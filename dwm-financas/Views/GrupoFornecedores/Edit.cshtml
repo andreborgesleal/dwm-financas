@@ -1,65 +1,39 @@
-﻿@using DWM.Models.Repositories
-@using App_Dominio.Repositories
+﻿@using App_Dominio.Repositories
 @model DWM.Models.Repositories.GrupoCredorViewModel
 @{
-    ViewBag.Title = "DWM-Finanças";
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../GrupoFornecedores/Edit";
+    t[0].nomeCurto = "Editar";
+    t[0].referencia = "";
+
+    t[1].url = "../Home/Default";
 }
-<div class="container">
-    @using (Html.BeginForm("Edit", "GrupoFornecedores", FormMethod.Post, new { @class = "form-horizontal" }))
-    {
-        @Html.HiddenFor(info => info.grupoCredorId)
-        @Html.HiddenFor(info => info.empresaId)
-        <div class="panel panel-primary" style="margin-top: 10px">
-            <div class="panel-heading">
-                <h2 class="panel-title">
-                    Grupos de fornecedores - <small class="text-white">Ex: Médicos, Corretores, Funcionários, etc.</small>
-                </h2>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12 col-xs-12 col-sm-12">
-                        <blockquote>
-                            <p>
-                                Alteração de grupos de fornecedores
-                            </p> <small>Os grupos classificam os fornecedores com características semelhantes para melhor apresentação dos demonstrativos financeiros</small>
-                        </blockquote>
-                        <div class="col-md-12 col-xs-12 col-sm-12">
-                            <div class="form-group" style="margin-top: 20px">
-                                @Html.ValidationSummary(false)
-                            </div>
-                        </div>
-                        <div class="form-group" style="margin-top: 20px">
-                            @Html.LabelFor(m => m.nome, new { @class = "col-md-1 col-xs-12 col-sm-3 control-label" })
-                            <div class="col-md-4 col-xs-8 col-sm-6">
-                                @Html.TextBoxFor(m => m.nome, new { @class = "form-control input-sm" })
-                            </div>
-                        </div>
+<div class="x_panel">
+    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Grupo de Fornecedores", Descricao = "Alterar Grupo de Fornecedor. Ex: Concecionárias, Bancos, Prestadores, Funcionários", Transacao = t })
+    <div class="x_content">
+        @using (Html.BeginForm("Edit", "GrupoFornecedores", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.Partial("_alerts")
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            @Html.HiddenFor(info => info.grupoCredorId)
+            @Html.HiddenFor(info => info.empresaId)
+            <div class="row">
+                <div class="col-md-4 col-xs-12 col-sm-12 col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.nome, new { @class = "control-label" })
+                        <input type="text" class="form-control" name="nome" id="nome" value="@Model.nome" maxlength="30" />
                     </div>
                 </div>
             </div>
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-md-8 col-xs-12">
-                        @Html.Partial("_defaultListButtons",
-                        new List<ButtonRepository>
-                        {
-                            new ButtonRepository() {    linkText = "Salvar",
-                                                        actionName = "",
-                                                        controllerName = "",
-                                                        buttonType = "submit"
-                                                    } ,
-                            new ButtonRepository() {    linkText = "Cancelar",
-                                                        actionName = "Browse",
-                                                        controllerName = "GrupoFornecedores",
-                                                        buttonType = "link"
-                                                    }
-                        })
-                    </div>
-                    <div class="col-md-offset-4 hidden-xs">
-                        ( * ) - Campo de preenchimento obrigatório
+            <p>&nbsp;</p>
+            <div class="row clearfix">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success" value="Salvar" name="btn-salvar" id="btn-salvar" />
+                        <input type="button" onclick="window.location = '../GrupoFornecedores/Browse'" class="btn btn-default" value="Cancelar" />
                     </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>

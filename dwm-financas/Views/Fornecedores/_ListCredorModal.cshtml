@@ -1,0 +1,48 @@
+﻿@using DWM.Models.Repositories;
+@model System.Web.Mvc.PagedList<CredorViewModel>
+@{
+    Layout = null;
+}
+
+@if (Model != null)
+{
+    <div class="row Scroll margem-negativa">
+        <div class="col-md-12">
+            <table class="table table-hover table-bordered table-condensed dedo-indicador">
+                <caption></caption>
+                <thead class="corvo text-white">
+                    <tr>
+                        <th>Nome do Fornecedor</th>
+                        <th>CPF/CNPJ</th>
+                        <th>Telefone</th>
+                        <th>Grupo</th>
+                    </tr>
+                </thead>
+                @foreach (CredorViewModel cre in Model)
+                {
+                    <tr onclick="Move('@cre.credorId', '@cre.nome')">
+                        <td class="col-md-6 col-sm-4">
+                            <small>@cre.nome</small><br />
+                            <small>@cre.email</small>
+                        </td>
+                        <td class="col-md-2 col-sm-2">
+                            <small>@App_Dominio.Models.Funcoes.FormataCPFCNPJ(cre.cpf_cnpj)</small>
+                        </td>
+                        <td class="col-md-2 col-sm-2">
+                            <small>@App_Dominio.Models.Funcoes.FormataTelefone(cre.fone1)</small>
+                        </td>
+                        <td class="col-md-2 col-sm-3">
+                            <small>@cre.nome_grupo</small>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    @Html.Partial("Paginacao", Model)
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+

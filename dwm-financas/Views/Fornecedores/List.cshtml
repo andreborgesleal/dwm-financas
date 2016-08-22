@@ -1,0 +1,54 @@
+﻿@model System.Web.Mvc.PagedList<DWM.Models.Repositories.CredorViewModel>
+@{
+    Layout = null;
+}
+@if (Model != null)
+{
+    <div class="dashboard-widget-content">
+        <p>Clique nos botões de <code>Ação</code> para executar a ação desejada</p>
+        <div class="table-responsive">
+            <table class="table table-striped jambo_table bulk_action">
+                <thead>
+                    <tr class="headings">
+                        <th class="col-md-2 column-title text-center nobr">Ação</th>
+                        <th>Nome</th>
+                        <th>CPF/CNPJ</th>
+                        <th>Celular</th>
+                        <th>Grupo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DWM.Models.Repositories.CredorViewModel cre in Model)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-info btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='Edit?credorId=@cre.credorId'"></button>
+                                <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="window.location='Delete?credorId=@cre.credorId'"></button>
+                            </td>
+                            <td>
+                                <small>@cre.nome</small><br />
+                                <small>@cre.email</small>
+                            </td>
+                            <td>
+                                <small>@App_Dominio.Models.Funcoes.FormataCPFCNPJ(cre.cpf_cnpj)</small>
+                            </td>
+                            <td>
+                                <small>@App_Dominio.Models.Funcoes.FormataTelefone(cre.fone1)</small>
+                            </td>
+                            <td>
+                                <small>@cre.nome_grupo</small>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Partial("Paginacao", Model)
+    </div>
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+

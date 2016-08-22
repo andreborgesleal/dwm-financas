@@ -1,0 +1,25 @@
+﻿@model System.Web.Mvc.PagedList<DWM.Models.Repositories.CredorViewModel>
+@{
+    Layout = null;
+    Model.action = "../Fornecedores/_ListCredorModal";
+}
+@Html.EditorFor(info => Model, "NAVBAR", new { brand = "Fornecedores" })
+<div class="container-fluid">
+    <div id="div-cre">
+        @Html.Partial("../Fornecedores/_ListCredorModal", Model)
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function Move(id, descricao) {
+        $("#credorId").val(id);
+        $("#nome_credor").val(descricao);
+        $("#nome_credor1").val(descricao);
+        $("#btnModal").click();
+    }
+
+</script>
+
+
+

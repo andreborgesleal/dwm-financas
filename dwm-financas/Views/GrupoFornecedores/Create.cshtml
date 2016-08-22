@@ -1,8 +1,6 @@
 ﻿@using App_Dominio.Repositories
 @model DWM.Models.Repositories.GrupoCredorViewModel
 @{
-    ViewBag.Title = "DWM-Finanças";
-
     TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
     t[0].url = "../GrupoFornecedores/Create";
     t[0].nomeCurto = "Incluir";
@@ -12,11 +10,10 @@
 }
 
 <div class="x_panel">
-    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Grupo de Fornecedores", Descricao = "Incluir Grupo de Fornecedor. Ex: Concecionárias, Bancos, Prestadores,", Transacao = t })
+    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Grupo de Fornecedores", Descricao = "Incluir Grupo de Fornecedor. Ex: Concecionárias, Bancos, Prestadores, Funcionários", Transacao = t })
     <div class="x_content">
         @using (Html.BeginForm("Create", "GrupoFornecedores", FormMethod.Post, new { @class = "form-horizontal" }))
         {
-            @Html.Partial("_alerts")
             @Html.ValidationSummary("", new { @class = "text-danger" })
             <div class="row">
                 <div class="col-md-4 col-xs-12 col-sm-12 col-lg-4">

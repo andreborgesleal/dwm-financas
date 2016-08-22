@@ -1,9 +1,6 @@
 ﻿@using App_Dominio.Repositories
 @model PagedList<DWM.Models.Repositories.GrupoCredorViewModel>
 @{
-    ViewBag.Title = "DWM-Finanças";
-    ViewBag.Header = "Grupo";
-
     TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
     t[0].url = "../GrupoFornecedores/Create";
     t[0].nomeCurto = "Incluir";

@@ -4037,6 +4037,7 @@
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\inputs-jquery-ui.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -4131,6 +4132,13 @@
     <Content Include="Views\GrupoFornecedores\ListGrupoCredorModal.cshtml" />
     <Content Include="Views\GrupoFornecedores\_ListGrupoCredorModal.cshtml" />
     <Content Include="Views\Shared\_defaultListButtons.cshtml" />
+    <Content Include="Views\Fornecedores\Browse.cshtml" />
+    <Content Include="Views\Fornecedores\Create.cshtml" />
+    <Content Include="Views\Fornecedores\Delete.cshtml" />
+    <Content Include="Views\Fornecedores\Edit.cshtml" />
+    <Content Include="Views\Fornecedores\List.cshtml" />
+    <Content Include="Views\Fornecedores\ListCredorModal.cshtml" />
+    <Content Include="Views\Fornecedores\_ListCredorModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />

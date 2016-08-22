@@ -14,7 +14,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DWM-Condomínios</title>
+    <title>DWM-Finanças</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -181,6 +181,7 @@
             <!-- pagen content -->
             <div class="right_col" role="main">
                 @BreadCrumbPage.Trace((App_Dominio.Component.BreadCrumb)ViewBag.BreadCrumb)
+                @Html.Partial("_alerts")
                 @*@Html.Partial("_alerts")
                 <div class="alert alert-dismissable alert-warning" id="alerta" style="visibility: hidden">
                     <a class="close" href="#" aria-hidden="true" onclick="$('#alerta').hide()">x</a>
