@@ -1,0 +1,16 @@
+﻿@model System.Web.Mvc.IPagedList
+@{
+    Layout = null;
+}
+@if (Model != null)
+{
+    @Html.Partial("LOVModal", Model)
+}
+else
+{
+    @Html.Partial("_AcessoNegado")
+}
+
+
+
+

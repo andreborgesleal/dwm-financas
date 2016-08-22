@@ -1,0 +1,36 @@
+﻿@using DWM.Models.Repositories;
+@model System.Web.Mvc.PagedList<GrupoCredorViewModel>
+@{
+    Layout = null;
+}
+
+@if (Model != null)
+{
+    <div class="row Scroll margem-negativa">
+        <div class="col-md-12" style="padding-right: 0px;">
+            <table class="table table-hover table-bordered table-condensed dedo-indicador">
+                <caption></caption>
+                <thead class="corvo text-white">
+                    <tr>
+                        <th>Nome do grupo</th>
+                    </tr>
+                </thead>
+                @foreach (GrupoCredorViewModel gcre in Model)
+                {
+                    <tr onclick="Move('@gcre.grupoCredorId', '@gcre.nome')">
+                        <td class="col-md-7 col-sm-2">
+                            <small>@gcre.nome</small>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    @Html.Partial("Paginacao", Model)
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+

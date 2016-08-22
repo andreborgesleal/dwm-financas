@@ -1,0 +1,65 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@model DWM.Models.Repositories.GrupoCredorViewModel
+@{
+    ViewBag.Title = "DWM-Finanças";
+}
+<div class="container">
+    @using (Html.BeginForm("Edit", "GrupoFornecedores", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.HiddenFor(info => info.grupoCredorId)
+        @Html.HiddenFor(info => info.empresaId)
+        <div class="panel panel-primary" style="margin-top: 10px">
+            <div class="panel-heading">
+                <h2 class="panel-title">
+                    Grupos de fornecedores - <small class="text-white">Ex: Médicos, Corretores, Funcionários, etc.</small>
+                </h2>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12 col-sm-12">
+                        <blockquote>
+                            <p>
+                                Alteração de grupos de fornecedores
+                            </p> <small>Os grupos classificam os fornecedores com características semelhantes para melhor apresentação dos demonstrativos financeiros</small>
+                        </blockquote>
+                        <div class="col-md-12 col-xs-12 col-sm-12">
+                            <div class="form-group" style="margin-top: 20px">
+                                @Html.ValidationSummary(false)
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top: 20px">
+                            @Html.LabelFor(m => m.nome, new { @class = "col-md-1 col-xs-12 col-sm-3 control-label" })
+                            <div class="col-md-4 col-xs-8 col-sm-6">
+                                @Html.TextBoxFor(m => m.nome, new { @class = "form-control input-sm" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-8 col-xs-12">
+                        @Html.Partial("_defaultListButtons",
+                        new List<ButtonRepository>
+                        {
+                            new ButtonRepository() {    linkText = "Salvar",
+                                                        actionName = "",
+                                                        controllerName = "",
+                                                        buttonType = "submit"
+                                                    } ,
+                            new ButtonRepository() {    linkText = "Cancelar",
+                                                        actionName = "Browse",
+                                                        controllerName = "GrupoFornecedores",
+                                                        buttonType = "link"
+                                                    }
+                        })
+                    </div>
+                    <div class="col-md-offset-4 hidden-xs">
+                        ( * ) - Campo de preenchimento obrigatório
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

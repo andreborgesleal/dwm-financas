@@ -1,0 +1,132 @@
+﻿@using DWM.Models.Repositories
+@model PagedList<ContaReceberViewModel>
+@{
+    Layout = null;
+}
+
+@if (Model != null)
+{
+    <div class="row clearfix">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Cobrança <small>Listagem de títulos</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        @Html.Partial("PaginacaoRegistrosForm", Model)
+                        <li>
+                            <a class="close-link" onclick="window.location = '../Home/Default'"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="dashboard-widget-content">
+                        <p>Clique nos botões de <code>Ação</code> para executar a ação desejada</p>
+                        <div class="table-responsive">
+                            <table class="table table-striped jambo_table bulk_action">
+                                <thead>
+                                    <tr class="headings">
+                                        <th class="column-title">ID</th>
+                                        <th class="column-title">Vencimento</th>
+                                        <th class="column-title">Perm</th>
+                                        <th class="column-title">Cliente</th>
+                                        <th class="column-title">Situação</th>
+                                        <th class="column-title">Dt.Baixa</th>
+                                        <th class="column-title">Últ. Pagto</th>
+                                        <th class="column-title text-right">Principal</th>
+                                        <th class="column-title text-right">Encargos</th>
+                                        <th class="column-title text-right">Desconto</th>
+                                        <th class="column-title text-right">Amortização</th>
+                                        <th class="column-title text-right">Saldo</th>
+                                        <th class="column-title text-center nobr">Ação</th>
+                                        @*<th class="bulk-actions" colspan="7">
+                                            <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                        </th>*@
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (ContaReceberViewModel rec in Model)
+                                    {
+                                        <tr class="even pointer">
+                                            <td class="text-left">
+                                                @(rec.operacaoId.ToString() + "-" + rec.OperacaoParcela.parcelaId.ToString())
+                                            </td>
+                                            <td class="text-left">
+                                                @rec.OperacaoParcela.dt_vencimento.ToString("dd/MM/yyyy")
+                                            </td>
+                                            <td class="text-center">
+                                                @rec.OperacaoParcela.atraso
+                                            </td>
+                                            <td class="text-left">
+                                                @rec.nome_cliente
+                                            </td>
+                                            <td class="text-left">
+                                                @rec.OperacaoParcela.situacao
+                                            </td>
+                                            <td class="text-left">
+                                                @if (rec.OperacaoParcela.dt_baixa.HasValue)
+                                                {
+                                                    @rec.OperacaoParcela.dt_baixa.Value.ToString("dd/MM/yyyy")
+                                                }
+                                            </td>
+                                            <td class="text-left">
+                                                @if (rec.OperacaoParcela.dt_ultima_amortizacao.HasValue)
+                                                {
+                                                    @rec.OperacaoParcela.dt_ultima_amortizacao.Value.ToString("dd/MM/yyyy")
+                                                }
+                                            </td>
+                                            <td class="text-right">
+                                                @rec.OperacaoParcela.vr_principal.ToString("###,###,###,##0.00")
+                                            </td>
+                                            <td class="text-right">
+                                                @if (rec.OperacaoParcela.vr_encargos.HasValue)
+                                                {
+                                                    @rec.OperacaoParcela.vr_encargos.Value.ToString("###,###,###,##0.00")
+                                                }
+                                            </td>
+                                            <td class="text-right">
+                                                @if (rec.OperacaoParcela.vr_desconto.HasValue)
+                                                {
+                                                    @rec.OperacaoParcela.vr_desconto.Value.ToString("###,###,###,##0.00")
+                                                }
+                                            </td>
+                                            <td class="text-right">
+                                                @if (rec.OperacaoParcela.vr_total_pago.HasValue)
+                                                {
+                                                    @rec.OperacaoParcela.vr_total_pago.Value.ToString("###,###,###,##0.00")
+                                                }
+                                            </td>
+                                            <td class="text-right">
+                                                @if (rec.OperacaoParcela.vr_saldo_devedor.HasValue)
+                                                {
+                                                    @rec.OperacaoParcela.vr_saldo_devedor.Value.ToString("###,###,###,##0.00")
+                                                }
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="btn-group">
+                                                    <a class="btn btn-primary" href="#" title="Editar" onclick="window.location='../Cobranca/Edit?operacaoId=@(rec.operacaoId)&parcelaId=@(rec.OperacaoParcela.parcelaId)'"><i class="fa fa-edit"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        @Html.Partial("Paginacao", Model)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+
+
+
