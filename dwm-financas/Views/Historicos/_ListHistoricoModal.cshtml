@@ -1,0 +1,41 @@
+﻿@using DWM.Models.Repositories;
+@model System.Web.Mvc.PagedList<HistoricoViewModel>
+@{
+    Layout = null;
+}
+
+@if (Model != null)
+{
+    <div class="row Scroll" style="margin-top: -15px">
+        <div class="col-md-12" style="padding-right: 0px;">
+            <table class="table table-hover table-bordered table-condensed" style="cursor: pointer">
+                <caption></caption>
+                <thead class="corvo text-white">
+                    <tr>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                @foreach (HistoricoViewModel his in Model)
+                {
+                    <tr onclick="Move('@his.historicoId', '@his.descricao')">
+                        <td class="col-md-7 col-sm-2">
+                            <small>@his.descricao</small>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    @Html.Partial("Paginacao", Model)
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+
+
+
+
+
+

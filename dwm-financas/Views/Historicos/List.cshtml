@@ -1,0 +1,67 @@
+﻿@model System.Web.Mvc.PagedList<DWM.Models.Repositories.HistoricoViewModel>
+
+@{
+    Layout = null;
+}
+@if (Model != null)
+{
+    <div class="dashboard-widget-content">
+        <div class="row">
+            <div class="col-md-6">
+                Clique nos botões de <code>Ação</code> para executar a ação desejada
+            </div>
+            <div class="col-md-offset-9 col-lg-offset-9 col-xs-offset-7">
+                @Html.Partial("Filtro")
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped jambo_table bulk_action">
+                <thead>
+                    <tr class="headings">
+                        <th class="col-md-2 column-title text-center nobr">Ação</th>
+                        <th class="column-title">Descrição</th>
+                        <th class="column-title">Tipo Histórico</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DWM.Models.Repositories.HistoricoViewModel his in Model)
+                    {
+                        <tr class="even pointer">
+                            <td class="col-md-2 text-center">
+                                <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='Edit?historicoId=@his.historicoId'"></button>
+                                <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="window.location='Delete?historicoId=@his.historicoId'"></button>
+                            </td>
+                            <td>
+                                <h4>@his.descricao</h4>
+                            </td>
+                            @if (his.ind_tipoHistorico.Equals("C"))
+                            {
+                                <td>
+                                    <h4>Contabilidade</h4>
+                                </td>
+                            }
+                            else if (his.ind_tipoHistorico.Equals("P"))
+                            {
+                                <td>
+                                    <h4>Contas a Pagar</h4>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <h4>Contas a Receber</h4>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Partial("Paginacao", Model)
+    </div>
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+

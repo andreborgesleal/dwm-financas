@@ -1,0 +1,24 @@
+﻿@model System.Web.Mvc.PagedList<DWM.Models.Repositories.HistoricoViewModel>
+@{
+    Layout = null;
+    Model.action = "../Historicos/_ListHistoricoContabilidadeModal";
+}
+
+@Html.EditorFor(info => Model, "NAVBAR", new { brand = "Históricos Padrões" })
+<div class="container-fluid">
+    <div id="div-his">
+        @Html.Partial("../Historicos/_ListHistoricoModal", Model)
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function Move(id, descricao) {
+        $("#historicoId").val(id);
+        $("#descricao_historico").val(descricao);
+        $("#descricao_historico1").val(descricao);
+        $("#btnModal").click();
+    }
+
+</script>
+

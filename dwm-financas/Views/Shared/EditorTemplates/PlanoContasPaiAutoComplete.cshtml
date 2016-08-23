@@ -1,0 +1,134 @@
+﻿@{
+    var next = ViewData["nextField"];
+    var previous = ViewData["prevField"];
+    var codigoPleno = ViewData["value"];
+    var Text = ViewData["Text"];
+    var value = ViewData["value"];
+    var tabindex = ViewData["tabindex"];
+}
+<div class="form-group">
+    <div id="div-lov"></div>
+    <label class="control-label" for="descricao_pai">Conta</label>
+    <div class="input-group" id="PlanoContasParent">
+        <input type="text" id="descricao_pai" name="descricao_pai" value="@Text" class="form-control" onblur="fillPlacon();" tabindex="@tabindex" />
+        
+        <select id="descricao_pai" name="descricao_pai" class="select2_single form-control" tabindex="-1">
+            <option></option>
+            <option value="AK">Alaska</option>
+            <option value="HI">Hawaii</option>
+            <option value="CA">California</option>
+            <option value="NV">Nevada</option>
+            <option value="OR">Oregon</option>
+            <option value="WA">Washington</option>
+            <option value="AZ">Arizona</option>
+            <option value="CO">Colorado</option>
+            <option value="ID">Idaho</option>
+            <option value="MT">Montana</option>
+            <option value="NE">Nebraska</option>
+            <option value="NM">New Mexico</option>
+            <option value="ND">North Dakota</option>
+            <option value="UT">Utah</option>
+            <option value="WY">Wyoming</option>
+            <option value="AR">Arkansas</option>
+            <option value="IL">Illinois</option>
+            <option value="IA">Iowa</option>
+            <option value="KS">Kansas</option>
+            <option value="KY">Kentucky</option>
+            <option value="LA">Louisiana</option>
+            <option value="MN">Minnesota</option>
+            <option value="MS">Mississippi</option>
+            <option value="MO">Missouri</option>
+            <option value="OK">Oklahoma</option>
+            <option value="SD">South Dakota</option>
+            <option value="TX">Texas</option>
+        </select>
+
+        <input type="hidden" id="planoContaId_pai" name="planoContaId_pai" value="@value" />
+        @*<input type="hidden" id="codigoPleno" name="codigoPleno" value="@codigoPleno" />*@
+        <div class="input-group-btn">
+            <button class="btn btn-primary" type="button" onclick="showLookup('LovPlanoContasPaiModal');"><i class="glyphicon glyphicon-search"></i></button>
+            <button class="btn btn-instagram" type="button" onclick="clean('planoContaId_pai', 'descricao_pai');"><i class="glyphicon glyphicon-remove"></i></button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Next Field
+    $('#PlanoContasParent').on('keydown', '#descricao_pai', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode == 9 && '@next' != '') {
+            e.preventDefault();
+            if (!e.shiftKey)
+                $('#@next').focus();
+            else
+                $('#@previous').focus();
+        }
+    });
+    // Fim-Next Field
+
+    var link = encodeURI('../PlanoContas/getNames?noCahce=' + new Date());
+    var data = { values: [] };
+    var plan = { countries: [] };
+    $.ajax({
+        type: "POST",
+        url: link,
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        async: false,
+        dataType: "json",
+        success: function (jsonObj) {
+            for (i in jsonObj) {
+                data.values.push(jsonObj[i].descricao);
+                plan.countries.push({ objId: jsonObj[i].planoContaId, descricao: jsonObj[i].descricao })
+            };
+        }
+    });
+
+    $('#descricao_pai').typeahead({
+        local: data.values,
+    });
+    $('descricao_pai').css('background-color', '#fff');
+
+    function fillPlacon() {
+        for (i in plan.countries) {
+            if (plan.countries[i].descricao == $('#descricao_pai').val()) {
+                $('#planoContaId_pai').val(plan.countries[i].objId);
+            }
+        }
+    }
+
+</script>
+
+
+
+<label class="control-label">Select Custom</label>
+<select class="select2_single form-control" tabindex="-1">
+    <option></option>
+    <option value="AK">Alaska</option>
+    <option value="HI">Hawaii</option>
+    <option value="CA">California</option>
+    <option value="NV">Nevada</option>
+    <option value="OR">Oregon</option>
+    <option value="WA">Washington</option>
+    <option value="AZ">Arizona</option>
+    <option value="CO">Colorado</option>
+    <option value="ID">Idaho</option>
+    <option value="MT">Montana</option>
+    <option value="NE">Nebraska</option>
+    <option value="NM">New Mexico</option>
+    <option value="ND">North Dakota</option>
+    <option value="UT">Utah</option>
+    <option value="WY">Wyoming</option>
+    <option value="AR">Arkansas</option>
+    <option value="IL">Illinois</option>
+    <option value="IA">Iowa</option>
+    <option value="KS">Kansas</option>
+    <option value="KY">Kentucky</option>
+    <option value="LA">Louisiana</option>
+    <option value="MN">Minnesota</option>
+    <option value="MS">Mississippi</option>
+    <option value="MO">Missouri</option>
+    <option value="OK">Oklahoma</option>
+    <option value="SD">South Dakota</option>
+    <option value="TX">Texas</option>
+</select>

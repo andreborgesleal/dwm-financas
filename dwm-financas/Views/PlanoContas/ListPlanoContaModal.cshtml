@@ -1,0 +1,33 @@
+﻿@model System.Web.Mvc.PagedList<DWM.Models.Repositories.PlanoContaViewModel>
+@{
+    Layout = null;
+    Model.action = "../PlanoContas/_ListPlanoContaModal";
+}
+
+@Html.EditorFor(info => Model, "NAVBAR", new { brand = "Plano de Contas" })
+<div class="container-fluid">
+    <div id="div-pc">
+        @Html.Partial("../PlanoContas/_ListPlanoContaModal", Model)
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function Move(id, descricao, codigoPleno) {
+        $("#planoContaId").val(id);
+        $("#codigoPleno").val(codigoPleno);
+        $("#descricao_conta").val(descricao);
+        $("#descricao_conta1").val(descricao);
+        $("#btnModal").click();
+    }
+
+</script>
+
+
+
+
+
+
+
+
+

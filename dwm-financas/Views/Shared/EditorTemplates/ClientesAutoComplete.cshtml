@@ -1,0 +1,68 @@
+﻿@{
+    var next = ViewData["nextField"];
+    var previous = ViewData["prevField"];
+    var value = ViewData["value"];
+    var Text = ViewData["Text"];
+    var tabindex = ViewData["tabindex"];
+}
+<div class="form-group">
+    <label class="control-label" for="nome_cliente">Cliente</label>
+    <div class="input-group" id="ClienteParent">
+        <input type="text" id="nome_cliente" name="nome_cliente" value="@Text" class="form-control" onblur="fillCliente();" tabindex="@tabindex" />
+        <input type="hidden" id="clienteId" name="clienteId" value="@value" />
+        <div class="input-group-btn">
+            <button class="btn btn-primary" style="margin-top: -5px" type="button" onclick="showLookup('LovClienteModal');"><i class="glyphicon glyphicon-search"></i></button>
+            <button class="btn btn-instagram" style="margin-top: -5px" type="button" onclick="clean('clienteId', 'nome_cliente');"><i class="glyphicon glyphicon-remove"></i></button>
+        </div>
+    </div>
+    <div id="div-lov"></div>
+</div>
+
+<script>
+    // Next Field
+    $('#ClienteParent').on('keydown', '#nome_cliente', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode == 9 && '@next' != '') {
+            e.preventDefault();
+            if (!e.shiftKey)
+                $('#@next').focus();
+            else
+                $('#@previous').focus();
+        }
+    });
+    // Fim-Next Field
+
+    var link = encodeURI('../Clientes/getNames?noCahce=' + new Date());
+    var data = { values: [] };
+    var cli = { countries: [] };
+    $.ajax({
+        type: "POST",
+        url: link,
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        async: false,
+        dataType: "json",
+        success: function (jsonObj) {
+            for (i in jsonObj) {
+                data.values.push(jsonObj[i].nome);
+                cli.countries.push({ objId: jsonObj[i].clienteId, nome: jsonObj[i].nome })
+            };
+        }
+    });
+
+    $('#nome_cliente').typeahead({
+        local: data.values,
+    });
+    $('nome_cliente').css('background-color', '#fff');
+
+    function fillCliente() {
+        for (i in cli.countries) {
+            if (cli.countries[i].nome == $('#nome_cliente').val()) {
+                $('#clienteId').val(cli.countries[i].objId);
+            }
+        }
+    }
+
+</script>
+
+

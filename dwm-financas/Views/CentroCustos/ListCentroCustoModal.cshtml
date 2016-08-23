@@ -1,0 +1,24 @@
+﻿@model System.Web.Mvc.PagedList<DWM.Models.Repositories.CentroCustoViewModel>
+@{
+    Layout = null;
+    Model.action = "../CentroCustos/_ListCentroCustoModal";
+}
+@Html.EditorFor(info => Model, "NAVBAR", new { brand = "Centros de Custos" })
+<div class="container-fluid">
+    <div id="div-ccu">
+        @Html.Partial("../CentroCustos/_ListCentroCustoModal", Model)
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function Move(id, descricao) {
+        $("#centroCustoId").val(id);
+        $("#descricao_centroCusto").val(descricao);
+        $("#descricao_centroCusto1").val(descricao);
+        $("#btnModal").click();
+    }
+
+</script>
+
+

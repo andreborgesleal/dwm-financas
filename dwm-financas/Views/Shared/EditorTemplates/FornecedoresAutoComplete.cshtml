@@ -1,0 +1,67 @@
+﻿@{
+    var next = ViewData["nextField"];
+    var previous = ViewData["prevField"];
+    var value = ViewData["value"];
+    var Text = ViewData["Text"];
+    var tabindex = ViewData["tabindex"];
+}
+<div class="form-group">
+    <label class="control-label" for="nome_credor">Fornecedor</label>
+    <div class="input-group" id="FornParent">
+        <input type="text" id="nome_credor" name="nome_credor" value="@Text" class="form-control" onblur="fillForn();" tabindex="@tabindex" />
+        <input type="hidden" id="credorId" name="credorId" value="@value" />
+        <div class="input-group-btn">
+            <button class="btn btn-primary" style="margin-top: -5px" type="button" onclick="showLookup('LovCredorModal');"><i class="glyphicon glyphicon-search"></i></button>
+            <button class="btn btn-instagram" style="margin-top: -5px" type="button" onclick="clean('credorId', 'nome_credor');"><i class="glyphicon glyphicon-remove"></i></button>
+        </div>
+    </div>
+    <div id="div-lov"></div>
+</div>
+
+<script>
+    // Next Field
+    $('#FornParent').on('keydown', '#nome_credor', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode == 9 && '@next' != '') {
+            e.preventDefault();
+            if (!e.shiftKey)
+                $('#@next').focus();
+            else
+                $('#@previous').focus();
+        }
+    });
+    // Fim-Next Field
+
+    var link = encodeURI('../Fornecedores/getNames?noCahce=' + new Date());
+    var data = { values: [] };
+    var cre = { countries: [] };
+    $.ajax({
+        type: "POST",
+        url: link,
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        async: false,
+        dataType: "json",
+        success: function (jsonObj) {
+            for (i in jsonObj) {
+                data.values.push(jsonObj[i].nome);
+                cre.countries.push({ objId: jsonObj[i].credorId, nome: jsonObj[i].nome })
+            };
+        }
+    });
+
+    $('#nome_credor').typeahead({
+        local: data.values,
+    });
+    $('nome_credor').css('background-color', '#fff');
+
+    function fillForn() {
+        for (i in cre.countries) {
+            if (cre.countries[i].nome == $('#nome_credor').val()) {
+                $('#credorId').val(cre.countries[i].objId);
+            }
+        }
+    }
+
+</script>
+

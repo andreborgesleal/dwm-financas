@@ -1,0 +1,69 @@
+﻿@{
+    var next = ViewData["nextField"];
+    var previous = ViewData["prevField"];
+    var value = ViewData["value"];
+    var Text = ViewData["Text"];
+    var tabindex = ViewData["tabindex"];
+}
+<div class="form-group">
+    <label class="control-label" for="nome_banco3">Banco</label>
+    <div class="input-group" id="Bco3Parent">
+        <input type="text" id="nome_banco3" name="nome_banco3" value="@Text" class="form-control" onblur="fillBco3();" tabindex="@tabindex" />
+        <input type="hidden" id="banco3Id" name="banco3Id" value="@value" />
+        <div class="input-group-btn">
+            <button class="btn btn-primary" style="margin-top: -5px" type="button" onclick="showLookup('LovBanco3Modal');"><i class="glyphicon glyphicon-search"></i></button>
+            <button class="btn btn-instagram" style="margin-top: -5px" type="button" onclick="clean('banco3Id', 'nome_banco3');"><i class="glyphicon glyphicon-remove"></i></button>
+        </div>
+    </div>
+    <div id="div-lov"></div>
+</div>
+
+<script>
+    // Next Field
+    $('#Bco3Parent').on('keydown', '#nome_banco3', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode == 9 && '@next' != '') {
+            e.preventDefault();
+            if (!e.shiftKey)
+                $('#@next').focus();
+            else
+                $('#@previous').focus();
+        }
+    });
+    // Fim-Next Field
+
+    var link = encodeURI('../Bancos/getNames?noCahce=' + new Date());
+    var data = { values: [] };
+    var bco3 = { countries: [] };
+    $.ajax({
+        type: "POST",
+        url: link,
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        async: false,
+        dataType: "json",
+        success: function (jsonObj) {
+            for (i in jsonObj) {
+                data.values.push(jsonObj[i].nome);
+                bco3.countries.push({ objId: jsonObj[i].bancoId, nome: jsonObj[i].nome })
+            };
+        }
+    });
+
+    $('#nome_banco3').typeahead({
+        local: data.values,
+    });
+    $('nome_banco3').css('background-color', '#fff');
+
+    function fillBco3() {
+        for (i in bco3.countries) {
+            if (bco3.countries[i].nome == $('#nome_banco3').val()) {
+                $('#banco3Id').val(bco3.countries[i].objId);
+            }
+        }
+    }
+
+</script>
+
+
+

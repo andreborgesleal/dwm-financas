@@ -1,0 +1,69 @@
+﻿@{ 
+    var next = ViewData["nextField"];
+    var previous = ViewData["prevField"];
+    var codigoPleno = ViewData["value"];
+    var Text = ViewData["Text"];
+    var value = ViewData["value"];
+    var tabindex = ViewData["tabindex"];
+}
+<div class="form-group">
+    <div id="div-lov"></div>
+    <label class="control-label" for="descricao_conta">Conta</label>
+    <div class="input-group" id="PlanoContasParent">
+        <input type="text" id="descricao_conta" name="descricao_conta" value="@Text" class="form-control" onblur="fillPlacon();" tabindex="@tabindex" />
+        <input type="hidden" id="planoContaId" name="planoContaId" value="@value" />
+        <input type="hidden" id="codigoPleno" name="codigoPleno" value="@codigoPleno" />
+        <div class="input-group-btn">
+            <button class="btn btn-primary" style="margin-top: -5px" type="button" onclick="showLookup('LovPlanoContaModal');"><i class="glyphicon glyphicon-search"></i></button>
+            <button class="btn btn-instagram" style="margin-top: -5px" type="button" onclick="clean('planoContaId','descricao_conta');"><i class="glyphicon glyphicon-remove"></i></button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Next Field
+    $('#PlanoContasParent').on('keydown', '#descricao_conta', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode == 9 && '@next' != '') {
+            e.preventDefault();
+            if (!e.shiftKey)
+                $('#@next').focus();
+            else
+                $('#@previous').focus();
+        }
+    });
+    // Fim-Next Field
+
+    var link = encodeURI('../PlanoContas/getNames?noCahce=' + new Date());
+    var data = { values: [] };
+    var plan = { countries: [] };
+    $.ajax({
+        type: "POST",
+        url: link,
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        async: false,
+        dataType: "json",
+        success: function (jsonObj) {
+            for (i in jsonObj) {
+                data.values.push(jsonObj[i].descricao);
+                plan.countries.push({ objId: jsonObj[i].planoContaId, codigoPleno: jsonObj[i].codigoPleno, descricao: jsonObj[i].descricao })
+            };
+        }
+    });
+
+    $('#descricao_conta').typeahead({
+        local: data.values,
+    });
+    $('descricao_conta').css('background-color', '#fff');
+
+    function fillPlacon() {
+        for (i in plan.countries) {
+            if (plan.countries[i].descricao == $('#descricao_conta').val()) {
+                $('#planoContaId').val(plan.countries[i].objId);
+                $('#codigoPleno').val(plan.countries[i].codigoPleno);
+            }
+        }
+    }
+
+</script>
