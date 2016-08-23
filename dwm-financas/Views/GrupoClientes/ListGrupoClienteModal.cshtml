@@ -1,0 +1,27 @@
+﻿@model System.Web.Mvc.PagedList<DWM.Models.Repositories.GrupoClienteViewModel>
+@{
+    Layout = null;
+    Model.action = "../GrupoClientes/_ListGrupoClienteModal";
+}
+@Html.EditorFor(info => Model, "NAVBAR", new { brand = "Grupo de Clientes" })
+<div class="container-fluid">
+    <div id="div-gcli">
+        @Html.Partial("../GrupoClientes/_ListGrupoClienteModal", Model)
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    function Move(id, descricao) {
+        $("#grupoClienteId").val(id);
+        $("#nome_grupoCliente").val(descricao);
+        $("#nome_grupoCliente1").val(descricao);
+        $("#btnModal").click();
+    }
+
+</script>
+
+
+
+

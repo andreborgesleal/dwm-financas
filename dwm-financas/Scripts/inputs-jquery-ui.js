@@ -213,7 +213,27 @@ function BuscaCep(_cep, _logradouro, _bairro, _cidade, _uf) {
     });
 }
 
+
 function BuscaCep2(_cep, _logradouro, _bairro, _cidade, _uf) {
+    CarregandoIn();
+    var cep = $("#" + _cep).val();
+    cep = cep.replace(/\D/g, "");
+    var link = encodeURI("http://apps.widenet.com.br/busca-cep/api/cep/" + cep + ".json");
+
+    $.getJSON(link, function (data) {
+        $("#" + _logradouro).val(data.address);
+        $("#" + _bairro).val(data.district);
+        $("#" + _cidade).val(data.city);
+        $("#" + _uf).val(data.state);
+    });
+    $('#carregando').css("visibility", "hidden");
+    $('#carregando').css("height", "0px");
+    $('#carregando').css("margin-top", "0%");
+    $('#carregando').css("margin-left", "0%");
+
+}
+
+function BuscaCep3(_cep, _logradouro, _bairro, _cidade, _uf) {
     CarregandoIn();
     var cep = $("#" + _cep).val();
     cep = cep.replace(/\D/g, "");
@@ -231,6 +251,8 @@ function BuscaCep2(_cep, _logradouro, _bairro, _cidade, _uf) {
     $('#carregando').css("margin-left", "0%");
 
 }
+
+
 
 function ReadAlert(id) {
     var link = "../Home/ReadAlert?alertaId=" + id;

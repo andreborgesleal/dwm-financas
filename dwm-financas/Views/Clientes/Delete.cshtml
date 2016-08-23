@@ -1,8 +1,8 @@
 ﻿@using App_Dominio.Repositories
-@model DWM.Models.Repositories.CredorViewModel
+@model DWM.Models.Repositories.ClienteViewModel
 @{
     TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
-    t[0].url = "../Fornecedores/Create";
+    t[0].url = "../Clientes/Create";
     t[0].nomeCurto = "Incluir";
     t[0].referencia = "";
 
@@ -10,16 +10,16 @@
 }
 
 <div class="x_panel">
-    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Fornecedores", Descricao = "Excluir fornecedor", Transacao = t })
+    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Clientes", Descricao = "Excluir cliente", Transacao = t })
     <div class="x_content">
-        @using (Html.BeginForm("Delete", "Fornecedores", FormMethod.Post, new { @class = "form-horizontal" }))
+        @using (Html.BeginForm("Delete", "Clientes", FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.ValidationSummary("", new { @class = "text-danger" })
             @Html.HiddenFor(info => info.dt_inclusao)
-            @Html.HiddenFor(info => info.credorId)
+            @Html.HiddenFor(info => info.clienteId)
             @Html.HiddenFor(info => info.nome)
             @Html.HiddenFor(info => info.ind_tipo_pessoa)
-            <div class="well well-sm">Atenção: Não será permitido excluir um fornecedor se houver pagamentos vinculados a ele.</div>
+            <div class="well well-sm">Atenção: Não será permitido excluir um cliente se houver cobrança vinculada a ele.</div>
             <div class="row clearfix">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -33,7 +33,7 @@
                             <div class="form-group">
                                 <label class="control-label" for="historicoId">Grupo</label>
                                 <div class="input-group col-md-12">
-                                    @Html.DropDownListFor(m => m.grupoCredorId, new DWM.Models.Enumeracoes.BindDropDownList().GrupoFornecedores("Selecione...", Model.grupoCredorId.ToString()), new { @class = "form-control", @disabled = "disable" })
+                                    @Html.DropDownListFor(m => m.grupoClienteId, new DWM.Models.Enumeracoes.BindDropDownList().GrupoClientes("Selecione...", Model.grupoClienteId.ToString()), new { @class = "form-control", @disabled = "disable" })
                                 </div>
                             </div>
                         </div>
@@ -197,5 +197,4 @@
 
     }
 </script>
-
 

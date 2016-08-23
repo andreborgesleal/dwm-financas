@@ -1,8 +1,8 @@
 ﻿@using App_Dominio.Repositories
-@model DWM.Models.Repositories.CredorViewModel
+@model DWM.Models.Repositories.ClienteViewModel
 @{
     TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
-    t[0].url = "../Fornecedores/Create";
+    t[0].url = "../Clientes/Create";
     t[0].nomeCurto = "Incluir";
     t[0].referencia = "";
 
@@ -10,13 +10,13 @@
 }
 
 <div class="x_panel">
-    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Fornecedores", Descricao = "Editar fornecedor", Transacao = t })
+    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Clientes", Descricao = "Editar cliente", Transacao = t })
     <div class="x_content">
-        @using (Html.BeginForm("Edit", "Fornecedores", FormMethod.Post, new { @class = "form-horizontal" }))
+        @using (Html.BeginForm("Edit", "Clientes", FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.ValidationSummary("", new { @class = "text-danger" })
             @Html.HiddenFor(info => info.dt_inclusao)
-            @Html.HiddenFor(info => info.credorId)
+            @Html.HiddenFor(info => info.clienteId)
             <div class="row clearfix">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -30,7 +30,7 @@
                             <div class="form-group">
                                 <label class="control-label" for="historicoId">Grupo</label>
                                 <div class="input-group col-md-12">
-                                    @Html.DropDownListFor(m => m.grupoCredorId, new DWM.Models.Enumeracoes.BindDropDownList().GrupoFornecedores("Selecione...", Model.grupoCredorId.ToString()), new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.grupoClienteId, new DWM.Models.Enumeracoes.BindDropDownList().GrupoClientes("Selecione...", Model.grupoClienteId.ToString()), new { @class = "form-control" })
                                 </div>
                             </div>
                         </div>
@@ -162,7 +162,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <input type="submit" class="btn btn-success" value="Salvar" name="btn-salvar" id="btn-salvar" />
-                        <input type="button" onclick="window.location = '../Fornecedores/Browse'" class="btn btn-default" value="Cancelar" />
+                        <input type="button" onclick="window.location = '../Clientes/Browse'" class="btn btn-default" value="Cancelar" />
                     </div>
                 </div>
             </div>

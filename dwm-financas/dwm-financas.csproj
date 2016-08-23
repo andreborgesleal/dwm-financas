@@ -4139,6 +4139,21 @@
     <Content Include="Views\Fornecedores\List.cshtml" />
     <Content Include="Views\Fornecedores\ListCredorModal.cshtml" />
     <Content Include="Views\Fornecedores\_ListCredorModal.cshtml" />
+    <Content Include="Views\GrupoClientes\Browse.cshtml" />
+    <Content Include="Views\GrupoClientes\Create.cshtml" />
+    <Content Include="Views\GrupoClientes\Delete.cshtml" />
+    <Content Include="Views\GrupoClientes\Edit.cshtml" />
+    <Content Include="Views\GrupoClientes\List.cshtml" />
+    <Content Include="Views\GrupoClientes\ListGrupoClienteModal.cshtml" />
+    <Content Include="Views\GrupoClientes\_ListGrupoClienteModal.cshtml" />
+    <Content Include="Views\Clientes\Browse.cshtml" />
+    <Content Include="Views\Clientes\Create.cshtml" />
+    <Content Include="Views\Clientes\Delete.cshtml" />
+    <Content Include="Views\Clientes\Edit.cshtml" />
+    <Content Include="Views\Clientes\List.cshtml" />
+    <Content Include="Views\Clientes\ListClienteModal.cshtml" />
+    <Content Include="Views\Clientes\_ListClienteModal.cshtml" />
+    <Content Include="Views\Shared\Filtro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />
