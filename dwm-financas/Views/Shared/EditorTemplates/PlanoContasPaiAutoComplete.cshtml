@@ -7,7 +7,7 @@
     var tabindex = ViewData["tabindex"];
 }
 <div class="form-group">
-    <div id="div-lov"></div>
+    <div id="div-pc"></div>
     <label class="control-label" for="descricao_pai">Conta</label>
     <div class="input-group" id="PlanoContasParent">
         @*<input type="hidden" id="codigoPleno" name="codigoPleno" value="@codigoPleno" />*@
@@ -46,7 +46,7 @@
         dataType: "json",
         success: function (jsonObj) {
             for (i in jsonObj) {
-                data.values.push(jsonObj[i].descricao);
+                data.values.push(jsonObj[i].codigoPleno + ' ' + jsonObj[i].descricao);
                 plan.countries.push({ objId: jsonObj[i].planoContaId, descricao: jsonObj[i].descricao })
             };
         }
