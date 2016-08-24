@@ -15,7 +15,7 @@ namespace dwm_condominios
                       "~/Content/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css",
                       "~/Content/production/css/maps/jquery-jvectormap-2.0.3.css",
                       "~/Content/vendors/select2/dist/css/select2.min.css",
-                      "~/Content/production/css/custom.css",                      
+                      "~/Content/production/css/custom.css",
                       "~/Scripts/css/datepicker.css",
                       "~/Content/vendors/summernote/css/summernote.css"));
 
@@ -54,14 +54,16 @@ namespace dwm_condominios
                         "~/Content/vendors/Flot/jquery.flot.resize.js"
                         ));
 
-            bundles.Add(new ScriptBundle("~/bundles/select2").Include("~/Content/vendors/select2/dist/js/select2.full.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/autocomplete").Include("~/Content/vendors/select2/dist/js/select2.full.min.js",
+                    "~/Content/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"));
+
 
             bundles.Add(new ScriptBundle("~/bundles/flot-plugins").Include(
-                        "~/Content/production/js/flot/jquery.flot.orderBars.js",
-                        "~/Content/production/js/flot/date.js",
-                        "~/Content/production/js/flot/jquery.flot.spline.js",
-                        "~/Content/production/js/flot/curvedLines.js"
-                        ));
+                    "~/Content/production/js/flot/jquery.flot.orderBars.js",
+                    "~/Content/production/js/flot/date.js",
+                    "~/Content/production/js/flot/jquery.flot.spline.js",
+                    "~/Content/production/js/flot/curvedLines.js"
+                    ));
 
             bundles.Add(new ScriptBundle("~/bundles/jVectorMap").Include(
                         "~/Content/production/js/maps/jquery-jvectormap-2.0.3.min.js"
@@ -100,13 +102,13 @@ namespace dwm_condominios
                         "~/Scripts/modernizr-2.6.2.js"
                         ));
 
-            bundles.Add(new StyleBundle("~/bundles/autocomplete.css").Include(
-                        "~/Content/autocomplete/autocomplete.css"
-                    ));
+            //bundles.Add(new StyleBundle("~/bundles/autocomplete.css").Include(
+            //            "~/Content/autocomplete/autocomplete.css"
+            //        ));
 
-            bundles.Add(new ScriptBundle("~/bundles/autocomplete.js").Include(
-                        "~/Content/autocomplete/jquery.ui.autocomplete.js"
-                    ));
+            //bundles.Add(new ScriptBundle("~/bundles/autocomplete.js").Include(
+            //            "~/Content/autocomplete/jquery.ui.autocomplete.js"
+            //        ));
 
             //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
             //            "~/Scripts/jquery.validate*"));

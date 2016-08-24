@@ -10,48 +10,16 @@
     <div id="div-lov"></div>
     <label class="control-label" for="descricao_pai">Conta</label>
     <div class="input-group" id="PlanoContasParent">
-        <input type="text" id="descricao_pai" name="descricao_pai" value="@Text" class="form-control" onblur="fillPlacon();" tabindex="@tabindex" />
-        
-        <select id="descricao_pai" name="descricao_pai" class="select2_single form-control" tabindex="-1">
-            <option></option>
-            <option value="AK">Alaska</option>
-            <option value="HI">Hawaii</option>
-            <option value="CA">California</option>
-            <option value="NV">Nevada</option>
-            <option value="OR">Oregon</option>
-            <option value="WA">Washington</option>
-            <option value="AZ">Arizona</option>
-            <option value="CO">Colorado</option>
-            <option value="ID">Idaho</option>
-            <option value="MT">Montana</option>
-            <option value="NE">Nebraska</option>
-            <option value="NM">New Mexico</option>
-            <option value="ND">North Dakota</option>
-            <option value="UT">Utah</option>
-            <option value="WY">Wyoming</option>
-            <option value="AR">Arkansas</option>
-            <option value="IL">Illinois</option>
-            <option value="IA">Iowa</option>
-            <option value="KS">Kansas</option>
-            <option value="KY">Kentucky</option>
-            <option value="LA">Louisiana</option>
-            <option value="MN">Minnesota</option>
-            <option value="MS">Mississippi</option>
-            <option value="MO">Missouri</option>
-            <option value="OK">Oklahoma</option>
-            <option value="SD">South Dakota</option>
-            <option value="TX">Texas</option>
-        </select>
-
-        <input type="hidden" id="planoContaId_pai" name="planoContaId_pai" value="@value" />
         @*<input type="hidden" id="codigoPleno" name="codigoPleno" value="@codigoPleno" />*@
+        <input type="text" id="descricao_pai" name="descricao_pai" value="@Text" class="form-control" onblur="fillPlacon();" tabindex="@tabindex" size="400" />
+        <input type="hidden" id="planoContaId_pai" name="planoContaId_pai" value="@value" />
         <div class="input-group-btn">
             <button class="btn btn-primary" type="button" onclick="showLookup('LovPlanoContasPaiModal');"><i class="glyphicon glyphicon-search"></i></button>
-            <button class="btn btn-instagram" type="button" onclick="clean('planoContaId_pai', 'descricao_pai');"><i class="glyphicon glyphicon-remove"></i></button>
+            <button class="btn btn-instagram" type="button" onclick="clean('planoContaId_pai', 'descricao_pai');" style="margin-left: -6px"><i class="glyphicon glyphicon-remove"></i></button>
         </div>
     </div>
 </div>
-
+<div id="descricao_pai-container" class="panel panel-primary" style="position: relative; float: left; margin-top: -20px;"></div>
 <script>
     // Next Field
     $('#PlanoContasParent').on('keydown', '#descricao_pai', function (e) {
@@ -84,11 +52,6 @@
         }
     });
 
-    $('#descricao_pai').typeahead({
-        local: data.values,
-    });
-    $('descricao_pai').css('background-color', '#fff');
-
     function fillPlacon() {
         for (i in plan.countries) {
             if (plan.countries[i].descricao == $('#descricao_pai').val()) {
@@ -100,35 +63,23 @@
 </script>
 
 
+<!-- jQuery autocomplete -->
+<script>
+      $(document).ready(function() {
+          var planPaiArray = $.map(data.values, function(value, key) {
+            return {
+              value: value,
+              data: key
+            };
+          });
 
-<label class="control-label">Select Custom</label>
-<select class="select2_single form-control" tabindex="-1">
-    <option></option>
-    <option value="AK">Alaska</option>
-    <option value="HI">Hawaii</option>
-    <option value="CA">California</option>
-    <option value="NV">Nevada</option>
-    <option value="OR">Oregon</option>
-    <option value="WA">Washington</option>
-    <option value="AZ">Arizona</option>
-    <option value="CO">Colorado</option>
-    <option value="ID">Idaho</option>
-    <option value="MT">Montana</option>
-    <option value="NE">Nebraska</option>
-    <option value="NM">New Mexico</option>
-    <option value="ND">North Dakota</option>
-    <option value="UT">Utah</option>
-    <option value="WY">Wyoming</option>
-    <option value="AR">Arkansas</option>
-    <option value="IL">Illinois</option>
-    <option value="IA">Iowa</option>
-    <option value="KS">Kansas</option>
-    <option value="KY">Kentucky</option>
-    <option value="LA">Louisiana</option>
-    <option value="MN">Minnesota</option>
-    <option value="MS">Mississippi</option>
-    <option value="MO">Missouri</option>
-    <option value="OK">Oklahoma</option>
-    <option value="SD">South Dakota</option>
-    <option value="TX">Texas</option>
-</select>
+        // initialize autocomplete with custom appendTo
+        $('#descricao_pai').autocomplete({
+          lookup: planPaiArray,
+          appendTo: '#descricao_pai-container'
+        });
+      });
+</script>
+<!-- /jQuery autocomplete -->
+
+
