@@ -16,6 +16,7 @@
         @using (Html.BeginForm("Create", "PlanoContas", FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.ValidationSummary("", new { @class = "text-danger" })
+            @Html.HiddenFor(info => info.exercicio)
             <div class="row clearfix">
                 <div class="col-md-3">
                     <div class="form-group">
@@ -61,18 +62,17 @@
             </div>
             if (Model != null && Model.lastThree != null)
             {
-                <div class="panel panel-default margem-interna">
-                    <!-- Default panel contents -->
-                    <div class="panel-heading"><strong>Últimas contas</strong></div>
-                    <!-- Table -->
-                    <table class="table">
-                        <thead class="corvo text-white">
-                            <tr>
-                                <th>Código Pleno</th>
-                                <th>Descrição</th>
-                                <th>Tipo</th>
-                            </tr>
-                        </thead>
+                <h4>Últimas contas incluídas</h4>
+                <!-- Table -->
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Código Pleno</th>
+                            <th>Descrição</th>
+                            <th>Tipo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         @foreach (DWM.Models.Entidades.PlanoConta pc in Model.lastThree)
                         {
                             <tr>
@@ -87,8 +87,8 @@
                                 </td>
                             </tr>
                         }
-                    </table>
-                </div>
+                    </tbody>
+                </table>
             }
             <p>&nbsp;</p>
             <div class="row clearfix">

@@ -49,14 +49,19 @@ namespace DWM.Models.Repositories
             get
             {
                 int grau = 1;
-                string[] id = codigoPleno.Split('.');
-                for (int i = 1; i <= id.Length - 1; i++)
+                if (codigoPleno != null)
                 {
-                    if (int.Parse(id[i]) == 0)
-                        break;
-                    grau++;
+                    string[] id = codigoPleno.Split('.');
+                    for (int i = 1; i <= id.Length - 1; i++)
+                    {
+                        if (int.Parse(id[i]) == 0)
+                            break;
+                        grau++;
+                    }
+                    return grau;
                 }
-                return grau;
+                else
+                    return -1;
             }
         }
 

@@ -1,103 +1,86 @@
-﻿@using DWM.Models.Repositories
+﻿@using App_Dominio.Enumeracoes
 @using App_Dominio.Repositories
-@using App_Dominio.Enumeracoes
 @model DWM.Models.Repositories.PlanoContaViewModel
 @{
-    ViewBag.Title = "DWM-Finanças";
-}
-<div class="container">
-    @using (Html.BeginForm("Delete", "PlanoContas", FormMethod.Post, new { @class = "form" }))
-    {
-        @Html.HiddenFor(info => info.planoContaId)
-        @Html.HiddenFor(info => info.exercicio)
-        @Html.HiddenFor(info => info.descricao)
-        @Html.HiddenFor(info => info.planoContaId_pai)
-        @Html.HiddenFor(info => info.tipoConta)
-        @Html.HiddenFor(info => info.codigoReduzido)
-        @Html.HiddenFor(info => info.codigoPleno)
-        @Html.HiddenFor(info => info.vr_saldo_inicial)
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../PlanoContas/Create";
+    t[0].nomeCurto = "Incluir";
+    t[0].referencia = "";
 
-        <div class="panel panel-primary" style="margin-top: 10px">
-            <div class="panel-heading">
-                <h2 class="panel-title">
-                    Plano de contas - <small class="text-white">Exclusão (Observação: Não será permitido excluir uma conta que esteja vinculada a outra conta ou que possua movimento)</small>
-                </h2>
-            </div>
-            <div class="panel-body">
-                @Html.ValidationSummary(false, "", new { @style = "margin-left: -20px" })
-                <div class="row clearfix">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label" for="nome">Código Pleno *</label>
-                            @Html.TextBoxFor(info => info.codigoPleno, new { @class = "form-control input-sm", @disabled = "disable" })
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label" for="nome">Código Reduzido *</label>
-                            @Html.TextBoxFor(info => info.codigoReduzido, new { @class = "form-control input-sm", @disabled = "disable" })
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label" for="nome">Tipo da Conta *</label>
-                            @Html.DropDownListFor(m => m.tipoConta, DropDownListEnum.TipoConta(Model.tipoConta), new { @class = "form-control", @disabled = "disable" })
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        @Html.EditorFor(m => m.vr_saldo_inicial, "DECIMAL", new
-                   {
-                       htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return Converte(this, 'vr_saldo_inicial')", @disabled = "disable" }
-                   })
+    t[1].url = "../Home/Default";
+}
+
+<div class="x_panel">
+    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Plano de contas", Descricao = "Excluir conta", Transacao = t })
+    <div class="x_content">
+        @using (Html.BeginForm("Delete", "PlanoContas", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.HiddenFor(info => info.planoContaId)
+            @Html.HiddenFor(info => info.exercicio)
+            @Html.HiddenFor(info => info.descricao)
+            @Html.HiddenFor(info => info.planoContaId_pai)
+            @Html.HiddenFor(info => info.tipoConta)
+            @Html.HiddenFor(info => info.codigoReduzido)
+            @Html.HiddenFor(info => info.codigoPleno)
+            @Html.HiddenFor(info => info.vr_saldo_inicial)
+            <div class="well well-sm">Atenção: Não será permitido excluir uma conta se houver movimento financeiro/contábil vinculados a ela.</div>
+            <div class="row clearfix">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label" for="nome">Código Pleno</label>
+                        @Html.TextBoxFor(info => info.codigoPleno, new { @class = "form-control", @disabled = "disable" })
                     </div>
                 </div>
-                <div class="row clearfix">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label" for="descricao">Descrição *</label>
-                            @Html.TextBoxFor(m => m.descricao, new { @class = "form-control input-sm", @maxlength = "60", @disabled = "disable" })
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        @Html.Editor("descricao_pai1", "PlanoContasPaiAutoComplete", new
-                           {
-                               value = Model.planoContaId_pai != null ? Model.planoContaId_pai.ToString() : "",
-                               Text = Model.descricao_pai ?? "",
-                               tabIndex = 4,
-                               nextField = "btnSalvar"
-                           })
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label" for="nome">Código Reduzido</label>
+                        @Html.TextBoxFor(info => info.codigoReduzido, new { @class = "form-control", @disabled = "disable" })
                     </div>
                 </div>
-            </div>
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-md-8 col-xs-12">
-                        @Html.Partial("_defaultListButtons",
-                            new List<ButtonRepository>
-                            {
-                                new ButtonRepository() {    linkText = "Excluir",
-                                                            actionName = "",
-                                                            controllerName = "",
-                                                            buttonType = "submit"
-                                                        } ,
-                                new ButtonRepository() {    linkText = "Cancelar",
-                                                            actionName = "Browse",
-                                                            controllerName = "PlanoContas",
-                                                            buttonType = "link"
-                                                        }
-                            })
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label" for="nome">Tipo da Conta</label>
+                        @Html.DropDownListFor(m => m.tipoConta, DropDownListEnum.TipoConta(Model.tipoConta), new { @class = "form-control", @disabled = "disable" })
                     </div>
-                    <div class="col-md-offset-4 hidden-xs">
-                        ( * ) - Campo de preenchimento obrigatório
+                </div>
+                <div class="col-md-3">
+                    @Html.EditorFor(m => m.vr_saldo_inicial, "DECIMAL", new
+                       {
+                           htmlAttributes = (object)new { @class = "form-control text-right", @onblur = "return Converte(this, 'vr_saldo_inicial')", @disabled = "disable" }
+                       })
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="descricao">Descrição</label>
+                        @Html.TextBoxFor(m => m.descricao, new { @class = "form-control", @maxlength = "60", @disabled = "disable" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @Html.Editor("descricao_pai1", "PlanoContasPaiAutoComplete", new
+                       {
+                           value = Model.planoContaId_pai != null ? Model.planoContaId_pai.ToString() : "",
+                           Text = Model.descricao_pai ?? "",
+                           prevField = "descricao",
+                           nextField = "btnSalvar"
+                       })
+                </div>
+            </div>
+            <p>&nbsp;</p>
+            <div class="row clearfix">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-danger" value="Excluir" name="btn-excluir" id="btn-excluir" />
+                        <input type="button" onclick="window.location = '../PlanoContas/Browse'" class="btn btn-default" value="Cancelar" />
                     </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
 
 <script type="text/javascript">
     $('#codigoPleno').mask('@Model.mascaraPC');
-
 </script>
 

@@ -4199,6 +4199,7 @@
     <Content Include="Views\Shared\EditorTemplates\HistoricoAutoComplete.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\PlanoContasAutoComplete.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\PlanoContasPaiAutoComplete.cshtml" />
+    <Content Include="Views\Shared\_Filter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />

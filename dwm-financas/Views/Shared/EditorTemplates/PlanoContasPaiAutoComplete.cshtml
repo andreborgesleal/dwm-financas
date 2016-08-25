@@ -47,14 +47,14 @@
         success: function (jsonObj) {
             for (i in jsonObj) {
                 data.values.push(jsonObj[i].codigoPleno + ' ' + jsonObj[i].descricao);
-                plan.countries.push({ objId: jsonObj[i].planoContaId, descricao: jsonObj[i].descricao })
+                plan.countries.push({ objId: jsonObj[i].planoContaId, codigoPleno: jsonObj[i].codigoPleno, descricao: jsonObj[i].descricao })
             };
         }
     });
 
     function fillPlacon() {
         for (i in plan.countries) {
-            if (plan.countries[i].descricao == $('#descricao_pai').val()) {
+            if (plan.countries[i].codigoPleno + ' ' + plan.countries[i].descricao == $('#descricao_pai').val()) {
                 $('#planoContaId_pai').val(plan.countries[i].objId);
             }
         }
