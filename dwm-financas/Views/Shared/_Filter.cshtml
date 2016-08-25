@@ -1,0 +1,15 @@
+﻿@model System.Web.Mvc.IPagedList  
+@{
+    Layout= null;
+}   
+
+<div class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-12 col-xs-10 col-sm-8 input-group">
+            <input type="text" name="descricao" id="descricao" class="form-control input-sm" placeholder="O que deseja procurar?" />
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true" onclick="Refresh(0, getPageSize(), '@Model.action', '@Model.DivId')"></span></button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -16,7 +16,6 @@ C:\sistemas\dwm-financas\dwm-financas\bin\dwm-financas.dll.config
 C:\sistemas\dwm-financas\dwm-financas\bin\dwm-financas.dll
 C:\sistemas\dwm-financas\dwm-financas\bin\dwm-financas.pdb
 C:\sistemas\dwm-financas\dwm-financas\bin\Antlr3.Runtime.dll
-C:\sistemas\dwm-financas\dwm-financas\bin\App_Dominio.dll
 C:\sistemas\dwm-financas\dwm-financas\bin\EntityFramework.dll
 C:\sistemas\dwm-financas\dwm-financas\bin\EntityFramework.SqlServer.dll
 C:\sistemas\dwm-financas\dwm-financas\bin\Microsoft.AI.Agent.Intercept.dll
