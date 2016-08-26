@@ -1,0 +1,25 @@
+﻿@using App_Dominio.Repositories
+@model PagedList<DWM.Models.Repositories.EventoViewModel>
+@{
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../Eventos/Create";
+    t[0].nomeCurto = "Incluir";
+    t[0].referencia = "";
+
+    t[1].url = "../Home/Default";
+}
+<div class="x_panel">
+    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Eventos", Descricao = "Listagem de Eventos", Transacao = t })
+    <div class="x_content">
+        <div id="div-list">
+            @Html.Partial("List", Model)
+        </div>
+        <div class="altura-35">
+            @Html.Partial("_defaultListButtons", new List<ButtonRepository> { new ButtonRepository() { linkText = "Incluir", actionName = "Create", controllerName = "Eventos", buttonType = "link" } })
+        </div>
+    </div>
+</div>
+
+
+
+

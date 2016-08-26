@@ -6,7 +6,15 @@
 @if (Model != null)
 {
     <div class="dashboard-widget-content">
-        <p>Clique nos botões de <code>Ação</code> para executar a ação desejada</p>
+        <div class="col-md-5">
+            Clique nos botões de <code>Ação</code> para executar a ação desejada
+        </div>
+        <div class="col-md-1">
+            <a href="../GrupoClientes/Create" class="text-primary">Incluir</a>
+        </div>
+        <div class="col-md-offset-9 col-lg-offset-9 col-xs-offset-7">
+            @Html.Partial("Filtro")
+        </div>
         <div class="table-responsive">
             <table class="table table-striped jambo_table bulk_action">
                 <thead>
@@ -24,7 +32,7 @@
                                 <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="window.location='Delete?grupoClienteId=@gru.grupoClienteId'"></button>
                             </td>
                             <td>
-                                <h4>@gru.nome</h4>
+                                <span>@gru.nome</span>
                             </td>
                         </tr>
                     }

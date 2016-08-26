@@ -6,10 +6,13 @@
 {
     <div class="dashboard-widget-content">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 Clique nos botões de <code>Ação</code> para executar a ação desejada
             </div>
-            <div class="col-md-offset-10">
+            <div class="col-md-1">
+                <a href="../Fornecedores/Create" class="text-primary">Incluir</a>
+            </div>
+            <div class="col-md-offset-9 col-lg-offset-9 col-xs-offset-7">
                 @Html.Partial("Filtro")
             </div>
         </div>
@@ -33,17 +36,17 @@
                                 <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="window.location='Delete?credorId=@cre.credorId'"></button>
                             </td>
                             <td>
-                                <small>@cre.nome</small><br />
+                                <span>@cre.nome</span><br />
                                 <small>@cre.email</small>
                             </td>
                             <td>
-                                <small>@App_Dominio.Models.Funcoes.FormataCPFCNPJ(cre.cpf_cnpj)</small>
+                                <span>@App_Dominio.Models.Funcoes.FormataCPFCNPJ(cre.cpf_cnpj)</span>
                             </td>
                             <td>
-                                <small>@App_Dominio.Models.Funcoes.FormataTelefone(cre.fone1)</small>
+                                <span>@App_Dominio.Models.Funcoes.FormataTelefone(cre.fone1)</span>
                             </td>
                             <td>
-                                <small>@cre.nome_grupo</small>
+                                <span>@cre.nome_grupo</span>
                             </td>
                         </tr>
                     }

@@ -1,0 +1,223 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@using App_Dominio.Enumeracoes
+@model DWM.Models.Repositories.EnquadramentoViewModel
+@{
+    ViewBag.Title = "DWM-Finanças";
+}
+<div class="container">
+    @using (Html.BeginForm("Create", "Enquadramentos", FormMethod.Post, new { @class = "form" }))
+    {
+        @Html.HiddenFor(info => info.exercicio)
+        @Html.HiddenFor(info => info.empresaId)
+        <div id="div-lov"></div>
+        <div class="panel panel-primary margem-topo-10">
+            <div class="panel-heading">
+                <h2 class="panel-title">
+                    Enquadramento Contábil - <small class="text-white font-8">Inclusão</small>
+                </h2>
+            </div>
+            <div class="panel-body">
+                @Html.ValidationSummary(false, "", new { @style = "margin-left: -20px" })
+                <div class="row clearfix">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-1 margem-interna" for="nome">Descrição</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.descricao, new { @class = "form-control input-sm", @maxlength = "50", @onblur = "$('#descricao_conta').focus();" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix margem-topo margem-interna">
+                    <div class="col-md-12">
+                        <nav class="navbar navbar-default gelo no-padding">
+                            <div class="container-fluid">
+                                <!-- Brand and toggle get grouped for better mobile display -->
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    <a class="navbar-brand" href="#">Itens do Enquadramento</a>
+                                </div>
+
+                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                    <ul class="nav navbar-nav">
+                                        <li class="active" id="nav-new"><a href="#" onclick="NewItem();">Novo <span class="sr-only">(current)</span></a></li>
+                                        <li id="nav-edit"><a href="#">Editar</a></li>
+                                        <li id="nav-del"><a href="#">Excluir</a></li>
+                                    </ul>
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Consultar <span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="#">Plano de Contas</a></li>
+                                                <li><a href="#">Históricos</a></li>
+                                                <li><a href="#">Centros de Custos</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">Enquadramentos</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div><!-- /.navbar-collapse -->
+                            </div><!-- /.container-fluid -->
+                        </nav>
+                        <div id="div-item">
+                            @Html.Partial("CreateItem", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-8 col-xs-12">
+                        @Html.Partial("_defaultListButtons",
+                        new List<ButtonRepository>
+                        {
+                            new ButtonRepository() {    linkText = "Salvar",
+                                                        actionName = "",
+                                                        controllerName = "",
+                                                        buttonType = "submit"
+                                                    } ,
+                            new ButtonRepository() {    linkText = "Cancelar",
+                                                        actionName = "Browse",
+                                                        controllerName = "Enquadramentos",
+                                                        buttonType = "link"
+                                                    }
+                        })
+                    </div>
+                    <div class="col-md-offset-4 hidden-xs">
+                        ( * ) - Campo de preenchimento obrigatório
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+<script>
+
+    function NewItem() {
+        $("#nav-edit").removeClass('active');
+        $("#nav-new").addClass("active");
+
+        var link = '@Url.Action("NewItem")';
+        link = encodeURI(link + '?noCahce=' + new Date());
+        $('#div-item').load(link);
+    }
+
+    //var data = {
+    //    countries: ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda",
+    //        "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh",
+    //        "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia",
+    //        "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burma",
+    //        "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad",
+    //        "Chile", "China", "Colombia", "Comoros", "Congo, Democratic Republic", "Congo, Republic of the",
+    //        "Costa Rica", "Cote d'Ivoire", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti",
+    //        "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador",
+    //        "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon",
+    //        "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Greenland", "Grenada", "Guatemala", "Guinea",
+    //        "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India",
+    //        "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan",
+    //        "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kuwait", "Kyrgyzstan", "Laos",
+    //        "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg",
+    //        "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands",
+    //        "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Mongolia", "Morocco", "Monaco",
+    //        "Mozambique", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger",
+    //        "Nigeria", "Norway", "Oman", "Pakistan", "Panama", "Papua New Guinea", "Paraguay", "Peru",
+    //        "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Samoa", "San Marino",
+    //        "Sao Tome", "Saudi Arabia", "Senegal", "Serbia and Montenegro", "Seychelles", "Sierra Leone",
+    //        "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "Spain",
+    //        "Sri Lanka", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan",
+    //        "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey",
+    //        "Turkmenistan", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States",
+    //        "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"],
+    //    capitals: ["Abu Dhabi", "Abuja", "Accra", "Adamstown", "Addis Ababa", "Algiers", "Alofi", "Amman", "Amsterdam",
+    //        "Andorra la Vella", "Ankara", "Antananarivo", "Apia", "Ashgabat", "Asmara", "Astana", "Asunción", "Athens",
+    //        "Avarua", "Baghdad", "Baku", "Bamako", "Bandar Seri Begawan", "Bangkok", "Bangui", "Banjul", "Basseterre",
+    //        "Beijing", "Beirut", "Belgrade", "Belmopan", "Berlin", "Bern", "Bishkek", "Bissau", "Bogotá", "Brasília",
+    //        "Bratislava", "Brazzaville", "Bridgetown", "Brussels", "Bucharest", "Budapest", "Buenos Aires", "Bujumbura",
+    //        "Cairo", "Canberra", "Caracas", "Castries", "Cayenne", "Charlotte Amalie", "Chisinau", "Cockburn Town",
+    //        "Conakry", "Copenhagen", "Dakar", "Damascus", "Dhaka", "Dili", "Djibouti", "Dodoma", "Doha", "Douglas",
+    //        "Dublin", "Dushanbe", "Edinburgh of the Seven Seas", "El Aaiún", "Episkopi Cantonment", "Flying Fish Cove",
+    //        "Freetown", "Funafuti", "Gaborone", "George Town", "Georgetown", "Georgetown", "Gibraltar", "King Edward Point",
+    //        "Guatemala City", "Gustavia", "Hagåtña", "Hamilton", "Hanga Roa", "Hanoi", "Harare", "Hargeisa", "Havana",
+    //        "Helsinki", "Honiara", "Islamabad", "Jakarta", "Jamestown", "Jerusalem", "Juba", "Kabul", "Kampala",
+    //        "Kathmandu", "Khartoum", "Kiev", "Kigali", "Kingston", "Kingston", "Kingstown", "Kinshasa", "Kuala Lumpur",
+    //        "Kuwait City", "Libreville", "Lilongwe", "Lima", "Lisbon", "Ljubljana", "Lomé", "London", "Luanda", "Lusaka",
+    //        "Luxembourg", "Madrid", "Majuro", "Malabo", "Malé", "Managua", "Manama", "Manila", "Maputo", "Marigot",
+    //        "Maseru", "Mata-Utu", "Mbabane Lobamba", "Melekeok Ngerulmud", "Mexico City", "Minsk", "Mogadishu", "Monaco",
+    //        "Monrovia", "Montevideo", "Moroni", "Moscow", "Muscat", "Nairobi", "Nassau", "Naypyidaw", "N'Djamena",
+    //        "New Delhi", "Niamey", "Nicosia", "Nicosia", "Nouakchott", "Nouméa", "Nukuʻalofa", "Nuuk", "Oranjestad",
+    //        "Oslo", "Ottawa", "Ouagadougou", "Pago Pago", "Palikir", "Panama City", "Papeete", "Paramaribo", "Paris",
+    //        "Philipsburg", "Phnom Penh", "Plymouth Brades Estate", "Podgorica Cetinje", "Port Louis", "Port Moresby",
+    //        "Port Vila", "Port-au-Prince", "Port of Spain", "Porto-Novo Cotonou", "Prague", "Praia", "Cape Town",
+    //        "Pristina", "Pyongyang", "Quito", "Rabat", "Reykjavík", "Riga", "Riyadh", "Road Town", "Rome", "Roseau",
+    //        "Saipan", "San José", "San Juan", "San Marino", "San Salvador", "Sana'a", "Santiago", "Santo Domingo",
+    //        "São Tomé", "Sarajevo", "Seoul", "Singapore", "Skopje", "Sofia", "Sri Jayawardenepura Kotte", "St. George's",
+    //        "St. Helier", "St. John's", "St. Peter Port", "St. Pierre", "Stanley", "Stepanakert", "Stockholm", "Sucre",
+    //        "Sukhumi", "Suva", "Taipei", "Tallinn", "Tarawa Atoll", "Tashkent", "Tbilisi", "Tegucigalpa", "Tehran",
+    //        "Thimphu", "Tirana", "Tiraspol", "Tokyo", "Tórshavn", "Tripoli", "Tskhinvali", "Tunis", "Ulan Bator", "Vaduz",
+    //        "Valletta", "The Valley", "Vatican City", "Victoria", "Vienna", "Vientiane", "Vilnius", "Warsaw",
+    //        "Washington, D.C.", "Wellington", "West Island", "Willemstad", "Windhoek", "Yamoussoukro", "Yaoundé", "Yaren",
+    //        "Yerevan", "Zagreb"]
+    //};
+    //var link = encodeURI('../Historicos/getNames?noCahce=' + new Date());
+    //var data = { countries: [] };
+    //var hist = { countries: [] };
+    //$.ajax({
+    //    type: "POST",
+    //    url: link,
+    //    contentType: "application/json; charset=utf-8",
+    //    global: false,
+    //    async: false,
+    //    dataType: "json",
+    //    success: function (jsonObj) {
+    //        for (i in jsonObj) {
+    //            data.countries.push(jsonObj[i].descricao);
+    //            hist.countries.push({ historicoId: jsonObj[i].historicoId, descricao: jsonObj[i].descricao })
+    //        };
+    //    }
+    //});
+
+    //$('#q').typeahead({
+    //    minLength: 1,
+    //    order: "asc",
+    //    group: true,
+    //    groupMaxItem: 5,
+    //    hint: true,
+    //    filter: "lists",
+    //    selector: {
+    //        filter: "input-group-btn",
+    //        filterButton: "btn btn-default",
+    //        dropdown: "dropdown-menu dropdown-menu-right",
+    //        list: "dropdown-menu",
+    //        hint: "form-control"
+    //    },
+    //    source: {
+    //        Históricos: {
+    //            data: data.countries
+    //        }
+    //    },
+    //    debug: true
+    //});
+
+    //function MoveHist(_descricao)
+    //{
+    //    return
+    //    $('#histId').val("");
+    //    for (i in hist.countries) {
+    //        if (hist.countries[i].descricao == _descricao.value)
+    //            $('#histId').val(hist.countries[i].historicoId);
+    //    };
+    //}
+
+
+
+</script>

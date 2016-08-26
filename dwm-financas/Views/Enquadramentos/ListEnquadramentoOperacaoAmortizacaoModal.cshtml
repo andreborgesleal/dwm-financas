@@ -1,0 +1,24 @@
+﻿@model System.Web.Mvc.PagedList<DWM.Models.Repositories.EnquadramentoViewModel>
+@{
+    Layout = null;
+    Model.action = "../Enquadramentos/_ListEnquadramentoOperacaoAmortizacaoModal";
+}
+@Html.EditorFor(info => Model, "NAVBAR", new { brand = "Enquandramentos contábeis" })
+<div class="container-fluid">
+    <div id="div-amort">
+        @Html.Partial("../Enquadramentos/_ListEnquadramentoOperacaoAmortizacaoModal", Model)
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function Move(id, descricao) {
+        $("#enquadramento_amortizacaoId").val(id);
+        $("#descricao_enquadramento_amortizacao").val(descricao);
+        $("#descricao_enquadramento_amortizacao1").val(descricao);
+        $("#btnModal").click();
+    }
+
+</script>
+
+

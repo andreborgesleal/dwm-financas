@@ -1,0 +1,74 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@using App_Dominio.Enumeracoes
+@using App_Dominio.Controllers
+@model DWM.Models.Repositories.EnquadramentoViewModel
+@{
+    Layout = null;
+}
+@if (Model.EnquadramentoItem.mensagem != null && TempData.ContainsKey(Alerts.INFORMATION))
+{
+    <div class="row clearfix">
+        <div class="col-md-12">
+            @Html.Partial("_alerts")
+        </div>
+    </div>
+}
+<div class="row clearfix">
+    <div class="col-md-6">
+        @Html.Editor("descricao_conta1", "PlanoContasAutoComplete", new
+                           {
+                               value = Model.EnquadramentoItem.planoContaId.ToString(),
+                               Text = Model.EnquadramentoItem.descricao_planoConta,
+                               Tag = Model.EnquadramentoItem.codigoPleno,
+                               tabIndex = 1,
+                               nextField = "descricao_centroCusto"
+                           })
+    </div>
+    <div class="col-md-6">
+        @Html.Editor("descricao_centroCusto1", "CentroCustoAutoComplete", new
+                           {
+                               value = Model.EnquadramentoItem.centroCustoId.ToString(),
+                               Text = Model.EnquadramentoItem.descricao_centroCusto,
+                               tabindex = 2,
+                               nextField = "descricao_historico",
+                               prevField = "descricao_conta"
+                           })
+    </div>
+</div>
+<div class="row clearfix">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Editor("descricao_historico1", "HistoricoAutoComplete", new
+                           {
+                               value = Model.EnquadramentoItem.historicoId.ToString(),
+                               Text = Model.EnquadramentoItem.descricao_historico,
+                               tabindex = 3,
+                               nextField = "EnquadramentoItem_complementoHist",
+                               prevField = "descricao_centroCusto"
+                           })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="control-label" for="nome">Tipo do lançamento *</label>
+                    @Html.DropDownListFor(m => m.EnquadramentoItem.tipoLancamento, DropDownListEnum.NaturezaOperacao(Model.EnquadramentoItem.tipoLancamento), new { @class = "form-control", @tabindex = "5" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(m => m.EnquadramentoItem.valor, "DECIMAL", new
+                            {
+                                htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return Converte(this, 'valor')", tabindex = "6" }
+                            })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="control-label" for="complementoHist">Histórico complementar</label>
+            @Html.TextAreaFor(m => m.EnquadramentoItem.complementoHist, 5, 1, new { @class = "form-control", tabindex = "4" })
+        </div>
+    </div>
+</div>

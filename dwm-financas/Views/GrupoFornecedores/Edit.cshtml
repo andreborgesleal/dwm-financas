@@ -9,11 +9,10 @@
     t[1].url = "../Home/Default";
 }
 <div class="x_panel">
-    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Grupo de Fornecedores", Descricao = "Alterar Grupo de Fornecedor. Ex: Concecionárias, Bancos, Prestadores, Funcionários", Transacao = t })
+    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Grupo de Fornecedores", Descricao = "Editar Grupo de Fornecedor. Ex: Concecionárias, Bancos, Prestadores, Funcionários", Transacao = t })
     <div class="x_content">
         @using (Html.BeginForm("Edit", "GrupoFornecedores", FormMethod.Post, new { @class = "form-horizontal" }))
         {
-            @Html.Partial("_alerts")
             @Html.ValidationSummary("", new { @class = "text-danger" })
             @Html.HiddenFor(info => info.grupoCredorId)
             @Html.HiddenFor(info => info.empresaId)

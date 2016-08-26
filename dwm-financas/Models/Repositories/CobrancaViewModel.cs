@@ -53,7 +53,7 @@ namespace DWM.Models.Repositories
         [DisplayName("Valor")]
         public decimal valor { get; set; }
 
-        [DisplayName("Juros Mora")]
+        [DisplayName("Juros")]
         public decimal vr_jurosMora { get; set; }
 
         [DisplayName("Multa")]

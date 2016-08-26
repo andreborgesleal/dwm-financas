@@ -46,16 +46,16 @@
                                 <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="window.location='Delete?planoContaId=@planoConta.planoContaId'"></button>
                             </td>
                             <td class="text-center">
-                                <h4>@planoConta.codigoPleno</h4>
+                                <span>@planoConta.codigoPleno</span>
                             </td>
                             <td style="text-indent: @((planoConta.grauPc - 1) * 20)px">
-                                <h4>@planoConta.descricao</h4>
+                                <span>@planoConta.descricao</span>
                             </td>
                             <td class="text-center">
-                                <h4>@planoConta.codigoReduzido</h4>
+                                <span>@planoConta.codigoReduzido</span>
                             </td>
                             <td>
-                                <h4>@planoConta.tipoConta</h4>
+                                <span>@planoConta.tipoConta</span>
                             </td>
                         </tr>
                     }

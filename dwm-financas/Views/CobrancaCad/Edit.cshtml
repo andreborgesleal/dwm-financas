@@ -1,0 +1,154 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@using App_Dominio.Enumeracoes
+@model CobrancaViewModel
+@{
+    ViewBag.Title = "DWM-Finanças";
+}
+<div class="container">
+    @using (Html.BeginForm("Edit", "CobrancaCad", FormMethod.Post, new { @class = "form" }))
+    {
+        @Html.HiddenFor(info => info.cobrancaId)
+        <div class="panel panel-primary margem-topo-10">
+            <div class="panel-heading">
+                <h2 class="panel-title">
+                    Cadastro de Cobrança - <small class="text-white">Edição dos parâmetros de cobrança</small>
+                </h2>
+            </div>
+            <div class="panel-body">
+                @Html.ValidationSummary(false, "", new { @style = "margin-left: -20px" })
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label" for="grupoCobrancaId">Cobrança</label>
+                            @Html.DropDownListFor(m => m.grupoCobrancaId, new DWM.Models.Enumeracoes.BindDropDownList().GrupoCobrancas("", Model.grupoCobrancaId.ToString()), new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.Editor("descricao_historico1", "HistoricoAutoComplete", new
+                   {
+                       value = Model.historicoId > 0 ? Model.historicoId.ToString() : "",
+                       Text = Model.descricao_historico ?? "",
+                       nextField = "nome_banco",
+                       prevField = "grupoClienteId"
+                   })
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        @Html.Editor("nome_banco1", "BancosAutoComplete", new
+                   {
+                       value = Model.bancoId.ToString(),
+                       Text = Model.nome_banco ?? "",
+                       nextField = "descricao_enquadramento",
+                       prevField = "descricao_historico"
+                   })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.Editor("descricao_enquadramento1", "EnquadramentoAutoComplete", new
+                   {
+                       value = Model.enquadramentoId.ToString(),
+                       Text = Model.descricao_enquadramento ?? "",
+                       nextField = "dt_inicio",
+                       prevField = "nome_banco"
+                   })
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label" for="dt_emissao">Início</label>
+                            @Html.EditorFor(info => info.dt_inicio, "DATE", new { identificador = "dt_inicio", value = Model.dt_inicio, readOnly = "false" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label" for="dt_emissao">Fim</label>
+                            @Html.EditorFor(info => info.dt_fim, "DATE", new { identificador = "dt_fim", value = Model.dt_fim, readOnly = "false" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label" for="grupoCobrancaId">Vencimento</label>
+                            @Html.DropDownListFor(m => m.dia_vencimento, DropDownListEnum.Dias31(Model.dia_vencimento.ToString()), new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            @Html.EditorFor(m => m.valor, "DECIMAL", new
+                       {
+                           htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "fnValidaValor(this);" }
+                       })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            @Html.EditorFor(m => m.vr_multa, "DECIMAL", new
+                       {
+                           htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "fnValidaValor(this);" }
+                       })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            @Html.EditorFor(m => m.vr_jurosMora, "DECIMAL", new
+                       {
+                           htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "fnValidaValor(this);" }
+                       })
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-2">
+                        <div class="form-group col-md-10 no-padding">
+                            <label class="control-label">Nº Parcelas</label>
+                            @Html.TextBoxFor(info => info.num_parcelas, "{0:##0}", new { @class = "form-control input-sm text-right", @onkeypress = "return numeros()" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-8 col-xs-12">
+                        @Html.Partial("_defaultListButtons",
+                        new List<ButtonRepository>
+                        {
+                            new ButtonRepository() {    linkText = "Salvar",
+                                                        actionName = "Edit",
+                                                        controllerName = "CobrancaCad",
+                                                        buttonType = "submit"
+                                                    } ,
+                            new ButtonRepository() {    linkText = "Cancelar",
+                                                        actionName = "Browse",
+                                                        controllerName = "CobrancaCad",
+                                                        buttonType = "link"
+                                                    }
+                        })
+                    </div>
+                    <div class="col-md-offset-4 hidden-xs">
+                        ( * ) - Campo de preenchimento obrigatório
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="panel panel-default">
+        @Html.EditorFor(info => Model.pagedList, "NAVBAR", new { brand = "Lista de clientes" })
+        <div class="panel-body margem-negativa">
+            <div id="div-create-cli">
+                @Html.Partial("CreateItem", Model)
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="altura-35">
+                @Html.Partial("_defaultListButtons", new List<ButtonRepository> { new ButtonRepository() { linkText = "Incluir", actionName = "Create", controllerName = "CobrancaCad", buttonType = "link" } })
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+

@@ -1,0 +1,27 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@model System.Web.Mvc.PagedList<DWM.Models.Repositories.EnquadramentoViewModel>
+@{
+    ViewBag.Title = "DWM-Finanças";
+}
+<div class="container">
+    <div class="panel panel-default">
+        @Html.EditorFor(info => Model, "NAVBAR", new { brand = "Enquadramento Contábil", link = "../Enquadramentos/Create", textLink = "Incluir" })
+        <div class="panel-body">
+            <div id="div-list">
+                @Html.Partial("List", Model)
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="altura-35">
+                @Html.Partial("_defaultListButtons", new List<ButtonRepository> { new ButtonRepository() { linkText = "Incluir", actionName = "Create", controllerName = "Enquadramentos", buttonType = "link" } })
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

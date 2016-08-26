@@ -6,21 +6,21 @@
     var tabindex = ViewData["tabindex"];
 }
 <div class="form-group">
+    <div id="div-lov"></div>
     <label class="control-label" for="descricao_historico">Histórico</label>
     <div class="input-group" id="HistParent">
         <input type="text" id="descricao_historico" name="descricao_historico" value="@Text" class="form-control" onblur="fillHist();" tabindex="@tabindex" />
         <input type="hidden" id="historicoId" name="historicoId" value="@value" />
         <div class="input-group-btn">
-            <button class="btn btn-primary" style="margin-top: -5px" type="button" onclick="showLookup('LovHistoricoContabilidadeModal');"><i class="glyphicon glyphicon-search"></i></button>
-            <button class="btn btn-bitbucket" style="margin-top: -5px" type="button" onclick="InsertModal('../Historicos/CrudHistoricoContabilidadeModal',
+            <button class="btn btn-primary" type="button" onclick="showLookup('LovHistoricoContabilidadeModal');"><i class="glyphicon glyphicon-search"></i></button>
+            <button class="btn btn-bitbucket" type="button" onclick="InsertModal('../Historicos/CrudHistoricoContabilidadeModal',
                             'descricao' ,
                             'historicoId' ,
                             'descricao_historico' ,
                             '@next' );"><i class="glyphicon glyphicon-plus"></i></button>
-            <button class="btn btn-instagram" style="margin-top: -5px" type="button" onclick="clean('historicoId', 'descricao_historico');"><i class="glyphicon glyphicon-remove"></i></button>
+            <button class="btn btn-instagram" type="button" onclick="clean('historicoId', 'descricao_historico');"><i class="glyphicon glyphicon-remove"></i></button>
         </div>
     </div>
-    <div id="div-lov"></div>
 </div>
 
 @*//  Formulário Modal para a mensagem*@
@@ -45,7 +45,7 @@
 </div>
 <a id="linkModal" href="#myMessageModalTypeahead_historicoId" data-toggle="modal"></a>
 @*// Fim-Formulário Modal*@
-
+<div id="descricao_historico-container" class="panel panel-primary" style="position: relative; float: left; margin-top: -20px; border: none"></div>
 <script>
     // Next Field
     $('#HistParent').on('keydown', '#descricao_historico', function (e) {
@@ -78,11 +78,6 @@
         }
     });
 
-    $('#descricao_historico').typeahead({
-        local: data.values,
-    });
-    $('descricao_historico').css('background-color', '#fff');
-
     function fillHist() {
         for (i in his.countries) {
             if (his.countries[i].descricao == $('#descricao_historico').val()) {
@@ -93,3 +88,21 @@
 
 </script>
 
+<!-- jQuery autocomplete -->
+<script>
+      $(document).ready(function() {
+          var hisArray = $.map(his.countries, function(value, key) {
+            return {
+              value: value.descricao,
+              data: key.historicoId
+            };
+          });
+
+        // initialize autocomplete with custom appendTo
+          $('#descricao_historico').autocomplete({
+          lookup: hisArray,
+          appendTo: '#descricao_historico-container'
+        });
+      });
+</script>
+<!-- /jQuery autocomplete -->

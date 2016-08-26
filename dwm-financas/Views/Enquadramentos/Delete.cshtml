@@ -1,0 +1,102 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@using App_Dominio.Enumeracoes
+@model DWM.Models.Repositories.EnquadramentoViewModel
+@{
+    ViewBag.Title = "DWM-Finanças";
+}
+<div class="container">
+    @using (Html.BeginForm("Delete", "Enquadramentos", FormMethod.Post, new { @class = "form" }))
+    {
+        @Html.HiddenFor(info => info.exercicio)
+        @Html.HiddenFor(info => info.enquadramentoId)
+        @Html.HiddenFor(info => info.empresaId)
+        <div class="panel panel-primary margem-topo-10">
+            <div class="panel-heading">
+                <h2 class="panel-title">
+                    Enquadramento Contábil - <small class="text-white font-8">Exclusão</small>
+                </h2>
+            </div>
+            <div class="panel-body">
+                @Html.ValidationSummary(false, "", new { @style = "margin-left: -20px" })
+                <div class="row clearfix">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-1 margem-interna" for="nome">Descrição</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.descricao, new { @class = "form-control input-sm disabled", @maxlength = "50", @onblur = "$('#descricao_conta').focus();" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix margem-topo margem-interna">
+                    <div class="col-md-12">
+                        <nav class="navbar navbar-default gelo no-padding">
+                            <div class="container-fluid">
+                                <!-- Brand and toggle get grouped for better mobile display -->
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    <a class="navbar-brand" href="#">Itens do Enquadramento</a>
+                                </div>
+
+                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                    <ul class="nav navbar-nav">
+                                        <li class="active" id="nav-new"><a href="#" onclick="NewItem();">Novo <span class="sr-only">(current)</span></a></li>
+                                        <li id="nav-edit"><a href="#">Editar</a></li>
+                                        <li id="nav-del"><a href="#">Excluir</a></li>
+                                    </ul>
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Consultar <span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="#">Plano de Contas</a></li>
+                                                <li><a href="#">Históricos</a></li>
+                                                <li><a href="#">Centros de Custos</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">Enquadramentos</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div><!-- /.navbar-collapse -->
+                            </div><!-- /.container-fluid -->
+                        </nav>
+                        <div id="div-item">
+                            @Html.Partial("CreateItem", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-8 col-xs-12">
+                        @Html.Partial("_defaultListButtons",
+                        new List<ButtonRepository>
+                        {
+                            new ButtonRepository() {    linkText = "Excluir",
+                                                        actionName = "",
+                                                        controllerName = "",
+                                                        buttonType = "submit"
+                                                    } ,
+                            new ButtonRepository() {    linkText = "Cancelar",
+                                                        actionName = "Browse",
+                                                        controllerName = "Enquadramentos",
+                                                        buttonType = "link"
+                                                    }
+                        })
+                    </div>
+                    <div class="col-md-offset-4 hidden-xs">
+                        ( * ) - Campo de preenchimento obrigatório
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+

@@ -1,0 +1,36 @@
+﻿@using DWM.Models.Repositories;
+@model System.Web.Mvc.PagedList<EnquadramentoViewModel>
+@{
+    Layout = null;
+}
+
+@if (Model != null)
+{
+    <div class="row Scroll margem-negativa">
+        <div class="col-md-12">
+            <table class="table table-striped jambo_table bulk_action" style="cursor: pointer">
+                <caption></caption>
+                <thead>
+                    <tr class="headings">
+                        <th>Enquadramento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (EnquadramentoViewModel enq in Model)
+                    {
+                        <tr class="even pointer" onclick="Move('@enq.enquadramentoId', '@enq.descricao')">
+                            <td class="col-md-7 col-sm-2">
+                                <small>@enq.descricao</small>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @Html.Partial("Paginacao", Model)
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}

@@ -7,8 +7,11 @@
 {
     <div class="dashboard-widget-content">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 Clique nos botões de <code>Ação</code> para executar a ação desejada
+            </div>
+            <div class="col-md-1">
+                <a href="../Historicos/Create" class="text-primary">Incluir</a>
             </div>
             <div class="col-md-offset-9 col-lg-offset-9 col-xs-offset-7">
                 @Html.Partial("Filtro")
@@ -32,24 +35,24 @@
                                 <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="window.location='Delete?historicoId=@his.historicoId'"></button>
                             </td>
                             <td>
-                                <h4>@his.descricao</h4>
+                                <span>@his.descricao</span>
                             </td>
                             @if (his.ind_tipoHistorico.Equals("C"))
                             {
                                 <td>
-                                    <h4>Contabilidade</h4>
+                                    <span>Contabilidade</span>
                                 </td>
                             }
                             else if (his.ind_tipoHistorico.Equals("P"))
                             {
                                 <td>
-                                    <h4>Contas a Pagar</h4>
+                                    <span>Contas a Pagar</span>
                                 </td>
                             }
                             else
                             {
                                 <td>
-                                    <h4>Contas a Receber</h4>
+                                    <span>Contas a Receber</span>
                                 </td>
                             }
                         </tr>

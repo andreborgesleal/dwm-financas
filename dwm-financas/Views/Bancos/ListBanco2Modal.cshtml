@@ -1,0 +1,26 @@
+﻿@model System.Web.Mvc.PagedList<DWM.Models.Repositories.BancoViewModel>
+@{
+    Layout = null;
+    Model.action = "../Bancos/_ListBanco2Modal";
+}
+@Html.EditorFor(info => Model, "NAVBAR", new { brand = "Bancos" })
+<div class="container-fluid">
+    <div id="div-ban2">
+        @Html.Partial("../Bancos/_ListBanco2Modal", Model)
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function Move(id, descricao) {
+        $("#banco2Id").val(id);
+        $("#nome_banco2").val(descricao);
+        $("#nome_banco21").val(descricao);
+        $("#btnModal").click();
+    }
+
+</script>
+
+
+
+

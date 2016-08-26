@@ -1,0 +1,104 @@
+﻿@using App_Dominio.Enumeracoes
+@using DWM.Models.Repositories
+@model CobrancaViewModel
+@{
+    Layout = null;
+    if (Model.CobrancaClienteViewModel == null || Model.CobrancaClienteViewModel.dia_vencimento == null)
+    {
+        Model.CobrancaClienteViewModel = new CobrancaClienteViewModel()
+        {
+            cobrancaId = Model.cobrancaId,
+            dia_vencimento = Model.dia_vencimento,
+            valor = Model.valor
+        };
+    }
+}
+<div id="div-lov"></div>
+@Html.Partial("_alerts")
+<div class="alert alert-warning margem-negativa">
+    <div class="row">
+        <div class="col-md-2">
+            <strong><span>@Model.CobrancaClientes.Where(info => !info.dt_desativacao.HasValue).Select(info => info.clienteId).Count().ToString("###,##0") clientes</span></strong>
+        </div>
+        <div class="col-lg-offset-9">
+            <strong><span class="pull-right">Total da cobrança: @Model.CobrancaClientes.Where(info => !info.dt_desativacao.HasValue).Select(info => info.valor).Sum(m => m.Value == 0 ? Model.valor : m.Value).ToString("R$ ###,###,###,##0.00")</span></strong>
+        </div>
+    </div>
+</div>
+<div id="div-list-cob-cli">
+    @Html.Partial("ListClientes", Model.pagedList)
+</div>
+
+@using (Ajax.BeginForm("CreateItem", "CobrancaCad", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div-create-cli" }, new { @class = "form", @id = "form001", @name = "form001" }))
+{
+    @Html.HiddenFor(info => info.cobrancaId)
+    @Html.HiddenFor(info => info.dia_vencimento)
+    @Html.HiddenFor(info => info.valor)
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Incluir
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            @Html.Editor("nome_cliente1", "ClientesAutoComplete", new
+                               {
+                                   value = Model.CobrancaClienteViewModel.clienteId > 0 ? Model.CobrancaClienteViewModel.clienteId.ToString() : "",
+                                   Text = Model.CobrancaClienteViewModel.nome_cliente ?? "",
+                                   nextField = "dia_vencimento2"
+                               })
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="control-label" for="dia_vencimento2">Vencimento</label>
+                                @Html.DropDownList("dia_vencimento2", DropDownListEnum.Dias31(Model.CobrancaClienteViewModel.dia_vencimento.ToString()), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                @Html.Editor("valor2", "DECIMAL", new
+                                   {
+                                       label = "Valor",
+                                       identificador = "valor21",
+                                       value = Model.CobrancaClienteViewModel.valor,
+                                       htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "fnValidaValor(this);" }
+                                   })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-3">
+                            <input type="submit" class="btn btn-primary" value="Salvar" name="btn-save1" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script type="text/javascript">
+    $(function () {
+        $('#form001').submit(function () {
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        $('#div-create-cli').html(result);
+                    }
+                });
+            }
+            return false;
+        });
+    });
+
+</script>

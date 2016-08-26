@@ -9,11 +9,10 @@
     t[1].url = "../Home/Default";
 }
 <div class="x_panel">
-    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Grupo de Clientes", Descricao = "Alterar Grupo de Cliente. Ex: Médicos, Condôminos, Imobiliárias, Mensalistas, Cliente Eventuais, Cliente Diversos", Transacao = t })
+    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Grupo de Clientes", Descricao = "Editar Grupo de Cliente. Ex: Médicos, Condôminos, Imobiliárias, Mensalistas, Cliente Eventuais, Cliente Diversos", Transacao = t })
     <div class="x_content">
         @using (Html.BeginForm("Edit", "GrupoClientes", FormMethod.Post, new { @class = "form-horizontal" }))
         {
-            @Html.Partial("_alerts")
             @Html.ValidationSummary("", new { @class = "text-danger" })
             @Html.HiddenFor(info => info.grupoClienteId)
             @Html.HiddenFor(info => info.empresaId)
