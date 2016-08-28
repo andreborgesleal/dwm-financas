@@ -1,0 +1,23 @@
+﻿@using App_Dominio.Repositories
+@model PagedList<DWM.Models.Repositories.GrupoCobrancaViewModel>
+@{
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../GrupoCobranca/Create";
+    t[0].nomeCurto = "Incluir";
+    t[0].referencia = "";
+
+    t[1].url = "../Home/Default";
+}
+<div class="x_panel">
+    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Grupos de Cobrança", Descricao = "Listagem da tabela de grupos de cobrança", Transacao = t })
+    <div class="x_content">
+        <div id="div-list">
+            @Html.Partial("List", Model)
+        </div>
+        <div class="altura-35">
+            @Html.Partial("_defaultListButtons", new List<ButtonRepository> { new ButtonRepository() { linkText = "Incluir", actionName = "Create", controllerName = "GrupoCobranca", buttonType = "link" } })
+        </div>
+    </div>
+</div>
+
+

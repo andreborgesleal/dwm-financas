@@ -12,23 +12,24 @@
 }
 
 <div class="x_panel">
-    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Cadastro de cobrança", Descricao = "Editar as confirgurações da cobrança", Transacao = t })
+    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Cadastro de cobrança", Descricao = "Excluir cobrança", Transacao = t })
     <div class="x_content">
-        @using (Html.BeginForm("Edit", "CobrancaCad", FormMethod.Post, new { @class = "form-horizontal", @id = "form0" }))
+        @using (Html.BeginForm("Delete", "CobrancaCad", FormMethod.Post, new { @class = "form-horizontal", @id = "form0" }))
         {
             @Html.ValidationSummary("", new { @class = "text-danger" })
             @Html.HiddenFor(info => info.cobrancaId)
+            @Html.HiddenFor(info => info.valor)
             <div class="row">
                 <div class="col-md-6 col-xs-12 col-sm-12 col-lg-6">
                     <div class="form-group">
                         <label class="control-label" for="grupoCobrancaId">Cobrança</label>
-                        @Html.DropDownListFor(m => m.grupoCobrancaId, new DWM.Models.Enumeracoes.BindDropDownList().GrupoCobrancas("", Model.grupoCobrancaId.ToString()), new { @class = "form-control" })
+                        @Html.DropDownListFor(m => m.grupoCobrancaId, new DWM.Models.Enumeracoes.BindDropDownList().GrupoCobrancas("", Model.grupoCobrancaId.ToString()), new { @class = "form-control", @disabled = "disable" })
                     </div>
                 </div>
                 <div class="col-md-6 col-xs-12 col-sm-12 col-lg-6">
                     <div class="form-group">
                         <label class="control-label" for="grupoClienteId">Clientes</label>
-                        @Html.DropDownListFor(m => m.grupoClienteId, new DWM.Models.Enumeracoes.BindDropDownList().GrupoClientesParaCobranca(Model.grupoClienteId.ToString()), new { @class = "form-control" })
+                        @Html.DropDownListFor(m => m.grupoClienteId, new DWM.Models.Enumeracoes.BindDropDownList().GrupoClientesParaCobranca(Model.grupoClienteId.ToString()), new { @class = "form-control", @disabled = "disable" })
                     </div>
                 </div>
             </div>
@@ -65,19 +66,19 @@
                 <div class="col-md-2 col-xs-12 col-sm-12 col-lg-2">
                     <div class="form-group">
                         <label class="control-label" for="dt_inicio">Início</label>
-                        @Html.EditorFor(info => info.dt_inicio, "DATE", new { identificador = "dt_inicio", value = Model.dt_inicio, readOnly = "false" })
+                        @Html.EditorFor(info => info.dt_inicio, "DATE", new { identificador = "dt_inicio", value = Model.dt_inicio, readOnly = "true" })
                     </div>
                 </div>
                 <div class="col-md-2 col-xs-12 col-sm-12 col-lg-2">
                     <div class="form-group">
                         <label class="control-label" for="dia_vencimento">Vencimento</label>
-                        @Html.DropDownListFor(m => m.dia_vencimento, DropDownListEnum.Dias31("", Model.dia_vencimento.ToString()), new { @class = "form-control" })
+                        @Html.DropDownListFor(m => m.dia_vencimento, DropDownListEnum.Dias31("", Model.dia_vencimento.ToString()), new { @class = "form-control", @disabled = "disable" })
                     </div>
                 </div>
                 <div class="col-md-2 col-xs-12 col-sm-12 col-lg-2">
                     <div class="form-group">
                         <label class="control-label" for="num_parcelas">Nº Parcelas</label>
-                        @Html.TextBoxFor(info => info.num_parcelas, "{0:##0}", new { @class = "form-control input-sm text-right", @onkeypress = "return numeros()" })
+                        @Html.TextBoxFor(info => info.num_parcelas, "{0:##0}", new { @class = "form-control input-sm text-right", @onkeypress = "return numeros()", @disabled = "disable" })
                     </div>
                 </div>
             </div>
@@ -85,25 +86,25 @@
                 <div class="col-md-2 col-xs-12 col-sm-12 col-lg-2">
                     <div class="form-group">
                         @Html.EditorFor(m => m.valor, "DECIMAL", new
-                           {
-                               htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "fnValidaValor(this);" }
-                           })
+                   {
+                       htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "fnValidaValor(this);", @disabled = "disable" }
+                   })
                     </div>
                 </div>
                 <div class="col-md-2 col-xs-12 col-sm-12 col-lg-2">
                     <div class="form-group">
                         @Html.EditorFor(m => m.vr_multa, "DECIMAL", new
-                           {
-                               htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "fnValidaValor(this);" }
-                           })
+                   {
+                       htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "fnValidaValor(this);", @disabled = "disable" }
+                   })
                     </div>
                 </div>
                 <div class="col-md-2 col-xs-12 col-sm-12 col-lg-2">
                     <div class="form-group">
                         @Html.EditorFor(m => m.vr_jurosMora, "DECIMAL", new
-                           {
-                               htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "fnValidaValor(this);" }
-                           })
+                   {
+                       htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "fnValidaValor(this);", @disabled = "disable" }
+                   })
                     </div>
                 </div>
             </div>
@@ -111,7 +112,7 @@
             <div class="row clearfix">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <input type="submit" class="btn btn-success" value="Salvar" name="btn-salvar" id="btn-salvar" />
+                        <input type="submit" class="btn btn-danger" value="Excluir" name="btn-excluir" id="btn-excluir" />
                         <input type="button" onclick="window.location = '../CobrancaCad/Browse'" class="btn btn-default" value="Cancelar" />
                     </div>
                 </div>
@@ -119,6 +120,4 @@
         }
     </div>
 </div>
-<div id="div-create-cli">
-    @Html.Partial("CreateItem", Model)
-</div>
+

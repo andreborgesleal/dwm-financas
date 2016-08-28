@@ -59,23 +59,17 @@
         }
     }
 
+    var banArray = $.map(bco.countries, function (value, key) {
+        return {
+            value: value.nome,
+            data: key.bancoId
+        };
+    });
+
+    // initialize autocomplete with custom appendTo
+    $('#nome_banco').autocomplete({
+        lookup: banArray,
+        appendTo: '#nome_banco-container'
+    });
 </script>
 
-<!-- jQuery autocomplete -->
-<script>
-      $(document).ready(function() {
-          var banArray = $.map(bco.countries, function(value, key) {
-            return {
-              value: value.nome,
-              data: key.bancoId
-            };
-          });
-
-        // initialize autocomplete with custom appendTo
-          $('#nome_banco').autocomplete({
-          lookup: banArray,
-          appendTo: '#nome_banco-container'
-        });
-      });
-</script>
-<!-- /jQuery autocomplete -->

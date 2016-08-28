@@ -3,10 +3,13 @@
     Layout = null;
     Model.action = "../Clientes/_ListClienteModal";
 }
-@Html.EditorFor(info => Model, "NAVBAR", new { brand = "Clientes" })
-<div class="container-fluid">
-    <div id="div-cli">
-        @Html.Partial("../Clientes/_ListClienteModal", Model)
+
+<div class="row">
+    <div class="col-md-12" style="margin: 0px">
+        @Html.Partial("_Filter", Model)
+        <div id="div-cli" class="no-padding">
+            @Html.Partial("../Clientes/_ListClienteModal", Model)
+        </div>
     </div>
 </div>
 

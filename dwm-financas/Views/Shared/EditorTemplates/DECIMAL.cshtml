@@ -7,7 +7,7 @@
 @if (ViewData["form"] == null)
 {
     <div class="form-group">
-        <label class="control-label col-lg-offset-8" for="descricao">@_label</label>
+        <label class="control-label col-lg-offset-8 pull-right" for="descricao">@_label</label>
         @Html.TextBox(String.Empty + "1", ViewData.TemplateInfo.FormattedModelValue, "{0:###,###,##0.00}", ViewData["htmlAttributes"])
         @Html.Hidden(String.Empty, ViewData.TemplateInfo.FormattedModelValue)
     </div>
@@ -22,7 +22,4 @@ else
         </div>
     </div>
 }
-
-
-
 

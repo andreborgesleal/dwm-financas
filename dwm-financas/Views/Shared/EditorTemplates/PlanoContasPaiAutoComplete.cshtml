@@ -59,27 +59,19 @@
             }
         }
     }
+    var planPaiArray = $.map(data.values, function (value, key) {
+        return {
+            value: value,
+            data: key
+        };
+    });
+
+    // initialize autocomplete with custom appendTo
+    $('#descricao_pai').autocomplete({
+        lookup: planPaiArray,
+        appendTo: '#descricao_pai-container'
+    });
 
 </script>
-
-
-<!-- jQuery autocomplete -->
-<script>
-      $(document).ready(function() {
-          var planPaiArray = $.map(data.values, function(value, key) {
-            return {
-              value: value,
-              data: key
-            };
-          });
-
-        // initialize autocomplete with custom appendTo
-        $('#descricao_pai').autocomplete({
-          lookup: planPaiArray,
-          appendTo: '#descricao_pai-container'
-        });
-      });
-</script>
-<!-- /jQuery autocomplete -->
 
 

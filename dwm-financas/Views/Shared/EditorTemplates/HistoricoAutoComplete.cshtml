@@ -17,6 +17,7 @@
                             'descricao' ,
                             'historicoId' ,
                             'descricao_historico' ,
+                            'descricao_historico' ,
                             '@next' );"><i class="glyphicon glyphicon-plus"></i></button>
             <button class="btn btn-instagram" type="button" onclick="clean('historicoId', 'descricao_historico');"><i class="glyphicon glyphicon-remove"></i></button>
         </div>
@@ -86,23 +87,18 @@
         }
     }
 
+    var hisArray = $.map(his.countries, function (value, key) {
+        return {
+            value: value.descricao,
+            data: key.historicoId
+        };
+    });
+
+    // initialize autocomplete with custom appendTo
+    $('#descricao_historico').autocomplete({
+        lookup: hisArray,
+        appendTo: '#descricao_historico-container'
+    });
+
 </script>
 
-<!-- jQuery autocomplete -->
-<script>
-      $(document).ready(function() {
-          var hisArray = $.map(his.countries, function(value, key) {
-            return {
-              value: value.descricao,
-              data: key.historicoId
-            };
-          });
-
-        // initialize autocomplete with custom appendTo
-          $('#descricao_historico').autocomplete({
-          lookup: hisArray,
-          appendTo: '#descricao_historico-container'
-        });
-      });
-</script>
-<!-- /jQuery autocomplete -->

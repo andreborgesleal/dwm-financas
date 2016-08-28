@@ -324,6 +324,45 @@ function Refresh(index, pagesize, action, DivId) {
     })
 }
 
+function RefreshAll(index, pagesize, action, DivId) {
+    var link = action;
+    link = encodeURI(link + '?index=' + index + '&pageSize=' + pagesize);
+
+    var $inputs = $('.form-horizontal :input');
+
+    // not sure if you wanted this, but I thought I'd add it.
+    // get an associative array of just the values.
+    $inputs.each(function () {
+        if (this.id != '' && this.id != null)
+            link += '&' + this.id + '=' + $(this).val()
+    });
+
+    $('#carregando').css("visibility", "visible");
+    $('#carregando').css("width", "100%");
+    $('#carregando').css("height", "100%");
+    $('#carregando').css("position", "absolute");
+    $('#carregando').css("background-color", "black");
+    $('#carregando').css("filter", "alpha(opacity=60)");
+    $('#carregando').css("opacity", "0.6");
+    $('#carregando').css("left", "0%");
+    $('#carregando').css("top", "0%");
+
+    link = encodeURI(link + '&noCahce=' + new Date());
+
+    $('#' + DivId).load(link);
+    $(document).ajaxSuccess(function (event, xhr, settings) {
+        $('#carregando').css("visibility", "hidden");
+        $('#carregando').css("height", "0px");
+        $('#carregando').css("margin-top", "0%");
+        $('#carregando').css("margin-left", "0%");
+    }).error(function () {
+        $('#carregando').css("visibility", "hidden");
+        $('#carregando').css("height", "0px");
+        $('#carregando').css("margin-top", "0%");
+        $('#carregando').css("margin-left", "0%");
+    })
+}
+
 function selecionaPdf(obj, controller, action, javascriptFunction) {
     if (javascriptFunction != null)
     {

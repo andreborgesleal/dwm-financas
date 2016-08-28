@@ -103,6 +103,7 @@ namespace DWM.Controllers
                 };
                 ModelState.AddModelError("", value.mensagem.Message); // mensagem amigável ao usuário
                 Attention(value.mensagem.MessageBase);
+                BindBreadCrumb(breadCrumbText);
             }
 
             return value;
@@ -163,7 +164,7 @@ namespace DWM.Controllers
         }
 
         [AuthorizeFilter]
-        public ActionResult CreateItem(string cobrancaId, string clienteId, string dia_vencimento, string dia_vencimento2, string valor, string valor21)
+        public ActionResult CreateItem(string cobrancaId, string clienteId, string dia_vencimento, string dia_vencimento2, string valor, string valor2)
         {
             if (ViewBag.ValidateRequest)
             {
@@ -184,10 +185,10 @@ namespace DWM.Controllers
                     else
                         value.dia_vencimento = 0;
 
-                    if (valor != null && valor21 != null)
+                    if (valor != null && valor2 != null)
                     {
                         value.valor = decimal.Parse(valor);
-                        value.valor = value.valor == decimal.Parse(valor21) ? 0 : decimal.Parse(valor21);
+                        value.valor = value.valor == decimal.Parse(valor2) ? 0 : decimal.Parse(valor2);
                     }
                     else
                         value.valor = 0;
@@ -205,14 +206,14 @@ namespace DWM.Controllers
                 {
                     ModelState.AddModelError(ex.Result.Field, ex.Result.Message); // mensagem amigável ao usuário
                     Error(ex.Result.MessageBase); // Mensagem em inglês com a descrição detalhada do erro e fica no topo da tela
-                    OnCreateItemError(ref value,int.Parse(cobrancaId), clienteId, dia_vencimento2, valor21);
+                    OnCreateItemError(ref value,int.Parse(cobrancaId), clienteId, dia_vencimento2, valor2);
                 }
                 catch (Exception ex)
                 {
                     App_DominioException.saveError(ex, GetType().FullName);
                     ModelState.AddModelError("", MensagemPadrao.Message(17).ToString()); // mensagem amigável ao usuário
                     Error(ex.Message); // Mensagem em inglês com a descrição detalhada do erro e fica no topo da tela
-                    OnCreateItemError(ref value, int.Parse(cobrancaId), clienteId, dia_vencimento2, valor21);
+                    OnCreateItemError(ref value, int.Parse(cobrancaId), clienteId, dia_vencimento2, valor2);
                 }
 
                 CobrancaViewModel repository = new CobrancaViewModel()
@@ -224,7 +225,7 @@ namespace DWM.Controllers
                 Facade<CobrancaViewModel, CobrancaModel, ApplicationContext> facadeCob = new Facade<CobrancaViewModel, CobrancaModel, ApplicationContext>();
                 repository = facadeCob.getObject(repository);
                 repository.CobrancaClienteViewModel.dia_vencimento = value.dia_vencimento;
-                repository.CobrancaClienteViewModel.valor = value.valor;
+                repository.CobrancaClienteViewModel.valor = value.valor.HasValue && value.valor > 0 ? value.valor : valor2 != null ? decimal.Parse(valor2) : 0;
                 repository.CobrancaClienteViewModel.clienteId = value.clienteId;
                 repository.pagedList = facadeCob.getPagedList(l, 0, 15, cobrancaId);
 
@@ -374,6 +375,15 @@ namespace DWM.Controllers
             }
 
         }
+        #endregion
+
+        #region Delete
+        [AuthorizeFilter]
+        public ActionResult Delete(int cobrancaId)
+        {
+            return _Edit(new CobrancaViewModel() { cobrancaId = cobrancaId });
+        }
+
         #endregion
 
         public JsonResult getNames()

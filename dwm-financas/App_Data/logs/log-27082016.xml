@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="1027813496" Data="27/08/2016 15:38:59">
+    <Sessao>ylb1ordmw3piem5terat0sik</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>A cadeia de caracteres de entrada não estava em um formato correto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/edititem</NameSpace>
+    <Context />
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseDecimal(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Decimal.Parse(String s)
+   em DWM.Controllers.CobrancaCadController.EditItem(String cobrancaId, String clienteId, String dia_vencimento, String dia_vencimento3, String valor, String valor31) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 274</StackTrace>
+  </LOG>
+  <LOG ID="876556700" Data="27/08/2016 15:44:33">
+    <Sessao>ylb1ordmw3piem5terat0sik</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>A cadeia de caracteres de entrada não estava em um formato correto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/edititem</NameSpace>
+    <Context />
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseDecimal(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Decimal.Parse(String s)
+   em DWM.Controllers.CobrancaCadController.EditItem(String cobrancaId, String clienteId, String dia_vencimento, String dia_vencimento3, String valor, String valor31) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 274</StackTrace>
+  </LOG>
+  <LOG ID="2093684070" Data="27/08/2016 15:45:29">
+    <Sessao>ylb1ordmw3piem5terat0sik</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>A cadeia de caracteres de entrada não estava em um formato correto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/edititem</NameSpace>
+    <Context />
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseDecimal(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Decimal.Parse(String s)
+   em DWM.Controllers.CobrancaCadController.EditItem(String cobrancaId, String clienteId, String dia_vencimento, String dia_vencimento3, String valor, String valor31) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 274</StackTrace>
+  </LOG>
+  <LOG ID="204731948" Data="27/08/2016 16:43:10">
+    <Sessao>ylb1ordmw3piem5terat0sik</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>A cadeia de caracteres de entrada não estava em um formato correto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/edititem</NameSpace>
+    <Context />
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseDecimal(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Decimal.Parse(String s)
+   em DWM.Controllers.CobrancaCadController.EditItem(String cobrancaId, String clienteId, String dia_vencimento, String dia_vencimento3, String valor, String valor31) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 274</StackTrace>
+  </LOG>
+  <LOG ID="85776656" Data="27/08/2016 16:46:00">
+    <Sessao>ylb1ordmw3piem5terat0sik</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Cliente deve ser informado</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/createitem</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.CobrancaCadController.CreateItem(String cobrancaId, String clienteId, String dia_vencimento, String dia_vencimento2, String valor, String valor21) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 177</StackTrace>
+  </LOG>
+  <LOG ID="20472968" Data="27/08/2016 17:05:15">
+    <Sessao>ylb1ordmw3piem5terat0sik</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Cliente deve ser informado</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/createitem</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.CobrancaCadController.CreateItem(String cobrancaId, String clienteId, String dia_vencimento, String dia_vencimento2, String valor, String valor21) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 177</StackTrace>
+  </LOG>
+  <LOG ID="2094730269" Data="27/08/2016 17:09:55">
+    <Sessao>ylb1ordmw3piem5terat0sik</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>A cadeia de caracteres de entrada não estava em um formato correto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/createitem</NameSpace>
+    <Context />
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseDecimal(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Decimal.Parse(String s)
+   em DWM.Controllers.CobrancaCadController.CreateItem(String cobrancaId, String clienteId, String dia_vencimento, String dia_vencimento2, String valor, String valor21) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 191</StackTrace>
+  </LOG>
+  <LOG ID="241927615" Data="27/08/2016 17:14:52">
+    <Sessao>ylb1ordmw3piem5terat0sik</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Valor não pode ser nulo.
+Nome do parâmetro: String</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/createitem</NameSpace>
+    <Context />
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   em System.Int32.Parse(String s)
+   em DWM.Controllers.CobrancaCadController.CreateItem(String cobrancaId, String clienteId, String dia_vencimento, String dia_vencimento2, String valor, String valor2_1) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 174</StackTrace>
+  </LOG>
+  <LOG ID="754218254" Data="27/08/2016 17:25:59">
+    <Sessao>ylb1ordmw3piem5terat0sik</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Valor não pode ser nulo.
+Nome do parâmetro: String</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/createitem</NameSpace>
+    <Context />
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   em System.Int32.Parse(String s)
+   em DWM.Controllers.CobrancaCadController.CreateItem(String cobrancaId, String clienteId, String dia_vencimento, String dia_vencimento2, String valor, String valor2) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 174</StackTrace>
+  </LOG>
+  <LOG ID="371167736" Data="27/08/2016 17:29:01">
+    <Sessao>ylb1ordmw3piem5terat0sik</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>A cadeia de caracteres de entrada não estava em um formato correto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/createitem</NameSpace>
+    <Context />
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseDecimal(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Decimal.Parse(String s)
+   em DWM.Controllers.CobrancaCadController.CreateItem(String cobrancaId, String clienteId, String dia_vencimento, String dia_vencimento2, String valor, String valor2) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 191</StackTrace>
+  </LOG>
+  <LOG ID="444094422" Data="27/08/2016 17:29:12">
+    <Sessao>ylb1ordmw3piem5terat0sik</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>A cadeia de caracteres de entrada não estava em um formato correto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/createitem</NameSpace>
+    <Context />
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseDecimal(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Decimal.Parse(String s)
+   em DWM.Controllers.CobrancaCadController.CreateItem(String cobrancaId, String clienteId, String dia_vencimento, String dia_vencimento2, String valor, String valor2) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 191</StackTrace>
+  </LOG>
+  <LOG ID="439036768" Data="27/08/2016 18:56:44">
+    <Sessao>ylb1ordmw3piem5terat0sik</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Cliente deve ser informado</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/createitem</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.CobrancaCadController.CreateItem(String cobrancaId, String clienteId, String dia_vencimento, String dia_vencimento2, String valor, String valor2) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 177</StackTrace>
+  </LOG>
+  <LOG ID="476640287" Data="27/08/2016 21:17:55">
+    <Sessao>ylb1ordmw3piem5terat0sik</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Cliente deve ser informado</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/createitem</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.CobrancaCadController.CreateItem(String cobrancaId, String clienteId, String dia_vencimento, String dia_vencimento2, String valor, String valor2) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 177</StackTrace>
+  </LOG>
+  <LOG ID="1471584102" Data="27/08/2016 21:36:49">
+    <Sessao>ylb1ordmw3piem5terat0sik</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Valor não pode ser nulo.
+Nome do parâmetro: String</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/edit</NameSpace>
+    <Context>cobrancaId="1",descricao_historico="Mensalidade regular",historicoId="6",nome_banco="Banco Itaú",bancoId="1",descricao_enquadramento="Mensalidade regular",enquadramentoId="1",dt_inicio="01/08/2016",valor="152,66",vr_multa="0,00",vr_jurosMora="0,00",btn-excluir="Excluir"</Context>
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseDecimal(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Decimal.Parse(String s)
+   em DWM.Controllers.CobrancaCadController.BeforeCreate(CobrancaViewModel&amp; value, FormCollection collection) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 115
+   em DWM.Controllers.CobrancaCadController.BeforeEdit(CobrancaViewModel&amp; value, FormCollection collection) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 163
+   em App_Dominio.Controllers.DwmRootController`3.SetEdit(R value, FormCollection collection, String breadCrumbText, IDictionary`2 text) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Controllers\DwmRootController.cs:linha 221</StackTrace>
+  </LOG>
+  <LOG ID="1500598688" Data="27/08/2016 21:39:52">
+    <Sessao>ylb1ordmw3piem5terat0sik</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Valor não pode ser nulo.
+Nome do parâmetro: String</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/edit</NameSpace>
+    <Context>cobrancaId="1",descricao_historico="Mensalidade regular",historicoId="6",nome_banco="Banco Itaú",bancoId="1",descricao_enquadramento="Mensalidade regular",enquadramentoId="1",dt_inicio="01/08/2016",valor="152,66",vr_multa="0,00",vr_jurosMora="0,00",btn-excluir="Excluir"</Context>
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseDecimal(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Decimal.Parse(String s)
+   em DWM.Controllers.CobrancaCadController.BeforeCreate(CobrancaViewModel&amp; value, FormCollection collection) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 115
+   em DWM.Controllers.CobrancaCadController.BeforeEdit(CobrancaViewModel&amp; value, FormCollection collection) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 163
+   em App_Dominio.Controllers.DwmRootController`3.SetEdit(R value, FormCollection collection, String breadCrumbText, IDictionary`2 text) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Controllers\DwmRootController.cs:linha 221</StackTrace>
+  </LOG>
+  <LOG ID="802126694" Data="27/08/2016 21:40:48">
+    <Sessao>ylb1ordmw3piem5terat0sik</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Valor não pode ser nulo.
+Nome do parâmetro: String</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/edit</NameSpace>
+    <Context>cobrancaId="1",valor="152,66",descricao_historico="Mensalidade regular",historicoId="6",nome_banco="Banco Itaú",bancoId="1",descricao_enquadramento="Mensalidade regular",enquadramentoId="1",dt_inicio="01/08/2016",vr_multa="0,00",vr_jurosMora="0,00",btn-excluir="Excluir"</Context>
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseDecimal(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Decimal.Parse(String s)
+   em DWM.Controllers.CobrancaCadController.BeforeCreate(CobrancaViewModel&amp; value, FormCollection collection) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 115
+   em DWM.Controllers.CobrancaCadController.BeforeEdit(CobrancaViewModel&amp; value, FormCollection collection) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 163
+   em App_Dominio.Controllers.DwmRootController`3.SetEdit(R value, FormCollection collection, String breadCrumbText, IDictionary`2 text) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Controllers\DwmRootController.cs:linha 221</StackTrace>
+  </LOG>
+  <LOG ID="1718585546" Data="27/08/2016 21:43:44">
+    <Sessao>ylb1ordmw3piem5terat0sik</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Valor não pode ser nulo.
+Nome do parâmetro: String</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/edit</NameSpace>
+    <Context>cobrancaId="1",valor="152,66",descricao_historico="Mensalidade regular",historicoId="6",nome_banco="Banco Itaú",bancoId="1",descricao_enquadramento="Mensalidade regular",enquadramentoId="1",dt_inicio="01/08/2016",vr_multa="0,00",vr_jurosMora="0,00",btn-excluir="Excluir"</Context>
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseDecimal(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Decimal.Parse(String s)
+   em DWM.Controllers.CobrancaCadController.BeforeCreate(CobrancaViewModel&amp; value, FormCollection collection) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 115
+   em DWM.Controllers.CobrancaCadController.BeforeEdit(CobrancaViewModel&amp; value, FormCollection collection) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 163
+   em App_Dominio.Controllers.DwmRootController`3.SetEdit(R value, FormCollection collection, String breadCrumbText, IDictionary`2 text) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Controllers\DwmRootController.cs:linha 221</StackTrace>
+  </LOG>
+  <LOG ID="1247881151" Data="27/08/2016 21:48:52">
+    <Sessao>ylb1ordmw3piem5terat0sik</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Valor não pode ser nulo.
+Nome do parâmetro: String</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/edit</NameSpace>
+    <Context>cobrancaId="1",valor="152,66",descricao_historico="Mensalidade regular",historicoId="6",nome_banco="Banco Itaú",bancoId="1",descricao_enquadramento="Mensalidade regular",enquadramentoId="1",dt_inicio="01/08/2016",vr_multa="0,00",vr_jurosMora="0,00",btn-excluir="Excluir"</Context>
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseDecimal(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Decimal.Parse(String s)
+   em DWM.Controllers.CobrancaCadController.BeforeCreate(CobrancaViewModel&amp; value, FormCollection collection) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 115
+   em DWM.Controllers.CobrancaCadController.BeforeEdit(CobrancaViewModel&amp; value, FormCollection collection) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 163
+   em App_Dominio.Controllers.DwmRootController`3.SetEdit(R value, FormCollection collection, String breadCrumbText, IDictionary`2 text) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Controllers\DwmRootController.cs:linha 221</StackTrace>
+  </LOG>
+</LOG>

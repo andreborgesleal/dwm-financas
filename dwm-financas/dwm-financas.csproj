@@ -49,7 +49,7 @@
   <ItemGroup>
     <Reference Include="App_Dominio, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\app_dominio\App_Dominio\App_Dominio\bin\Debug\App_Dominio.dll</HintPath>
+      <HintPath>..\..\app_dominio\App_Dominio\App_Dominio\bin\Debug\App_Dominio.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
@@ -4240,6 +4240,12 @@
     <Content Include="Views\Enquadramentos\_ListEnquadramentoOperacaoAmortizacaoModal.cshtml" />
     <Content Include="Views\Enquadramentos\_ListEnquadramentoOperacaoModal.cshtml" />
     <Content Include="Views\Enquadramentos\_ListItem.cshtml" />
+    <Content Include="Views\GrupoCobranca\Browse.cshtml" />
+    <Content Include="Views\GrupoCobranca\Create.cshtml" />
+    <Content Include="Views\GrupoCobranca\Delete.cshtml" />
+    <Content Include="Views\GrupoCobranca\Edit.cshtml" />
+    <Content Include="Views\GrupoCobranca\List.cshtml" />
+    <Content Include="Views\CobrancaCad\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />

@@ -11,9 +11,9 @@
 }
 
 <div class="x_panel">
-    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Cadastro de cobrança", Descricao = "Incluir as confirgurações da cobrança.", Transacao = t })
+    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Cadastro de cobrança", Descricao = "Incluir as confirgurações da cobrança", Transacao = t })
     <div class="x_content">
-        @using (Html.BeginForm("Create", "CobrancaCad", FormMethod.Post, new { @class = "form-horizontal" }))
+        @using (Html.BeginForm("Create", "CobrancaCad", FormMethod.Post, new { @class = "form-horizontal", @id = "form0" }))
         {
             @Html.ValidationSummary("", new { @class = "text-danger" })
             <div class="row">

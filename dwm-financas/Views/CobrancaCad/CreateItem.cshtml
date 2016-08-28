@@ -1,8 +1,17 @@
-﻿@using App_Dominio.Enumeracoes
-@using DWM.Models.Repositories
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@using App_Dominio.Enumeracoes
 @model CobrancaViewModel
 @{
     Layout = null;
+
+    TransacaoRepository[] t1 = { new TransacaoRepository(), new TransacaoRepository() };
+    t1[0].url = "../CobrancaCad/Create";
+    t1[0].nomeCurto = "Incluir";
+    t1[0].referencia = "";
+
+    t1[1].url = "../Home/Default";
+
     if (Model.CobrancaClienteViewModel == null || Model.CobrancaClienteViewModel.dia_vencimento == null)
     {
         Model.CobrancaClienteViewModel = new CobrancaClienteViewModel()
@@ -13,75 +22,87 @@
         };
     }
 }
-<div id="div-lov"></div>
-@Html.Partial("_alerts")
-<div class="alert alert-warning margem-negativa">
-    <div class="row">
-        <div class="col-md-2">
-            <strong><span>@Model.CobrancaClientes.Where(info => !info.dt_desativacao.HasValue).Select(info => info.clienteId).Count().ToString("###,##0") clientes</span></strong>
+<div id="div-alerta">
+    @Html.Partial("_alerts")
+</div>
+<div class="x_panel">
+    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Clientes", Descricao = "Listagem dos clientes para cobrança", Transacao = t1 })
+    <div class="x_content">
+        <div id="div-lov"></div>
+        <!-- top tiles -->
+        <div class="row tile_count">
+            <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i> Total de clientes</span>
+                <div class="count">@Model.CobrancaClientes.Where(info => !info.dt_desativacao.HasValue).Select(info => info.clienteId).Count().ToString("###,##0")</div>
+                <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i></i> @Model.descricao_grupoCobranca</span>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                <span class="count_top"><i class="fa fa-clock-o"></i> Valor da parcela</span>
+                <div class="count">@Model.valor.ToString("R$ ###,###,##0.00")</div>
+                <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i></i> Boleto</span>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i> Vencimento</span>
+                <div class="count red">Dia @Model.dia_vencimento</div>
+                <span class="count_bottom"><i class="red"><i class="fa fa-sort-asc"></i> </i> @App_Dominio.Models.Funcoes.Brasilia().Year</span>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i> Total da cobrança</span>
+                <div class="count green">@Model.CobrancaClientes.Where(info => !info.dt_desativacao.HasValue).Select(info => info.valor).Sum(m => m.Value == 0 ? Model.valor : m.Value).ToString("R$ ###,###,###,##0.00")</div>
+                <span class="count_bottom"><i class="green"><i class="fa fa-sort-desc"></i> </i> Faturamento</span>
+            </div>
         </div>
-        <div class="col-lg-offset-9">
-            <strong><span class="pull-right">Total da cobrança: @Model.CobrancaClientes.Where(info => !info.dt_desativacao.HasValue).Select(info => info.valor).Sum(m => m.Value == 0 ? Model.valor : m.Value).ToString("R$ ###,###,###,##0.00")</span></strong>
-        </div>
+        <!-- /top tiles -->
+    </div>
+    
+    <div id="div-list-cob-cli">
+        @Html.Partial("ListClientes", Model.pagedList)
     </div>
 </div>
-<div id="div-list-cob-cli">
-    @Html.Partial("ListClientes", Model.pagedList)
-</div>
-
-@using (Ajax.BeginForm("CreateItem", "CobrancaCad", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div-create-cli" }, new { @class = "form", @id = "form001", @name = "form001" }))
-{
-    @Html.HiddenFor(info => info.cobrancaId)
-    @Html.HiddenFor(info => info.dia_vencimento)
-    @Html.HiddenFor(info => info.valor)
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingOne">
-                <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Incluir
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                <div class="panel-body">
-                    <div class="row clearfix">
-                        <div class="col-md-6">
-                            @Html.Editor("nome_cliente1", "ClientesAutoComplete", new
+<div class="x_panel" id="incluir-cliente">
+    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Incluir", Descricao = "Inserir novo cliente na lista", Transacao = t1 })
+    <div class="x_content">
+        @using (Ajax.BeginForm("CreateItem", "CobrancaCad", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div-create-cli" }, new { @class = "form", @id = "form001", @name = "form001" }))
+        {
+            
+            @Html.HiddenFor(info => info.cobrancaId)
+            @Html.HiddenFor(info => info.dia_vencimento)
+            @Html.HiddenFor(info => info.valor)
+            <div class="row clearfix">
+                <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                    @Html.Editor("nome_cliente1", "ClientesAutoComplete", new
                                {
                                    value = Model.CobrancaClienteViewModel.clienteId > 0 ? Model.CobrancaClienteViewModel.clienteId.ToString() : "",
                                    Text = Model.CobrancaClienteViewModel.nome_cliente ?? "",
                                    nextField = "dia_vencimento2"
                                })
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label class="control-label" for="dia_vencimento2">Vencimento</label>
-                                @Html.DropDownList("dia_vencimento2", DropDownListEnum.Dias31(Model.CobrancaClienteViewModel.dia_vencimento.ToString()), new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                @Html.Editor("valor2", "DECIMAL", new
-                                   {
-                                       label = "Valor",
-                                       identificador = "valor21",
-                                       value = Model.CobrancaClienteViewModel.valor,
-                                       htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "fnValidaValor(this);" }
-                                   })
-                            </div>
-                        </div>
+                </div>
+                <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label" for="dia_vencimento2">Vencimento</label>
+                        @Html.DropDownList("dia_vencimento2", DropDownListEnum.Dias31(Model.CobrancaClienteViewModel.dia_vencimento.ToString()), new { @class = "form-control" })
                     </div>
-                    <div class="row clearfix">
-                        <div class="col-md-3">
-                            <input type="submit" class="btn btn-primary" value="Salvar" name="btn-save1" />
-                        </div>
+                </div>
+                <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label pull-right" for="valor">Valor</label>
+                        <input type="text" name="valor2" id="valor2" value="@Model.CobrancaClienteViewModel.valor" class="form-control text-right" onfocus = "this.select();" onblur = "fnValidaValor(this);" />
                     </div>
                 </div>
             </div>
-        </div>
+            <p>&nbsp;</p>
+            <div class="row clearfix">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success" value="Salvar" name="btn-save1" id="btn-save1" onclick="document.getElementById('linkTopo').click();" />
+                        <input type="button" onclick="window.location = '../CobrancaCad/Browse'" class="btn btn-default" value="Cancelar" />
+                        <a href="#div-alerta" class="info pull-right" id="linkTopo"><i class="fa fa-toggle-up"></i> Topo</a>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
-}
+</div>
 
 
 <script type="text/javascript">
@@ -102,3 +123,4 @@
     });
 
 </script>
+
