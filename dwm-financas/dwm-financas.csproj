@@ -4265,6 +4265,7 @@
     <Content Include="Views\Cobranca\_Modify.cshtml" />
     <Content Include="Views\Cobranca\_NavBar.cshtml" />
     <Content Include="Views\Shared\_FormModal.cshtml" />
+    <Content Include="Views\Shared\_AjaxAlert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />
