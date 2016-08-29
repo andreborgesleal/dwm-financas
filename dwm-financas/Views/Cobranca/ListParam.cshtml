@@ -21,7 +21,7 @@
                         <div class="icon">
                             <i class="fa fa-barcode"></i>
                         </div>
-                        <div class="count">@Model[0].TotalEmitido.Value.ToString("R$ ###,###,##0.00")</div>
+                        <div class="count"><span class="h2"><strong>@Model[0].TotalEmitido.Value.ToString("R$ ###,###,##0.00")</strong></span></div>
                         <h3>Total emitido</h3>
                         <p>títulos emitidos no período.</p>
                     </div>
@@ -31,8 +31,8 @@
                         <div class="icon">
                             <i class="fa fa-check-square-o"></i>
                         </div>
-                        <div class="count green">@Model[0].TotalAmortizado.Value.ToString("R$ ###,###,##0.00")</div>
-                        <h3>Total amortizado/liquidado</h3>
+                        <div class="count green"><span class="h2"><strong>@Model[0].TotalAmortizado.Value.ToString("R$ ###,###,##0.00")</strong></span></div>
+                        <h3>Total amortizado</h3>
                         <p>títulos com pagamento parcial/total</p>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         <div class="icon">
                             <i class="fa fa-sort-amount-desc"></i>
                         </div>
-                        <div class="count red">@Model[0].TotalEmAberto.Value.ToString("R$ ###,###,##0.00")</div>
+                        <div class="count red"><span class="h2"><strong>@Model[0].TotalEmAberto.Value.ToString("R$ ###,###,##0.00")</strong></span></div>
                         <h3>Total em aberto</h3>
                         <p>títulos a vencer/vencidos.</p>
                     </div>

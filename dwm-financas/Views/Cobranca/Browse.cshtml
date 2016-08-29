@@ -23,7 +23,7 @@
             @Html.Hidden("baixa_cancelamento_")
 
             <div class="row">
-                <div class="col-md-6 col-lg-4 col-xs-12 col-sm-12">
+                <div class="col-md-6 col-lg-5 col-xs-12 col-sm-12">
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" id="titulos_em_aberto" name="titulos_em_aberto" class="icheckbox_flat-green" checked="checked" value="true" onclick="habilitaTitulos_em_aberto()">
@@ -44,13 +44,13 @@
                             <div class="form-group">
                                 <label class="control-label" for="dt_vencidos_atraso1">Período</label>
                                 <div class="row clearfix">
-                                    <div class="col-lg-4 col-md-5 col-xs-12 col-sm-12">
+                                    <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
                                         @Html.Editor("dt_vencidos_atraso1", "DATE", new { identificador = "dt_vencidos_atraso1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.AddMonths(-2).ToString("yyyy-MM-") + "01") })
                                     </div>
                                     <div class="col-md-1">
                                         à
                                     </div>
-                                    <div class="col-lg-4 col-md-5 col-xs-12 col-sm-12">
+                                    <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
                                         @Html.Editor("dt_vencidos_atraso2", "DATE", new { identificador = "dt_vencidos_atraso2", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-dd")).AddDays(-1) })
                                     </div>
                                     <div class="col-md-1"></div>
@@ -68,13 +68,13 @@
                             <div class="form-group">
                                 <label class="control-label" for="dt_vencimento1">Período</label>
                                 <div class="row clearfix">
-                                    <div class="col-lg-4 col-md-5 col-xs-12 col-sm-12">
+                                    <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
                                         @Html.Editor("dt_vencimento1", "DATE", new { identificador = "dt_vencimento1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-dd")) })
                                     </div>
                                     <div class="col-md-1">
                                         à
                                     </div>
-                                    <div class="col-lg-4 col-md-5 col-xs-12 col-sm-12">
+                                    <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
                                         @Html.Editor("dt_vencimento2", "DATE", new { identificador = "dt_vencimento2", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-") + "01").AddDays(-1) })
                                     </div>
                                     <div class="col-md-1"></div>
@@ -102,20 +102,20 @@
                     <div class="form-group margem-topo">
                         <label class="control-label" for="dt_emissao1">Emissão</label>
                         <div class="row clearfix">
-                            <div class="col-lg-4 col-md-5 col-xs-12 col-sm-12">
+                            <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
                                 @Html.Editor("dt_emissao1", "DATE", new { identificador = "dt_emissao1", readOnly = "false" })
                             </div>
                             <div class="col-md-1">
                                 à
                             </div>
-                            <div class="col-lg-4 col-md-5 col-xs-12 col-sm-12">
+                            <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
                                 @Html.Editor("dt_emissao2", "DATE", new { identificador = "dt_emissao2", readOnly = "false" })
                             </div>
                             <div class="col-md-1"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 col-xs-12 col-sm-12">
+                <div class="col-md-6 col-lg-5 col-xs-12 col-sm-12">
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" id="titulos_baixados" name="titulos_baixados" class="icheckbox_flat-green" checked="checked" value="true" onclick = "checkTitulos_baixados()">
@@ -150,13 +150,13 @@
                             <div class="form-group">
                                 <label class="control-label" for="dt_baixa1">Período</label>
                                 <div class="row clearfix">
-                                    <div class="col-lg-4 col-md-5 col-xs-12 col-sm-12">
+                                    <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
                                         @Html.Editor("dt_baixa1", "DATE", new { identificador = "dt_baixa1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-") + "01") })
                                     </div>
                                     <div class="col-md-1">
                                         à
                                     </div>
-                                    <div class="col-lg-4 col-md-5 col-xs-12 col-sm-12">
+                                    <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
                                         @Html.Editor("dt_baixa2", "DATE", new { identificador = "dt_baixa2", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-dd")) })
                                     </div>
                                     <div class="col-md-1"></div>
