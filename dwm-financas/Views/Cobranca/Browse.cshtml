@@ -1,0 +1,348 @@
+﻿@using App_Dominio.Repositories
+@model PagedList<DWM.Models.Repositories.ContaReceberDemonstrativoViewModel>
+@{
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../Cobranca/Create";
+    t[0].nomeCurto = "Incluir";
+    t[0].referencia = "";
+
+    t[1].url = "../Home/Default";
+}
+<div class="x_panel" id="panel-top">
+    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Títulos em carteira de cobrança", Descricao = "Parâmetros de busca", Transacao = t })
+    <div class="x_content">
+        @using (Ajax.BeginForm(null, null, new AjaxOptions { HttpMethod = "get" }, new { @style = "margin-left: 20px", @role = "search" }))
+        {
+            @Html.Hidden("titulos_em_aberto_")
+            @Html.Hidden("titulos_vencidos_atraso_")
+            @Html.Hidden("titulos_a_vencer_")
+            @Html.Hidden("titulos_amortizados_")
+            @Html.Hidden("titulos_nao_pagos_")
+            @Html.Hidden("titulos_baixados_")
+            @Html.Hidden("baixa_liquidacao_")
+            @Html.Hidden("baixa_cancelamento_")
+
+            <div class="row">
+                <div class="col-md-6 col-lg-4 col-xs-12 col-sm-12">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="titulos_em_aberto" name="titulos_em_aberto" class="icheckbox_flat-green" checked="checked" value="true" onclick="habilitaTitulos_em_aberto()">
+                        </label>
+                        <span class="h4">&nbsp;Títulos em aberto</span>
+                    </div>
+                    <div id="panel_titulos_em_aberto" class="panel panel-info">
+                        <div class="panel-body moldura-basic">
+                            <div class="well info espacamento-sm">Quanto ao vencimento</div>
+                            <p>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="titulos_vencidos_atraso" name="titulos_vencidos_atraso" class="icheckbox_flat-green" checked="checked" value="true" onclick = "checkTitulos_vencidos_atraso()">
+                                    </label>
+                                    <span>&nbsp;Títulos vencidos</span>
+                                </div>
+                            </p>
+                            <div class="form-group">
+                                <label class="control-label" for="dt_vencidos_atraso1">Período</label>
+                                <div class="row clearfix">
+                                    <div class="col-lg-4 col-md-5 col-xs-12 col-sm-12">
+                                        @Html.Editor("dt_vencidos_atraso1", "DATE", new { identificador = "dt_vencidos_atraso1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.AddMonths(-2).ToString("yyyy-MM-") + "01") })
+                                    </div>
+                                    <div class="col-md-1">
+                                        à
+                                    </div>
+                                    <div class="col-lg-4 col-md-5 col-xs-12 col-sm-12">
+                                        @Html.Editor("dt_vencidos_atraso2", "DATE", new { identificador = "dt_vencidos_atraso2", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-dd")).AddDays(-1) })
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                            </div>
+                            <hr />
+                            <p>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="titulos_a_vencer" name="titulos_a_vencer" class="icheckbox_flat-green" checked="checked" value="true" onclick = "checkTitulos_a_vencer()">
+                                    </label>
+                                    <span>&nbsp;Títulos à vencer</span>
+                                </div>
+                            </p>
+                            <div class="form-group">
+                                <label class="control-label" for="dt_vencimento1">Período</label>
+                                <div class="row clearfix">
+                                    <div class="col-lg-4 col-md-5 col-xs-12 col-sm-12">
+                                        @Html.Editor("dt_vencimento1", "DATE", new { identificador = "dt_vencimento1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-dd")) })
+                                    </div>
+                                    <div class="col-md-1">
+                                        à
+                                    </div>
+                                    <div class="col-lg-4 col-md-5 col-xs-12 col-sm-12">
+                                        @Html.Editor("dt_vencimento2", "DATE", new { identificador = "dt_vencimento2", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-") + "01").AddDays(-1) })
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                            </div>
+                            <div class="well info espacamento-sm">Quanto à amortização</div>
+                            <p>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="titulos_amortizados" name="titulos_amortizados" class="icheckbox_flat-green" checked="checked" value="true">
+                                    </label>
+                                    <span>&nbsp;Exibe títulos com amortização (pagamento parcial)</span>
+                                </div>
+                            </p>
+                            <p>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="titulos_nao_pagos" name="titulos_nao_pagos" class="icheckbox_flat-green" checked="checked" value="true">
+                                    </label>
+                                    <span>&nbsp;Exibe títulos sem amortização</span>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group margem-topo">
+                        <label class="control-label" for="dt_emissao1">Emissão</label>
+                        <div class="row clearfix">
+                            <div class="col-lg-4 col-md-5 col-xs-12 col-sm-12">
+                                @Html.Editor("dt_emissao1", "DATE", new { identificador = "dt_emissao1", readOnly = "false" })
+                            </div>
+                            <div class="col-md-1">
+                                à
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-xs-12 col-sm-12">
+                                @Html.Editor("dt_emissao2", "DATE", new { identificador = "dt_emissao2", readOnly = "false" })
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xs-12 col-sm-12">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="titulos_baixados" name="titulos_baixados" class="icheckbox_flat-green" checked="checked" value="true" onclick = "checkTitulos_baixados()">
+                        </label>
+                        <span class="h4">&nbsp;Títulos baixados</span>
+                    </div>
+                    <div id="panel_titulos_baixados" class="panel panel-info">
+                        <div class="panel-body moldura-basic">
+                            <div class="well info espacamento-sm">Motivo da baixa</div>
+                            <p>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="baixa_liquidacao" name="baixa_liquidacao" class="icheckbox_flat-green" checked="checked" value="true">
+                                    </label>
+                                    <span>&nbsp;Baixa por liquidação</span>
+                                </div>
+                            </p>
+                            <p>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="baixa_cancelamento" name="baixa_cancelamento" class="icheckbox_flat-green" checked="checked" value="true">
+                                    </label>
+                                    <span>&nbsp;Baixa por cancelamento</span>
+                                </div>
+                            </p>
+                            @*<p>
+                                    @Html.CheckBox("baixa_renegociacao", false, new { @disabled = "disable" })<small class="text-muted">&nbsp;Baixa por renegociação</small>
+                                </p>
+                                <p>
+                                    @Html.CheckBox("baixa_desconto", false, new { @disabled = "disable" })<small class="text-muted">&nbsp;Duplicata descontada</small>
+                                </p>*@
+                            <div class="form-group">
+                                <label class="control-label" for="dt_baixa1">Período</label>
+                                <div class="row clearfix">
+                                    <div class="col-lg-4 col-md-5 col-xs-12 col-sm-12">
+                                        @Html.Editor("dt_baixa1", "DATE", new { identificador = "dt_baixa1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-") + "01") })
+                                    </div>
+                                    <div class="col-md-1">
+                                        à
+                                    </div>
+                                    <div class="col-lg-4 col-md-5 col-xs-12 col-sm-12">
+                                        @Html.Editor("dt_baixa2", "DATE", new { identificador = "dt_baixa2", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-dd")) })
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p></p>
+                    @Html.Editor("descricao_centroCusto1", "CentroCustoAutoComplete", new { nextField = "nome_grupoCliente", prevField = "dt_baixa2" })
+                    @Html.Editor("nome_grupoCliente1", "GrupoClienteAutoComplete", new { nextField = "nome_cliente", prevField = "descricao_centroCusto" })
+                    @Html.Editor("nome_cliente1", "ClientesAutoComplete", new { nextField = "nome_banco", prevField = "nome_grupoCliente" })
+                    @Html.Editor("nome_banco1", "BancosAutoComplete", new { nextField = "dt_emissao1", prevField = "nome_cliente" })
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <a href="#panel-detail" class="btn btn-primary" onclick="busca()">Buscar</a>
+                        <input type="button" class="btn btn-default" onclick="window.location = '../Cobranca/Create'" value="Incluir" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div id="div-list-static"></div>
+
+
+<script>
+    var _dt_vencidos_atraso1;
+    var _dt_vencidos_atraso2;
+    var _dt_vencimento1;
+    var _dt_vencimento2;
+    var _dt_baixa1;
+    var _dt_baixa2;
+
+    function busca() {
+        $("#titulos_em_aberto_").val($("#titulos_em_aberto:checked").val());
+        $("#titulos_vencidos_atraso_").val($("#titulos_vencidos_atraso:checked").val());
+        $("#titulos_a_vencer_").val($("#titulos_a_vencer:checked").val());
+        $("#titulos_amortizados_").val($("#titulos_amortizados:checked").val());
+        $("#titulos_nao_pagos_").val($("#titulos_nao_pagos:checked").val());
+        $("#titulos_baixados_").val($("#titulos_baixados:checked").val());
+        $("#baixa_liquidacao_").val($("#baixa_liquidacao:checked").val());
+        $("#baixa_cancelamento_").val($("#baixa_cancelamento:checked").val());
+
+        Refresh(0, getPageSize(), 'ListParam', 'div-list-static');
+
+        $('#div-list-static').html('');
+    }
+
+    function callEdit() {
+        if ($('#operacaoId1').val() != "")
+            window.location = 'Edit?operacaoId=' + $('#operacaoId1').val() + "&parcelaId=1";
+    }
+
+    function habilitaTitulos_em_aberto() {
+        if ($("#titulos_em_aberto:checked").val() == "true")
+        {
+            $("#panel_titulos_em_aberto").find(":input").prop("disabled", false);
+
+            $("#titulos_vencidos_atraso").prop("checked", true);
+            $("#titulos_a_vencer").prop("checked", true);
+            $("#titulos_amortizados").prop("checked", true);
+            $("#titulos_nao_pagos").prop("checked", true);
+
+
+            habilitaTitulos_a_vencer();
+            habilitaTitulos_vencidos_atraso();
+        }
+        else
+        {
+            $("#titulos_vencidos_atraso").prop("checked", false);
+            $("#titulos_a_vencer").prop("checked", false);
+            $("#titulos_amortizados").prop("checked", false);
+            $("#titulos_nao_pagos").prop("checked", false);
+
+            desabilitaTitulos_vencidos_atraso();
+            desabilitaTitulos_a_vencer();
+
+            $("#panel_titulos_em_aberto").find(":input").prop("disabled", true);
+        }
+    }
+
+    function checkTitulos_vencidos_atraso() {
+        if ($("#titulos_vencidos_atraso:checked").val() == "true")
+        {
+            habilitaTitulos_vencidos_atraso();
+        }
+        else
+        {
+            desabilitaTitulos_vencidos_atraso();
+        }
+    }
+
+    function habilitaTitulos_vencidos_atraso() {
+        $("#dt_vencidos_atraso1").val(_dt_vencidos_atraso1);
+        $("#dt_vencidos_atraso2").val(_dt_vencidos_atraso2);
+
+        $("#dt_vencidos_atraso1").prop("disabled", false);
+        $("#dt_vencidos_atraso2").prop("disabled", false);
+    }
+
+    function desabilitaTitulos_vencidos_atraso() {
+
+        if ($("#dt_vencidos_atraso1").val() != "")
+            _dt_vencidos_atraso1 = $("#dt_vencidos_atraso1").val();
+
+        if ($("#dt_vencidos_atraso2").val() != "")
+            _dt_vencidos_atraso2 = $("#dt_vencidos_atraso2").val();
+
+        $("#dt_vencidos_atraso1").val("");
+        $("#dt_vencidos_atraso2").val("");
+
+        $("#dt_vencidos_atraso1").prop("disabled", true);
+        $("#dt_vencidos_atraso2").prop("disabled", true);
+    }
+
+    function checkTitulos_a_vencer() {
+        if ($("#titulos_a_vencer:checked").val() == "true") {
+            habilitaTitulos_a_vencer();
+        }
+        else {
+            desabilitaTitulos_a_vencer();
+        }
+    }
+
+    function habilitaTitulos_a_vencer() {
+        $("#dt_vencimento1").val(_dt_vencimento1);
+        $("#dt_vencimento2").val(_dt_vencimento2);
+
+        $("#dt_vencimento1").prop("disabled", false);
+        $("#dt_vencimento2").prop("disabled", false);
+    }
+
+    function desabilitaTitulos_a_vencer() {
+        if ($("#dt_vencimento1").val() != "")
+            _dt_vencimento1 = $("#dt_vencimento1").val();
+        if ($("#dt_vencimento2").val() != "")
+            _dt_vencimento2 = $("#dt_vencimento2").val();
+
+        $("#dt_vencimento1").val("");
+        $("#dt_vencimento2").val("");
+
+        $("#dt_vencimento1").prop("disabled", true);
+        $("#dt_vencimento2").prop("disabled", true);
+    }
+
+    function checkTitulos_baixados() {
+        if ($("#titulos_baixados:checked").val() == "true") {
+            habilitaTitulos_baixados();
+        }
+        else {
+            desabilitaTitulos_baixados();
+        }
+    }
+
+    function habilitaTitulos_baixados() {
+        $("#panel_titulos_baixados").find(":input").prop("disabled", false);
+
+        $("#dt_baixa1").val(_dt_baixa1);
+        $("#dt_baixa2").val(_dt_baixa2);
+
+        $("#dt_baixa1").prop("disabled", false);
+        $("#dt_baixa2").prop("disabled", false);
+
+        $("#baixa_liquidacao").prop("checked", true);
+        $("#baixa_cancelamento").prop("checked", true);
+    }
+
+    function desabilitaTitulos_baixados() {
+        if ($("#dt_baixa1").val() != "")
+            _dt_baixa1 = $("#dt_baixa1").val();
+        if ($("#dt_baixa2").val() != "")
+            _dt_baixa2 = $("#dt_baixa2").val();
+
+        $("#dt_baixa1").val("");
+        $("#dt_baixa2").val("");
+
+        $("#dt_baixa1").prop("disabled", true);
+        $("#dt_baixa2").prop("disabled", true);
+
+        $("#baixa_liquidacao").prop("checked", false);
+        $("#baixa_cancelamento").prop("checked", false);
+
+        $("#panel_titulos_baixados").find(":input").prop("disabled", true);
+    }
+
+</script>

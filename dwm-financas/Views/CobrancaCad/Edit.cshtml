@@ -77,7 +77,7 @@
                 <div class="col-md-2 col-xs-12 col-sm-12 col-lg-2">
                     <div class="form-group">
                         <label class="control-label" for="num_parcelas">Nº Parcelas</label>
-                        @Html.TextBoxFor(info => info.num_parcelas, "{0:##0}", new { @class = "form-control input-sm text-right", @onkeypress = "return numeros()" })
+                        @Html.TextBoxFor(info => info.num_parcelas, "{0:##0}", new { @class = "form-control text-right", @onkeypress = "return numeros()" })
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                     <div class="form-group">
                         @Html.EditorFor(m => m.valor, "DECIMAL", new
                            {
-                               htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "fnValidaValor(this);" }
+                               htmlAttributes = (object)new { @class = "form-control text-right", @onfocus = "this.select();", @onblur = "fnValidaValor(this);" }
                            })
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                     <div class="form-group">
                         @Html.EditorFor(m => m.vr_multa, "DECIMAL", new
                            {
-                               htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "fnValidaValor(this);" }
+                               htmlAttributes = (object)new { @class = "form-control text-right", @onfocus = "this.select();", @onblur = "fnValidaValor(this);" }
                            })
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                     <div class="form-group">
                         @Html.EditorFor(m => m.vr_jurosMora, "DECIMAL", new
                            {
-                               htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "fnValidaValor(this);" }
+                               htmlAttributes = (object)new { @class = "form-control text-right", @onfocus = "this.select();", @onblur = "fnValidaValor(this);" }
                            })
                     </div>
                 </div>

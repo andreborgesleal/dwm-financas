@@ -1,0 +1,140 @@
+﻿@model DWM.Models.Repositories.EditarContaReceberViewModel
+@{
+    Layout = null;
+}
+@using (Ajax.BeginForm("Modify", "Cobranca", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "EditarContaReceber" }, new { @class = "form", @id = "form2" }))
+{
+    @Html.HiddenFor(info => info.operacaoId)
+    @Html.HiddenFor(info => info.parcelaId)
+    @Html.HiddenFor(info => info.historicoId)
+    @Html.HiddenFor(info => info.complementoHist)
+    <div class="panel panel-info margem-topo-10">
+        <div class="panel-heading">
+            <h3 class="panel-title">Alterar dados do título</h3>
+        </div>
+        @Html.Partial("_AjaxAlert")
+        <div class="panel-body">
+            <div class="row clearfix">
+                <div class="col-md-6">
+                    @Html.Editor("nome_banco3", "Bancos3AutoComplete", new
+                       {
+                           value = Model.bancoId != null ? Model.bancoId.ToString() : "",
+                           Text = Model.nome_banco ?? "",
+                           nextField = "dt_vencimento",
+                           prevField = ""
+                       })
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label" for="dt_baixa">Dt.Vencimento</label>
+                        @Html.EditorFor(info => info.dt_vencimento, "DATE", new { identificador = "dt_vencimento", readOnly = "false", value = Model.dt_vencimento })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label">Nº Título</label>
+                        @Html.TextBoxFor(info => info.num_titulo, new { @class = "form-control input-sm", @maxlength = "20" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label" for="drpFormaPagamento">Forma de pagamento</label>
+                        @Html.DropDownListFor(m => m.ind_forma_pagamento, new DWM.Models.Enumeracoes.BindDropDownList().FormaPagamento(Model.ind_forma_pagamento ?? ""), new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                Dados do Cheque
+                            </h2>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row clearfix">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Nº Banco</label>
+                                        @Html.TextBoxFor(info => info.cheque_banco, "{0:##0}", new { @class = "form-control input-sm", @onkeypress = "return numeros()", @maxlength = "3" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Agência</label>
+                                        @Html.TextBoxFor(info => info.cheque_agencia, new { @class = "form-control input-sm", @maxlength = "5" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Nº Cheque</label>
+                                        @Html.TextBoxFor(info => info.cheque_numero, new { @class = "form-control input-sm", @maxlength = "6" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label">Valor Principal</label>
+                        <input class="form-control text-right" id="vr_principal" name="vr_principal" type="text" value="@Model.vr_principal.ToString("###,###,##0.00")" onblur="return Converte(this, 'vr_principal')">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-md-9 col-xs-12">
+                    <input type="submit" class="btn btn-success" value="Salvar" onclick="return valida();">
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $(function () {
+        $('#form2').submit(function () {
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        $('#EditarContaReceber').html(result);
+                    }
+                });
+            }
+            return false;
+        });
+    });
+
+    function valida() {
+
+        if ($("#bancoId").val() == '' || $("#bancoId").val() == '0') {
+            ShowMessageAjaxAlert('Banco deve ser informado', 'warning');
+            $('#nome_banco').focus();
+            return false;
+        }
+
+        if ($("#dt_vencimento").val() == '') {
+            ShowMessageAjaxAlert('Data do vencimento deve ser informada', 'warning');
+            $('#dt_vencimento').focus();
+            return false;
+        }
+
+        var _vr_principal = $("#vr_principal").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
+        _vr_principal = parseInt(_vr_principal);
+
+        if (_vr_principal <= 0) {
+            ShowMessageAjaxAlert('Valor principal deve ser informado', 'warning');
+            $('#vr_principal').focus();
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+

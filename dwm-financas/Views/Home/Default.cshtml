@@ -6,12 +6,12 @@
     DateTime Data2 = Funcoes.Brasilia().Date;
 
     #region Cobranca
-    List<ContaReceberViewModel> cr = (PagedList<ContaReceberViewModel>)Model.Cobranca;
+    List<ContaReceberDemonstrativoViewModel> cr = (PagedList<ContaReceberDemonstrativoViewModel>)Model.Cobranca;
 
     decimal faturamento_mes = 0;
     decimal Titulos_EmAberto = 0;
 
-    foreach (ContaReceberViewModel rec in cr)
+    foreach (ContaReceberDemonstrativoViewModel rec in cr)
     {
         if (rec.OperacaoParcela.dt_ultima_amortizacao.HasValue && rec.OperacaoParcela.dt_ultima_amortizacao.Value >= Data1 && rec.OperacaoParcela.dt_ultima_amortizacao.Value <= Data2)
         {

@@ -6,23 +6,25 @@
 
 @if (Model != null)
 {
-    <div class="row Scroll margem-negativa">
+    <div class="row Scroll" style="margin-top: -15px">
         <div class="col-md-12" style="padding-right: 0px;">
-            <table class="table table-hover table-bordered table-condensed dedo-indicador">
+            <table class="table table-striped jambo_table bulk_action" style="cursor: pointer">
                 <caption></caption>
-                <thead class="corvo text-white">
-                    <tr>
-                        <th>Nome do grupo</th>
+                <thead>
+                    <tr class="headings">
+                        <th class="column-title">Nome do grupo</th>
                     </tr>
                 </thead>
-                @foreach (GrupoClienteViewModel gcli in Model)
-                {
-                    <tr onclick="Move('@gcli.grupoClienteId', '@gcli.nome')">
-                        <td class="col-md-7 col-sm-2">
-                            <small>@gcli.nome</small>
-                        </td>
-                    </tr>
-                }
+                <tbody>
+                    @foreach (GrupoClienteViewModel gcli in Model)
+                    {
+                        <tr class="even pointer" onclick="Move('@gcli.grupoClienteId', '@gcli.nome')">
+                            <td>
+                                <small>@gcli.nome</small>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
             </table>
         </div>
     </div>
@@ -32,7 +34,6 @@ else
 {
     @Html.Partial("_AcessoNegadoModal")
 }
-
 
 
 

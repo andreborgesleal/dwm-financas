@@ -53,9 +53,13 @@ namespace DWM.Controllers
 
         public ActionResult ListParam(int? index, int? pageSize = 20)
         {
-            ListViewContaReceber listCob = new ListViewContaReceber();
-            Facade<ContaReceberViewModel, ContaReceberModel, ApplicationContext> facadeCob = new Facade<ContaReceberViewModel, ContaReceberModel, ApplicationContext>();
-            IPagedList pagedList = facadeCob.getPagedList(listCob, index, pageSize.Value,
+            //ListViewContaReceber listCob = new ListViewContaReceber();
+            //Facade<ContaReceberViewModel, ContaReceberModel, ApplicationContext> facadeCob = new Facade<ContaReceberViewModel, ContaReceberModel, ApplicationContext>();
+
+            ListViewContaReceberDemonstrativoBI listCob = new ListViewContaReceberDemonstrativoBI();
+            Factory<ContaReceberDemonstrativoViewModel, ApplicationContext> facadeCob = new Factory<ContaReceberDemonstrativoViewModel, ApplicationContext>();
+
+            IPagedList pagedList = facadeCob.PagedList(listCob, index, pageSize.Value,
                                             true,
                                             new DateTime(Funcoes.Brasilia().Year, Funcoes.Brasilia().AddMonths(-2).Month, 1),
                                             Funcoes.Brasilia().Date,

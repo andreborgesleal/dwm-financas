@@ -1,0 +1,47 @@
+﻿@model int
+@{ 
+    Layout = null;
+
+    string[,] NavBarItems = {
+                                { "../Cobranca/Create" , "text-primary" , "Incluir" },
+                                { "../Cobranca/Index" , "text-primary" , "Editar" }
+                            };
+}
+<nav class="navbar navbar-default alert">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <a class="navbar-brand" href="../Cobranca/Browse">Contas a Receber</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-left">
+            @{
+                int i = 0;
+                while (i <= NavBarItems.GetLength(0) - 1)
+                {
+                    if (i != Model)
+                    {
+                        <li><a href="@NavBarItems[i, 0]"><span class="@NavBarItems[i,1]">@NavBarItems[i, 2]</span></a></li>
+                    }
+                    else
+                    {
+                        <li><a href="#"><span class="text-prateado">@NavBarItems[i, 2]</span></a></li>
+                    }
+
+                    i++;
+                }
+            }
+            @*<li><a href="../ContaPagar/Create"><span class="text-primary">Incluir</span></a></li>
+            <li><a href="../ContaPagar/Index"><span class="text-primary">Editar</span></a></li>*@
+        </ul>
+        <form class="navbar-form navbar-right" role="search" id="formSearch" name="formSearch">
+            <div class="form-group">
+                <label class="control-label col-md-2 margem-interna" for="operacaoId1">ID</label>
+                <div class="input-group col-md-8">
+                    @Html.TextBox("operacaoId1", "", new { @class = "form-control input-sm" })
+                    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true" onclick="callEdit()"></span></span>
+                </div>
+            </div>
+        </form>
+    </div><!-- /.navbar-collapse -->
+</nav>

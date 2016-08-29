@@ -29,10 +29,12 @@ namespace DWM.Models.BI
             HomeViewModel r = (HomeViewModel)value;
             try
             {
-                ListViewContaReceber listCob = new ListViewContaReceber();
-                Facade<ContaReceberViewModel, ContaReceberModel, ApplicationContext> facadeCob = new Facade<ContaReceberViewModel, ContaReceberModel, ApplicationContext>();
-                r.Cobranca = facadeCob.getPagedList(listCob, 0, 15,
-                                                true,
+                ListViewContaReceberDemonstrativoBI listCob = new ListViewContaReceberDemonstrativoBI();
+                //Facade<ContaReceberDemonstrativoViewModel, ContaReceberModel, ApplicationContext> facadeCob = new Facade<ContaReceberDemonstrativoViewModel, ContaReceberModel, ApplicationContext>();
+
+                Factory<ContaReceberDemonstrativoViewModel, ApplicationContext> facadeCob = new Factory<ContaReceberDemonstrativoViewModel, ApplicationContext>();
+
+                r.Cobranca = facadeCob.PagedList(listCob, 0, 15, true,
                                                 new DateTime(Funcoes.Brasilia().Year, Funcoes.Brasilia().AddMonths(-2).Month, 1),
                                                 Funcoes.Brasilia().Date,
                                                 true,
@@ -50,6 +52,7 @@ namespace DWM.Models.BI
                                                 null,
                                                 null,
                                                 null);
+
 
                 ListViewContaPagar listPag = new ListViewContaPagar();
                 Facade<ContaPagarViewModel, ContaPagarModel, ApplicationContext> facadePag = new Facade<ContaPagarViewModel, ContaPagarModel, ApplicationContext>();

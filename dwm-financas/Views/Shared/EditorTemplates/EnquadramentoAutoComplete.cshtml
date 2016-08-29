@@ -11,8 +11,8 @@
         <input type="text" id="descricao_enquadramento" name="descricao_enquadramento" onblur="fillEnq();" value="@Text" class="form-control" tabindex="@tabindex" />
         <input type="hidden" id="enquadramentoId" name="enquadramentoId" value="@value" />
         <div class="input-group-btn">
-            <button class="btn btn-primary" type="button" onclick="showLookup('LovEnquadramentoOperacaoModal');"><i class="glyphicon glyphicon-search"></i></button>
-            <button class="btn btn-instagram" type="button" onclick="clean('enquadramentoId', 'descricao_enquadramento');"><i class="glyphicon glyphicon-remove"></i></button>
+            <button class="btn btn-primary" style="margin-left: -5px" type="button" onclick="showLookup('LovEnquadramentoOperacaoModal');"><i class="glyphicon glyphicon-search"></i></button>
+            <button class="btn btn-instagram" style="margin-left: -5px" type="button" onclick="clean('enquadramentoId', 'descricao_enquadramento');"><i class="glyphicon glyphicon-remove"></i></button>
         </div>
     </div>
     <div id="div-lov"></div>
@@ -59,23 +59,18 @@
         }
     }
 
+    var enqArray = $.map(enq.countries, function (value, key) {
+        return {
+            value: value.descricao,
+            data: key.enquadramentoId
+        };
+    });
+
+    // initialize autocomplete with custom appendTo
+    $('#descricao_enquadramento').autocomplete({
+        lookup: enqArray,
+        appendTo: '#descricao_enquadramento-container'
+    });
+
 </script>
 
-<!-- jQuery autocomplete -->
-<script>
-      $(document).ready(function() {
-          var enqArray = $.map(enq.countries, function (value, key) {
-            return {
-              value: value.descricao,
-              data: key.enquadramentoId
-            };
-          });
-
-        // initialize autocomplete with custom appendTo
-          $('#descricao_enquadramento').autocomplete({
-          lookup: enqArray,
-          appendTo: '#descricao_enquadramento-container'
-        });
-      });
-</script>
-<!-- /jQuery autocomplete -->

@@ -1,0 +1,232 @@
+﻿@using DWM.Models.Repositories
+@model ContaReceberViewModel
+@{
+    Layout = null;
+}
+
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Operação de contas a receber - <small class="text-white">Edição</small></h3>
+        </div>
+        <div class="panel-body">
+            <!-- Contas a receber -->
+            <div class="row clearfix">
+                <div class="col-md-3">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <h4><strong>Operação</strong></h4>
+                            @(Model.operacaoId)
+                        </li>
+                        <li class="list-group-item">
+                            <h4><strong>Emissão</strong></h4>
+                            @Model.dt_emissao.ToString("dd/MM/yyyy")
+                        </li>
+                        <li class="list-group-item">
+                            <h4><strong>Documento</strong></h4>
+                            @Model.documento
+                        </li>
+                        <li class="list-group-item">
+                            <h4><strong>Cliente</strong></h4>
+                            @Model.nome_cliente  <br />
+                            <small>@Model.descricao_grupoCliente</small>
+                        </li>
+                        <li class="list-group-item">
+                            <h4><strong>Histórico</strong></h4>
+                            @(Model.descricao_historico + " " + Model.complementoHist)
+                        </li>
+                        @if (Model.centroCustoId.HasValue)
+                        {
+                            <li class="list-group-item">
+                                <h4><strong>Centro de Custo</strong></h4>
+                                @Model.descricao_centroCusto
+                            </li>
+                        }
+                        @if (Model.vr_multa.HasValue)
+                        {
+                            <li class="list-group-item">
+                                <h4><strong>Multa por atraso</strong></h4>
+                                @Model.vr_multa.Value.ToString("##0.00")% <br />
+                                <span class="text-prateado">@(((Model.vr_multa / 100) * Model.OperacaoParcelas.FirstOrDefault().vr_principal).Value.ToString("R$ ###,###,##0.00"))</span>
+                            </li>
+                        }
+                        @if (Model.vr_jurosMora.HasValue)
+                        {
+                            <li class="list-group-item">
+                                <h4><strong>Juros de Mora</strong></h4>
+                                @Model.vr_jurosMora.Value.ToString("##0.00")% <br />
+                                <span class="text-prateado">@(((Model.vr_jurosMora / 100) * Model.OperacaoParcelas.FirstOrDefault().vr_principal).Value.ToString("R$ ###,###,##0.00")) por dia</span>
+
+                            </li>
+                        }
+                        <li class="list-group-item">
+                            <h4><strong>Total</strong></h4>
+                            @Model.OperacaoParcelas.Sum(info => info.vr_principal).ToString("R$ ###,###,##0.00") -
+                            <span class="text-prateado"> @Model.OperacaoParcelas.Count() parcela(s)</span>
+                        </li>
+                        @if (Model.OperacaoParcelas != null && Model.OperacaoParcelas.Count() > 0)
+                        {
+                            if ("5|6".Contains(Model.OperacaoParcelas.FirstOrDefault().ind_baixa ?? " "))
+                            {
+                                <li class="list-group-item">
+                                    <h4><strong>Situação</strong></h4>
+                                    @Model.OperacaoParcelas.FirstOrDefault().situacao
+                                </li>
+                            }
+                        }
+
+                    </ul>
+                </div>
+                <div class="col-md-9">
+                    <!------------------->
+                    <!-- Contabilidade -->
+                    <!------------------->
+                    @if (Model.Contabilidade != null && Model.Contabilidade.ContabilidadeItems.Count() > 0)
+                    {
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Contabildiade</h3>
+                            </div>
+                            <div class="panel-body">
+                                @if (Model.Contabilidade.ContabilidadeItems.Count() > 0)
+                                {
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <tr class="active">
+                                                <td><strong>Conta</strong></td>
+                                                <td><strong>Descrição</strong></td>
+                                                <td class="text-right"><strong>Débito</strong></td>
+                                                <td class="text-right"><strong>Crédito</strong></td>
+                                            </tr>
+                                            @foreach (ContabilidadeItemViewModel item in Model.Contabilidade.ContabilidadeItems)
+                                            {
+                                                <tr>
+                                                    <td>@item.codigoReduzido</td>
+                                                    <td>@item.descricao_planoConta</td>
+                                                    <td class="text-right">@(item.tipoLancamento == "D" ? item.valor.ToString("###,###,###,##0.00") : "")</td>
+                                                    <td class="text-right">@(item.tipoLancamento == "C" ? item.valor.ToString("###,###,###,##0.00") : "")</td>
+                                                </tr>
+                                            }
+                                            <tr class="warning">
+                                                <td colspan="2"><strong>Total</strong></td>
+                                                <td class="text-right"><strong>@Model.Contabilidade.ContabilidadeItems.Where(tipo => tipo.tipoLancamento == "D").Select(info => info.valor).Sum().ToString("###,###,###,##0.00")</strong></td>
+                                                <td class="text-right"><strong>@Model.Contabilidade.ContabilidadeItems.Where(tipo => tipo.tipoLancamento == "C").Select(info => info.valor).Sum().ToString("###,###,###,##0.00")</strong></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="well text-center">Não há lançamento contábil para esta operação</div>
+                    }
+                    <!-- Títulos -->
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Posição financeira dos títulos</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <tr class="active">
+                                    <td class="text-center"><strong>#</strong></td>
+                                    <td class="text-center"><strong>Vencimento</strong></td>
+                                    <td class="text-center"><strong>Últ.Pagto</strong></td>
+                                    <td class="text-right"><strong>Principal</strong></td>
+                                    <td class="text-right"><strong>Amortização</strong></td>
+                                    <td class="text-right"><strong>Encargos</strong></td>
+                                    <td class="text-right"><strong>Desconto</strong></td>
+                                    <td class="text-right"><strong>Valor Pago</strong></td>
+                                    <td class="text-right"><strong>Saldo devedor</strong></td>
+                                </tr>
+                                @{ foreach (ContaReceberParcelaViewModel par in Model.OperacaoParcelas)
+                                    {
+                                        <tr>
+                                            <td class="text-center"><a href="Edit?operacaoId=@Model.operacaoId&parcelaId=@par.parcelaId" class="dedo-indicador text-primary">@(par.parcelaId)</a></td>
+                                            <td class="text-center">@par.dt_vencimento.ToString("dd/MM/yyyy")</td>
+                                            <td class="text-center">@(par.dt_ultima_amortizacao.HasValue ? par.dt_ultima_amortizacao.Value.ToString("dd/MM/yyyy") : "")</td>
+                                            <td class="text-right">@par.vr_principal.ToString("###,###,###,##0.00")</td>
+                                            <td class="text-right">@(par.vr_amortizacao.HasValue && par.vr_amortizacao.Value > 0 ? par.vr_amortizacao.Value.ToString("###,###,###,##0.00") : "")</td>
+                                            <td class="text-right">@(par.vr_encargos.HasValue && par.vr_encargos.Value > 0 ? par.vr_encargos.Value.ToString("###,###,###,##0.00") : "")</td>
+                                            <td class="text-right">@(par.vr_desconto.HasValue && par.vr_desconto.Value > 0 ? par.vr_desconto.Value.ToString("###,###,###,##0.00") : "")</td>
+                                            <td class="text-right">@(par.vr_total_pago.HasValue && par.vr_total_pago.Value > 0 ? par.vr_total_pago.Value.ToString("###,###,###,##0.00") : "")</td>
+                                            <td class="text-right">@(par.vr_saldo_devedor.HasValue && par.vr_saldo_devedor.Value > 0 ? par.vr_saldo_devedor.Value.ToString("R$ ###,###,###,##0.00") : "R$ 0,00")</td>
+                                        </tr>
+                                    }
+                                }
+                                <tr class="warning">
+                                    <td class="text-left" colspan="3"><strong>Total</strong></td>
+                                    <td class="text-right"><strong>@Model.OperacaoParcelas.Sum(info => info.vr_principal).ToString("###,###,###,##0.00")</strong></td>
+                                    <td class="text-right"><strong>@(Model.OperacaoParcelas.Sum(info => info.vr_amortizacao.GetValueOrDefault(0)).ToString("###,###,###,##0.00"))</strong></td>
+                                    <td class="text-right"><strong>@(Model.OperacaoParcelas.Sum(info => info.vr_encargos.GetValueOrDefault(0)).ToString("###,###,###,##0.00"))</strong></td>
+                                    <td class="text-right"><strong>@(Model.OperacaoParcelas.Sum(info => info.vr_desconto.GetValueOrDefault(0)).ToString("###,###,###,##0.00"))</strong></td>
+                                    <td class="text-right"><strong>@(Model.OperacaoParcelas.Sum(info => info.vr_total_pago.GetValueOrDefault(0)).ToString("###,###,###,##0.00"))</strong></td>
+                                    <td class="text-right"><strong>@(Model.OperacaoParcelas.Sum(info => info.vr_saldo_devedor.GetValueOrDefault(0)).ToString("R$ ###,###,###,##0.00"))</strong></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (Model.operacaoId > 0)
+            {
+                <div class="row clearfix">
+                    <div class="col-md-12">
+                        <div>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#baixar" aria-controls="baixar" role="tab" data-toggle="tab"><i class="fa fa-check-square fa-2x"> Liquidar</i></a></li>
+                                <li role="presentation"><a href="#excluir" aria-controls="excluir" role="tab" data-toggle="tab"><i class="fa fa-trash-o fa-2x"> Excluir</i></a></li>
+                                <li role="presentation"><a href="#cancelar" aria-controls="cancelar" role="tab" data-toggle="tab"><i class="fa fa-remove fa-2x"> Cancelar</i></a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <!-- Baixar por motivo de liquidação -->
+                                <div role="tabpanel" class="tab-pane active" id="baixar">
+                                    @if (Model.OperacaoParcela.vr_saldo_devedor > 0)
+                                    {
+                                        @Html.Partial("_Liquidar", Model)
+                                    }
+                                    else
+                                    {
+                                        <div class="well text-center margem-topo-10">Operação já foi baixada.</div>
+                                    }
+                                </div>
+                                <!-- Exclusão da operação -->
+                                <div role="tabpanel" class="tab-pane" id="excluir">
+                                    @Html.Partial("_Delete", Model)
+                                </div>
+                                <!-- Baixa por motivo de cancelamento -->
+                                <div role="tabpanel" class="tab-pane" id="cancelar">
+                                    @if (Model.OperacaoParcela.vr_saldo_devedor > 0)
+                                    {
+                                        <div id="Cancelar">
+                                            @Html.Partial("_Cancel", Model)
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="well text-center margem-topo-10">Operação já foi baixada.</div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <input type="button" class="btn btn-default" value="Voltar" onclick="window.location='/Cobranca/Index'">
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 ﻿@using DWM.Models.Repositories
-@model PagedList<ContaReceberViewModel>
+@model PagedList<ContaReceberDemonstrativoViewModel>
 @{
     Layout = null;
 }
@@ -48,7 +48,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (ContaReceberViewModel rec in Model)
+                                    @foreach (ContaReceberDemonstrativoViewModel rec in Model)
                                     {
                                         <tr class="even pointer">
                                             <td class="text-left">

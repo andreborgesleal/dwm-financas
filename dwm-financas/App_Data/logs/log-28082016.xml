@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="1850694846" Data="28/08/2016 11:41:57">
+    <Sessao>fyyhwvkjit3jw1fgu50toq11</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>A cadeia de caracteres de entrada não estava em um formato correto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/edititem</NameSpace>
+    <Context />
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseDecimal(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Decimal.Parse(String s)
+   em DWM.Controllers.CobrancaCadController.EditItem(String cobrancaId, String clienteId, String dia_vencimento, String dia_vencimento3, String valor, String valor31) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 274</StackTrace>
+  </LOG>
+  <LOG ID="925728984" Data="28/08/2016 11:42:02">
+    <Sessao>fyyhwvkjit3jw1fgu50toq11</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>A cadeia de caracteres de entrada não estava em um formato correto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaCadController =&gt; cobrancacad/edititem</NameSpace>
+    <Context />
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseDecimal(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Decimal.Parse(String s)
+   em DWM.Controllers.CobrancaCadController.EditItem(String cobrancaId, String clienteId, String dia_vencimento, String dia_vencimento3, String valor, String valor31) na C:\sistemas\dwm-financas\dwm-financas\Controllers\CobrancaCadController.cs:linha 274</StackTrace>
+  </LOG>
+</LOG>

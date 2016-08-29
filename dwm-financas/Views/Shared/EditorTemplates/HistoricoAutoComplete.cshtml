@@ -12,14 +12,14 @@
         <input type="text" id="descricao_historico" name="descricao_historico" value="@Text" class="form-control" onblur="fillHist();" tabindex="@tabindex" />
         <input type="hidden" id="historicoId" name="historicoId" value="@value" />
         <div class="input-group-btn">
-            <button class="btn btn-primary" type="button" onclick="showLookup('LovHistoricoContabilidadeModal');"><i class="glyphicon glyphicon-search"></i></button>
-            <button class="btn btn-bitbucket" type="button" onclick="InsertModal('../Historicos/CrudHistoricoContabilidadeModal',
+            <button class="btn btn-primary" style="margin-left: -5px" type="button" onclick="showLookup('LovHistoricoContabilidadeModal');"><i class="glyphicon glyphicon-search"></i></button>
+            <button class="btn btn-bitbucket" style="margin-left: -5px" type="button" onclick="InsertModal('../Historicos/CrudHistoricoContabilidadeModal',
                             'descricao' ,
                             'historicoId' ,
                             'descricao_historico' ,
                             'descricao_historico' ,
                             '@next' );"><i class="glyphicon glyphicon-plus"></i></button>
-            <button class="btn btn-instagram" type="button" onclick="clean('historicoId', 'descricao_historico');"><i class="glyphicon glyphicon-remove"></i></button>
+            <button class="btn btn-instagram" style="margin-left: -5px" type="button" onclick="clean('historicoId', 'descricao_historico');"><i class="glyphicon glyphicon-remove"></i></button>
         </div>
     </div>
 </div>

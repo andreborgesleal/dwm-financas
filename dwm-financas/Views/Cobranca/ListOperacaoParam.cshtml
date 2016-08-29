@@ -1,0 +1,92 @@
+﻿@using DWM.Models.Repositories;
+@model PagedList<EditarContaReceberViewModel>
+@{
+    Layout = null;
+}
+
+@if (Model != null)
+{
+    <div class="row Scroll">
+        <div class="col-md-12 table-responsive hidden-xs">
+            <table class="table table-hover table-striped table-condensed" style="cursor: pointer">
+                <thead class="corvo text-white">
+                    <tr>
+                        <th class="text-center">Ação</th>
+                        <th>ID</th>
+                        <th>Emissão</th>
+                        <th>Cliente</th>
+                        <th>Últ. Pagto</th>
+                        <th style="text-align: right">Principal</th>
+                        <th style="text-align: right">Encargos</th>
+                        <th style="text-align: right">Desconto</th>
+                        <th style="text-align: right">Amortização</th>
+                        <th style="text-align: right">Saldo</th>
+                    </tr>
+                </thead>
+                @foreach (EditarContaReceberViewModel pag in Model)
+                {
+                    <tr>
+                        <td class="text-center" style="width: 5%">
+                            <a href="#" onclick="window.location='_Index?operacaoId=@pag.operacaoId'">Editar</a>
+                        </td>
+                        <td style="width: 5%" class="text-left">
+                            @(pag.operacaoId.ToString())
+                        </td>
+                        <td style="width: 7%" class="text-left">
+                            @pag.dt_emissao.ToString("dd/MM/yyyy")
+                        </td>
+                        <td style="width: 22%" class="text-left">
+                            @pag.nome_cliente
+                        </td>
+                        <td style="width: 5%" class="text-left">
+                            @if (pag.dt_ultima_amortizacao.HasValue)
+                            {
+                                @pag.dt_ultima_amortizacao.Value.ToString("dd/MM/yyyy")
+                            }
+                        </td>
+                        <td style="width: 8%" class="text-right">
+                            @pag.vr_principal.ToString("###,###,###,##0.00")
+                        </td>
+                        <td style="width: 8%" class="text-right">
+                            @if (pag.vr_encargos.HasValue)
+                            {
+                                @pag.vr_encargos.Value.ToString("###,###,###,##0.00")
+                            }
+                        </td>
+                        <td style="width: 8%" class="text-right">
+                            @if (pag.vr_desconto.HasValue)
+                            {
+                                @pag.vr_desconto.Value.ToString("###,###,###,##0.00")
+                            }
+                        </td>
+                        <td style="width: 8%" class="text-right">
+                            @if (pag.vr_total_pago.HasValue)
+                            {
+                                @pag.vr_total_pago.Value.ToString("###,###,###,##0.00")
+                            }
+                        </td>
+                        <td style="width: 8%" class="text-right">
+                            @if (pag.vr_saldo_devedor.HasValue)
+                            {
+                                @pag.vr_saldo_devedor.Value.ToString("###,###,###,##0.00")
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    @Html.Partial("Paginacao", Model)
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+
+
+
+
+
+
+

@@ -344,6 +344,7 @@
     <Compile Include="Models\Repositories\ContaReceberParcelaViewModel.cs" />
     <Compile Include="Models\Repositories\ContaReceberViewModel.cs" />
     <Compile Include="Models\Repositories\CredorViewModel.cs" />
+    <Compile Include="Models\Repositories\ContaReceberDemonstrativoViewModel.cs" />
     <Compile Include="Models\Repositories\DiarioViewModel.cs" />
     <Compile Include="Models\Repositories\EditarContaPagarParcelaEventoViewModel.cs" />
     <Compile Include="Models\Repositories\EditarContaPagarViewModel.cs" />
@@ -4246,6 +4247,24 @@
     <Content Include="Views\GrupoCobranca\Edit.cshtml" />
     <Content Include="Views\GrupoCobranca\List.cshtml" />
     <Content Include="Views\CobrancaCad\Delete.cshtml" />
+    <Content Include="Views\Cobranca\Browse.cshtml" />
+    <Content Include="Views\Cobranca\Create.cshtml" />
+    <Content Include="Views\Cobranca\Edit.cshtml" />
+    <Content Include="Views\Cobranca\Index.cshtml" />
+    <Content Include="Views\Cobranca\ListOperacaoParam.cshtml" />
+    <Content Include="Views\Cobranca\ListParam.cshtml" />
+    <Content Include="Views\Cobranca\ListParcelas.cshtml" />
+    <Content Include="Views\Cobranca\_Baixar.cshtml" />
+    <Content Include="Views\Cobranca\_Cancel.cshtml" />
+    <Content Include="Views\Cobranca\_Delete.cshtml" />
+    <Content Include="Views\Cobranca\_Edit.cshtml" />
+    <Content Include="Views\Cobranca\_EditarOperacao.cshtml" />
+    <Content Include="Views\Cobranca\_Evento.cshtml" />
+    <Content Include="Views\Cobranca\_Index.cshtml" />
+    <Content Include="Views\Cobranca\_Liquidar.cshtml" />
+    <Content Include="Views\Cobranca\_Modify.cshtml" />
+    <Content Include="Views\Cobranca\_NavBar.cshtml" />
+    <Content Include="Views\Shared\_FormModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />

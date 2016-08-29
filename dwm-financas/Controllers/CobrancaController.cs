@@ -138,7 +138,7 @@ namespace DWM.Controllers
                 int? _centroCustoId = centroCustoId != null && centroCustoId != "" ? int.Parse(centroCustoId) : _null;
                 int? _grupoId = grupoClienteId != null && grupoClienteId != "" ? int.Parse(grupoClienteId) : _null;
                 int? _bancoId = bancoId != null && bancoId != "" ? int.Parse(bancoId) : _null;
-                ListViewContaReceber list = new ListViewContaReceber();
+                ListViewContaReceberDemonstrativoBI list = new ListViewContaReceberDemonstrativoBI();
                 return this._List(index, pageSize, "Browse", list, _titulos_vencidos_atraso, _dt_vencidos_atraso1, _dt_vencidos_atraso2, _titulos_a_vencer, 
                                     _dt_vencimento1, _dt_vencimento2, _titulos_amortizados, _titulos_nao_pagos, _baixa_liquidacao,
                                     _baixa_cancelamento, _dt_baixa1, _dt_baixa2, _clienteId, _dt_emissao1, _dt_emissao2, _centroCustoId, _grupoId, _bancoId);
@@ -146,6 +146,20 @@ namespace DWM.Controllers
             else
                 return View();
         }
+
+        public ActionResult _List(int? index, int? pageSize, string action, ListViewContaReceberDemonstrativoBI model, params object[] param)
+        {
+            if (ViewBag.ValidateRequest)
+            {
+                Factory<ContaReceberDemonstrativoViewModel, ApplicationContext> facadeCob = new Factory<ContaReceberDemonstrativoViewModel, ApplicationContext>();
+                IPagedList pagedList = facadeCob.PagedList(model, index, pageSize.Value, param);
+                UpdateBreadCrumb(this.ControllerContext.RouteData.Values["controller"].ToString(), action);
+                return View(pagedList);
+            }
+            else
+                return null;
+        }
+
 
         [AuthorizeFilter]
         public ActionResult ListOperacaoParam(int? index, int? pageSize = 50, string clienteId = null, string dt_emissao1 = null, string dt_emissao2 = null)

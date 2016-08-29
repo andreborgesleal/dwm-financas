@@ -11,8 +11,8 @@
     <label class="control-label" for="descricao_pai">Conta</label>
     <div class="input-group" id="PlanoContasParent">
         @*<input type="hidden" id="codigoPleno" name="codigoPleno" value="@codigoPleno" />*@
-        <input type="text" id="descricao_pai" name="descricao_pai" value="@Text" class="form-control" onblur="fillPlacon();" tabindex="@tabindex" size="400" />
-        <input type="hidden" id="planoContaId_pai" name="planoContaId_pai" value="@value" />
+        <input type="text" style="margin-left: -5px" id="descricao_pai" name="descricao_pai" value="@Text" class="form-control" onblur="fillPlacon();" tabindex="@tabindex" size="400" />
+        <input type="hidden" style="margin-left: -5px" id="planoContaId_pai" name="planoContaId_pai" value="@value" />
         <div class="input-group-btn">
             <button class="btn btn-primary" type="button" onclick="showLookup('LovPlanoContasPaiModal');"><i class="glyphicon glyphicon-search"></i></button>
             <button class="btn btn-instagram" type="button" onclick="clean('planoContaId_pai', 'descricao_pai');" style="margin-left: -6px"><i class="glyphicon glyphicon-remove"></i></button>

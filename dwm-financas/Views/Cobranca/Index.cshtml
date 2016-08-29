@@ -1,0 +1,61 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@model PagedList<DWM.Models.Repositories.ContaReceberViewModel>
+@{
+    ViewBag.Title = "DWM-Finanças";
+}
+
+<div class="container">
+    <div class="panel panel-default">
+        @Html.Partial("_NavBar", 1)
+        <div class="panel-body margem-negativa">
+            @using (Ajax.BeginForm("_Index", "Cobranca", new AjaxOptions { HttpMethod = "get" }, new { @style = "margin-left: 20px", @role = "search" }))
+            {
+                <div class="form">
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            @Html.Editor("nome_cliente1", "ClientesAutoComplete", new { nextField = "dt_emissao1" })
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="dt_emissao1">Emissão</label>
+                                <div class="input-group">
+                                    <div class="row clearfix">
+                                        <div class="col-md-5">
+                                            @Html.Editor("dt_emissao1", "DATE", new { identificador = "dt_emissao1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.AddMonths(-1).ToString("yyyy-MM-01")) })
+                                        </div>
+                                        <div class="col-md-1">
+                                            à
+                                        </div>
+                                        <div class="col-md-5">
+                                            @Html.Editor("dt_emissao2", "DATE", new { identificador = "dt_emissao2", readOnly = "false", value = DateTime.Today })
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="button" class="btn btn-primary" value="Buscar" onclick="busca()" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    @Html.Partial("_FormModal", "Listar Cobrança")
+</div>
+
+<script>
+    function busca() {
+        Refresh(0, getPageSize(), 'ListOperacaoParam', 'div-list-static');
+
+        $('#div-list-static').html('');
+        //$('#linkModalList').click();
+        document.getElementById('linkModalList').click();
+    }
+</script>

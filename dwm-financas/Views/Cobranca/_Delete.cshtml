@@ -1,0 +1,33 @@
+﻿@using DWM.Models.Repositories
+@model ContaReceberViewModel
+@{
+    Layout = null;
+}
+
+<div>
+    @using (Ajax.BeginForm("DelOp", "Cobranca", new AjaxOptions { HttpMethod = "GET" }, new { @class = "form", @id = "form2" }))
+    {
+        @Html.HiddenFor(info => info.operacaoId)
+        <div class="well text-center margem-topo-10">Todos os títulos serão excluídos. Os títulos já pagos ou amortizados serão excluídos bem como suas movimentações e lançamentos contábeis.</div>
+        <input type="submit" class="btn btn-danger" value="Excluir">
+    }
+</div>
+
+@*<script type="text/javascript">
+    $(function () {
+        $('#form2').submit(function () {
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        $('#EditarOperacaoContaPagar').html(result);
+                    }
+                });
+            }
+            return false;
+        });
+    });
+</script>*@
+
