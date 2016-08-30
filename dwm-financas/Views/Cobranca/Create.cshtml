@@ -3,346 +3,312 @@
 @using App_Dominio.Enumeracoes
 @model ContaReceberViewModel
 @{
-    ViewBag.Title = "DWM-Finanças";
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../Cobranca/Create";
+    t[0].nomeCurto = "Incluir";
+    t[0].referencia = "";
+
+    t[1].url = "../Home/Default";
 }
-<div class="container">
-    @using (Html.BeginForm("Create", "Cobranca", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data", @id = "formulario" }))
-    {
-        @Html.HiddenFor(info => info.empresaId)
-        <div id="div-lov"></div>
-        <div class="panel panel-primary" style="margin-top: 10px">
-            <div class="panel-heading">
-                <div class="row clearfix">
-                    <div class="col-md-4">
-                        <h2 class="panel-title">
-                            Cobrança - <small class="text-white">Inclusão de títulos</small>
-                        </h2>
+<div class="x_panel" id="panel-top">
+    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Títulos de cobrança", Descricao = "Incluir títulos na carteira de cobrança", Transacao = t })
+    <div class="x_content">
+        @using (Html.BeginForm("Create", "Cobranca", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data", @id = "formulario" }))
+        {
+            @Html.ValidationSummary(false, "", new { @style = "margin-left: -20px" })
+            @Html.HiddenFor(info => info.empresaId)
+            <div class="row clearfix">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label margem-interna" for="dt_emissao">Emissão</label>
+                        @Html.EditorFor(info => info.dt_emissao, "DATE", new { identificador = "dt_emissao", readOnly = "false" })
                     </div>
-                    @*<div class="col-md-7">
-                            <div class="col-md-offset-9">
-                                <div class="form-group">
-                                    <label class="control-label col-md-2 margem-interna" for="operacaoId">ID</label>
-                                    <div class="input-group col-md-10">
-                                        @Html.TextBox("operacaoId1", "", new { @class = "form-control input-sm" })
-                                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true" onclick="callEdit()"></span></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>*@
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group col-md-12" id="teste">
+                        <label class="control-label margem-interna" for="documento">Documento</label>
+                        @Html.TextBoxFor(info => info.documento, new { @class = "form-control input-sm", @maxlength = "12" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <p>
+                        &nbsp;
+                    </p>
+                    @*@Html.CheckBoxFor(info => info.recorrencia_mensal, new { @onclick = "RecorrenciaMensal()" })<small>&nbsp;Recorrência mensal</small>*@
+                </div>
+                <div class="col-md-6">
+                    @Html.Editor("nome_cliente1", "ClientesAutoComplete", new
+                   {
+                       value = Model.clienteId > 0 ? Model.clienteId.ToString() : "",
+                       Text = Model.nome_cliente ?? "",
+                       nextField = "descricao_historico",
+                       prevField = "documento"
+                   })
                 </div>
             </div>
-            <div class="panel-body">
-                @Html.ValidationSummary(false, "", new { @style = "margin-left: -20px" })
-                <div class="row clearfix">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="control-label margem-interna" for="dt_emissao">Emissão</label>
-                            @Html.EditorFor(info => info.dt_emissao, "DATE", new { identificador = "dt_emissao", readOnly = "false" })
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group col-md-12" id="teste">
-                            <label class="control-label margem-interna" for="documento">Documento</label>
-                            @Html.TextBoxFor(info => info.documento, new { @class = "form-control input-sm", @maxlength = "12" })
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <p>
-                            &nbsp;
-                        </p>
-                        @Html.CheckBoxFor(info => info.recorrencia_mensal, new { @onclick = "RecorrenciaMensal()" })<small>&nbsp;Recorrência mensal</small>
-                    </div>
-                    <div class="col-md-6">
-                        @Html.Editor("nome_cliente1", "ClientesAutoComplete", new
-                           {
-                               value = Model.clienteId > 0 ? Model.clienteId.ToString() : "",
-                               Text = Model.nome_cliente ?? "",
-                               nextField = "descricao_historico",
-                               prevField = "recorrencia_mensal"
-                           })
+            <div class="row clearfix">
+                <div class="col-md-6">
+                    @Html.Editor("descricao_historico1", "HistoricoAutoComplete", new
+                        {
+                            value = Model.historicoId > 0 ? Model.historicoId.ToString() : "",
+                            Text = Model.descricao_historico ?? "",
+                            nextField = "complementoHist",
+                            prevField = "nome_cliente"
+                        })
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="complementoHist">Histórico complementar</label>
+                        @Html.TextAreaFor(m => m.complementoHist, 1, 1, new { @class = "form-control" })
                     </div>
                 </div>
-                <div class="row clearfix">
-                    <div class="col-md-6">
-                        @Html.Editor("descricao_historico1", "HistoricoAutoComplete", new
-                           {
-                               value = Model.historicoId > 0 ? Model.historicoId.ToString() : "",
-                               Text = Model.descricao_historico ?? "",
-                               nextField = "complementoHist",
-                               prevField = "nome_cliente"
-                           })
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label" for="complementoHist">Histórico complementar</label>
-                            @Html.TextAreaFor(m => m.complementoHist, 1, 1, new { @class = "form-control" })
-                        </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-6">
+                    @Html.Editor("descricao_centroCusto1", "CentroCustoAutoComplete", new
+                        {
+                            value = Model.centroCustoId != null ? Model.centroCustoId.ToString() : "",
+                            Text = Model.descricao_centroCusto ?? "",
+                            nextField = "descricao_enquadramento",
+                            prevField = "complementoHist"
+                        })
+                </div>
+                <div class="col-md-6">
+                    @Html.Editor("descricao_enquadramento1", "EnquadramentoAutoComplete", new
+                        {
+                            value = Model.enquadramentoId != null ? Model.enquadramentoId.ToString() : "",
+                            Text = Model.descricao_enquadramento ?? "",
+                            nextField = "OperacaoParcela_num_titulo",
+                            prevField = "descricao_centroCusto"
+                        })
+                </div>
+            </div>
+            /* Dados do Título */
+            <div class="row clearfix">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label" for="documento">Nº Título</label>
+                        @Html.TextBoxFor(info => info.OperacaoParcela.num_titulo, new { @class = "form-control input-sm", @maxlength = "20" })
                     </div>
                 </div>
-                <div class="row clearfix">
-                    <div class="col-md-6">
-                        @Html.Editor("descricao_centroCusto1", "CentroCustoAutoComplete", new
-                           {
-                               value = Model.centroCustoId != null ? Model.centroCustoId.ToString() : "",
-                               Text = Model.descricao_centroCusto ?? "",
-                               nextField = "descricao_enquadramento",
-                               prevField = "complementoHist"
-                           })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.Editor("descricao_enquadramento1", "EnquadramentoAutoComplete", new
-                           {
-                               value = Model.enquadramentoId != null ? Model.enquadramentoId.ToString() : "",
-                               Text = Model.descricao_enquadramento ?? "",
-                               nextField = "OperacaoParcela_num_titulo",
-                               prevField = "descricao_centroCusto"
-                           })
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label" for="dt_emissao">Vencimento</label>
+                        @Html.EditorFor(info => info.OperacaoParcela.dt_vencimento, "DATE", new { identificador = "dt_vencimento", readOnly = "false", value = Model.OperacaoParcela.dt_vencimento })
                     </div>
                 </div>
-                <div role="tabpanel">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-pills" role="tablist">
-                        <li role="presentation" class="active"><a href="#dados_titulo" id="dados_tituloLink" aria-controls="dados_titulo" role="tab" data-toggle="tab">Dados do título</a></li>
-                        <li role="presentation" class="disabledTab" id="parcelaTab"><a href="#parcelamento" id="parcelamentoLink" aria-controls="parcelamento" role="tab" data-toggle="tab">Parcelamento</a></li>
-                        <li role="presentation" class="disabledTab" id="amortizacaoTab"><a href="#amortizacao" aria-controls="amortizacao" role="tab" data-toggle="tab">Amortização</a></li>
-                    </ul>
-                    <!-- Tab panes -->
-                    <div class="tab-content margem-topo-30">
-                        <div role="tabpanel" class="tab-pane active" id="dados_titulo">
-                            <div class="row clearfix">
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label class="control-label" for="documento">Nº Título</label>
-                                        @Html.TextBoxFor(info => info.OperacaoParcela.num_titulo, new { @class = "form-control input-sm", @maxlength = "20" })
-                                    </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label" for="drpFormaPagamento">Forma de pagamento</label>
+                        @Html.DropDownListFor(m => m.OperacaoParcela.ind_forma_pagamento, new DWM.Models.Enumeracoes.BindDropDownList().FormaPagamento("4"), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @Html.Editor("nome_banco1", "BancosAutoComplete", new
+                               {
+                                   value = Model.OperacaoParcela.bancoId != null ? Model.OperacaoParcela.bancoId.ToString() : "",
+                                   Text = Model.OperacaoParcela.nome_banco ?? "",
+                                   nextField = "OperacaoParcela_vr_principal_1",
+                                   prevField = "OperacaoParcela_ind_forma_pagamento"
+                               })
+                </div>
+            </div>
+
+            /* Dados FileUpload, Dados do cheque e Valores */
+            <div class="row clearfix">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">
+                                        Arquivo (boleto, nota fiscal, etc.)
+                                    </h2>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="panel-body">
                                     <div class="form-group">
-                                        <label class="control-label" for="dt_emissao">Vencimento</label>
-                                        @Html.EditorFor(info => info.OperacaoParcela.dt_vencimento, "DATE", new { identificador = "dt_vencimento", readOnly = "false", value = Model.OperacaoParcela.dt_vencimento })
+                                        <input id="fileupload" type="file" name="files[]" multiple>
+                                        @Html.Hidden("fileBoleto", Model.fileBoleto)
                                     </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label class="control-label" for="drpFormaPagamento">Forma de pagamento</label>
-                                        @Html.DropDownListFor(m => m.OperacaoParcela.ind_forma_pagamento, new DWM.Models.Enumeracoes.BindDropDownList().FormaPagamento("4"), new { @class = "form-control" })
+                                    <div class="file_name" id="file_name1"></div>
+                                    <div class="progress" id="progress1">
+                                        <div id="progress1-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                            <span class="sr-only">0% complete</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    @Html.Editor("nome_banco1", "BancosAutoComplete", new
-                                       {
-                                           value = Model.OperacaoParcela.bancoId != null ? Model.OperacaoParcela.bancoId.ToString() : "",
-                                           Text = Model.OperacaoParcela.nome_banco ?? "",
-                                           nextField = "OperacaoParcela_vr_principal_1",
-                                           prevField = "OperacaoParcela_ind_forma_pagamento"
-                                       })
                                 </div>
                             </div>
-                            <div class="row clearfix">
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="panel panel-primary">
-                                                <div class="panel-heading">
-                                                    <h2 class="panel-title">
-                                                        Arquivo (boleto, nota fiscal, etc.)
-                                                    </h2>
-                                                </div>
-                                                <div class="panel-body">
-                                                    <div class="form-group">
-                                                        <input id="fileupload" type="file" name="files[]" multiple>
-                                                        @Html.Hidden("fileBoleto", Model.fileBoleto)
-                                                    </div>
-                                                    <div class="file_name" id="file_name1"></div>
-                                                    <div class="progress" id="progress1">
-                                                        <div id="progress1-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                                                            <span class="sr-only">0% complete</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="panel panel-primary margem-topo-sm">
-                                                <div class="panel-heading">
-                                                    <h2 class="panel-title">
-                                                        Dados do Cheque
-                                                    </h2>
-                                                </div>
-                                                <div class="panel-body">
-                                                    <div class="row clearfix">
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Nº Banco</label>
-                                                                @Html.TextBoxFor(info => info.OperacaoParcela.cheque_banco, "{0:##0}", new { @class = "form-control input-sm", @onkeypress = "return numeros()" })
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Agência</label>
-                                                                @Html.TextBoxFor(info => info.OperacaoParcela.cheque_agencia, new { @class = "form-control input-sm", @maxlength = "5" })
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Nº Cheque</label>
-                                                                @Html.TextBoxFor(info => info.OperacaoParcela.cheque_numero, new { @class = "form-control input-sm", @maxlength = "6" })
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-primary margem-topo-sm">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">
+                                        Dados do Cheque
+                                    </h2>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="panel panel-primary">
-                                                <div class="panel-heading">
-                                                    <h2 class="panel-title">
-                                                        Valores
-                                                    </h2>
-                                                </div>
-                                                <div class="panel-body">
-                                                    <form class="form-horizontal">
-                                                        <div class="row">
-                                                            <div class="col-md-12 no-padding altura-35">
-                                                                @Html.EditorFor(m => m.OperacaoParcela.vr_principal, "DECIMAL", new
-                                                                    {
-                                                                        form = "horizontal",
-                                                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "return fnValorPrincipal(this);" }
-                                                                    })
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-12 no-padding altura-35">
-                                                                @Html.EditorFor(m => m.OperacaoParcela.OperacaoParcelaEvento.valor, "DECIMAL", new
-                                                                                                    {
-                                                                                                        form = "horizontal",
-                                                                                                        label = "Amortização Inicial",
-                                                                                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return fnValorPrincipal(this);" }
-                                                                                                    })
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-12 no-padding altura-35">
-                                                                @Html.EditorFor(m => m.vr_jurosMora, "DECIMAL", new
-                                                                                                    {
-                                                                                                        form = "horizontal",
-                                                                                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return Converte(this, 'vr_jurosMora')" }
-                                                                                                    })
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-12 no-padding altura-35">
-                                                                @Html.EditorFor(m => m.vr_multa, "DECIMAL", new
-                                                                                                    {
-                                                                                                        form = "horizontal",
-                                                                                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return Converte(this, 'vr_multa')" }
-                                                                                                    })
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-12 no-padding altura-35">
-                                                                @Html.Editor("vr_saldoDevedor", "DECIMAL", new
-                                                                                            {
-                                                                                                form = "horizontal",
-                                                                                                label = "Saldo devedor",
-                                                                                                htmlAttributes = (object)new { @class = "form-control input-sm text-right", @disabled = "disabled", @onblur = "return Converte(this)" }
-                                                                                            })
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-12 no-padding altura-35">
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-6">Nº Parcelas</label>
-                                                                    <div class="col-sm-6">
-                                                                        @Html.TextBoxFor(info => info.num_parcelas, "{0:##0}", new { @class = "form-control input-sm text-right", @onblur = "HabilitaBotaoParcela()", @onkeypress = "return numeros()" })
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-12 margem-interna-10">
-                                                                <a href="#" class="btn btn-primary btn-sm link-default disabled" id="btn-amortizacao" onclick="fnTabAmortizacao();"><span class="link-default">Amortizar</span></a>
-                                                                <a href="#" class="btn btn-primary btn-sm link-default disabled pull-right" id="btn-parcela" onclick="fnGerarParcelas()"><span class="link-default">Gerar parcelas</span></a>                                                                
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
+                                <div class="panel-body">
+                                    <div class="row clearfix">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label">Nº Banco</label>
+                                                @Html.TextBoxFor(info => info.OperacaoParcela.cheque_banco, "{0:##0}", new { @class = "form-control input-sm", @onkeypress = "return numeros()" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label">Agência</label>
+                                                @Html.TextBoxFor(info => info.OperacaoParcela.cheque_agencia, new { @class = "form-control input-sm", @maxlength = "5" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label">Nº Cheque</label>
+                                                @Html.TextBoxFor(info => info.OperacaoParcela.cheque_numero, new { @class = "form-control input-sm", @maxlength = "6" })
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div role="tabpanel" class="tab-pane" id="amortizacao">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <form class="form-horizontal">
+                        <div class="row">
+                            <div class="col-md-12 no-padding altura-35">
+                                @Html.EditorFor(m => m.OperacaoParcela.vr_principal, "DECIMAL", new
+                                           {
+                                               form = "horizontal",
+                                               htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "return fnValorPrincipal(this);" }
+                                           })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 no-padding altura-35">
+                                @Html.EditorFor(m => m.OperacaoParcela.OperacaoParcelaEvento.valor, "DECIMAL", new
+                                           {
+                                               form = "horizontal",
+                                               label = "Amortização Inicial",
+                                               htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return fnValorPrincipal(this);" }
+                                           })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 no-padding altura-35">
+                                @Html.EditorFor(m => m.vr_jurosMora, "DECIMAL", new
+                                           {
+                                               form = "horizontal",
+                                               htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return Converte(this, 'vr_jurosMora')" }
+                                           })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 no-padding altura-35">
+                                @Html.EditorFor(m => m.vr_multa, "DECIMAL", new
+                                           {
+                                               form = "horizontal",
+                                               htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return Converte(this, 'vr_multa')" }
+                                           })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 no-padding altura-35">
+                                @Html.Editor("vr_saldoDevedor", "DECIMAL", new
+                                           {
+                                               form = "horizontal",
+                                               label = "Saldo devedor",
+                                               htmlAttributes = (object)new { @class = "form-control input-sm text-right", @disabled = "disabled", @onblur = "return Converte(this)" }
+                                           })
+                            </div>
+                        </div>
+                        <div class="row" id="xpto">
+                            <div class="col-md-12 no-padding altura-35">
+                                <div class="form-group">
+                                    <label class="col-sm-6">Nº Parcelas</label>
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(info => info.num_parcelas, "{0:##0}", new { @class = "form-control input-sm text-right", @onblur = "HabilitaBotaoParcela()", @onkeypress = "return numeros()" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-md-12 margem-interna-10">
+                                <span>Clique na aba <code>amortização</code> para baixar/amortizar o títulos ou na aba <code>Parcelamento</code> para parcelar o saldo devedor. </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            /* Tab-Panel Amortização e Parcelamento */
+            <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Amortização</a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false" onclick="fnGerarParcelas();">Parcelamento</a>
+                    </li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                        <div id="div-amortizacao">
                             <div class="row clearfix">
-                                <div class="col-md-6">
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">
-                                            <h2 class="panel-title">
-                                                Dados do pagamento
-                                            </h2>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <div class="col-md-12 altura-35">
+                                            @Html.Editor("vr_amortizacao", "DECIMAL", new
+                                               {
+                                                   form = "horizontal",
+                                                   label = "Valor Amortizado",
+                                                   htmlAttributes = (object)new { @class = "form-control input-sm text-right", @disabled = "disabled", @onblur = "return Converte(this)" }
+                                               })
                                         </div>
-                                        <div class="panel-body">
-                                            <div class="row">
-                                                <div class="col-md-12 altura-35">
-                                                    @Html.Editor("vr_amortizacao", "DECIMAL", new
-                                                       {
-                                                           form = "horizontal",
-                                                           label = "Valor Amortizado",
-                                                           htmlAttributes = (object)new { @class = "form-control input-sm text-right", @disabled = "disabled", @onblur = "return Converte(this)" }
-                                                       })
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12 altura-35">
-                                                    @Html.Editor("vr_juros", "DECIMAL", new
-                                                       {
-                                                           form = "horizontal",
-                                                           label = "Multa/Juros",
-                                                           htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "return fnValorTotal(this);" }
-                                                       })
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12 altura-35">
-                                                    @Html.Editor("vr_mora", "DECIMAL", new
-                                                       {
-                                                           form = "horizontal",
-                                                           label = "Mora",
-                                                           htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return fnValorTotal(this);" }
-                                                       })
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12 altura-50">
-                                                    @Html.Editor("vr_desconto", "DECIMAL", new
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 altura-35">
+                                            @Html.Editor("vr_juros", "DECIMAL", new
+                                               {
+                                                   form = "horizontal",
+                                                   label = "Multa/Juros",
+                                                   htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "return fnValorTotal(this);" }
+                                               })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 altura-35">
+                                            @Html.Editor("vr_mora", "DECIMAL", new
+                                               {
+                                                   form = "horizontal",
+                                                   label = "Mora",
+                                                   htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return fnValorTotal(this);" }
+                                               })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 altura-50">
+                                            @Html.Editor("vr_desconto", "DECIMAL", new
                                                {
                                                    form = "horizontal",
                                                    label = "Desconto",
                                                    htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return fnValorTotal(this);" }
                                                })
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12 altura-35">
-                                                    @Html.Editor("vr_total", "DECIMAL", new
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 altura-35">
+                                            @Html.Editor("vr_total", "DECIMAL", new
                                                {
                                                    form = "horizontal",
                                                    label = "Total",
                                                    htmlAttributes = (object)new { @class = "form-control input-sm text-right", @disabled = "disabled", @onblur = "return Converte(this)" }
                                                })
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="row clearfix">
                                         <div class="col-md-12">
                                             <div class="panel panel-primary">
@@ -394,44 +360,27 @@
                                 </div>
                             </div>
                         </div>
-                        <div role="tabpanel" class="tab-pane" id="parcelamento">
-                            <div id="div-item"></div>
-                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                        @Html.Partial("_AjaxAlert","xpto")
+                        <div id="div-item"></div>
                     </div>
                 </div>
             </div>
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-md-8 col-xs-12">
-                        @Html.Partial("_defaultListButtons",
-                        new List<ButtonRepository>
-                        {
-                            new ButtonRepository() {    linkText = "Salvar",
-                                                        actionName = "",
-                                                        controllerName = "",
-                                                        javaScriptFunction = "Valida()",
-                                                        buttonType = "submit"
-                                                    } ,
-                            new ButtonRepository() {    linkText = "Cancelar",
-                                                        actionName = "Browse",
-                                                        controllerName = "PlanoContas",
-                                                        buttonType = "link"
-                                                    }
-                        })
-                    </div>
-                    <div class="col-md-offset-4 hidden-xs">
-                        ( * ) - Campo de preenchimento obrigatório
+            /* Salvar */
+            <p>&nbsp;</p>
+            <div class="row clearfix">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success" value="Salvar" name="btn-salvar" id="btn-salvar" onclick="return Valida();" />
+                        <input type="button" onclick="window.location = '../Cobranca/Browse'" class="btn btn-default" value="Cancelar" />
                     </div>
                 </div>
             </div>
-        </div>
-    }
+        }
 
-    <div class="margem-topo-100">&nbsp;</div>
-    <div class="margem-topo-50">&nbsp;</div>
-
+    </div>
 </div>
-
 
 <div class="modal fade" id="myModal1">
     <div class="modal-dialog modal-lg">
@@ -697,7 +646,8 @@
         if (_saldoDevedor > 0)
             HabilitaBotaoParcela();
         else
-            DesabilitaBotaoParcela();
+            $('#div-item').html('');
+            //DesabilitaBotaoParcela();
 
         return true;
     }
@@ -742,21 +692,24 @@
 
     function fnGerarParcelas() {
         var _vr_saldoDevedor_1 = parseInt($('#vr_saldoDevedor_1').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
-
         if (_vr_saldoDevedor_1 == 0) {
-            ShowMessageAlert('Saldo devedor deve ser maior que zero para gerar as parcelas', 'warning');
+            ShowMessageAjaxAlert('Saldo devedor deve ser maior que zero para gerar as parcelas', 'warning');
             $('#OperacaoParcela_OperacaoParcelaEvento_valor_1').focus();
+            $('#div-item').html('');
             return false;
         }
 
         if ($('#bancoId').val() == null || $('#bancoId').val() == '') {
-            ShowMessageAlert('Banco deve deve informado para gerar as parcelas', 'warning');
+            ShowMessageAjaxAlert('Banco deve deve informado para gerar as parcelas', 'warning');
             $('#nome_banco').focus();
+            $('#div-item').html('');
             return false;
         }
 
-        $('#parcelaTab').removeClass('disabledTab');
-        $('#parcelamentoLink').click();
+        $('#AjaxAlert').hide();
+
+        //$('#parcelaTab').removeClass('disabledTab');
+        //$('#parcelamentoLink').click();
 
         CarregandoIn();
 
@@ -793,16 +746,6 @@
             $('#carregando').css("margin-top", "0%");
             $('#carregando').css("margin-left", "0%");
         })
-    }
-
-    function fnTabAmortizacao() {
-        var _valorAmortizado = $('#OperacaoParcela_OperacaoParcelaEvento_valor_1').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _valorAmortizado = parseInt(_valorAmortizado);
-        if (_valorAmortizado > 0)
-        {
-            $('.nav-pills a[href="#amortizacao"]').tab('show');
-            $('#vr_juros_1').focus();
-        }
     }
 
 </script>
