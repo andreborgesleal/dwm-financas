@@ -11,13 +11,13 @@
         <input type="text" id="descricao_enquadramento_amortizacao" name="descricao_enquadramento_amortizacao" value="@Text" class="form-control" onblur="fillEnq2();" tabindex="@tabindex" />
         <input type="hidden" id="enquadramento_amortizacaoId" name="enquadramento_amortizacaoId" value="@value" />
         <div class="input-group-btn">
-            <button class="btn btn-primary" style="margin-top: -5px" type="button" onclick="showLookup('LovEnquadramentoOperacaoAmortizacaoModal');"><i class="glyphicon glyphicon-search"></i></button>
-            <button class="btn btn-instagram" style="margin-top: -5px" type="button" onclick="clean('enquadramento_amortizacaoId', 'descricao_enquadramento_amortizacao');"><i class="glyphicon glyphicon-remove"></i></button>
+            <button class="btn btn-primary" style="margin-left: -5px" type="button" onclick="showLookup('LovEnquadramentoOperacaoAmortizacaoModal');"><i class="glyphicon glyphicon-search"></i></button>
+            <button class="btn btn-instagram" style="margin-left: -5px" type="button" onclick="clean('enquadramento_amortizacaoId', 'descricao_enquadramento_amortizacao');"><i class="glyphicon glyphicon-remove"></i></button>
         </div>
     </div>
     <div id="div-lov"></div>
 </div>
-
+<div id="descricao_enquadramento_amortizacao-container" class="panel panel-primary" style="position: relative; float: left; margin-top: -20px; border: none"></div>
 <script>
     // Next Field
     $('#Enq2Parent').on('keydown', '#descricao_enquadramento_amortizacao', function (e) {
@@ -33,7 +33,7 @@
     // Fim-Next Field
 
     var link = encodeURI('../Enquadramentos/getNames?noCahce=' + new Date());
-    var data = { values: [] };
+    var dataEnq2 = { values: [] };
     var enq2 = { countries: [] };
     $.ajax({
         type: "POST",
@@ -44,16 +44,11 @@
         dataType: "json",
         success: function (jsonObj) {
             for (i in jsonObj) {
-                data.values.push(jsonObj[i].descricao);
+                dataEnq2.values.push(jsonObj[i].descricao);
                 enq2.countries.push({ objId: jsonObj[i].enquadramentoId, descricao: jsonObj[i].descricao })
             };
         }
     });
-
-    $('#descricao_enquadramento_amortizacao').typeahead({
-        local: data.values,
-    });
-    $('descricao_enquadramento_amortizacao').css('background-color', '#fff');
 
     function fillEnq2() {
         for (i in enq2.countries) {
@@ -62,6 +57,19 @@
             }
         }
     }
+
+    var enq2Array = $.map(enq2.countries, function (value, key) {
+        return {
+            value: value.descricao,
+            data: key.enquadramentoId
+        };
+    });
+
+    // initialize autocomplete with custom appendTo
+    $('#descricao_enquadramento_amortizacao').autocomplete({
+        lookup: enq2Array,
+        appendTo: '#descricao_enquadramento_amortizacao-container'
+    });
 
 </script>
 

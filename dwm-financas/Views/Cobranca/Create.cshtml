@@ -15,12 +15,14 @@
     <div class="x_content">
         @using (Html.BeginForm("Create", "Cobranca", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data", @id = "formulario" }))
         {
-            @Html.ValidationSummary(false, "", new { @style = "margin-left: -20px" })
+            @Html.Partial("_AjaxAlert", "panel-top")
+            @*@Html.ValidationSummary(false, "" )*@
+            @Html.ValidationSummary("", new { @class = "text-danger" })
             @Html.HiddenFor(info => info.empresaId)
             <div class="row clearfix">
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label class="control-label margem-interna" for="dt_emissao">Emissão</label>
+                         <label class="control-label margem-interna" for="dt_emissao">Emissão</label>
                         @Html.EditorFor(info => info.dt_emissao, "DATE", new { identificador = "dt_emissao", readOnly = "false" })
                     </div>
                 </div>
@@ -83,7 +85,7 @@
                         })
                 </div>
             </div>
-            /* Dados do Título */
+            /* Nº Título (Seu Número), Banco, Forma de pagamento */
             <div class="row clearfix">
                 <div class="col-md-2">
                     <div class="form-group">
@@ -100,7 +102,7 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <label class="control-label" for="drpFormaPagamento">Forma de pagamento</label>
-                        @Html.DropDownListFor(m => m.OperacaoParcela.ind_forma_pagamento, new DWM.Models.Enumeracoes.BindDropDownList().FormaPagamento("4"), new { @class = "form-control" })
+                        @Html.DropDownListFor(m => m.OperacaoParcela.ind_forma_pagamento, new DWM.Models.Enumeracoes.BindDropDownList().FormaPagamento("4"), new { @class = "form-control", @onchange="fnFormaPagto();" })
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -142,7 +144,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="panel panel-primary margem-topo-sm">
+                            <div class="panel panel-default margem-topo-sm disabled" id="dados_cheque">
                                 <div class="panel-heading">
                                     <h2 class="panel-title">
                                         Dados do Cheque
@@ -235,7 +237,7 @@
                         </div>
                         <div class="row" >
                             <div class="col-md-12 margem-interna-10">
-                                <span>Clique na aba <code>amortização</code> para baixar/amortizar o títulos ou na aba <code>Parcelamento</code> para parcelar o saldo devedor. </span>
+                                <span>Clique na aba <code>amortização</code> para baixar/amortizar o título ou na aba <code>Parcelamento</code> para parcelar o saldo devedor. </span>
                             </div>
                         </div>
                     </form>
@@ -256,7 +258,7 @@
                     <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
                         <div id="div-amortizacao">
                             <div class="row clearfix">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="row">
                                         <div class="col-md-12 altura-35">
                                             @Html.Editor("vr_amortizacao", "DECIMAL", new
@@ -308,7 +310,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="row clearfix">
                                         <div class="col-md-12">
                                             <div class="panel panel-primary">
@@ -344,13 +346,13 @@
                                         </div>
                                     </div>
                                     <div class="row clearfix">
-                                        <div class="col-md-4">
+                                        <div class="col-md-5">
                                             <div class="form-group">
                                                 <label class="control-label" for="dt_ocorrencia">Dt.Amortização</label>
                                                 @Html.EditorFor(info => info.OperacaoParcela.OperacaoParcelaEvento.dt_ocorrencia, "DATE", new { identificador = "dt_ocorrencia", readOnly = "false" })
                                             </div>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-7">
                                             <div class="form-group">
                                                 <label class="control-label" for="dt_movto">Dt.Movimento</label>
                                                 @Html.EditorFor(info => info.OperacaoParcela.OperacaoParcelaEvento.dt_movto, "DATE", new { identificador = "dt_movto", readOnly = "false" })
@@ -362,7 +364,6 @@
                         </div>
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-                        @Html.Partial("_AjaxAlert","xpto")
                         <div id="div-item"></div>
                     </div>
                 </div>
@@ -374,6 +375,7 @@
                     <div class="form-group">
                         <input type="submit" class="btn btn-success" value="Salvar" name="btn-salvar" id="btn-salvar" onclick="return Valida();" />
                         <input type="button" onclick="window.location = '../Cobranca/Browse'" class="btn btn-default" value="Cancelar" />
+                        <a href="#panel-top" class="info pull-right" id="topo"><i class="fa fa-toggle-up"></i> Topo</a>
                     </div>
                 </div>
             </div>
@@ -382,22 +384,22 @@
     </div>
 </div>
 
-<div class="modal fade" id="myModal1">
+<div id="myModal1" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Modal title</h4>
+        <div class="modal-content hidden-xs">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="btnModal">×</button>
+                <h3 class="modal-title" id="myModalLabel">Modal title</h3>
             </div>
-            <div class="modal-body text-center" id="myModal1-body">
+            <div class="modal-body" id="myModal1-body">
                 <p>One fine body&hellip;</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="myModal2">
     <div class="modal-dialog modal-lg">
@@ -431,49 +433,56 @@
 <script>
             
     function Valida() {
-        
+        return true;
         if ($("#dt_emissao").val() == '') {
-            ShowMessageAlert('Campo de preenchimento obrigatório: Data de Emissão', 'warning');
+            ShowMessageAjaxAlert('Campo de preenchimento obrigatório: Data de Emissão', 'warning');
             $('#dt_emissao').focus();
+            document.getElementById('topo').click();
             return false;
         }
         if ($("#clienteId").val() == '' || $('#clienteId').val() == "0")
         {
-            ShowMessageAlert('Campo de preenchimento obrigatório: Cliente', 'warning');
+            ShowMessageAjaxAlert('Campo de preenchimento obrigatório: Cliente', 'warning');
             $('#nome_cliente').focus();
+            document.getElementById('topo').click();
             return false;
         }
         if ($("#historicoId").val() == '' || $('#historicoId').val() == "0") {
-            ShowMessageAlert('Campo de preenchimento obrigatório: Histórico', 'warning');
+            ShowMessageAjaxAlert('Campo de preenchimento obrigatório: Histórico', 'warning');
             $('#descricao_historico').focus();
+            document.getElementById('topo').click();
             return false;
         }
         if ($("#dt_vencimento").val() == '') {
-            ShowMessageAlert('Campo de preenchimento obrigatório: Data de Vencimento', 'warning');
+            ShowMessageAjaxAlert('Campo de preenchimento obrigatório: Data de Vencimento', 'warning');
             $('#dt_vencimento').focus();
+            document.getElementById('topo').click();
             return false;
         }
 
         var _valorPrincipal = parseFloat($('#OperacaoParcela_vr_principal_1').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
 
         if (_valorPrincipal <= 0) {
-            ShowMessageAlert('Campo de preenchimento obrigatório: Valor Principal', 'warning');
+            ShowMessageAjaxAlert('Campo de preenchimento obrigatório: Valor Principal', 'warning');
             $('#OperacaoParcela_vr_principal_1').focus();
+            document.getElementById('topo').click();
             return false;
         }
 
         if ($('#num_parcelas').val() == '')
         {
-            ShowMessageAlert('Campo de preenchimento obrigatório: Nº de Parcelas', 'warning');
+            ShowMessageAjaxAlert('Campo de preenchimento obrigatório: Nº de Parcelas', 'warning');
             $('#num_parcelas').focus();
+            document.getElementById('topo').click();
             return false;
         }
 
         var _num_parcelas = parseInt($('#num_parcelas').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
 
         if (_num_parcelas <= 0) {
-            ShowMessageAlert('Nº de Parcelas deve ser maior que zero', 'warning');
+            ShowMessageAjaxAlert('Nº de Parcelas deve ser maior que zero', 'warning');
             $('#num_parcelas').focus();
+            document.getElementById('topo').click();
             return false;
         }
 
@@ -487,8 +496,9 @@
 
         if (v < e)
         {
-            ShowMessageAlert('Data de vencimento deve ser maior ou igual que a data de emissão', 'warning');
+            ShowMessageAjaxAlert('Data de vencimento deve ser maior ou igual que a data de emissão', 'warning');
             $('#dt_vencimento').focus();
+            document.getElementById('topo').click();
             return false;
         }
 
@@ -538,7 +548,6 @@
                 return false;
             }
         }
-
         return true;
     }
 
@@ -560,33 +569,28 @@
         if ($('#OperacaoParcela_vr_principal_1').val() == '')
             $('#OperacaoParcela_vr_principal_1').val('0,00');
 
-        var _valorPrincipal = $('#OperacaoParcela_vr_principal_1').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _valorPrincipal = parseFloat(_valorPrincipal / 100);
+        if ($('#num_parcelas').val() == null || $('#num_parcelas').val() == '' || parseInt($('#num_parcelas').val()) < 2)
+            $('#div-item').html('');
+    }
 
-        if ($('#recorrencia_mensal').is(':unchecked') && parseFloat($('#vr_saldoDevedor_1').val().replace('.','').replace(',','').replace('.','').replace('.','')) > 0)
+    function fnFormaPagto() {
+        if ($('#OperacaoParcela_ind_forma_pagamento').val() == "2")
         {
-            if (parseInt($('#num_parcelas').val()) > 1 && _valorPrincipal > 0)
-                $('#btn-parcela').removeClass('disabled');
-            else {
-                $('#btn-parcela').addClass('disabled');
-                $('#parcelaTab').addClass('disabledTab');
-            }
-
+            $('#dados_cheque').removeClass('panel-default');
+            $('#dados_cheque').addClass('panel-primary');
+        }
+        else
+        {
+            $('#dados_cheque').removeClass('panel-primary');
+            $('#dados_cheque').addClass('panel-default');
         }
     }
 
     function DesabilitaBotaoParcela() {
-        $('#parcelaTab').addClass('disabledTab');
-        $('#btn-parcela').addClass('disabled');
-        $('#dados_tituloLink').click();
+        //$('#parcelaTab').addClass('disabledTab');
+        //$('#btn-parcela').addClass('disabled');
+        //$('#dados_tituloLink').click();
         $('#num_parcelas').val('1');
-    }
-
-    function RecorrenciaMensal() {
-        if ($('#recorrencia_mensal').is(':checked'))
-            DesabilitaBotaoParcela();
-        else
-            HabilitaBotaoParcela();
     }
 
     function fnValorPrincipal(obj) {
@@ -646,8 +650,10 @@
         if (_saldoDevedor > 0)
             HabilitaBotaoParcela();
         else
+        {
             $('#div-item').html('');
-            //DesabilitaBotaoParcela();
+            DesabilitaBotaoParcela();
+        }
 
         return true;
     }
@@ -696,6 +702,7 @@
             ShowMessageAjaxAlert('Saldo devedor deve ser maior que zero para gerar as parcelas', 'warning');
             $('#OperacaoParcela_OperacaoParcelaEvento_valor_1').focus();
             $('#div-item').html('');
+            document.getElementById('topo').click();
             return false;
         }
 
@@ -703,6 +710,16 @@
             ShowMessageAjaxAlert('Banco deve deve informado para gerar as parcelas', 'warning');
             $('#nome_banco').focus();
             $('#div-item').html('');
+            document.getElementById('topo').click();
+            return false;
+        }
+
+        if ($('#num_parcelas').val() == null || $('#num_parcelas').val() == '' || parseInt($('#num_parcelas').val()) < 2)
+        {
+            ShowMessageAjaxAlert('Nº de parcelas deve ser maior que 1 para gerar as parcelas', 'warning');
+            $('#num_parcelas').focus();
+            $('#div-item').html('');
+            document.getElementById('topo').click();
             return false;
         }
 

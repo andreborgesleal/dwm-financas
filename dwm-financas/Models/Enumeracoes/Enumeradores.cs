@@ -51,18 +51,18 @@ namespace DWM.Models.Enumeracoes
             [StringDescription("Cheque")]
             [StringValue("2")]
             CHEQUE,
-            [StringDescription("Cartão de crédito")]
+            [StringDescription("Cartão")]
             [StringValue("3")]
             CARTAO,
             [StringDescription("Boleto")]
             [StringValue("4")]
             BOLETO,
-            [StringDescription("Nota promissória")]
+            [StringDescription("TED/DOC")]
             [StringValue("5")]
-            NOTA_PROMISSORIA,
-            [StringDescription("Nota fiscal")]
+            TED_DOC,
+            [StringDescription("Pag. Eletrônico")]
             [StringValue("6")]
-            NOTA_FISCAL,
+            PAG_SEGURO,
             [StringDescription("Outros")]
             [StringValue("9")]
             OUTROS,

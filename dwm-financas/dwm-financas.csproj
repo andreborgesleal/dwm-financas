@@ -4053,6 +4053,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Temp\teste.txt" />
     <Content Include="Users_Data\Empresas\3\Avatar\1.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -4269,6 +4270,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />
+    <Folder Include="Users_Data\Empresas\3\arquivos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
