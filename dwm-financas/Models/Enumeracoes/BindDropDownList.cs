@@ -202,8 +202,8 @@ namespace DWM.Models.Enumeracoes
                 new SelectListItem() { Value = Enumeradores.FormaPagamento.CHEQUE.GetStringValue(), Text = Enumeradores.FormaPagamento.CHEQUE.GetStringDescription() }, 
                 new SelectListItem() { Value = Enumeradores.FormaPagamento.CARTAO.GetStringValue(), Text = Enumeradores.FormaPagamento.CARTAO.GetStringDescription() },
                 new SelectListItem() { Value = Enumeradores.FormaPagamento.BOLETO.GetStringValue(), Text = Enumeradores.FormaPagamento.BOLETO.GetStringDescription() }, 
-                new SelectListItem() { Value = Enumeradores.FormaPagamento.NOTA_PROMISSORIA.GetStringValue(), Text = Enumeradores.FormaPagamento.NOTA_PROMISSORIA.GetStringDescription() }, 
-                new SelectListItem() { Value = Enumeradores.FormaPagamento.NOTA_FISCAL.GetStringValue(), Text = Enumeradores.FormaPagamento.NOTA_FISCAL.GetStringDescription() },
+                new SelectListItem() { Value = Enumeradores.FormaPagamento.TED_DOC.GetStringValue(), Text = Enumeradores.FormaPagamento.TED_DOC.GetStringDescription() }, 
+                new SelectListItem() { Value = Enumeradores.FormaPagamento.PAG_SEGURO.GetStringValue(), Text = Enumeradores.FormaPagamento.PAG_SEGURO.GetStringDescription() },
                 new SelectListItem() { Value = Enumeradores.FormaPagamento.OUTROS.GetStringValue(), Text = Enumeradores.FormaPagamento.OUTROS.GetStringDescription()  }
             };
 

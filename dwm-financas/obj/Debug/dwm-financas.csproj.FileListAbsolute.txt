@@ -89,7 +89,6 @@ C:\sistemas\dwm-financas\dwm-financas\bin\Microsoft.ReportViewer.ProcessingObjec
 C:\sistemas\dwm-financas\dwm-financas\bin\Microsoft.SqlServer.Types.dll
 C:\sistemas\dwm-financas\dwm-financas\bin\App_Dominio.pdb
 C:\sistemas\dwm-financas\dwm-financas\bin\Microsoft.Threading.Tasks.xml
-C:\sistemas\dwm-financas\dwm-financas\obj\Debug\dwm-financas.csprojResolveAssemblyReference.cache
 C:\sistemas\dwm-financas\dwm-financas\dwm-financas\bin\ApplicationInsights.config
 C:\sistemas\dwm-financas\dwm-financas\dwm-financas\bin\roslyn\csc.exe
 C:\sistemas\dwm-financas\dwm-financas\dwm-financas\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -181,3 +180,4 @@ C:\sistemas\dwm-financas\dwm-financas\dwm-financas\bin\Microsoft.Threading.Tasks
 C:\sistemas\dwm-financas\dwm-financas\dwm-financas\obj\Debug\dwm-financas.csprojResolveAssemblyReference.cache
 C:\sistemas\dwm-financas\dwm-financas\dwm-financas\obj\Debug\dwm-financas.dll
 C:\sistemas\dwm-financas\dwm-financas\dwm-financas\obj\Debug\dwm-financas.pdb
+C:\sistemas\dwm-financas\dwm-financas\obj\Debug\dwm-financas.csprojResolveAssemblyReference.cache

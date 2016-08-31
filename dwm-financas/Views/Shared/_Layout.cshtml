@@ -17,7 +17,6 @@
     <title>DWM-Finanças</title>
 
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/bundles/autocomplete.css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/bootstrap-daterangepicker")
@@ -193,7 +192,7 @@
             <div class="right_col" role="main">
                 @BreadCrumbPage.Trace((App_Dominio.Component.BreadCrumb)ViewBag.BreadCrumb)
                 @Html.Partial("_alerts")
-                @*@Html.Partial("_alerts")
+                @*
                 <div class="alert alert-dismissable alert-warning" id="alerta" style="visibility: hidden">
                     <a class="close" href="#" aria-hidden="true" onclick="$('#alerta').hide()">x</a>
                     <h4 class="alert-heading" id="alerta-heading">Atenção!</h4>

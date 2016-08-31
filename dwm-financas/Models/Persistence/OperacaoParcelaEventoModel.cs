@@ -71,7 +71,7 @@ namespace DWM.Models.Persistence
                 {
                     #region Move the file from Temp Folder to Users_Data Folder
                     System.IO.FileInfo f = new System.IO.FileInfo(Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Temp"), value.arquivo));
-                    f.MoveTo(Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Users_Data"), value.arquivo));
+                    f.MoveTo(Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Users_Data/Empresas/" + sessaoCorrente.empresaId.ToString() + "/arquivos"), value.arquivo));
                     #endregion
                 }
                 #endregion

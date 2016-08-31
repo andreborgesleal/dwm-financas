@@ -677,14 +677,14 @@ namespace DWM.Controllers
 
         public override void BeforeCreate(ref ORepo value, FormCollection collection)
         {
-            if (collection["OperacaoParcela.OperacaoParcelaEvento.valor.1"] != "")
-                value.OperacaoParcela.vr_amortizacao = decimal.Parse(collection["OperacaoParcela.OperacaoParcelaEvento.valor.1"]);
+            if (collection["OperacaoParcela_OperacaoParcelaEvento_valor"] != "")
+                value.OperacaoParcela.vr_amortizacao = decimal.Parse(collection["OperacaoParcela_OperacaoParcelaEvento_valor"]);
 
-            if (collection["vr_jurosMora.1"] != null && collection["vr_jurosMora.1"] != "" && collection["vr_jurosMora.1"] != "0,00")
-                value.vr_jurosMora = decimal.Parse(collection["vr_jurosMora.1"]);
+            if (collection["vr_jurosMora"] != null && collection["vr_jurosMora"] != "" && collection["vr_jurosMora"] != "0,00")
+                value.vr_jurosMora = decimal.Parse(collection["vr_jurosMora"]);
 
-            if (collection["vr_multa.1"] != null && collection["vr_multa.1"] != "" && collection["vr_multa.1"] != "0,00")
-                value.vr_multa = decimal.Parse(collection["vr_multa.1"]);
+            if (collection["vr_multa"] != null && collection["vr_multa"] != "" && collection["vr_multa"] != "0,00")
+                value.vr_multa = decimal.Parse(collection["vr_multa"]);
 
             if (collection["enquadramentoId"] != null && collection["enquadramentoId"] != "")
                 value.enquadramentoId = int.Parse(collection["enquadramentoId"]);
@@ -698,7 +698,7 @@ namespace DWM.Controllers
             value.fileComprovante = collection["fileComprovante"];
             if (collection["enquadramento_amortizacaoId"] != null && collection["enquadramento_amortizacaoId"] != "")
                 value.enquadramento_amortizacaoId = int.Parse(collection["enquadramento_amortizacaoId"]);
-            value.OperacaoParcela.vr_principal = decimal.Parse(collection["OperacaoParcela.vr_principal.1"]);
+            value.OperacaoParcela.vr_principal = decimal.Parse(collection["OperacaoParcela_vr_principal"]);
             value.OperacaoParcelas = new List<OPRepo>();
 
             #region Parcela
@@ -706,12 +706,12 @@ namespace DWM.Controllers
             value.OperacaoParcela.vr_encargos = 0;
             if (collection["bancoId"] != "" && collection["bancoId"] != "")
                 value.OperacaoParcela.bancoId = int.Parse(collection["bancoId"]);
-            if (collection["vr_desconto.1"] != null && collection["vr_desconto.1"] != "" && collection["vr_desconto.1"] != "0,00")
-                value.OperacaoParcela.vr_desconto = decimal.Parse(collection["vr_desconto.1"]);
-            if (collection["vr_juros.1"] != null && collection["vr_juros.1"] != "" && collection["vr_juros.1"] != "0,00")
-                value.OperacaoParcela.vr_encargos = decimal.Parse(collection["vr_juros.1"]);
-            if (collection["vr_mora.1"] != null && collection["vr_mora.1"] != "" && collection["vr_mora.1"] != "0,00")
-                value.OperacaoParcela.vr_encargos += decimal.Parse(collection["vr_mora.1"]);
+            if (collection["vr_desconto"] != null && collection["vr_desconto"] != "" && collection["vr_desconto"] != "0,00")
+                value.OperacaoParcela.vr_desconto = decimal.Parse(collection["vr_desconto"]);
+            if (collection["vr_juros"] != null && collection["vr_juros"] != "" && collection["vr_juros"] != "0,00")
+                value.OperacaoParcela.vr_encargos = decimal.Parse(collection["vr_juros"]);
+            if (collection["vr_mora"] != null && collection["vr_mora"] != "" && collection["vr_mora"] != "0,00")
+                value.OperacaoParcela.vr_encargos += decimal.Parse(collection["vr_mora"]);
             value.OperacaoParcela.vr_saldo_devedor = value.OperacaoParcela.vr_principal - value.OperacaoParcela.vr_amortizacao;
             if (value.OperacaoParcela.vr_amortizacao > 0 && collection["dt_ocorrencia"] != "")
                 value.OperacaoParcela.dt_ultima_amortizacao = Funcoes.StringToDate(collection["dt_ocorrencia"]);
@@ -832,24 +832,24 @@ namespace DWM.Controllers
             if (collection["fileComprovante"] != null)
                 value.fileComprovante = collection["fileComprovante"];
 
-            if (collection["OperacaoParcela.vr_principal.1"] != null && collection["OperacaoParcela.vr_principal.1"] != "")
-                value.OperacaoParcela.vr_principal = Decimal.Parse(collection["OperacaoParcela.vr_principal.1"]);
+            if (collection["OperacaoParcela_vr_principal"] != null && collection["OperacaoParcela_vr_principal"] != "")
+                value.OperacaoParcela.vr_principal = Decimal.Parse(collection["OperacaoParcela_vr_principal"]);
 
-            if (collection["OperacaoParcela.OperacaoParcelaEvento.valor.1"] != null && collection["OperacaoParcela.OperacaoParcelaEvento.valor.1"] != "")
-                value.OperacaoParcela.OperacaoParcelaEvento.valor = decimal.Parse(collection["OperacaoParcela.OperacaoParcelaEvento.valor.1"]);
-            if (collection["vr_jurosMora.1"] != null && collection["vr_jurosMora.1"] != "")
-                value.vr_jurosMora = decimal.Parse(collection["vr_jurosMora.1"]);
-            if (collection["vr_multa.1"] != null && collection["vr_multa.1"] != "")
-                value.vr_multa = decimal.Parse(collection["vr_multa.1"]);
+            if (collection["OperacaoParcela_OperacaoParcelaEvento_valor"] != null && collection["OperacaoParcela_OperacaoParcelaEvento_valor"] != "")
+                value.OperacaoParcela.OperacaoParcelaEvento.valor = decimal.Parse(collection["OperacaoParcela_OperacaoParcelaEvento_valor"]);
+            if (collection["vr_jurosMora"] != null && collection["vr_jurosMora"] != "")
+                value.vr_jurosMora = decimal.Parse(collection["vr_jurosMora"]);
+            if (collection["vr_multa"] != null && collection["vr_multa"] != "")
+                value.vr_multa = decimal.Parse(collection["vr_multa"]);
 
             value.num_parcelas = int.Parse(collection["num_parcelas"]);
 
-            if (collection["vr_desconto.1"] != null && collection["vr_desconto.1"] != "" && collection["vr_desconto.1"] != "0,00")
-                value.OperacaoParcela.vr_desconto = decimal.Parse(collection["vr_desconto.1"]);
-            if (collection["vr_juros.1"] != null && collection["vr_juros.1"] != "" && collection["vr_juros.1"] != "0,00")
-                value.OperacaoParcela.vr_encargos = decimal.Parse(collection["vr_juros.1"]);
-            if (collection["vr_mora.1"] != null && collection["vr_mora.1"] != "" && collection["vr_mora.1"] != "0,00")
-                value.OperacaoParcela.vr_encargos += decimal.Parse(collection["vr_mora.1"]);
+            if (collection["vr_desconto"] != null && collection["vr_desconto"] != "" && collection["vr_desconto"] != "0,00")
+                value.OperacaoParcela.vr_desconto = decimal.Parse(collection["vr_desconto"]);
+            if (collection["vr_juros"] != null && collection["vr_juros"] != "" && collection["vr_juros"] != "0,00")
+                value.OperacaoParcela.vr_encargos = decimal.Parse(collection["vr_juros"]);
+            if (collection["vr_mora"] != null && collection["vr_mora"] != "" && collection["vr_mora"] != "0,00")
+                value.OperacaoParcela.vr_encargos += decimal.Parse(collection["vr_mora"]);
         }
         #endregion
 

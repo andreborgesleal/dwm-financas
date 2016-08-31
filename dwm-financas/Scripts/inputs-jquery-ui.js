@@ -64,7 +64,7 @@ function FileUpload(_fileUpload, _fileHidden, _progress, _file_name, _myModal, _
 
             if (data.result.mensagem != "Sucesso") {
                 $('#' + _progress + ' #' + _progress + '-bar').css('width', '0%');
-                ShowMessageAlert(data.result.mensagem, "danger");
+                ShowMessageAjaxAlert(data.result.mensagem, "danger");
                 $('#' + _arq).hide();
                 $('#' + _trash).hide();
                 return;
@@ -73,11 +73,11 @@ function FileUpload(_fileUpload, _fileHidden, _progress, _file_name, _myModal, _
             $('#' + _fileUpload).hide(); // esconde o componente para forçar a exclusão do arquivo para poder enviar outro arquivo
 
             if (data.result.type == 'image/jpeg' || data.result.type == 'image/png' || data.result.type == 'image/bmp') {
-                $('#' + _myModal + '-body').html('<img src="../Temp/' + data.result.name + '" class="img-responsive" alt="Responsive image" style="height: 600px">');
+                $('#' + _myModal + '-body').html('<img src="../Temp/' + data.result.name + '" class="img-responsive" alt="Responsive image" style="height: 480px">');
                 $('#' + _file_name).html('<small data-toggle="modal" data-target="#' + _myModal + '" style="cursor: pointer" id="' + _arq + '"><img src="../Temp/' + data.result.name + '" class="img-responsive" alt="Responsive image" style="height: 75px">' + data.result.nome_original + '</small>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-trash" aria-hidden="true" style="cursor: pointer" id="' + _trash + '" onclick="DelFile(\'' + data.result.name + '\', \'' + _fileUpload + '\', \'' + _arq + '\', \'' + _trash + '\')"></span>');
             }
             else if (data.result.type == 'application/pdf') {
-                $('#' + _myModal + '-body').html('<iframe style="height: 600px; width: 100%" src="../Temp/' + data.result.name + '"></iframe>');
+                $('#' + _myModal + '-body').html('<iframe style="height: 480px; width: 100%" src="../Temp/' + data.result.name + '"></iframe>');
                 $('#' + _file_name).html('<small data-toggle="modal" data-target="#' + _myModal + '" style="cursor: pointer" id="' + _arq + '"><img src="http://www.equidadeparaainfancia.org/img/pdf.jpg" class="img-responsive" alt="Responsive image">' + data.result.nome_original + '</small>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-trash" aria-hidden="true" style="cursor: pointer" id="' + _trash + '" onclick="DelFile(\'' + data.result.name + '\', \'' + _fileUpload + '\', \'' + _arq + '\', \'' + _trash + '\')"></span>');
             }
             $('.modal-title').html(data.result.nome_original);

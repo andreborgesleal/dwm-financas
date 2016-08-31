@@ -4,79 +4,84 @@
     Layout = null;
     int contador = 1;
 }
-<table class="table">
-    <thead class="corvo text-white">
-        <tr>
-            <th class="text-center">Item</th>
-            <th class="text-center">Vencimento</th>
-            <th class="text-left">Título</th>
-            <th class="text-center">Banco</th>
-            <th class="text-left">Frm.Pagto</th>
-            <th class="text-center">Banco</th>
-            <th class="text-center">Agência</th>
-            <th class="text-center">Nº Cheque</th>
-            <th class="text-right">Principal</th>
-            <th class="text-right">Amortização</th>
-            <th class="text-right">Saldo Devedor</th>
-        </tr>
-    </thead>
-    @foreach (ContaReceberParcelaViewModel p in Model)
-    {
-        <tr>
-            <td class="col-md-1 col-sm-4 text-center">
-                <small>@(contador++)</small>
-            </td>
-            <td class="col-md-1 col-sm-2">
-                <small class="text-center">@p.dt_vencimento.ToString("dd/MM/yyyy")</small>
-            </td>
-            <td class="col-md-1 col-sm-2">
-                <small>@p.num_titulo</small>
-            </td>
-            <td class="col-md-1 col-sm-2 text-center">
-                <small>@Html.Editor("nome_banco_", "TRUNC", new { text = p.nome_banco ?? "", width = 20 })</small>
-            </td>
-            <td class="col-md-2 col-sm-2">
-                <small>@p.descricao_forma_pagamento</small>
-            </td>
-            <td class="col-md-1 col-sm-3 text-center">
-                <small>@p.cheque_banco</small>
-            </td>
-            <td class="col-md-1 col-sm-3 text-center">
-                <small>@p.cheque_agencia</small>
-            </td>
-            <td class="col-md-1 col-sm-3 text-center">
-                <small>@p.cheque_numero</small>
-            </td>
-            <td class="col-md-1 col-sm-2 text-right">
-                <small>@p.vr_principal.ToString("###,###,###,##0.00")</small>
-            </td>
-            <td class="col-md-1 col-sm-2 text-right">
-                <small>@p.vr_amortizacao.Value.ToString("###,###,###,##0.00")</small>
-            </td>
-            <td class="col-md-1 col-sm-2 text-right">
-                <small>@p.vr_saldo_devedor.Value.ToString("###,###,###,##0.00")</small>
-            </td>
-        </tr>
-    }
-    <tr>
-        <td class="col-md-4" colspan="4">
-            &nbsp;
-        </td>
-        <td class="col-md-2 col-sm-2">
-            <small><strong>Total</strong></small>
-        </td>
-        <td class="col-md-3 col-sm-3" colspan="3">
-            &nbsp;
-        </td>
-        <td class="col-md-1 col-sm-2 text-right">
-            <small><strong>@Model.Sum(info => info.vr_principal).ToString("###,###,###,##0.00")</strong></small>
-        </td>
-        <td class="col-md-1 col-sm-2 text-right">
-            <small><strong>@Model.Sum(info => info.vr_amortizacao.Value).ToString("###,###,###,##0.00")</strong></small>
-        </td>
-        <td class="col-md-1 col-sm-2 text-right">
-            <small><strong>@Model.Sum(info => info.vr_saldo_devedor.Value).ToString("###,###,###,##0.00")</strong></small>
-        </td>
-    </tr>
-</table>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr class="headings">
+                <th class="column-title text-center">Item</th>
+                <th class="column-title text-left">Vencimento</th>
+                <th class="column-title text-left">Título</th>
+                <th class="column-title text-left">Banco</th>
+                <th class="column-title text-left">Frm.Pagto</th>
+                <th class="column-title text-center">Banco</th>
+                <th class="column-title text-center">Agência</th>
+                <th class="column-title text-center">Nº Cheque</th>
+                <th class="column-title text-right">Principal</th>
+                <th class="column-title text-right">Amortização</th>
+                <th class="column-title text-right">Saldo Devedor</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ContaReceberParcelaViewModel p in Model)
+            {
+                <tr class="even pointer">
+                    <td class="text-center">
+                        <span>#@(contador++)</span>
+                    </td>
+                    <td>
+                        <span class="text-left">@p.dt_vencimento.ToString("dd/MM/yyyy")</span>
+                    </td>
+                    <td>
+                        <span>@p.num_titulo</span>
+                    </td>
+                    <td>
+                        <span>@Html.Editor("nome_banco_", "TRUNC", new { text = p.nome_banco ?? "", width = 20 })</span>
+                    </td>
+                    <td>
+                        <span>@p.descricao_forma_pagamento</span>
+                    </td>
+                    <td class="text-center">
+                        <span>@p.cheque_banco</span>
+                    </td>
+                    <td class="text-center">
+                        <span>@p.cheque_agencia</span>
+                    </td>
+                    <td class="text-center">
+                        <span>@p.cheque_numero</span>
+                    </td>
+                    <td class="text-right">
+                        <span>@p.vr_principal.ToString("###,###,###,##0.00")</span>
+                    </td>
+                    <td class="text-right">
+                        <span>@p.vr_amortizacao.Value.ToString("###,###,###,##0.00")</span>
+                    </td>
+                    <td class="text-right">
+                        <span>@p.vr_saldo_devedor.Value.ToString("###,###,###,##0.00")</span>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="4">
+                    &nbsp;
+                </td>
+                <td>
+                    <span><strong>Total</strong></span>
+                </td>
+                <td colspan="3">
+                    &nbsp;
+                </td>
+                <td class="text-right">
+                    <span><strong>@Model.Sum(info => info.vr_principal).ToString("###,###,###,##0.00")</strong></span>
+                </td>
+                <td class="text-right">
+                    <span><strong>@Model.Sum(info => info.vr_amortizacao.Value).ToString("###,###,###,##0.00")</strong></span>
+                </td>
+                <td class="text-right">
+                    <span><strong>@Model.Sum(info => info.vr_saldo_devedor.Value).ToString("###,###,###,##0.00")</strong></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 

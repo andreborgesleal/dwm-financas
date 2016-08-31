@@ -33,7 +33,7 @@
     // Fim-Next Field
 
     var link = encodeURI('../Enquadramentos/getNames?noCahce=' + new Date());
-    var data = { values: [] };
+    var dataEnq = { values: [] };
     var enq = { countries: [] };
     $.ajax({
         type: "POST",
@@ -44,7 +44,7 @@
         dataType: "json",
         success: function (jsonObj) {
             for (i in jsonObj) {
-                data.values.push(jsonObj[i].descricao);
+                dataEnq.values.push(jsonObj[i].descricao);
                 enq.countries.push({ objId: jsonObj[i].enquadramentoId, descricao: jsonObj[i].descricao })
             };
         }
