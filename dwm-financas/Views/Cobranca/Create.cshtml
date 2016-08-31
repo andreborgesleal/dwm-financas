@@ -37,7 +37,7 @@
                     </p>
                     @*@Html.CheckBoxFor(info => info.recorrencia_mensal, new { @onclick = "RecorrenciaMensal()" })<small>&nbsp;Recorrência mensal</small>*@
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     @Html.Editor("nome_cliente1", "ClientesAutoComplete", new
                    {
                        value = Model.clienteId > 0 ? Model.clienteId.ToString() : "",
@@ -57,7 +57,7 @@
                             prevField = "nome_cliente"
                         })
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="form-group">
                         <label class="control-label" for="complementoHist">Histórico complementar</label>
                         @Html.TextAreaFor(m => m.complementoHist, 1, 1, new { @class = "form-control" })
@@ -74,7 +74,7 @@
                             prevField = "complementoHist"
                         })
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     @Html.Editor("descricao_enquadramento1", "EnquadramentoAutoComplete", new
                         {
                             value = Model.enquadramentoId != null ? Model.enquadramentoId.ToString() : "",
@@ -104,7 +104,7 @@
                         @Html.DropDownListFor(m => m.OperacaoParcela.ind_forma_pagamento, new DWM.Models.Enumeracoes.BindDropDownList().FormaPagamento("4"), new { @class = "form-control", @onchange="fnFormaPagto();" })
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     @Html.Editor("nome_banco1", "BancosAutoComplete", new
                                {
                                    value = Model.OperacaoParcela.bancoId != null ? Model.OperacaoParcela.bancoId.ToString() : "",
@@ -175,7 +175,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="form-horizontal">
                         <div class="row">
                             <div class="col-md-12 no-padding altura-35">
