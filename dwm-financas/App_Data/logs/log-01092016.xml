@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="1381835776" Data="01/09/2016 10:12:32">
+    <Sessao>qxhxl5ta3b5poni5hwwdhhbd</Sessao>
+    <IP>::1</IP>
+    <HostName>NONECO-N010\andre.leal</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaController =&gt; cobranca/create</NameSpace>
+    <Context>empresaId="6",dt_emissao="28/07/2016",documento="MS-1849",nome_cliente="Clovis Malcher Filho",clienteId="4",descricao_historico="Títulos a receber",historicoId="12",complementoHist="ref MS-1849",descricao_centroCusto="Apostas",centroCustoId="1",descricao_enquadramento="Emissão de boleto de aposta",enquadramentoId="4",OperacaoParcela.num_titulo="MS18490005",dt_vencimento="05/08/2016",OperacaoParcela.ind_forma_pagamento="4",nome_banco="Banco Itaú",bancoId="1",fileBoleto="",OperacaoParcela.cheque_banco="",OperacaoParcela.cheque_agencia="",OperacaoParcela.cheque_numero="",OperacaoParcela_vr_principal="100,00",OperacaoParcela_OperacaoParcelaEvento_valor="0,00",vr_jurosMora="0,00",vr_multa="0,00",num_parcelas="1",vr_juros="0,00",vr_mora="0,00",vr_desconto="0,00",fileComprovante="",descricao_enquadramento_amortizacao="",enquadramento_amortizacaoId="",dt_ocorrencia="01/09/2016",dt_movto="01/09/2016",btn-salvar="Salvar"</Context>
+    <StackTrace>   em DWM.Controllers.OperacaoController`19.BeforeCreate(ORepo&amp; value, FormCollection collection) na C:\sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 727
+   em App_Dominio.Controllers.DwmRootController`3.SetCreate(R value, FormCollection collection, String breadCrumbText) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Controllers\DwmRootController.cs:linha 89</StackTrace>
+  </LOG>
+  <LOG ID="1446033093" Data="01/09/2016 10:39:47">
+    <Sessao>zh5vrvzmnw0axhtxgcujjwtj</Sessao>
+    <IP>::1</IP>
+    <HostName>NONECO-N010\andre.leal</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaController =&gt; cobranca/create</NameSpace>
+    <Context>empresaId="6",dt_emissao="28/07/2016",documento="MS18149",nome_cliente="Clovis Malcher Filho",clienteId="4",descricao_historico="Títulos a receber",historicoId="12",complementoHist="ref MS1849",descricao_centroCusto="Apostas",centroCustoId="1",descricao_enquadramento="Emissão de boleto de aposta",enquadramentoId="4",OperacaoParcela.num_titulo="MS18490005",dt_vencimento="01/09/2016",OperacaoParcela.ind_forma_pagamento="4",nome_banco="Banco Itaú",bancoId="1",fileBoleto="",OperacaoParcela.cheque_banco="",OperacaoParcela.cheque_agencia="",OperacaoParcela.cheque_numero="",OperacaoParcela_vr_principal="100,00",OperacaoParcela_OperacaoParcelaEvento_valor="0,00",vr_jurosMora="",vr_multa="",num_parcelas="1",vr_juros="0,00",vr_mora="0,00",vr_desconto="0,00",fileComprovante="",descricao_enquadramento_amortizacao="",enquadramento_amortizacaoId="",dt_ocorrencia="01/09/2016",dt_movto="01/09/2016",btn-salvar="Salvar"</Context>
+    <StackTrace>   em DWM.Controllers.OperacaoController`19.BeforeCreate(ORepo&amp; value, FormCollection collection) na C:\sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 727
+   em App_Dominio.Controllers.DwmRootController`3.SetCreate(R value, FormCollection collection, String breadCrumbText) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Controllers\DwmRootController.cs:linha 89</StackTrace>
+  </LOG>
+  <LOG ID="344405984" Data="01/09/2016 10:41:46">
+    <Sessao>zh5vrvzmnw0axhtxgcujjwtj</Sessao>
+    <IP>::1</IP>
+    <HostName>NONECO-N010\andre.leal</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaController =&gt; cobranca/create</NameSpace>
+    <Context>empresaId="6",dt_emissao="28/07/2016",documento="MS1849",nome_cliente="Clovis Malcher Filho",clienteId="4",descricao_historico="Títulos a receber",historicoId="12",complementoHist="ref. aposta loteria ms1849",descricao_centroCusto="Apostas",centroCustoId="1",descricao_enquadramento="Emissão de boleto de aposta",enquadramentoId="4",OperacaoParcela.num_titulo="MS18490005",dt_vencimento="01/09/2016",OperacaoParcela.ind_forma_pagamento="4",nome_banco="Banco Itaú",bancoId="1",fileBoleto="",OperacaoParcela.cheque_banco="",OperacaoParcela.cheque_agencia="",OperacaoParcela.cheque_numero="",OperacaoParcela_vr_principal="100,00",OperacaoParcela_OperacaoParcelaEvento_valor="0,00",vr_jurosMora="0,00",vr_multa="",num_parcelas="1",vr_juros="0,00",vr_mora="0,00",vr_desconto="0,00",fileComprovante="",descricao_enquadramento_amortizacao="",enquadramento_amortizacaoId="",OperacaoParcela_OperacaoParcelaEvento_dt_ocorrencia="01/09/2016",OperacaoParcela_OperacaoParcelaEvento_dt_movto="01/09/2016",btn-salvar="Salvar"</Context>
+    <StackTrace>   em DWM.Controllers.OperacaoController`19.BeforeCreate(ORepo&amp; value, FormCollection collection) na C:\sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 727
+   em App_Dominio.Controllers.DwmRootController`3.SetCreate(R value, FormCollection collection, String breadCrumbText) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Controllers\DwmRootController.cs:linha 89</StackTrace>
+  </LOG>
+  <LOG ID="1465641187" Data="01/09/2016 11:33:38">
+    <Sessao>zh5vrvzmnw0axhtxgcujjwtj</Sessao>
+    <IP>::1</IP>
+    <HostName>NONECO-N010\andre.leal</HostName>
+    <Mensagem>Parte do caminho não foi encontrado.</Mensagem>
+    <NameSpace>DWM.Models.Persistence.ContaReceberParcelaEventoModel =&gt; cobranca/create</NameSpace>
+    <Context>empresaId="6",OperacaoParcela.OperacaoParcelaEvento.dt_movto="01/09/2016 00:00:00",OperacaoParcela.OperacaoParcelaEvento.dt_ocorrencia="01/09/2016 00:00:00",dt_emissao="05/08/2016",documento="MS1849",nome_cliente="Aluízio da Fonseca",clienteId="7",descricao_historico="Títulos a receber",historicoId="12",complementoHist="ref aposta concurso mega sena 1849",descricao_centroCusto="Apostas",centroCustoId="1",descricao_enquadramento="Emissão de boleto de aposta",enquadramentoId="4",OperacaoParcela.num_titulo="MS18490009",dt_vencimento="05/08/2016",OperacaoParcela.ind_forma_pagamento="4",nome_banco="Banco Itaú",bancoId="1",fileBoleto="9a77d5a8-6a78-4486-999a-d14c13d88e06.pdf",OperacaoParcela.cheque_banco="",OperacaoParcela.cheque_agencia="",OperacaoParcela.cheque_numero="",OperacaoParcela_vr_principal="150,00",OperacaoParcela_OperacaoParcelaEvento_valor="0,00",vr_jurosMora="",vr_multa="",num_parcelas="1",vr_juros="0,00",vr_mora="0,00",vr_desconto="0,00",fileComprovante="",descricao_enquadramento_amortizacao="",enquadramento_amortizacaoId="",dt_ocorrencia="01/09/2016",dt_movto="01/09/2016",btn-salvar="Salvar"</Context>
+    <StackTrace />
+  </LOG>
+  <LOG ID="771559519" Data="01/09/2016 11:35:44">
+    <Sessao>zh5vrvzmnw0axhtxgcujjwtj</Sessao>
+    <IP>::1</IP>
+    <HostName>NONECO-N010\andre.leal</HostName>
+    <Mensagem>Parte do caminho não foi encontrado.</Mensagem>
+    <NameSpace>DWM.Models.Persistence.ContaReceberParcelaEventoModel =&gt; cobranca/create</NameSpace>
+    <Context>empresaId="6",OperacaoParcela.OperacaoParcelaEvento.dt_movto="01/09/2016 00:00:00",OperacaoParcela.OperacaoParcelaEvento.dt_ocorrencia="01/09/2016 00:00:00",dt_emissao="05/08/2016",documento="MS1849",nome_cliente="Aluízio da Fonseca",clienteId="7",descricao_historico="Títulos a receber",historicoId="12",complementoHist="ref aposta concurso mega sena 1849",descricao_centroCusto="Apostas",centroCustoId="1",descricao_enquadramento="Emissão de boleto de aposta",enquadramentoId="4",OperacaoParcela.num_titulo="MS18490009",dt_vencimento="05/08/2016",OperacaoParcela.ind_forma_pagamento="4",nome_banco="Banco Itaú",bancoId="1",fileBoleto="961ae9e7-104e-4c26-88a3-899fdbab6a4c.pdf",OperacaoParcela.cheque_banco="",OperacaoParcela.cheque_agencia="",OperacaoParcela.cheque_numero="",OperacaoParcela_vr_principal="150,00",OperacaoParcela_OperacaoParcelaEvento_valor="0,00",vr_jurosMora="0",vr_multa="0",num_parcelas="1",vr_juros="",vr_mora="",vr_desconto="",fileComprovante="",descricao_enquadramento_amortizacao="",enquadramento_amortizacaoId="",dt_ocorrencia="01/09/2016",dt_movto="01/09/2016",btn-salvar="Salvar"</Context>
+    <StackTrace />
+  </LOG>
+</LOG>

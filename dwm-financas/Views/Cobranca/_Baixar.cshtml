@@ -14,8 +14,8 @@
         <div class="panel-heading">
             <h3 class="panel-title">Baixa por motivo de liquidação ou Amortização da parcela</h3>
         </div>
-        @Html.Partial("_AjaxAlert")
-        <div class="panel-body">
+        @Html.Partial("_AjaxAlert", "panel-top")
+        <div class="panel-body" id="panel-top">
             <div class="row clearfix">
                 <div class="col-md-6">
                     @Html.Editor("nome_banco1", "BancosAutoComplete", new

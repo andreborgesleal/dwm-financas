@@ -18,6 +18,8 @@
             @Html.Partial("_AjaxAlert", "panel-top")
             @Html.ValidationSummary("", new { @class = "text-danger" })
             @Html.HiddenFor(info => info.empresaId)
+            @Html.HiddenFor(info => info.OperacaoParcela.OperacaoParcelaEvento.dt_movto)
+            @Html.HiddenFor(info => info.OperacaoParcela.OperacaoParcelaEvento.dt_ocorrencia)
             <div class="row clearfix">
                 <div class="col-md-2">
                     <div class="form-group">
@@ -266,7 +268,7 @@
                         </div>
                         <div class="row" >
                             <div class="col-md-12 margem-interna-10">
-                                <span>Clique na aba <code>amortização</code> para baixar/amortizar o título ou na aba <code>Parcelamento</code> para parcelar o saldo devedor. </span>
+                                <span>Clique na aba <code>amortização</code> para baixar/amortizar o título, ou na aba <code>Parcelamento</code> para parcelar o saldo devedor ou </span><a href="#" onclick="$('#btn-salvar').click()"><code>clique aqui para incluir o título</code></a>
                             </div>
                         </div>
                     </div>

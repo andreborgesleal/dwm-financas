@@ -22,6 +22,7 @@ namespace DWM.Models.Repositories
         public System.Nullable<int> bancoId { get; set; }
 
         public string nome_banco { get; set; }
+        public string classificacao { get; set; }
 
         [DisplayName("Nº Titulo")]
         [StringLength(20, ErrorMessage = "Número do título deve possuir no máximo 20 caracteres")]

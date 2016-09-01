@@ -71,6 +71,7 @@ namespace DWM.Models.BI
                          },
                          bancoId = par.bancoId,
                          nome_banco = ban.nome,
+                         classificacao = ban.classificacao,
                          num_titulo = par.num_titulo,
                          dt_vencimento = par.dt_vencimento,
                          vr_principal = par.vr_principal,
