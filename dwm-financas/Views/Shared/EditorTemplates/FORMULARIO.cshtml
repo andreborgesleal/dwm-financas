@@ -9,7 +9,7 @@
             @ViewData["Brand"]
             @foreach (TransacaoRepository trans in t.Where(info => info.exibir == "S"))
             {
-                <a href="#@trans.url" onclick="@trans.referencia"><small>@trans.nomeCurto</small></a>
+                <a href="#@trans.url" onclick="@trans.referencia"><small><i class="@trans.glyph"></i> @trans.nomeCurto</small></a>
             }
         </h2>
     }

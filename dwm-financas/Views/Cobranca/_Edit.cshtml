@@ -15,9 +15,9 @@
 <div id="div-lov"></div>
 @Html.Partial("_alerts")
 <!-- Contas a receber -->
-<div class="row">
+<div class="row"  id="panel-top">
     <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-        <div class="x_panel" id="panel-top">
+        <div class="x_panel">
             @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Editar título", Descricao = "", Transacao = t })
             <div class="x_content">
                 <ul class="list-group">
@@ -58,20 +58,23 @@
         <div class="x_panel">
             @{ 
                 TransacaoRepository[] tTitulo = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
-                tTitulo[0].url = "baixar";
+                tTitulo[0].url = "myTab";
                 tTitulo[0].nomeCurto = "Baixar";
-                tTitulo[0].referencia = "$('#baixar').click();";
+                tTitulo[0].referencia = "$(\"#home-tab\").click();";
                 tTitulo[0].exibir = "S";
+                tTitulo[0].glyph = "fa fa-check-square";
 
-                tTitulo[1].url = "evento";
+                tTitulo[1].url = "myTab";
                 tTitulo[1].nomeCurto = "Evento";
-                tTitulo[1].referencia = "$('#editar').click();";
+                tTitulo[1].referencia = "$(\"#profile-evento\").click();";
                 tTitulo[1].exibir = "S";
+                tTitulo[1].glyph = "fa fa-plus-square";
 
-                tTitulo[2].url = "alterar";
+                tTitulo[2].url = "myTab";
                 tTitulo[2].nomeCurto = "Alterar";
-                tTitulo[2].referencia = "$('#alterar').click();";
+                tTitulo[2].referencia = "$(\"#profile-alterar\").click();";
                 tTitulo[2].exibir = "S";
+                tTitulo[2].glyph = "fa fa-edit";
 
                 tTitulo[3].url = "../Home/Default";
             }
@@ -325,7 +328,7 @@
         <div class="" role="tabpanel" data-example-id="togglable-tabs">
             <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                 <li role="presentation" class="active">
-                    <a href="#baixar" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Baixar</a>
+                    <a href="#baixar" role="tab" id="home-tab" data-toggle="tab" aria-expanded="true">Baixar</a>
                 </li>
                 <li role="presentation" class="">
                     <a href="#evento" role="tab" id="profile-evento" data-toggle="tab" aria-expanded="false">Novo evento</a>
