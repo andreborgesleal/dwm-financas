@@ -6,31 +6,33 @@
 
 @if (Model != null)
 {
-    <div class="row Scroll margem-negativa">
-        <div class="col-md-12">
-            <table class="table table-hover table-bordered table-condensed dedo-indicador">
+    <div class="row Scroll" style="margin-top: -15px">
+        <div class="col-md-12" style="padding-right: 0px;">
+            <table class="table table-striped jambo_table bulk_action" style="cursor: pointer">
                 <caption></caption>
-                <thead class="corvo text-white">
-                    <tr>
-                        <th>Descrição</th>
-                        <th>Tipo</th>
-                        <th>Operação</th>
+                <thead>
+                    <tr class="headings">
+                        <th class="column-title">Descrição</th>
+                        <th class="column-title">Tipo</th>
+                        <th class="column-title">Operação</th>
                     </tr>
                 </thead>
-                @foreach (EventoViewModel evt in Model)
-                {
-                    <tr onclick="Move('@evt.eventoId', '@evt.descricao')">
-                        <td class="col-md-8 col-sm-2">
-                            <small>@evt.descricao</small>
-                        </td>
-                        <td class="col-md-10 col-sm-10">
-                            <small>@evt.ind_eventoFixoExtenso</small>
-                        </td>
-                        <td class="col-md-2 col-sm-2 text-center">
-                            <small>@(evt.ind_operacao == "C" ? "Crédito" : "Débito")</small>
-                        </td>
-                    </tr>
-                }
+                <tbody>
+                    @foreach (EventoViewModel evt in Model)
+                    {
+                        <tr class="even pointer" onclick="Move('@evt.eventoId', '@evt.descricao')">
+                            <td>
+                                <small>@evt.descricao</small>
+                            </td>
+                            <td>
+                                <small>@evt.ind_eventoFixoExtenso</small>
+                            </td>
+                            <td>
+                                <small>@(evt.ind_operacao == "C" ? "Crédito" : "Débito")</small>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
             </table>
         </div>
     </div>
@@ -40,8 +42,6 @@ else
 {
     @Html.Partial("_AcessoNegadoModal")
 }
-
-
 
 
 

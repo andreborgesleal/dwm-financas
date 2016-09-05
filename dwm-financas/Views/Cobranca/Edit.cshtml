@@ -3,7 +3,9 @@
 @model DWM.Models.Repositories.EditarContaReceberViewModel
 @{
     ViewBag.Title = "DWM Finanças";
-    var path = System.Configuration.ConfigurationManager.AppSettings["Users_Data"];
+    // var path = System.Configuration.ConfigurationManager.AppSettings["Users_Data"];
+    // var path = Model.PathArquivos;
+    var path = "";
 }
 <div id="EditarContaReceber">
     @Html.Partial("_Edit", Model)
@@ -85,6 +87,11 @@
 <script src="~/Scripts/fileUpload/jquery.fileupload.js"></script>
 
 <script>
+    $(document).ready(function () {
+        FileUpload('fileupload', 'arquivo', 'progress1', 'file_name1', 'myModal1', 'arq1', 'trash1');
+    });
+
+
     //$(document).ready(function () {
     //    FileUpload('fileupload', 'fileBoleto', 'progress1', 'file_name1', 'myModal1', 'arq1', 'trash1');
     //    FileUpload('fileUploadComprovante', 'fileComprovante', 'progress2', 'file_name2', 'myModal2', 'arq2', 'trash2');

@@ -164,7 +164,7 @@ namespace DWM.Controllers
         [AuthorizeFilter(Order = 1020)]
         public ActionResult _Baixar(int operacaoId, int parcelaId, int bancoId, string dt_pagamento, string dt_movto,
                                         string ind_forma_pagamento, string vr_juros_mora, string vr_multa_atraso,
-                                        string vr_desconto, string vr_saldo_devedor, string vr_liquidacao, string vr_baixa, string fileupload,
+                                        string vr_desconto, string vr_saldo_devedor, string vr_liquidacao, string vr_baixa, string arquivo,
                                         string cheque_banco, string cheque_agencia, string cheque_numero, int historicoId,
                                         string complementoHist, int? enquadramentoId, string vr_juros_mora_baixa1, string vr_multa_atraso_baixa1)
         {
@@ -210,7 +210,7 @@ namespace DWM.Controllers
 
                     value.OperacaoParcelaEvento.dt_ocorrencia = Funcoes.StringToDate(dt_pagamento).Value;
                     value.OperacaoParcelaEvento.dt_movto = Funcoes.StringToDate(dt_movto).Value;
-                    value.OperacaoParcelaEvento.arquivo = fileupload;
+                    value.OperacaoParcelaEvento.arquivo = arquivo;
                     value.OperacaoParcelaEvento.ind_operacao = "D";
                     value.OperacaoParcelaEvento.ind_estorno = "N";
 
@@ -228,7 +228,7 @@ namespace DWM.Controllers
                     ModelState.AddModelError(ex.Result.Field, ex.Result.Message); // mensagem amigável ao usuário
                     Error(ex.Result.MessageBase); // Mensagem em inglês com a descrição detalhada do erro e fica no topo da tela
                     OnBaixaError(ref value, bancoId, dt_pagamento, dt_movto, ind_forma_pagamento, vr_juros_mora, vr_multa_atraso,
-                                 vr_desconto, vr_liquidacao, vr_baixa, fileupload, cheque_banco, cheque_agencia, cheque_numero, historicoId,
+                                 vr_desconto, vr_liquidacao, vr_baixa, arquivo, cheque_banco, cheque_agencia, cheque_numero, historicoId,
                                  complementoHist, enquadramentoId);
                 }
                 catch (Exception ex)
@@ -237,7 +237,7 @@ namespace DWM.Controllers
                     ModelState.AddModelError("", MensagemPadrao.Message(17).ToString()); // mensagem amigável ao usuário
                     Error(ex.Message); // Mensagem em inglês com a descrição detalhada do erro e fica no topo da tela
                     OnBaixaError(ref value, bancoId, dt_pagamento, dt_movto, ind_forma_pagamento, vr_juros_mora, vr_multa_atraso,
-                                 vr_desconto, vr_liquidacao, vr_baixa, fileupload, cheque_banco, cheque_agencia, cheque_numero, historicoId,
+                                 vr_desconto, vr_liquidacao, vr_baixa, arquivo, cheque_banco, cheque_agencia, cheque_numero, historicoId,
                                  complementoHist, enquadramentoId);
                 }
                 return View("_Edit", value);

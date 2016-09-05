@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="1660031526" Data="05/09/2016 16:43:22">
+    <Sessao>hfnmdo5srn3vyln51c0hp3py</Sessao>
+    <IP>::1</IP>
+    <HostName>NONECO-N010\andre.leal</HostName>
+    <Mensagem>O thread estava sendo anulado.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.SecurityContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; cobranca/edit</NameSpace>
+    <Context />
+    <StackTrace>   em System.Buffer.BlockCopy(Array src, Int32 srcOffset, Array dst, Int32 dstOffset, Int32 count)
+   em System.Data.SqlClient.TdsParserStateObject.TryReadByteArray(Byte[] buff, Int32 offset, Int32 len, Int32&amp; totalRead)
+   em System.Data.SqlClient.TdsParserStateObject.NullBitmap.TryInitialize(TdsParserStateObject stateObj, Int32 columnsCount)
+   em System.Data.SqlClient.TdsParserStateObject.TryStartNewRow(Boolean isNullCompressed, Int32 nullBitmapColumnsCount)
+   em System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean&amp; dataReady)
+   em System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean&amp; more)
+   em System.Data.SqlClient.SqlDataReader.Read()
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.StoreRead()
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 202</StackTrace>
+  </LOG>
+  <LOG ID="582744236" Data="05/09/2016 16:43:22">
+    <Sessao>hfnmdo5srn3vyln51c0hp3py</Sessao>
+    <IP>::1</IP>
+    <HostName>NONECO-N010\andre.leal</HostName>
+    <Mensagem>O thread estava sendo anulado.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.SecurityContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; cobranca/edit</NameSpace>
+    <Context />
+    <StackTrace>   em System.Buffer.BlockCopy(Array src, Int32 srcOffset, Array dst, Int32 dstOffset, Int32 count)
+   em System.Data.SqlClient.TdsParserStateObject.TryReadByteArray(Byte[] buff, Int32 offset, Int32 len, Int32&amp; totalRead)
+   em System.Data.SqlClient.TdsParserStateObject.NullBitmap.TryInitialize(TdsParserStateObject stateObj, Int32 columnsCount)
+   em System.Data.SqlClient.TdsParserStateObject.TryStartNewRow(Boolean isNullCompressed, Int32 nullBitmapColumnsCount)
+   em System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean&amp; dataReady)
+   em System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean&amp; more)
+   em System.Data.SqlClient.SqlDataReader.Read()
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.StoreRead()
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 202</StackTrace>
+  </LOG>
+</LOG>

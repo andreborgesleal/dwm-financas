@@ -13,387 +13,387 @@
     t[1].url = "../Home/Default";
 }
 <div id="div-lov"></div>
-@Html.Partial("_alerts")
-<!-- Contas a receber -->
-<div class="row"  id="panel-top">
-    <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Editar título", Descricao = "", Transacao = t })
-            <div class="x_content">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <h4><strong>Operação</strong></h4>
-                        @(Model.operacaoId + "-" + Model.parcelaId.ToString())
-                    </li>
-                    <li class="list-group-item">
-                        <h4><strong>Emissão</strong></h4>
-                        @Model.dt_emissao.ToString("dd/MM/yyyy")
-                    </li>
-                    <li class="list-group-item">
-                        <h4><strong>Cliente</strong></h4>
-                        @Model.nome_cliente <br />
-                        <small>@Model.descricao_grupoCliente</small>
-                    </li>
-                    <li class="list-group-item">
-                        <h4><strong>Histórico</strong></h4>
-                        @(Model.descricao_historico + " " + Model.complementoHist)
-                    </li>
-                    @if (Model.centroCustoId.HasValue)
-                    {
+<div class="container-cadastro">
+    @Html.Partial("_alerts")
+    <!-- Contas a receber -->
+    <div class="row" id="panel-top">
+        <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Editar título", Descricao = "", Transacao = t })
+                <div class="x_content">
+                    <ul class="list-group">
                         <li class="list-group-item">
-                            <h4><strong>Centro de Custo</strong></h4>
-                            @Model.descricao_centroCusto
+                            <h4><strong>Operação</strong></h4>
+                            @(Model.operacaoId + "-" + Model.parcelaId.ToString())
                         </li>
-                    }
-                    <li class="list-group-item">
-                        <h4><strong>Total</strong></h4>
-                        @Model.vr_total.ToString("R$ ###,###,##0.00") -
-                        <span class="text-prateado"> @Model.qte_parcelas parcela(s)</span>
-                    </li>
-                </ul>
+                        <li class="list-group-item">
+                            <h4><strong>Emissão</strong></h4>
+                            @Model.dt_emissao.ToString("dd/MM/yyyy")
+                        </li>
+                        <li class="list-group-item">
+                            <h4><strong>Cliente</strong></h4>
+                            @Model.nome_cliente <br />
+                            <small>@Model.descricao_grupoCliente</small>
+                        </li>
+                        <li class="list-group-item">
+                            <h4><strong>Histórico</strong></h4>
+                            @(Model.descricao_historico + " " + Model.complementoHist)
+                        </li>
+                        @if (Model.centroCustoId.HasValue)
+                        {
+                            <li class="list-group-item">
+                                <h4><strong>Centro de Custo</strong></h4>
+                                @Model.descricao_centroCusto
+                            </li>
+                        }
+                        <li class="list-group-item">
+                            <h4><strong>Total</strong></h4>
+                            @Model.vr_total.ToString("R$ ###,###,##0.00") -
+                            <span class="text-prateado"> @Model.qte_parcelas parcela(s)</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            @{ 
-                TransacaoRepository[] tTitulo = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
-                tTitulo[0].url = "myTab";
-                tTitulo[0].nomeCurto = "Baixar";
-                tTitulo[0].referencia = "$(\"#home-tab\").click();";
-                tTitulo[0].exibir = "S";
-                tTitulo[0].glyph = "fa fa-check-square";
+        <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                @{
+                    TransacaoRepository[] tTitulo = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
+                    tTitulo[0].url = "myTab";
+                    tTitulo[0].nomeCurto = "Baixar";
+                    tTitulo[0].referencia = "$(\"#home-tab\").click();";
+                    tTitulo[0].exibir = "S";
+                    tTitulo[0].glyph = "fa fa-check-square";
 
-                tTitulo[1].url = "myTab";
-                tTitulo[1].nomeCurto = "Evento";
-                tTitulo[1].referencia = "$(\"#profile-evento\").click();";
-                tTitulo[1].exibir = "S";
-                tTitulo[1].glyph = "fa fa-plus-square";
+                    tTitulo[1].url = "myTab";
+                    tTitulo[1].nomeCurto = "Evento";
+                    tTitulo[1].referencia = "$(\"#profile-evento\").click();";
+                    tTitulo[1].exibir = "S";
+                    tTitulo[1].glyph = "fa fa-plus-square";
 
-                tTitulo[2].url = "myTab";
-                tTitulo[2].nomeCurto = "Alterar";
-                tTitulo[2].referencia = "$(\"#profile-alterar\").click();";
-                tTitulo[2].exibir = "S";
-                tTitulo[2].glyph = "fa fa-edit";
+                    tTitulo[2].url = "myTab";
+                    tTitulo[2].nomeCurto = "Alterar";
+                    tTitulo[2].referencia = "$(\"#profile-alterar\").click();";
+                    tTitulo[2].exibir = "S";
+                    tTitulo[2].glyph = "fa fa-edit";
 
-                tTitulo[3].url = "../Home/Default";
-            }
-            @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Dados do título", Descricao = "", Transacao = tTitulo })
-            <div class="x_content">
-                <!-- top tiles -->
-                <div class="row tile_count">
-                    <div class="col-md-3 col-sm-12 col-xs-12 col-lg-3 tile_stats_count">
-                        <span class="count_top"><i class="fa fa-calendar"></i> Vencimento</span>
-                        <div class="count red"><h3>@Model.dt_vencimento.ToString("dd/MM/yyyy")</h3></div>
-                        @if (@Model.atraso > 0)
-                        {
-                            <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>@Model.atraso dias</i> atasado</span>
-                        }
-                        else if (Model.dt_vencimento > App_Dominio.Models.Funcoes.Brasilia().Date)
-                        {
-                            <span class="count_bottom"><i class="red"><i class="fa fa-sort-asc"></i>@Model.dt_vencimento.Subtract(App_Dominio.Models.Funcoes.Brasilia().Date).TotalDays dias</i> para vencer</span>
-                        }
-                        
-                    </div>
-                    <div class="col-md-5 col-sm-12 col-xs-12 col-lg-5 tile_stats_count">
-                        <span class="count_top"><i class="fa fa-bank"></i> Banco</span>
-                        <div class="count"><h3>@Model.nome_banco</h3></div>
-                        <span class="count_bottom"><i class="primary"><i class="fa fa-sort-asc"></i></i> @Model.classificacao</span>
-                    </div>
-                    <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4 tile_stats_count">
-                        <span class="count_top"><i class="fa fa-dollar"></i> Saldo devedor</span>
-                        <div class="count green"><h3>@(Model.vr_saldo_devedor.HasValue ? Model.vr_saldo_devedor.Value.ToString("R$ ###,###,###,##0.00") : "0,00")</h3></div>
-                        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>@(Model.vr_encargos.HasValue ? Model.vr_encargos.Value.ToString("R$ ###,###,##0.00") : "R$ 0,00") </i> encargos</span>
-                    </div>
-                </div>
-                <div class="row tile_count">
-                    <div class="col-md-3 col-sm-12 col-xs-12 col-lg-3 tile_stats_count">
-                        <span class="count_top"><i class="fa fa-check-square"></i> Baixa</span>
-                        @if (Model.dt_baixa.HasValue)
-                        {
-                            <div class="count"><h3>@Model.dt_baixa.Value.ToString("dd/MM/yyyy")</h3></div>
-                            if (Model.dt_baixa > Model.dt_vencimento)
+                    tTitulo[3].url = "../Home/Default";
+                }
+                @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Dados do título", Descricao = "", Transacao = tTitulo })
+                <div class="x_content">
+                    <!-- top tiles -->
+                    <div class="row tile_count">
+                        <div class="col-md-3 col-sm-12 col-xs-12 col-lg-3 tile_stats_count">
+                            <span class="count_top"><i class="fa fa-calendar"></i> Vencimento</span>
+                            <div class="count red"><h3>@Model.dt_vencimento.ToString("dd/MM/yyyy")</h3></div>
+                            @if (@Model.atraso > 0)
                             {
-                                <span class="count_bottom"><i class="primary"><i class="fa fa-sort-asc"></i>@(Math.Abs(Model.dt_baixa.Value.Subtract(Model.dt_vencimento).TotalDays)) dias </i> de atraso</span>
+                                <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>@Model.atraso dias</i> atasado</span>
                             }
-                            else if (Model.dt_baixa < Model.dt_vencimento)
+                            else if (Model.dt_vencimento > App_Dominio.Models.Funcoes.Brasilia().Date)
                             {
-                                <span class="count_bottom"><i class="primary"><i class="fa fa-sort-asc"></i>@(Math.Abs(Model.dt_baixa.Value.Subtract(Model.dt_vencimento).TotalDays)) dias </i> antecipado</span>
+                                <span class="count_bottom"><i class="red"><i class="fa fa-sort-asc"></i>@Model.dt_vencimento.Subtract(App_Dominio.Models.Funcoes.Brasilia().Date).TotalDays dias</i> para vencer</span>
+                            }
+
+                        </div>
+                        <div class="col-md-5 col-sm-12 col-xs-12 col-lg-5 tile_stats_count">
+                            <span class="count_top"><i class="fa fa-bank"></i> Banco</span>
+                            <div class="count"><h3>@Model.nome_banco</h3></div>
+                            <span class="count_bottom"><i class="primary"><i class="fa fa-sort-asc"></i></i> @Model.classificacao</span>
+                        </div>
+                        <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4 tile_stats_count">
+                            <span class="count_top"><i class="fa fa-dollar"></i> Saldo devedor</span>
+                            <div class="count green"><h3>@(Model.vr_saldo_devedor.HasValue ? Model.vr_saldo_devedor.Value.ToString("R$ ###,###,###,##0.00") : "0,00")</h3></div>
+                            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>@(Model.vr_encargos.HasValue ? Model.vr_encargos.Value.ToString("R$ ###,###,##0.00") : "R$ 0,00") </i> encargos</span>
+                        </div>
+                    </div>
+                    <div class="row tile_count">
+                        <div class="col-md-3 col-sm-12 col-xs-12 col-lg-3 tile_stats_count">
+                            <span class="count_top"><i class="fa fa-check-square"></i> Baixa</span>
+                            @if (Model.dt_baixa.HasValue)
+                            {
+                                <div class="count"><h3>@Model.dt_baixa.Value.ToString("dd/MM/yyyy")</h3></div>
+                                if (Model.dt_baixa > Model.dt_vencimento)
+                                {
+                                    <span class="count_bottom"><i class="primary"><i class="fa fa-sort-asc"></i>@(Math.Abs(Model.dt_baixa.Value.Subtract(Model.dt_vencimento).TotalDays)) dias </i> de atraso</span>
+                                }
+                                else if (Model.dt_baixa < Model.dt_vencimento)
+                                {
+                                    <span class="count_bottom"><i class="primary"><i class="fa fa-sort-asc"></i>@(Math.Abs(Model.dt_baixa.Value.Subtract(Model.dt_vencimento).TotalDays)) dias </i> antecipado</span>
+                                }
+                                else
+                                {
+                                    <span class="count_bottom"><i class="primary"><i class="fa fa-sort-asc"></i>pago no vencimento </i></span>
+                                }
                             }
                             else
                             {
-                                <span class="count_bottom"><i class="primary"><i class="fa fa-sort-asc"></i>pago no vencimento </i></span>
+                                <div class="count"><h3>Pendente</h3></div>
                             }
-                        }
-                        else
-                        {
-                            <div class="count"><h3>Pendente</h3></div>
-                        }
-                        
+
+                        </div>
+                        <div class="col-md-5 col-sm-12 col-xs-12 col-lg-5 tile_stats_count">
+                            <span class="count_top"><i class="fa fa-spinner"></i> Forma Pagamento</span>
+                            <div class="count"><h3>@Model.descricao_forma_pagamento</h3></div>
+                            <span class="count_bottom"><i class="green">@(Model.num_titulo != null && Model.num_titulo.Trim() != "" ? Model.num_titulo : "-") </i> Nº Título</span>
+                        </div>
+                        <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4 tile_stats_count">
+                            <span class="count_top"><i class="fa fa-square"></i> Situação</span>
+                            <div class="count"><h3>@Model.situacao</h3></div>
+                            <span class="count_bottom"><i class="primary"><i class="fa fa-sort-asc"></i>@(Model.vr_total_pago.HasValue ? Model.vr_total_pago.Value.ToString("R$ ###,###,##0.00") : "R$ 0,00") </i> pago</span>
+                        </div>
                     </div>
-                    <div class="col-md-5 col-sm-12 col-xs-12 col-lg-5 tile_stats_count">
-                        <span class="count_top"><i class="fa fa-spinner"></i> Forma Pagamento</span>
-                        <div class="count"><h3>@Model.descricao_forma_pagamento</h3></div>
-                        <span class="count_bottom"><i class="green">@(Model.num_titulo != null && Model.num_titulo.Trim() != "" ? Model.num_titulo : "-") </i> Nº Título</span>
-                    </div>
-                    <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4 tile_stats_count">
-                        <span class="count_top"><i class="fa fa-square"></i> Situação</span>
-                        <div class="count"><h3>@Model.situacao</h3></div>
-                        <span class="count_bottom"><i class="primary"><i class="fa fa-sort-asc"></i>@(Model.vr_total_pago.HasValue ? Model.vr_total_pago.Value.ToString("R$ ###,###,##0.00") : "R$ 0,00") </i> pago</span>
-                    </div>
+                    <!-- /top tiles -->
                 </div>
-                <!-- /top tiles -->
             </div>
-        </div>
-        @if (Model.Contabilidades != null && Model.Contabilidades.Count() > 0)
-        {
-            TransacaoRepository[] tContabilidade = { new TransacaoRepository(), new TransacaoRepository() };
-            tContabilidade[0].url = "../Contabilidade/Edit?contabilidadeId=" + Model.Contabilidades.FirstOrDefault().contabilidadeId ;
-            tContabilidade[0].nomeCurto = "Editar lançamento contábil";
-            tContabilidade[0].referencia = "";
+            @if (Model.Contabilidades != null && Model.Contabilidades.Count() > 0)
+            {
+                TransacaoRepository[] tContabilidade = { new TransacaoRepository(), new TransacaoRepository() };
+                tContabilidade[0].url = "../Contabilidade/Edit?contabilidadeId=" + Model.Contabilidades.FirstOrDefault().contabilidadeId;
+                tContabilidade[0].nomeCurto = "Editar lançamento contábil";
+                tContabilidade[0].referencia = "";
 
-            tContabilidade[1].url = "../Home/Default";
+                tContabilidade[1].url = "../Home/Default";
 
-            <div class="x_panel">
-                @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Contabilidade", Descricao = "", Transacao = tContabilidade })
-                <div class="x_content">
-                    @if (Model.Contabilidades.Count() > 0)
-                    {
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr class="headings">
-                                        <th class="column-title"><strong>Conta</strong></th>
-                                        <th class="column-title"><strong>Descrição</strong></th>
-                                        <th class="column-title text-right"><strong>Débito</strong></th>
-                                        <th class="column-title text-right"><strong>Crédito</strong></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (ContabilidadeItemViewModel item in Model.Contabilidades)
-                                    {
-                                        <tr class="even pointer">
-                                            <td><span>@item.codigoReduzido</span></td>
-                                            <td><span>@item.descricao_planoConta</span></td>
-                                            <td class="text-right"><span>@(item.tipoLancamento == "D" ? item.valor.ToString("###,###,###,##0.00") : "")</span></td>
-                                            <td class="text-right"><span>@(item.tipoLancamento == "C" ? item.valor.ToString("###,###,###,##0.00") : "")</span></td>
+                <div class="x_panel">
+                    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Contabilidade", Descricao = "", Transacao = tContabilidade })
+                    <div class="x_content">
+                        @if (Model.Contabilidades.Count() > 0)
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr class="headings">
+                                            <th class="column-title"><strong>Conta</strong></th>
+                                            <th class="column-title"><strong>Descrição</strong></th>
+                                            <th class="column-title text-right"><strong>Débito</strong></th>
+                                            <th class="column-title text-right"><strong>Crédito</strong></th>
                                         </tr>
-                                    }
-                                    <tr class="warning">
-                                        <td colspan="2"><span><strong>Total</strong></span></td>
-                                        <td class="text-right"><span><strong>@Model.Contabilidades.Where(tipo => tipo.tipoLancamento == "D").Select(info => info.valor).Sum().ToString("###,###,###,##0.00")</strong></span></td>
-                                        <td class="text-right"><span><strong>@Model.Contabilidades.Where(tipo => tipo.tipoLancamento == "C").Select(info => info.valor).Sum().ToString("###,###,###,##0.00")</strong></span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    }
-                </div>
-            </div>
-        }
-        else
-        {
-            <div class="well text-center">Não há lançamento contábil para esta operação</div>
-        }
-    </div>
-</div>
-<!-- Posição financeira do título -->
-<div class="row">
-    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Posição financeira do título", Descricao = "", Transacao = t })
-            <div class="x_content">
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr class="headings">
-                                <th class="column-title"><strong>Atraso</strong></th>
-                                <th class="column-title text-center"><strong>Última amortização</strong></th>
-                                <th class="column-title"><strong>Cheque</strong></th>
-                                <th class="column-title text-right"><strong>Valor principal</strong></th>
-                                <th class="column-title text-right"><strong>Amortização</strong></th>
-                                <th class="column-title text-right"><strong>Encargos</strong></th>
-                                <th class="column-title text-right"><strong>Desconto</strong></th>
-                                <th class="column-title text-right"><strong>Valor Pago</strong></th>
-                                <th class="column-title text-right"><strong>Saldo devedor</strong></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>@(Model.atraso.HasValue && Model.atraso.Value > 0 ? Model.atraso.ToString() + " dias" : "")</td>
-                                <td class="text-center">@(Model.dt_ultima_amortizacao.HasValue ? Model.dt_ultima_amortizacao.Value.ToString("dd/MM/yyyy") : "")</td>
-                                <td>@(Model.cheque_numero != null && Model.cheque_numero != "" ? "Banco: " + Model.cheque_banco + " Agência: " + Model.cheque_agencia + " Ch. " + Model.cheque_numero : "")</td>
-                                <td class="text-right">@Model.vr_principal.ToString("###,###,###,##0.00")</td>
-                                <td class="text-right">@(Model.vr_amortizacao.HasValue && Model.vr_amortizacao.Value > 0 ? Model.vr_amortizacao.Value.ToString("###,###,###,##0.00") : "")</td>
-                                <td class="text-right">@(Model.vr_encargos.HasValue && Model.vr_encargos.Value > 0 ? Model.vr_encargos.Value.ToString("###,###,###,##0.00") : "")</td>
-                                <td class="text-right">@(Model.vr_desconto.HasValue && Model.vr_desconto.Value > 0 ? Model.vr_desconto.Value.ToString("###,###,###,##0.00") : "")</td>
-                                <td class="text-right">@(Model.vr_total_pago.HasValue && Model.vr_total_pago.Value > 0 ? Model.vr_total_pago.Value.ToString("###,###,###,##0.00") : "")</td>
-                                <td class="text-right">@(Model.vr_saldo_devedor.HasValue && Model.vr_saldo_devedor.Value > 0 ? Model.vr_saldo_devedor.Value.ToString("R$ ###,###,###,##0.00") : "R$ 0,00")</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Eventos -->
-<div class="row">
-    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Eventos", Descricao = "", Transacao = t })
-            <div class="x_content">
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr class="headings">
-                                <td class="column-title text-center"><strong>Ação</strong></td>
-                                <td class="column-title"><strong>Data</strong></td>
-                                <td class="column-title"><strong>Evento</strong></td>
-                                <td class="column-title text-center"><strong>Ocorrência</strong></td>
-                                <td class="column-title text-center"><strong>Contabilidade</strong></td>
-                                <td class="column-title text-center"><strong>Movimento</strong></td>
-                                <td class="column-title text-center"><strong>Tipo</strong></td>
-                                <td class="column-title text-right"><strong>Valor</strong></td>
-                                <td class="column-title text-center"><strong>Arquivo</strong></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (ContaReceberParcelaEventoViewModel ev in Model.OperacaoParcelaEventos)
-                            {
-                                string estornar = "Estornar";
-                                string classe = "";
-                                string tachado = "";
-                                if (ev.ind_estorno == "S")
-                                {
-                                    classe = "danger";
-                                    tachado = "riscado";
-                                    estornar = "Estornado";
-                                }
-
-                                <tr class="@classe">
-                                    @if (!"0|8".Contains(ev.ind_tipoEvento.Trim()) && ev.ind_estorno == "N")
-                                    {
-                                        <td class="text-center"><a class="primary dedo-indicador" onclick="fnEstorno('@ev.operacaoId', '@ev.parcelaId', '@ev.dt_evento.ToString("yyyy-MM-dd HH:mm:ss.fff tt")')">@estornar</a></td>
-                                    }
-                                    else
-                                    {
-                                        <td class="text-center"><a class="primary">@estornar</a></td>
-                                    }
-                                    <td>@ev.dt_evento.ToString("dd/MM/yyyy HH:mm")</td>
-                                    <td class="@tachado">@ev.descricao_evento</td>
-                                    <td class="text-center">@ev.dt_ocorrencia.ToString("dd/MM/yyyy")</td>
-                                    @if (ev.contabilidadeId.HasValue)
-                                    {
-                                        <td class="text-center">
-                                            <a href="#" data-toggle="modal" data-target="#myModal3" onclick="showContabilidade('@ev.contabilidadeId')">#@ev.contabilidadeId</a>
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td>&nbsp;</td>
-                                    }
-                                    @if (ev.movtoBancarioId.HasValue)
-                                    {
-                                        <td class="text-center">
-                                            <a href="#" data-toggle="modal" data-target="#myModal2" onclick="showMovtoBancario('@ev.movtoBancarioId')">#@ev.movtoBancarioId</a>
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td>&nbsp;</td>
-                                    }
-                                    <td class="text-center">@ev.ind_operacao</td>
-                                    <td class="text-right @tachado">@ev.valor.ToString("###,###,###,##0.00")</td>
-                                    @if (ev.arquivo != null && ev.arquivo != "")
-                                    {
-                                        <td class="text-center"><a class="label label-primary" data-toggle="modal" data-target="#myModal1" onclick="visualizar('@ev.arquivo', '@ev.arquivo_extensao')" href="#" title="Visualizar arquivo">Visualizar</a></td>
-                                    }
-                                    else
-                                    {
-                                        <td>&nbsp;</td>
-                                    }
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Tab (Baixa/Eventos/Alterar)-->
-<div class="row">
-    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-        <div class="" role="tabpanel" data-example-id="togglable-tabs">
-            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                <li role="presentation" class="active">
-                    <a href="#baixar" role="tab" id="home-tab" data-toggle="tab" aria-expanded="true">Baixar</a>
-                </li>
-                <li role="presentation" class="">
-                    <a href="#evento" role="tab" id="profile-evento" data-toggle="tab" aria-expanded="false">Novo evento</a>
-                </li>
-                <li role="presentation" class="">
-                    <a href="#alterar" role="tab" id="profile-alterar" data-toggle="tab" aria-expanded="false">Alterar</a>
-                </li>
-            </ul>
-            <div id="myTabContent" class="tab-content">
-                <div role="tabpanel" class="tab-pane fade active in" id="baixar" aria-labelledby="home-tab">
-                    @if (Model.ind_baixa == null || Model.ind_baixa == "")
-                    {
-                        <div id="baixa_motivo_liquidacao">
-                            @Html.Partial("_Baixar", Model)
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="well text-center margem-topo-10">Título Baixado</div>
-                    }
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="evento" aria-labelledby="profile-evento">
-                    @if (Model.ind_baixa == null || Model.ind_baixa == "")
-                    {
-                        <div id="novo-evento">
-                            @Html.Partial("_Evento", Model.editarOperacaoParcelaEventoViewModel)
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="well text-center margem-topo-10">Título Baixado</div>
-                    }
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="alterar" aria-labelledby="profile-alterar">
-                    @if (Model.ind_baixa == null || Model.ind_baixa == "")
-                    {
-                        if (Model.OperacaoParcelaEventos.Where(info => info.ind_estorno == "N").Count() > 1)
-                        {
-                            <div class="well text-center margem-topo-10">Título não pode ser editado porque possui movimentação</div>
-                        }
-                        else
-                        {
-                            <div id="novo-evento">
-                                @Html.Partial("_Modify", Model)
+                                    </thead>
+                                    <tbody>
+                                        @foreach (ContabilidadeItemViewModel item in Model.Contabilidades)
+                                        {
+                                            <tr class="even pointer">
+                                                <td><span>@item.codigoReduzido</span></td>
+                                                <td><span>@item.descricao_planoConta</span></td>
+                                                <td class="text-right"><span>@(item.tipoLancamento == "D" ? item.valor.ToString("###,###,###,##0.00") : "")</span></td>
+                                                <td class="text-right"><span>@(item.tipoLancamento == "C" ? item.valor.ToString("###,###,###,##0.00") : "")</span></td>
+                                            </tr>
+                                        }
+                                        <tr class="warning">
+                                            <td colspan="2"><span><strong>Total</strong></span></td>
+                                            <td class="text-right"><span><strong>@Model.Contabilidades.Where(tipo => tipo.tipoLancamento == "D").Select(info => info.valor).Sum().ToString("###,###,###,##0.00")</strong></span></td>
+                                            <td class="text-right"><span><strong>@Model.Contabilidades.Where(tipo => tipo.tipoLancamento == "C").Select(info => info.valor).Sum().ToString("###,###,###,##0.00")</strong></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         }
-                    }
-                    else
-                    {
-                        <div class="well text-center margem-topo-10">Título Baixado</div>
-                    }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="well text-center">Não há lançamento contábil para esta operação</div>
+            }
+        </div>
+    </div>
+    <!-- Posição financeira do título -->
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Posição financeira do título", Descricao = "", Transacao = t })
+                <div class="x_content">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr class="headings">
+                                    <th class="column-title"><strong>Atraso</strong></th>
+                                    <th class="column-title text-center"><strong>Última amortização</strong></th>
+                                    <th class="column-title"><strong>Cheque</strong></th>
+                                    <th class="column-title text-right"><strong>Valor principal</strong></th>
+                                    <th class="column-title text-right"><strong>Amortização</strong></th>
+                                    <th class="column-title text-right"><strong>Encargos</strong></th>
+                                    <th class="column-title text-right"><strong>Desconto</strong></th>
+                                    <th class="column-title text-right"><strong>Valor Pago</strong></th>
+                                    <th class="column-title text-right"><strong>Saldo devedor</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@(Model.atraso.HasValue && Model.atraso.Value > 0 ? Model.atraso.ToString() + " dias" : "")</td>
+                                    <td class="text-center">@(Model.dt_ultima_amortizacao.HasValue ? Model.dt_ultima_amortizacao.Value.ToString("dd/MM/yyyy") : "")</td>
+                                    <td>@(Model.cheque_numero != null && Model.cheque_numero != "" ? "Banco: " + Model.cheque_banco + " Agência: " + Model.cheque_agencia + " Ch. " + Model.cheque_numero : "")</td>
+                                    <td class="text-right">@Model.vr_principal.ToString("###,###,###,##0.00")</td>
+                                    <td class="text-right">@(Model.vr_amortizacao.HasValue && Model.vr_amortizacao.Value > 0 ? Model.vr_amortizacao.Value.ToString("###,###,###,##0.00") : "")</td>
+                                    <td class="text-right">@(Model.vr_encargos.HasValue && Model.vr_encargos.Value > 0 ? Model.vr_encargos.Value.ToString("###,###,###,##0.00") : "")</td>
+                                    <td class="text-right">@(Model.vr_desconto.HasValue && Model.vr_desconto.Value > 0 ? Model.vr_desconto.Value.ToString("###,###,###,##0.00") : "")</td>
+                                    <td class="text-right">@(Model.vr_total_pago.HasValue && Model.vr_total_pago.Value > 0 ? Model.vr_total_pago.Value.ToString("###,###,###,##0.00") : "")</td>
+                                    <td class="text-right">@(Model.vr_saldo_devedor.HasValue && Model.vr_saldo_devedor.Value > 0 ? Model.vr_saldo_devedor.Value.ToString("R$ ###,###,###,##0.00") : "R$ 0,00")</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        @*<div class="x_panel">
-            @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Títulos de cobrança", Descricao = "", Transacao = t })
-            <div class="x_content">
+    </div>
+    <!-- Eventos -->
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Eventos", Descricao = "", Transacao = t })
+                <div class="x_content">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr class="headings">
+                                    <td class="column-title text-center"><strong>Ação</strong></td>
+                                    <td class="column-title"><strong>Data</strong></td>
+                                    <td class="column-title"><strong>Evento</strong></td>
+                                    <td class="column-title text-center"><strong>Ocorrência</strong></td>
+                                    <td class="column-title text-center"><strong>Contabilidade</strong></td>
+                                    <td class="column-title text-center"><strong>Movimento</strong></td>
+                                    <td class="column-title text-center"><strong>Tipo</strong></td>
+                                    <td class="column-title text-right"><strong>Valor</strong></td>
+                                    <td class="column-title text-center"><strong>Arquivo</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (ContaReceberParcelaEventoViewModel ev in Model.OperacaoParcelaEventos)
+                                {
+                                    string estornar = "Estornar";
+                                    string classe = "";
+                                    string tachado = "";
+                                    if (ev.ind_estorno == "S")
+                                    {
+                                        classe = "danger";
+                                        tachado = "riscado";
+                                        estornar = "Estornado";
+                                    }
 
+                                    <tr class="@classe">
+                                        @if (!"0|8".Contains(ev.ind_tipoEvento.Trim()) && ev.ind_estorno == "N")
+                                        {
+                                            <td class="text-center"><a class="primary dedo-indicador" onclick="fnEstorno('@ev.operacaoId', '@ev.parcelaId', '@ev.dt_evento.ToString("yyyy-MM-dd HH:mm:ss.fff tt")')">@estornar</a></td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-center"><a class="primary">@estornar</a></td>
+                                        }
+                                        <td>@ev.dt_evento.ToString("dd/MM/yyyy HH:mm")</td>
+                                        <td class="@tachado">@ev.descricao_evento</td>
+                                        <td class="text-center">@ev.dt_ocorrencia.ToString("dd/MM/yyyy")</td>
+                                        @if (ev.contabilidadeId.HasValue)
+                                        {
+                                            <td class="text-center">
+                                                <a href="#" data-toggle="modal" data-target="#myModal3" onclick="showContabilidade('@ev.contabilidadeId')">#@ev.contabilidadeId</a>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>&nbsp;</td>
+                                        }
+                                        @if (ev.movtoBancarioId.HasValue)
+                                        {
+                                            <td class="text-center">
+                                                <a href="#" data-toggle="modal" data-target="#myModal2" onclick="showMovtoBancario('@ev.movtoBancarioId')">#@ev.movtoBancarioId</a>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>&nbsp;</td>
+                                        }
+                                        <td class="text-center">@ev.ind_operacao</td>
+                                        <td class="text-right @tachado">@ev.valor.ToString("###,###,###,##0.00")</td>
+                                        @if (ev.arquivo != null && ev.arquivo != "")
+                                        {
+                                            <td class="text-center"><a class="label label-primary" data-toggle="modal" data-target="#myModal1" onclick="visualizar('@ev.arquivo', '@ev.arquivo_extensao')" href="#" title="Visualizar arquivo">Visualizar</a></td>
+                                        }
+                                        else
+                                        {
+                                            <td>&nbsp;</td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>*@
+        </div>
+    </div>
+    <!-- Tab (Baixa/Eventos/Alterar)-->
+    @Html.Partial("_AjaxAlert", "panel-tab")
+    <div class="row" id="panel-tab">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#baixar" role="tab" id="home-tab" data-toggle="tab" aria-expanded="true">Baixar</a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#evento" role="tab" id="profile-evento" data-toggle="tab" aria-expanded="false">Novo evento</a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#alterar" role="tab" id="profile-alterar" data-toggle="tab" aria-expanded="false">Alterar</a>
+                    </li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="baixar" aria-labelledby="home-tab">
+                        @if (Model.ind_baixa == null || Model.ind_baixa == "")
+                        {
+                            <div id="baixa_motivo_liquidacao">
+                                @Html.Partial("_Baixar", Model)
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="well text-center margem-topo-10">Título Baixado</div>
+                        }
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="evento" aria-labelledby="profile-evento">
+                        @if (Model.ind_baixa == null || Model.ind_baixa == "")
+                        {
+                            <div id="novo-evento">
+                                @Html.Partial("_Evento", Model.editarOperacaoParcelaEventoViewModel)
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="well text-center margem-topo-10">Título Baixado</div>
+                        }
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="alterar" aria-labelledby="profile-alterar">
+                        @if (Model.ind_baixa == null || Model.ind_baixa == "")
+                        {
+                            if (Model.OperacaoParcelaEventos.Where(info => info.ind_estorno == "N").Count() > 1)
+                            {
+                                <div class="well text-center margem-topo-10">Título não pode ser editado porque possui movimentação</div>
+                            }
+                            else
+                            {
+                                <div id="novo-evento">
+                                    @Html.Partial("_Modify", Model)
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="well text-center margem-topo-10">Título Baixado</div>
+                        }
+                    </div>
+                </div>
+            </div>
+            @*<div class="x_panel">
+                    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Títulos de cobrança", Descricao = "", Transacao = t })
+                    <div class="x_content">
+
+                    </div>
+                </div>*@
+        </div>
     </div>
 </div>
-
-
-
 
 <script>
     function fnEstorno(_operacaoId, _parcelaId, _dt_evento)

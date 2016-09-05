@@ -8,83 +8,74 @@
     @Html.HiddenFor(info => info.parcelaId)
     @Html.HiddenFor(info => info.historicoId)
     @Html.HiddenFor(info => info.complementoHist)
-    <div class="panel panel-info margem-topo-10">
-        <div class="panel-heading">
-            <h3 class="panel-title">Inclusão de evento</h3>
+    <div class="row clearfix">
+        <div class="col-md-6">
+            @Html.Editor("descricao_evento1", "EventosAutoComplete", new
+               {
+                   value = Model.eventoId > 0 ? Model.eventoId.ToString() : "",
+                   Text = Model.descricao_evento ?? "",
+                   nextField = "descricao_enquadramento_amortizacao",
+                   prevField = ""
+               })
         </div>
-        @Html.Partial("_AjaxAlert", "panel-top")
-        <div class="panel-body" id="panel-top">
-            <div class="row clearfix">
-                <div class="col-md-6">
-                    @Html.Editor("descricao_evento1", "EventosAutoComplete", new
-                       {
-                           value = Model.eventoId > 0 ? Model.eventoId.ToString() : "",
-                           Text = Model.descricao_evento ?? "",
-                           nextField = "descricao_enquadramento_amortizacao",
-                           prevField = ""
-                       })
-                </div>
-                <div class="col-md-6">
-                    @Html.Editor("descricao_enquadramento2", "EnquadramentoAmortizacaoAutoComplete", new
-                       {
-                           value = Model.enquadramentoId != null ? Model.enquadramentoId.ToString() : "",
-                           Text = Model.descricao_enquadramento ?? "",
-                           nextField = "nome_banco2",
-                           prevField = "descricao_evento"
-                       })
-                </div>  
+        <div class="col-md-6">
+            @Html.Editor("descricao_enquadramento2", "EnquadramentoAmortizacaoAutoComplete", new
+               {
+                   value = Model.enquadramentoId != null ? Model.enquadramentoId.ToString() : "",
+                   Text = Model.descricao_enquadramento ?? "",
+                   nextField = "nome_banco2",
+                   prevField = "descricao_evento"
+               })
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-6">
+            @Html.Editor("nome_banco21", "Bancos2AutoComplete", new
+        {
+            value = Model.bancoId != null ? Model.bancoId.ToString() : "",
+            Text = Model.nome_banco ?? "",
+            nextField = "dt_ocorrencia",
+            prevField = "descricao_enquadramento_amortizacao"
+        })
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label" for="dt_ultima_amortizacao">Dt.Ocorrência</label>
+                @Html.EditorFor(info => info.dt_ocorrencia, "DATE", new { identificador = "dt_ocorrencia", readOnly = "false", value = Model.dt_ocorrencia })
             </div>
-            <div class="row clearfix">
-                <div class="col-md-6">
-                    @Html.Editor("nome_banco21", "Bancos2AutoComplete", new
-                       {
-                           value = Model.bancoId != null ? Model.bancoId.ToString() : "",
-                           Text = Model.nome_banco ?? "",
-                           nextField = "dt_ocorrencia",
-                           prevField = "descricao_enquadramento_amortizacao"
-                       })
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="dt_ultima_amortizacao">Dt.Ocorrência</label>
-                        @Html.EditorFor(info => info.dt_ocorrencia, "DATE", new { identificador = "dt_ocorrencia", readOnly = "false", value = Model.dt_ocorrencia })
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label">Valor</label>
-                        <input class="form-control text-right" id="valor" name="valor" type="text" value="@Model.valor.ToString("###,###,##0.00")" onblur="return Converte(this, 'valor')">
-                    </div>
-                </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label">Valor</label>
+                <input class="form-control text-right" id="valor" name="valor" type="text" value="@Model.valor.ToString("###,###,##0.00")" onblur="return Converte(this, 'valor')">
             </div>
-            <div class="row clearfix">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Arquivo de comprovante</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <input id="fileUploadComprovante" type="file" name="files[]" multiple>
-                            @Html.Hidden("fileComprovante", Model.arquivo)
-                        </div>
-                        <div class="file_name" id="file_name2"></div>
-                        <div class="progress" id="progress2">
-                            <div id="progress2-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                                <span class="sr-only">0% complete</span>
-                            </div>
-                        </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Arquivo de comprovante</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <input id="fileUploadComprovante" type="file" name="files[]" multiple>
+                    @Html.Hidden("fileComprovante", Model.arquivo)
+                </div>
+                <div class="file_name" id="file_name2"></div>
+                <div class="progress" id="progress2">
+                    <div id="progress2-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                        <span class="sr-only">0% complete</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="panel-footer">
-            <div class="row">
-                <div class="col-md-12 col-lg-12 col-xs-12">
-                    <input type="submit" class="btn btn-success" value="Salvar" onclick="return validaEvento();">
-                    <input type="button" onclick="window.location = '../Cobranca/Browse'" class="btn btn-default" value="Cancelar" />
-                    <a href="#panel-top" class="info pull-right" id="topo"><i class="fa fa-toggle-up"></i> Topo</a>
-                </div>
-            </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12">
+            <input type="submit" class="btn btn-success" value="Salvar" onclick="return validaEvento();" />
+            <input type="button" onclick="window.location = '../Cobranca/Browse'" class="btn btn-default" value="Cancelar" />
+            <a href="#panel-top" class="info pull-right" id="topo-eve"><i class="fa fa-toggle-up"></i> Topo</a>
         </div>
     </div>
 }
@@ -125,6 +116,8 @@
             $('#valor').focus();
             return false;
         }
+
+        document.getElementById('topo-eve').click();
 
         return true;
     }

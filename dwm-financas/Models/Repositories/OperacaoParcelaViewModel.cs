@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using App_Dominio.Contratos;
 using App_Dominio.Models;
+using System.IO;
+using App_Dominio.Security;
+using App_Dominio.Entidades;
 
 namespace DWM.Models.Repositories
 {
@@ -142,6 +145,15 @@ namespace DWM.Models.Repositories
         public IEnumerable<OPE> OperacaoParcelaEventos { get; set; }
 
         public string operacao { get; set; }
+
+        public string PathArquivos
+        {
+            get
+            {
+                EmpresaSecurity<SecurityContext> security = new EmpresaSecurity<SecurityContext>();
+                return "~/Users_Data/Empresas/" + security.getSessaoCorrente().empresaId.ToString() + "/arquivos/" ;
+            }
+        }
 
         public OperacaoParcelaViewModel()
         {
