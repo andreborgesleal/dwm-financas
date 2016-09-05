@@ -10,158 +10,149 @@
     @Html.HiddenFor(info => info.complementoHist)
     @Html.Hidden("vr_juros_mora_baixa1",Model.vr_juros_mora_baixa)
     @Html.Hidden("vr_multa_atraso_baixa1", Model.vr_multa_atraso_baixa)
-    <div class="panel panel-info margem-topo-10">
-        <div class="panel-heading">
-            <h3 class="panel-title">Baixa por motivo de liquidação ou Amortização da parcela</h3>
+    <div class="row clearfix">
+        <div class="col-md-6">
+            @Html.Editor("nome_banco1", "BancosAutoComplete", new
+           {
+               value = Model.bancoId != null ? Model.bancoId.ToString() : "",
+               Text = Model.nome_banco ?? "",
+               nextField = "dt_pagamento",
+               prevField = ""
+           })
         </div>
-        @Html.Partial("_AjaxAlert", "panel-top")
-        <div class="panel-body" id="panel-top">
-            <div class="row clearfix">
-                <div class="col-md-6">
-                    @Html.Editor("nome_banco1", "BancosAutoComplete", new
-                       {
-                           value = Model.bancoId != null ? Model.bancoId.ToString() : "",
-                           Text = Model.nome_banco ?? "",
-                           nextField = "dt_baixa",
-                           prevField = ""
-                       })
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="dt_baixa">Dt.Pagamento</label>
-                        @Html.EditorFor(info => info.dt_pagamento, "DATE", new { identificador = "dt_pagamento", readOnly = "false", value = Model.dt_pagamento })
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="dt_ultima_amortizacao">Dt.Movimento</label>
-                        @Html.EditorFor(info => info.dt_movto, "DATE", new { identificador = "dt_movto", readOnly = "false", value = Model.dt_movto })
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="drpFormaPagamento">Forma de pagamento</label>
-                        @Html.DropDownListFor(m => m.ind_forma_pagamento, new DWM.Models.Enumeracoes.BindDropDownList().FormaPagamento(Model.ind_forma_pagamento ?? ""), new { @class = "form-control" })
-                    </div>
-                </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label" for="dt_baixa">Dt.Pagamento</label>
+                @Html.EditorFor(info => info.dt_pagamento, "DATE", new { identificador = "dt_pagamento", readOnly = "false", value = Model.dt_pagamento })
             </div>
-            <div class="row clearfix">
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label">Saldo Devedor</label>
-                        <input class="form-control text-right" readonly id="vr_saldo_devedor" name="vr_saldo_devedor" type="text" value="@Model.vr_saldo_devedor.Value.ToString("###,###,###,##0.00")" onblur="return Converte(this, 'vr_saldo_devedor')">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        @{
-                            var _vr_juros = Model.vr_juros_mora_baixa ?? 0; //   Model.vr_encargos.Value - Model.vr_multa_atraso ?? 0;
-                            var _readonly = Model.hasMultaMora ? "readonly" : "";
-                        }
-                        <label class="control-label">Juros de mora</label>
-                        <input class="form-control text-right" @_readonly id="vr_juros_mora" name="vr_juros_mora" type="text" value="@_vr_juros.ToString("###,###,##0.00")" onblur="return calcularValor(this)">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        @{
-                            var vr_multa_atraso = Model.vr_multa_atraso_baixa ?? 0;
-                        }
-                        <label class="control-label">Multa por atraso</label>
-                        <input class="form-control text-right" @_readonly id="vr_multa_atraso" name="vr_multa_atraso" type="text" value="@vr_multa_atraso.ToString("###,###,##0.00")" onblur="return calcularValor(this)">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label">Desconto</label>
-                        <input class="form-control text-right" id="vr_desconto" name="vr_desconto" type="text" value="@Model.vr_desconto_baixa.Value.ToString("###,###,##0.00")" onblur="return calcularValor(this)">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label">Valor p/ liquidação</label>
-                        <input class="form-control text-right" readonly id="vr_liquidacao" name="vr_liquidacao" type="text" value="@Model.vr_saldo_devedor.Value.ToString("###,###,##0.00")">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label">Valor pago</label>
-                        <input class="form-control text-right" id="vr_baixa" name="vr_baixa" type="text" value="@Model.vr_baixa.Value.ToString("###,###,##0.00")" onblur="return Converte(this, 'vr_baixa')">
-                    </div>
-                </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label" for="dt_ultima_amortizacao">Dt.Movimento</label>
+                @Html.EditorFor(info => info.dt_movto, "DATE", new { identificador = "dt_movto", readOnly = "false", value = Model.dt_movto })
             </div>
-            <div class="row clearfix">
-                <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Arquivo de comprovante</h3>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label" for="drpFormaPagamento">Forma de pagamento</label>
+                @Html.DropDownListFor(m => m.ind_forma_pagamento, new DWM.Models.Enumeracoes.BindDropDownList().FormaPagamento(Model.ind_forma_pagamento ?? ""), new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label">Saldo Devedor</label>
+                <input class="form-control text-right" readonly id="vr_saldo_devedor" name="vr_saldo_devedor" type="text" value="@Model.vr_saldo_devedor.Value.ToString("###,###,###,##0.00")" onblur="return Converte(this, 'vr_saldo_devedor')">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                @{
+                    var _vr_juros = Model.vr_juros_mora_baixa ?? 0; //   Model.vr_encargos.Value - Model.vr_multa_atraso ?? 0;
+                    var _readonly = Model.hasMultaMora ? "readonly" : "";
+                }
+                <label class="control-label">Juros de mora</label>
+                <input class="form-control text-right" @_readonly id="vr_juros_mora" name="vr_juros_mora" type="text" value="@_vr_juros.ToString("###,###,##0.00")" onblur="return calcularValor(this)">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                @{
+                    var vr_multa_atraso = Model.vr_multa_atraso_baixa ?? 0;
+                }
+                <label class="control-label">Multa por atraso</label>
+                <input class="form-control text-right" @_readonly id="vr_multa_atraso" name="vr_multa_atraso" type="text" value="@vr_multa_atraso.ToString("###,###,##0.00")" onblur="return calcularValor(this)">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label">Desconto</label>
+                <input class="form-control text-right" id="vr_desconto" name="vr_desconto" type="text" value="@Model.vr_desconto_baixa.Value.ToString("###,###,##0.00")" onblur="return calcularValor(this)">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label">Valor p/ liquidação</label>
+                <input class="form-control text-right" readonly id="vr_liquidacao" name="vr_liquidacao" type="text" value="@Model.vr_saldo_devedor.Value.ToString("###,###,##0.00")">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label">Valor pago</label>
+                <input class="form-control text-right" id="vr_baixa" name="vr_baixa" type="text" value="@Model.vr_baixa.Value.ToString("###,###,##0.00")" onblur="return Converte(this, 'vr_baixa')">
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Arquivo de comprovante</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input id="fileupload" type="file" name="files[]" multiple>
+                        @Html.Hidden("arquivo")
+                    </div>
+                    <div class="file_name" id="file_name1"></div>
+                    <div class="progress" id="progress1">
+                        <div id="progress1-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            <span class="sr-only">0% complete</span>
                         </div>
-                        <div class="panel-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">
+                        Dados do Cheque
+                    </h2>
+                </div>
+                <div class="panel-body">
+                    <div class="row clearfix">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <input id="fileupload" type="file" name="files[]" multiple>
-                                @Html.Hidden("arquivo")
-                            </div>
-                            <div class="file_name" id="file_name1"></div>
-                            <div class="progress" id="progress1">
-                                <div id="progress1-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                                    <span class="sr-only">0% complete</span>
-                                </div>
+                                <label class="control-label">Nº Banco</label>
+                                @Html.TextBoxFor(info => info.cheque_banco, "{0:##0}", new { @class = "form-control input-sm", @onkeypress = "return numeros()", @maxlength = "3" })
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h2 class="panel-title">
-                                Dados do Cheque
-                            </h2>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Agência</label>
+                                @Html.TextBoxFor(info => info.cheque_agencia, new { @class = "form-control input-sm", @maxlength = "5" })
+                            </div>
                         </div>
-                        <div class="panel-body">
-                            <div class="row clearfix">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Nº Banco</label>
-                                        @Html.TextBoxFor(info => info.cheque_banco, "{0:##0}", new { @class = "form-control input-sm", @onkeypress = "return numeros()", @maxlength = "3" })
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Agência</label>
-                                        @Html.TextBoxFor(info => info.cheque_agencia, new { @class = "form-control input-sm", @maxlength = "5" })
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Nº Cheque</label>
-                                        @Html.TextBoxFor(info => info.cheque_numero, new { @class = "form-control input-sm", @maxlength = "6" })
-                                    </div>
-                                </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Nº Cheque</label>
+                                @Html.TextBoxFor(info => info.cheque_numero, new { @class = "form-control input-sm", @maxlength = "6" })
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row clearfix">
-                <div class="col-md-6">
-                    @Html.Editor("descricao_enquadramento1", "EnquadramentoAutoComplete", new
-                       {
-                           value = Model.enquadramentoId != null ? Model.enquadramentoId.ToString() : "",
-                           Text = Model.descricao_enquadramento ?? "",
-                           nextField = "",
-                           prevField = "cheque_numero"
-                       })
                 </div>
             </div>
         </div>
-        <div class="panel-footer">
-            <div class="row">
-                <div class="col-md-12 col-lg-12 col-xs-12">
-                    <input type="submit" class="btn btn-success" value="Salvar" onclick="return valida();">
-                    <input type="button" onclick="window.location = '../Cobranca/Browse'" class="btn btn-default" value="Cancelar" />
-                    <a href="#panel-top" class="info pull-right" id="topo"><i class="fa fa-toggle-up"></i> Topo</a>
-                </div>
-            </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-6">
+            @Html.Editor("descricao_enquadramento1", "EnquadramentoAutoComplete", new
+        {
+            value = Model.enquadramentoId != null ? Model.enquadramentoId.ToString() : "",
+            Text = Model.descricao_enquadramento ?? "",
+            nextField = "",
+            prevField = "cheque_numero"
+        })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12">
+            <input type="submit" class="btn btn-success" value="Salvar" onclick="return valida();" />
+            <input type="button" onclick="window.location = '../Cobranca/Browse'" class="btn btn-default" value="Cancelar" />
+            <a href="#panel-top" class="info pull-right" id="topo-baixa"><i class="fa fa-toggle-up"></i> Topo</a>
         </div>
     </div>
 }
@@ -184,7 +175,7 @@
     });
 
     $(document).ready(function () {
-        FileUpload('fileupload', 'fileBoleto', 'progress1', 'file_name1', 'myModal1', 'arq1', 'trash1');
+        FileUpload('fileupload', 'arquivo', 'progress1', 'file_name1', 'myModal1', 'arq1', 'trash1');
     });
 
     function calcularValor(obj) {
@@ -313,6 +304,8 @@
             $('#vr_desconto').focus();
             return false;
         }
+
+        document.getElementById('topo-baixa').click();
 
         return true;
     }

@@ -6,18 +6,18 @@
     var tabindex = ViewData["tabindex"];
 }
 <div class="form-group">
+    <div id="div-lov"></div>
     <label class="control-label" for="descricao_evento">Evento</label>
     <div class="input-group" id="EvtParent">
         <input type="text" id="descricao_evento" name="descricao_evento" value="@Text" class="form-control" onblur="fillEvt();" tabindex="@tabindex" />
         <input type="hidden" id="eventoId" name="eventoId" value="@value" />
         <div class="input-group-btn">
-            <button class="btn btn-primary" style="margin-top: -5px" type="button" onclick="showLookup('LovEventoModal');"><i class="glyphicon glyphicon-search"></i></button>
-            <button class="btn btn-instagram" style="margin-top: -5px" type="button" onclick="clean('eventoId', 'descricao_evento');"><i class="glyphicon glyphicon-remove"></i></button>
+            <button class="btn btn-primary" style="margin-left: -5px" type="button" onclick="showLookup('LovEventoModal');"><i class="glyphicon glyphicon-search"></i></button>
+            <button class="btn btn-instagram" style="margin-left: -5px" type="button" onclick="clean('eventoId', 'descricao_evento');"><i class="glyphicon glyphicon-remove"></i></button>
         </div>
     </div>
-    <div id="div-lov"></div>
 </div>
-
+<div id="descricao_evento-container" class="panel panel-primary" style="position: relative; float: left; margin-top: -20px; border: none"></div>
 <script>
     // Next Field
     $('#EvtParent').on('keydown', '#descricao_evento', function (e) {
@@ -33,7 +33,7 @@
     // Fim-Next Field
 
     var link = encodeURI('../Eventos/getNames?noCahce=' + new Date());
-    var data = { values: [] };
+    var dataEvt = { values: [] };
     var evt = { countries: [] };
     $.ajax({
         type: "POST",
@@ -44,16 +44,11 @@
         dataType: "json",
         success: function (jsonObj) {
             for (i in jsonObj) {
-                data.values.push(jsonObj[i].descricao);
+                dataEvt.values.push(jsonObj[i].descricao);
                 evt.countries.push({ objId: jsonObj[i].eventoId, descricao: jsonObj[i].descricao })
             };
         }
     });
-
-    $('#descricao_evento').typeahead({
-        local: data.values,
-    });
-    $('descricao_evento').css('background-color', '#fff');
 
     function fillEvt() {
         for (i in evt.countries) {
@@ -62,7 +57,18 @@
             }
         }
     }
+    var evtArray = $.map(evt.countries, function (value, key) {
+        return {
+            value: value.descricao,
+            data: key.eventoId
+        };
+    });
 
+    // initialize autocomplete with custom appendTo
+    $('#descricao_evento').autocomplete({
+        lookup: evtArray,
+        appendTo: '#descricao_evento-container'
+    });
 </script>
 
 
