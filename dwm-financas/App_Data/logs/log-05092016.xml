@@ -54,4 +54,92 @@
    em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
    em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 202</StackTrace>
   </LOG>
+  <LOG ID="591937320" Data="05/09/2016 21:51:45">
+    <Sessao>vusimkywkyxnvii4igf1qdcp</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Tempo limite expirado. O período de tempo limite foi atingido antes que fosse obtida uma conexão do pool. Isso pode ter ocorrido porque todas as conexões do pool estavam em uso e o tamanho máximo do pool foi atingido. *** The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; cobranca/edit</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   em System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   em System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.&lt;&gt;c__DisplayClass7.&lt;GetResults&gt;b__5()
+   em System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.&lt;System.Collections.Generic.IEnumerable&lt;T&gt;.GetEnumerator&gt;b__0()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 202</StackTrace>
+  </LOG>
+  <LOG ID="1505292586" Data="05/09/2016 21:51:46">
+    <Sessao>ptccrapspyd5tbm4t3aa3tod</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; account/login</NameSpace>
+    <Context>__RequestVerificationToken="AVeAjGrvGx2wR_pPBlAUapRaAuSEzwiG0iwyKloiyk8uTcMtQtXP7uQgjEwrKpZB3vQytKwH11peebE5Of-T-isVmlGxUhsYOcj0NqgZNvk1",UserName="andreborgesleal@live.com",Password="EvergladesFin"</Context>
+    <StackTrace />
+  </LOG>
+  <LOG ID="1924448623" Data="05/09/2016 21:51:46">
+    <Sessao>ptccrapspyd5tbm4t3aa3tod</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; account/login</NameSpace>
+    <Context>__RequestVerificationToken="AVeAjGrvGx2wR_pPBlAUapRaAuSEzwiG0iwyKloiyk8uTcMtQtXP7uQgjEwrKpZB3vQytKwH11peebE5Of-T-isVmlGxUhsYOcj0NqgZNvk1",UserName="andreborgesleal@live.com",Password="EvergladesFin"</Context>
+    <StackTrace />
+  </LOG>
+  <LOG ID="2082416177" Data="05/09/2016 22:41:56">
+    <Sessao>ptccrapspyd5tbm4t3aa3tod</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Não é possível encontrar o arquivo especificado.</Mensagem>
+    <NameSpace>DWM.Models.Persistence.ContaReceberParcelaEventoModel =&gt; cobranca/_baixar</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="1731044286" Data="05/09/2016 22:41:56">
+    <Sessao>ptccrapspyd5tbm4t3aa3tod</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Exceção do tipo 'System.Exception' foi acionada.</Mensagem>
+    <NameSpace>DWM.Models.BI.ContaReceberBaixarBI =&gt; cobranca/_baixar</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="857885205" Data="05/09/2016 22:50:58">
+    <Sessao>ptccrapspyd5tbm4t3aa3tod</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Não é possível encontrar o arquivo especificado.</Mensagem>
+    <NameSpace>DWM.Models.Persistence.ContaReceberParcelaEventoModel =&gt; cobranca/_baixar</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="729019835" Data="05/09/2016 22:54:45">
+    <Sessao>ptccrapspyd5tbm4t3aa3tod</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Não é possível encontrar o arquivo especificado.</Mensagem>
+    <NameSpace>DWM.Models.Persistence.ContaReceberParcelaEventoModel =&gt; cobranca/_baixar</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="1155721569" Data="05/09/2016 22:55:00">
+    <Sessao>ptccrapspyd5tbm4t3aa3tod</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Exceção do tipo 'System.Exception' foi acionada.</Mensagem>
+    <NameSpace>DWM.Models.BI.ContaReceberBaixarBI =&gt; cobranca/_baixar</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
 </LOG>

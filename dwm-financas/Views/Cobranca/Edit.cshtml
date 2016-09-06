@@ -3,9 +3,7 @@
 @model DWM.Models.Repositories.EditarContaReceberViewModel
 @{
     ViewBag.Title = "DWM Finanças";
-    // var path = System.Configuration.ConfigurationManager.AppSettings["Users_Data"];
-    // var path = Model.PathArquivos;
-    var path = "";
+    var path = Model.PathArquivos;
 }
 <div id="EditarContaReceber">
     @Html.Partial("_Edit", Model)

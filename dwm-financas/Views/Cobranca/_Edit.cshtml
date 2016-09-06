@@ -104,7 +104,7 @@
                         <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4 tile_stats_count">
                             <span class="count_top"><i class="fa fa-dollar"></i> Saldo devedor</span>
                             <div class="count green"><h3>@(Model.vr_saldo_devedor.HasValue ? Model.vr_saldo_devedor.Value.ToString("R$ ###,###,###,##0.00") : "0,00")</h3></div>
-                            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>@(Model.vr_encargos.HasValue ? Model.vr_encargos.Value.ToString("R$ ###,###,##0.00") : "R$ 0,00") </i> encargos</span>
+                            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>@(Model.vr_encargos.HasValue && Model.ind_baixa == null ? Model.vr_encargos.Value.ToString("R$ ###,###,##0.00") : "R$ 0,00") </i> encargos</span>
                         </div>
                     </div>
                     <div class="row tile_count">

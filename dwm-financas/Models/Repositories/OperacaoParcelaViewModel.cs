@@ -151,7 +151,7 @@ namespace DWM.Models.Repositories
             get
             {
                 EmpresaSecurity<SecurityContext> security = new EmpresaSecurity<SecurityContext>();
-                return "~/Users_Data/Empresas/" + security.getSessaoCorrente().empresaId.ToString() + "/arquivos/" ;
+                return "../Users_Data/Empresas/" + security.getSessaoCorrente().empresaId.ToString() + "/arquivos/" ;
             }
         }
 

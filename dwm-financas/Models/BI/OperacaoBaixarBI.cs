@@ -265,7 +265,7 @@ namespace DWM.Models.BI
                 r.ind_baixa = null;
                 decimal _valor_para_liquidacao = entity.vr_saldo_devedor.Value;
 
-                if (r.vr_baixa + r.vr_desconto == _valor_para_liquidacao)
+                if (r.vr_baixa + r.vr_desconto >= _valor_para_liquidacao)
                     r.ind_baixa = "4";
                 #endregion
 
