@@ -10,82 +10,83 @@
 
     t[1].url = "../Home/Default";
 }
-<div class="x_panel" id="panel-top">
-    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Títulos de cobrança", Descricao = "Incluir títulos na carteira de cobrança", Transacao = t })
-    <div class="x_content">
-        @using (Html.BeginForm("Create", "Cobranca", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data", @id = "formulario" }))
+<div class="container-cadastro">
+    <div class="x_panel" id="panel-top">
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Títulos de cobrança", Descricao = "Incluir títulos na carteira de cobrança", Transacao = t })
+        <div class="x_content">
+            @using (Html.BeginForm("Create", "Cobranca", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data", @id = "formulario" }))
         {
-            @Html.Partial("_AjaxAlert", "panel-top")
-            @Html.ValidationSummary("", new { @class = "text-danger" })
-            @Html.HiddenFor(info => info.empresaId)
-            @Html.HiddenFor(info => info.OperacaoParcela.OperacaoParcelaEvento.dt_movto)
-            @Html.HiddenFor(info => info.OperacaoParcela.OperacaoParcelaEvento.dt_ocorrencia)
-            <div class="row clearfix">
-                <div class="col-md-2">
-                    <div class="form-group">
-                         <label class="control-label margem-interna" for="dt_emissao">Emissão</label>
-                        @Html.EditorFor(info => info.dt_emissao, "DATE", new { identificador = "dt_emissao", readOnly = "false" })
+                @Html.Partial("_AjaxAlert", "panel-top")
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                @Html.HiddenFor(info => info.empresaId)
+                @Html.HiddenFor(info => info.OperacaoParcela.OperacaoParcelaEvento.dt_movto)
+                @Html.HiddenFor(info => info.OperacaoParcela.OperacaoParcelaEvento.dt_ocorrencia)
+                <div class="row clearfix">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label margem-interna" for="dt_emissao">Emissão</label>
+                            @Html.EditorFor(info => info.dt_emissao, "DATE", new { identificador = "dt_emissao", readOnly = "false" })
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group col-md-12" id="teste">
-                        <label class="control-label margem-interna" for="documento">Documento</label>
-                        @Html.TextBoxFor(info => info.documento, new { @class = "form-control input-sm", @maxlength = "12" })
+                    <div class="col-md-2">
+                        <div class="form-group col-md-12" id="teste">
+                            <label class="control-label margem-interna" for="documento">Documento</label>
+                            @Html.TextBoxFor(info => info.documento, new { @class = "form-control input-sm", @maxlength = "12" })
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-2">
-                    <p>
-                        &nbsp;
-                    </p>
-                    @*@Html.CheckBoxFor(info => info.recorrencia_mensal, new { @onclick = "RecorrenciaMensal()" })<small>&nbsp;Recorrência mensal</small>*@
-                </div>
-                <div class="col-md-5">
-                    @Html.Editor("nome_cliente1", "ClientesAutoComplete", new
+                    <div class="col-md-2">
+                        <p>
+                            &nbsp;
+                        </p>
+                        @*@Html.CheckBoxFor(info => info.recorrencia_mensal, new { @onclick = "RecorrenciaMensal()" })<small>&nbsp;Recorrência mensal</small>*@
+                    </div>
+                    <div class="col-md-5">
+                        @Html.Editor("nome_cliente1", "ClientesAutoComplete", new
                    {
                        value = Model.clienteId > 0 ? Model.clienteId.ToString() : "",
                        Text = Model.nome_cliente ?? "",
                        nextField = "descricao_historico",
                        prevField = "documento"
                    })
+                    </div>
                 </div>
-            </div>
-            <div class="row clearfix">
-                <div class="col-md-6">
-                    @Html.Editor("descricao_historico1", "HistoricoAutoComplete", new
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        @Html.Editor("descricao_historico1", "HistoricoAutoComplete", new
                         {
                             value = Model.historicoId > 0 ? Model.historicoId.ToString() : "",
                             Text = Model.descricao_historico ?? "",
                             nextField = "complementoHist",
                             prevField = "nome_cliente"
                         })
-                </div>
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <label class="control-label" for="complementoHist">Histórico complementar</label>
-                        @Html.TextAreaFor(m => m.complementoHist, 1, 1, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="control-label" for="complementoHist">Histórico complementar</label>
+                            @Html.TextAreaFor(m => m.complementoHist, 1, 1, new { @class = "form-control" })
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row clearfix">
-                <div class="col-md-6">
-                    @Html.Editor("descricao_centroCusto1", "CentroCustoAutoComplete", new
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        @Html.Editor("descricao_centroCusto1", "CentroCustoAutoComplete", new
                         {
                             value = Model.centroCustoId != null ? Model.centroCustoId.ToString() : "",
                             Text = Model.descricao_centroCusto ?? "",
                             nextField = "descricao_enquadramento",
                             prevField = "complementoHist"
                         })
-                </div>
-                <div class="col-md-5">
-                    @Html.Editor("descricao_enquadramento1", "EnquadramentoAutoComplete", new
+                    </div>
+                    <div class="col-md-5">
+                        @Html.Editor("descricao_enquadramento1", "EnquadramentoAutoComplete", new
                         {
                             value = Model.enquadramentoId != null ? Model.enquadramentoId.ToString() : "",
                             Text = Model.descricao_enquadramento ?? "",
                             nextField = "OperacaoParcela_num_titulo",
                             prevField = "descricao_centroCusto"
                         })
+                    </div>
                 </div>
-            </div>
             /* Nº Título (Seu Número), Banco, Forma de pagamento */
             <div class="row clearfix">
                 <div class="col-md-2">
@@ -188,10 +189,10 @@
                                     </div>
                                 </div>
                                 @*@Html.EditorFor(m => m.OperacaoParcela.vr_principal, "DECIMAL", new
-                                           {
-                                               form = "horizontal",
-                                               htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "return fnValorPrincipal(this);" }
-                                           })*@
+                                    {
+                                        form = "horizontal",
+                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "return fnValorPrincipal(this);" }
+                                    })*@
                             </div>
                         </div>
                         <div class="row">
@@ -203,11 +204,11 @@
                                     </div>
                                 </div>
                                 @*@Html.EditorFor(m => m.OperacaoParcela.OperacaoParcelaEvento.valor, "DECIMAL", new
-                                           {
-                                               form = "horizontal",
-                                               label = "Amortização Inicial",
-                                               htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return fnValorPrincipal(this);" }
-                                           })*@
+                                    {
+                                        form = "horizontal",
+                                        label = "Amortização Inicial",
+                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return fnValorPrincipal(this);" }
+                                    })*@
                             </div>
                         </div>
                         <div class="row">
@@ -219,10 +220,10 @@
                                     </div>
                                 </div>
                                 @*@Html.EditorFor(m => m.vr_jurosMora, "DECIMAL", new
-                                           {
-                                               form = "horizontal",
-                                               htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return Converte(this, 'vr_jurosMora')" }
-                                           })*@
+                                    {
+                                        form = "horizontal",
+                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return Converte(this, 'vr_jurosMora')" }
+                                    })*@
                             </div>
                         </div>
                         <div class="row">
@@ -234,10 +235,10 @@
                                     </div>
                                 </div>
                                 @*@Html.EditorFor(m => m.vr_multa, "DECIMAL", new
-                                           {
-                                               form = "horizontal",
-                                               htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return Converte(this, 'vr_multa')" }
-                                           })*@
+                                    {
+                                        form = "horizontal",
+                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return Converte(this, 'vr_multa')" }
+                                    })*@
                             </div>
                         </div>
                         <div class="row">
@@ -249,11 +250,11 @@
                                     </div>
                                 </div>
                                 @*@Html.Editor("vr_saldoDevedor", "DECIMAL", new
-                                           {
-                                               form = "horizontal",
-                                               label = "Saldo devedor",
-                                               htmlAttributes = (object)new { @class = "form-control input-sm text-right", @disabled = "disabled", @onblur = "return Converte(this)" }
-                                           })*@
+                                    {
+                                        form = "horizontal",
+                                        label = "Saldo devedor",
+                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @disabled = "disabled", @onblur = "return Converte(this)" }
+                                    })*@
                             </div>
                         </div>
                         <div class="row" id="xpto">
@@ -266,7 +267,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" >
+                        <div class="row">
                             <div class="col-md-12 margem-interna-10">
                                 <span>Clique na aba <code>amortização</code> para baixar/amortizar o título, ou na aba <code>Parcelamento</code> para parcelar o saldo devedor ou </span><a href="#" onclick="$('#btn-salvar').click()"><code>clique aqui para incluir o título</code></a>
                             </div>
@@ -274,7 +275,7 @@
                     </div>
                 </div>
             </div>
-            
+
             /* Tab-Panel Amortização e Parcelamento */
             <div class="" role="tabpanel" data-example-id="togglable-tabs">
                 <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
@@ -299,11 +300,11 @@
                                                 </div>
                                             </div>
                                             @*@Html.Editor("vr_amortizacao", "DECIMAL", new
-                                               {
-                                                   form = "horizontal",
-                                                   label = "Valor Amortizado",
-                                                   htmlAttributes = (object)new { @class = "form-control input-sm text-right", @disabled = "disabled", @onblur = "return Converte(this)" }
-                                               })*@
+                                                {
+                                                    form = "horizontal",
+                                                    label = "Valor Amortizado",
+                                                    htmlAttributes = (object)new { @class = "form-control input-sm text-right", @disabled = "disabled", @onblur = "return Converte(this)" }
+                                                })*@
                                         </div>
                                     </div>
                                     <div class="row">
@@ -311,15 +312,15 @@
                                             <div class="form-group">
                                                 <label class="col-md-6">Multa/Juros</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" name="vr_juros" id="vr_juros" class="form-control text-right" onfocus = "this.select();" onblur = "return fnValorTotal(this);" />
+                                                    <input type="text" name="vr_juros" id="vr_juros" class="form-control text-right" onfocus="this.select();" onblur="return fnValorTotal(this);" />
                                                 </div>
                                             </div>
                                             @*@Html.Editor("vr_juros", "DECIMAL", new
-                                               {
-                                                   form = "horizontal",
-                                                   label = "Multa/Juros",
-                                                   htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "return fnValorTotal(this);" }
-                                               })*@
+                                                {
+                                                    form = "horizontal",
+                                                    label = "Multa/Juros",
+                                                    htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "return fnValorTotal(this);" }
+                                                })*@
                                         </div>
                                     </div>
                                     <div class="row">
@@ -332,13 +333,13 @@
                                             </div>
                                         </div>
                                         @*<div class="col-md-12 altura-35">
-                                            @Html.Editor("vr_mora", "DECIMAL", new
-                                               {
-                                                   form = "horizontal",
-                                                   label = "Mora",
-                                                   htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return fnValorTotal(this);" }
-                                               })
-                                        </div>*@
+                                                @Html.Editor("vr_mora", "DECIMAL", new
+                                                   {
+                                                       form = "horizontal",
+                                                       label = "Mora",
+                                                       htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return fnValorTotal(this);" }
+                                                   })
+                                            </div>*@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 altura-35">
@@ -349,11 +350,11 @@
                                                 </div>
                                             </div>
                                             @*@Html.Editor("vr_desconto", "DECIMAL", new
-                                               {
-                                                   form = "horizontal",
-                                                   label = "Desconto",
-                                                   htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return fnValorTotal(this);" }
-                                               })*@
+                                                {
+                                                    form = "horizontal",
+                                                    label = "Desconto",
+                                                    htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return fnValorTotal(this);" }
+                                                })*@
                                         </div>
                                     </div>
                                     <div class="row">
@@ -365,11 +366,11 @@
                                                 </div>
                                             </div>
                                             @*@Html.Editor("vr_total", "DECIMAL", new
-                                               {
-                                                   form = "horizontal",
-                                                   label = "Total",
-                                                   htmlAttributes = (object)new { @class = "form-control input-sm text-right", @disabled = "disabled", @onblur = "return Converte(this)" }
-                                               })*@
+                                                {
+                                                    form = "horizontal",
+                                                    label = "Total",
+                                                    htmlAttributes = (object)new { @class = "form-control input-sm text-right", @disabled = "disabled", @onblur = "return Converte(this)" }
+                                                })*@
                                         </div>
                                     </div>
                                 </div>
@@ -444,6 +445,7 @@
             </div>
         }
 
+        </div>
     </div>
 </div>
 

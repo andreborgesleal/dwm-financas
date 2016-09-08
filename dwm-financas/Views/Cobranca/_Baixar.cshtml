@@ -226,7 +226,8 @@
             $("#vr_desconto").val("0,00");
         }
 
-        var _vr_liquidacao = (_vr_saldo_devedor - _vr_multa_atraso_baixa1 - _vr_juros_mora_baixa1) + _vr_juros_mora + _vr_multa_atraso - _vr_desconto;
+        //var _vr_liquidacao = (_vr_saldo_devedor - _vr_multa_atraso_baixa1 - _vr_juros_mora_baixa1) + _vr_juros_mora + _vr_multa_atraso - _vr_desconto;
+        var _vr_liquidacao = _vr_saldo_devedor + _vr_juros_mora + _vr_multa_atraso - _vr_desconto;
         _vr_baixa = _vr_liquidacao;
 
         $("#vr_liquidacao").val(_vr_baixa);

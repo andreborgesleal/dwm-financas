@@ -9,7 +9,14 @@
             @ViewData["Brand"]
             @foreach (TransacaoRepository trans in t.Where(info => info.exibir == "S"))
             {
-                <a href="#@trans.url" onclick="@trans.referencia"><small><i class="@trans.glyph"></i> @trans.nomeCurto</small></a>
+                if (trans.url != null && trans.url.Trim() != "")
+                {
+                    <a href="@trans.url" onclick="@trans.referencia"><small><i class="@trans.glyph"></i> @trans.nomeCurto</small></a>
+                }
+                else if (trans.uri != null && trans.uri.Trim() != "")
+                {
+                    <a href="#@trans.uri" onclick="@trans.referencia"><small><i class="@trans.glyph"></i> @trans.nomeCurto</small></a>
+                }
             }
         </h2>
     }
@@ -27,9 +34,18 @@
                 @{
                     for (int i = 0; i <= t.Length - 2; i++)
                     {
-                        <li>
-                            <a href="@t[i].url" onclick="@t[i].referencia">@t[i].nomeCurto</a>
-                        </li>
+                        if (t[i].url != null && t[i].url.Trim() != "")
+                        {
+                            <li>
+                                <a href="@t[i].url" onclick="@t[i].referencia">@t[i].nomeCurto</a>
+                            </li>
+                        }
+                        else if (t[i].uri != null && t[i].uri.Trim() != "")
+                        {
+                            <li>
+                                <a href="#@t[i].uri" onclick="@t[i].referencia">@t[i].nomeCurto</a>
+                            </li>
+                        }
                     }
                 }
                 @if (ViewData.Model is System.Web.Mvc.IPagedList)

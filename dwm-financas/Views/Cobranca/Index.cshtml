@@ -2,52 +2,59 @@
 @using App_Dominio.Repositories
 @model PagedList<DWM.Models.Repositories.ContaReceberViewModel>
 @{
-    ViewBag.Title = "DWM-Finanças";
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../Cobranca/Create";
+    t[0].nomeCurto = "Incluir";
+    t[0].referencia = "";
+    t[0].exibir = "S";
+    t[0].glyph = "fa fa-plus-square";
+
+    t[1].url = "../Home/Default";
 }
 
-<div class="container">
-    <div class="panel panel-default">
-        @Html.Partial("_NavBar", 1)
-        <div class="panel-body margem-negativa">
+<div class="container-cadastro">
+    <div class="x_panel" id="panel-top">
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Editar cobrança", Descricao = "", Transacao = t })
+        <div class="x_content">
             @using (Ajax.BeginForm("_Index", "Cobranca", new AjaxOptions { HttpMethod = "get" }, new { @style = "margin-left: 20px", @role = "search" }))
             {
-                <div class="form">
-                    <div class="row clearfix">
-                        <div class="col-md-6">
-                            @Html.Editor("nome_cliente1", "ClientesAutoComplete", new { nextField = "dt_emissao1" })
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label" for="dt_emissao1">Emissão</label>
-                                <div class="input-group">
-                                    <div class="row clearfix">
-                                        <div class="col-md-5">
-                                            @Html.Editor("dt_emissao1", "DATE", new { identificador = "dt_emissao1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.AddMonths(-1).ToString("yyyy-MM-01")) })
-                                        </div>
-                                        <div class="col-md-1">
-                                            à
-                                        </div>
-                                        <div class="col-md-5">
-                                            @Html.Editor("dt_emissao2", "DATE", new { identificador = "dt_emissao2", readOnly = "false", value = DateTime.Today })
-                                        </div>
-                                        <div class="col-md-1"></div>
-                                    </div>
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        @Html.Editor("nome_cliente1", "ClientesAutoComplete", new { nextField = "dt_emissao1" })
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label" for="dt_emissao1">Emissão</label>
+                            <div class="row clearfix">
+                                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                                    @Html.Editor("dt_emissao1", "DATE", new { identificador = "dt_emissao1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.AddMonths(-1).ToString("yyyy-MM-01")) })
                                 </div>
+                                <div class="col-md-1">
+                                    à
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                                    @Html.Editor("dt_emissao2", "DATE", new { identificador = "dt_emissao2", readOnly = "false", value = DateTime.Today })
+                                </div>
+                                <div class="col-md-1"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="row clearfix">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="button" class="btn btn-primary" value="Buscar" onclick="busca()" />
-                            </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="button" class="btn btn-primary" value="Buscar" onclick="busca()" />
+                            <input type="button" class="btn btn-default" onclick="window.location = '../Cobranca/Create'" value="Incluir" />
                         </div>
                     </div>
                 </div>
             }
         </div>
     </div>
-    @Html.Partial("_FormModal", "Listar Cobrança")
+
+    <div id="div-list-static"></div>
+
+    @*@Html.Partial("_FormModal", "Listar Cobrança")*@
 </div>
 
 <script>

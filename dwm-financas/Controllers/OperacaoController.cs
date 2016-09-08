@@ -564,8 +564,8 @@ namespace DWM.Controllers
                     Error(ex.Message); // Mensagem em inglês com a descrição detalhada do erro e fica no topo da tela
                 }
 
-                BindBreadCrumb("Cancelar Operação");
-                return View("_Index", value);
+                //BindBreadCrumb("Cancelar Operação");
+                return View("_EditarOperacao", value);
             }
             else
             {
@@ -664,8 +664,8 @@ namespace DWM.Controllers
                     ModelState.AddModelError("", MensagemPadrao.Message(17).ToString()); // mensagem amigável ao usuário
                     Error(ex.Message); // Mensagem em inglês com a descrição detalhada do erro e fica no topo da tela
                 }
-                BindBreadCrumb("Liquidar Operação");
-                return View("_Index", value);
+                //BindBreadCrumb("Liquidar Operação");
+                return View("_EditarOperacao", value);
             }
             else
             {

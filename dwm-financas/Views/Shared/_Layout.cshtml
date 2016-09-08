@@ -191,7 +191,9 @@
             <!-- pagen content -->
             <div class="right_col" role="main">
                 @BreadCrumbPage.Trace((App_Dominio.Component.BreadCrumb)ViewBag.BreadCrumb)
-                @Html.Partial("_alerts")
+                <div class="container-cadastro">
+                    @Html.Partial("_alerts")
+                </div>
                 @*
                 <div class="alert alert-dismissable alert-warning" id="alerta" style="visibility: hidden">
                     <a class="close" href="#" aria-hidden="true" onclick="$('#alerta').hide()">x</a>
@@ -199,7 +201,7 @@
                     <div id="MsgAlert"></div>
                 </div>*@
                 @RenderBody()
-                <div style="height: 500px">
+                <div style="height: 570px">
                 </div>
 
             </div>

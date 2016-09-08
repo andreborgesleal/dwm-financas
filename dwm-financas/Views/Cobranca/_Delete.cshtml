@@ -5,7 +5,8 @@
 }
 
 <div>
-    @using (Ajax.BeginForm("DelOp", "Cobranca", new AjaxOptions { HttpMethod = "GET" }, new { @class = "form", @id = "form2" }))
+    @*@using (Html.BeginForm("DelOp", "Cobranca", new AjaxOptions { HttpMethod = "GET" }, new { @class = "form", @id = "form2" }))*@
+    @using (Html.BeginForm("DelOp", "Cobranca", FormMethod.Post, new { @class = "form-horizontal" }))
     {
         @Html.HiddenFor(info => info.operacaoId)
         <div class="well text-center margem-topo-10">Todos os títulos serão excluídos. Os títulos já pagos ou amortizados serão excluídos bem como suas movimentações e lançamentos contábeis.</div>

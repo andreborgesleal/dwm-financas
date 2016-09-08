@@ -9,97 +9,98 @@
 
     t[1].url = "../Home/Default";
 }
-
-<div class="x_panel">
-    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Plano de contas", Descricao = "Incluir Conta", Transacao = t })
-    <div class="x_content">
-        @using (Html.BeginForm("Create", "PlanoContas", FormMethod.Post, new { @class = "form-horizontal" }))
-        {
-            @Html.ValidationSummary("", new { @class = "text-danger" })
-            @Html.HiddenFor(info => info.exercicio)
-            <div class="row clearfix">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label" for="nome">Código Pleno</label>
-                        @Html.TextBoxFor(info => info.codigoPleno, new { @class = "form-control" })
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label" for="nome">Código Reduzido</label>
-                        @Html.TextBoxFor(info => info.codigoReduzido, new { @class = "form-control" })
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label" for="nome">Tipo da Conta</label>
-                        @Html.DropDownListFor(m => m.tipoConta, DropDownListEnum.TipoConta(Model.tipoConta), new { @class = "form-control" })
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    @Html.EditorFor(m => m.vr_saldo_inicial, "DECIMAL", new
-                   {
-                       htmlAttributes = (object)new { @class = "form-control text-right", @onblur = "return Converte(this, 'vr_saldo_inicial')" }
-                   })
-                </div>
-            </div>
-            <div class="row clearfix">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label" for="descricao">Descrição</label>
-                        @Html.TextBoxFor(m => m.descricao, new { @class = "form-control", @maxlength = "60" })
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    @Html.Editor("descricao_pai1", "PlanoContasPaiAutoComplete", new
-                       {
-                           value = Model.planoContaId_pai != null ? Model.planoContaId_pai.ToString() : "",
-                           Text = Model.descricao_pai ?? "",
-                           prevField = "descricao",
-                           nextField = "btnSalvar"
-                       })
-                </div>
-            </div>
-            if (Model != null && Model.lastThree != null)
+<div class="container-cadastro">
+    <div class="x_panel">
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Plano de contas", Descricao = "Incluir Conta", Transacao = t })
+        <div class="x_content">
+            @using (Html.BeginForm("Create", "PlanoContas", FormMethod.Post, new { @class = "form-horizontal" }))
             {
-                <h4>Últimas contas incluídas</h4>
-                <!-- Table -->
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Código Pleno</th>
-                            <th>Descrição</th>
-                            <th>Tipo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (DWM.Models.Entidades.PlanoConta pc in Model.lastThree)
-                        {
-                            <tr>
-                                <td class="col-md-4 col-sm-4">
-                                    <small>@pc.codigoPleno</small>
-                                </td>
-                                <td class="col-md-6 col-sm-2">
-                                    <small>@pc.descricao</small>
-                                </td>
-                                <td class="col-md-2 col-sm-3">
-                                    <small>@(pc.tipoConta == "S" ? "SINTÉTICA" : "ANALÍTICA")</small>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            }
-            <p>&nbsp;</p>
-            <div class="row clearfix">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-success" value="Salvar" name="btn-salvar" id="btn-salvar" />
-                        <input type="button" onclick="window.location = '../PlanoContas/Browse'" class="btn btn-default" value="Cancelar" />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                @Html.HiddenFor(info => info.exercicio)
+                <div class="row clearfix">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label" for="nome">Código Pleno</label>
+                            @Html.TextBoxFor(info => info.codigoPleno, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label" for="nome">Código Reduzido</label>
+                            @Html.TextBoxFor(info => info.codigoReduzido, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label" for="nome">Tipo da Conta</label>
+                            @Html.DropDownListFor(m => m.tipoConta, DropDownListEnum.TipoConta(Model.tipoConta), new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.EditorFor(m => m.vr_saldo_inicial, "DECIMAL", new
+               {
+                   htmlAttributes = (object)new { @class = "form-control text-right", @onblur = "return Converte(this, 'vr_saldo_inicial')" }
+               })
                     </div>
                 </div>
-            </div>
-        }
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label" for="descricao">Descrição</label>
+                            @Html.TextBoxFor(m => m.descricao, new { @class = "form-control", @maxlength = "60" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.Editor("descricao_pai1", "PlanoContasPaiAutoComplete", new
+               {
+                   value = Model.planoContaId_pai != null ? Model.planoContaId_pai.ToString() : "",
+                   Text = Model.descricao_pai ?? "",
+                   prevField = "descricao",
+                   nextField = "btnSalvar"
+               })
+                    </div>
+                </div>
+                if (Model != null && Model.lastThree != null)
+                {
+                    <h4>Últimas contas incluídas</h4>
+                <!-- Table -->
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Código Pleno</th>
+                                <th>Descrição</th>
+                                <th>Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (DWM.Models.Entidades.PlanoConta pc in Model.lastThree)
+                            {
+                                <tr>
+                                    <td class="col-md-4 col-sm-4">
+                                        <small>@pc.codigoPleno</small>
+                                    </td>
+                                    <td class="col-md-6 col-sm-2">
+                                        <small>@pc.descricao</small>
+                                    </td>
+                                    <td class="col-md-2 col-sm-3">
+                                        <small>@(pc.tipoConta == "S" ? "SINTÉTICA" : "ANALÍTICA")</small>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                <p>&nbsp;</p>
+                <div class="row clearfix">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-success" value="Salvar" name="btn-salvar" id="btn-salvar" />
+                            <input type="button" onclick="window.location = '../PlanoContas/Browse'" class="btn btn-default" value="Cancelar" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 </div>
 

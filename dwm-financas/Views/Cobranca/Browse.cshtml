@@ -1,12 +1,21 @@
 ﻿@using App_Dominio.Repositories
 @model PagedList<DWM.Models.Repositories.ContaReceberDemonstrativoViewModel>
 @{
-    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
     t[0].url = "../Cobranca/Create";
     t[0].nomeCurto = "Incluir";
     t[0].referencia = "";
+    t[0].exibir = "S";
+    t[0].glyph = "fa fa-plus-square";
 
-    t[1].url = "../Home/Default";
+    t[1].url = "../Cobranca/Index";
+    t[1].nomeCurto = "Editar";
+    t[1].referencia = "";
+    t[1].exibir = "S";
+    t[1].glyph = "fa fa-edit";
+
+
+    t[2].url = "../Home/Default";
 }
 <div class="container-cadastro">
     <div class="x_panel" id="panel-top">

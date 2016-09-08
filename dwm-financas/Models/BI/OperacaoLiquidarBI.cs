@@ -41,6 +41,16 @@ namespace DWM.Models.BI
             Type typeInstance = typeof(OModel);
             return (OModel)Activator.CreateInstance(typeInstance);
         }
+        protected OPEModel getOperacaoParcelaEventoModelInstance()
+        {
+            Type typeInstance = typeof(OPEModel);
+            return (OPEModel)Activator.CreateInstance(typeInstance);
+        }
+        protected OPERepo getOperacaoParcelaEventoRepositoryInstance()
+        {
+            Type typeInstance = typeof(OPERepo);
+            return (OPERepo)Activator.CreateInstance(typeInstance);
+        }
         #endregion
 
         #region Abstract Methods
@@ -124,7 +134,27 @@ namespace DWM.Models.BI
                 if (_error_code.Value.ToString() != "0")
                     r.mensagem = new Validate() { Code = int.Parse(_error_code.Value.ToString()), Message = _error_desc.Value.ToString() };
                 else
+                {
+                    if (r.fileComprovante != null && r.fileComprovante != "")
+                    {
+                        #region Chamar o método AfterInsert dos eventos para mover os arquivos de boleto e comprovante (e fazer a atualização dos saldos)
+                        OPERepo evm = getOperacaoParcelaEventoRepositoryInstance();
+                        evm.arquivo = r.fileComprovante;
+
+                        OPEModel pevModel = getOperacaoParcelaEventoModelInstance();
+                        pevModel.Create(this.db, this.seguranca_db);
+
+                        evm = pevModel.AfterInsert(evm);
+                        if (evm.mensagem.Code > 0)
+                        {
+                            r.mensagem = evm.mensagem;
+                            throw new Exception(evm.mensagem.MessageBase);
+                        }
+                        #endregion
+                    }
+
                     r.mensagem = new Validate() { Code = 0, Message = "Registro incluído com sucesso" };
+                }
             }
             catch (App_DominioException ex)
             {

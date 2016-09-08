@@ -9,15 +9,16 @@
 
     t[1].url = "../Home/Default";
 }
-<div class="x_panel">
-    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Clientes", Descricao = "Listagem de Clientes", Transacao = t })
-    <div class="x_content">
-        <div id="div-list">
-            @Html.Partial("List", Model)
-        </div>
-        <div class="altura-35">
-            @Html.Partial("_defaultListButtons", new List<ButtonRepository> { new ButtonRepository() { linkText = "Incluir", actionName = "Create", controllerName = "Clientes", buttonType = "link" } })
+<div class="container-cadastro">
+    <div class="x_panel">
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Clientes", Descricao = "Listagem de Clientes", Transacao = t })
+        <div class="x_content">
+            <div id="div-list">
+                @Html.Partial("List", Model)
+            </div>
+            <div class="altura-35">
+                @Html.Partial("_defaultListButtons", new List<ButtonRepository> { new ButtonRepository() { linkText = "Incluir", actionName = "Create", controllerName = "Clientes", buttonType = "link" } })
+            </div>
         </div>
     </div>
 </div>
-

@@ -59,19 +59,19 @@
             <div class="x_panel">
                 @{
                     TransacaoRepository[] tTitulo = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
-                    tTitulo[0].url = "myTab";
+                    tTitulo[0].uri = "myTab";
                     tTitulo[0].nomeCurto = "Baixar";
                     tTitulo[0].referencia = "$(\"#home-tab\").click();";
                     tTitulo[0].exibir = "S";
                     tTitulo[0].glyph = "fa fa-check-square";
 
-                    tTitulo[1].url = "myTab";
+                    tTitulo[1].uri = "myTab";
                     tTitulo[1].nomeCurto = "Evento";
                     tTitulo[1].referencia = "$(\"#profile-evento\").click();";
                     tTitulo[1].exibir = "S";
                     tTitulo[1].glyph = "fa fa-plus-square";
 
-                    tTitulo[2].url = "myTab";
+                    tTitulo[2].uri = "myTab";
                     tTitulo[2].nomeCurto = "Alterar";
                     tTitulo[2].referencia = "$(\"#profile-alterar\").click();";
                     tTitulo[2].exibir = "S";
@@ -79,7 +79,7 @@
 
                     tTitulo[3].url = "../Home/Default";
                 }
-                @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Dados do título", Descricao = "", Transacao = tTitulo })
+                @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = Model.nome_cliente, Descricao = "", Transacao = tTitulo })
                 <div class="x_content">
                     <!-- top tiles -->
                     <div class="row tile_count">
@@ -96,12 +96,12 @@
                             }
 
                         </div>
-                        <div class="col-md-5 col-sm-12 col-xs-12 col-lg-5 tile_stats_count">
+                        <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4 tile_stats_count">
                             <span class="count_top"><i class="fa fa-bank"></i> Banco</span>
                             <div class="count"><h3>@Model.nome_banco</h3></div>
                             <span class="count_bottom"><i class="primary"><i class="fa fa-sort-asc"></i></i> @Model.classificacao</span>
                         </div>
-                        <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4 tile_stats_count">
+                        <div class="col-md-5 col-sm-12 col-xs-12 col-lg-5 tile_stats_count">
                             <span class="count_top"><i class="fa fa-dollar"></i> Saldo devedor</span>
                             <div class="count green"><h3>@(Model.vr_saldo_devedor.HasValue ? Model.vr_saldo_devedor.Value.ToString("R$ ###,###,###,##0.00") : "0,00")</h3></div>
                             <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>@(Model.vr_encargos.HasValue && Model.ind_baixa == null ? Model.vr_encargos.Value.ToString("R$ ###,###,##0.00") : "R$ 0,00") </i> encargos</span>
@@ -132,12 +132,12 @@
                             }
 
                         </div>
-                        <div class="col-md-5 col-sm-12 col-xs-12 col-lg-5 tile_stats_count">
+                        <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4 tile_stats_count">
                             <span class="count_top"><i class="fa fa-spinner"></i> Forma Pagamento</span>
                             <div class="count"><h3>@Model.descricao_forma_pagamento</h3></div>
                             <span class="count_bottom"><i class="green">@(Model.num_titulo != null && Model.num_titulo.Trim() != "" ? Model.num_titulo : "-") </i> Nº Título</span>
                         </div>
-                        <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4 tile_stats_count">
+                        <div class="col-md-5 col-sm-12 col-xs-12 col-lg-5 tile_stats_count">
                             <span class="count_top"><i class="fa fa-square"></i> Situação</span>
                             <div class="count"><h3>@Model.situacao</h3></div>
                             <span class="count_bottom"><i class="primary"><i class="fa fa-sort-asc"></i>@(Model.vr_total_pago.HasValue ? Model.vr_total_pago.Value.ToString("R$ ###,###,##0.00") : "R$ 0,00") </i> pago</span>

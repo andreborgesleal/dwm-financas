@@ -88,9 +88,9 @@ namespace DWM.Models.Repositories
                     case "4":
                         return "Boleto";
                     case "5":
-                        return "Nota promissória";
+                        return "TED/DOC";
                     case "6":
-                        return "Nota fiscal";
+                        return "Pag. Eletrônico";
                     case "9":
                         return "Outros";
                     default:
