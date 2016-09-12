@@ -1,0 +1,105 @@
+﻿@{
+    var next = ViewData["nextField"];
+    var previous = ViewData["prevField"];
+    var value = ViewData["value"];
+    var Text = ViewData["Text"];
+    var tabindex = ViewData["tabindex"];
+}
+<div class="form-group">
+    <div id="div-lov"></div>
+    <label class="control-label" for="descricao_centroCusto">Centro de Custo</label>
+    <div class="input-group" id="CCustoParent">
+        <input type="text" id="descricao_centroCusto" name="descricao_centroCusto" value="@Text" class="form-control" onblur="fillCCusto();" tabindex="@tabindex"/>
+        <input type="hidden" id="centroCustoId" name="centroCustoId" value="@value"/>
+        <div class="input-group-btn">
+            <button class="btn btn-primary" type="button" onclick="showLookup('LovCentroCustoModal');"><i class="glyphicon glyphicon-search"></i></button>
+            <button class="btn btn-bitbucket" type="button" style="margin-left: -5px" onclick="InsertModal('../CentroCustos/CrudCentroCustoModal',
+                            'descricao' ,
+                            'centroCustoId' ,
+                            'descricao_centroCusto' ,
+                            'descricao_centroCusto' ,
+                            '@next' );">
+                <i class="glyphicon glyphicon-plus"></i>
+            </button>
+            <button class="btn btn-instagram" type="button" style="margin-left: -5px" onclick="clean('centroCustoId', 'descricao_centroCusto');"><i class="glyphicon glyphicon-remove"></i></button>
+        </div>
+    </div>
+</div>
+@*//  Formulário Modal para a mensagem*@
+<div class="modal fade" id="myMessageModalTypeahead_centroCustoId" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header panel-success">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel_historicoId">
+                    Mensagem
+                </h4>
+            </div>
+            <div class="modal-body">
+                <p><label id="catarina"></label></p>
+            </div>
+            <div class="modal-footer panel-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<a id="linkModal" href="#myMessageModalTypeahead_centroCustoId" data-toggle="modal"></a>
+@*// Fim-Formulário Modal*@
+
+
+<div id="descricao_centroCusto-container" class="panel panel-primary" style="position: relative; float: left; margin-top: -20px; border: none"></div>
+<script>
+    // Next Field
+    $('#CCustoParent').on('keydown', '#descricao_centroCusto', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode == 9 && '@next' != '') {
+            e.preventDefault();
+            if (!e.shiftKey)
+                $('#@next').focus();
+            else
+                $('#@previous').focus();
+        }
+    });
+    // Fim-Next Field
+
+    var link = encodeURI('../CentroCustos/getNames?noCahce=' + new Date());
+    var dataCcu = { values: [] };
+    var ccu = { countries: [] };
+    $.ajax({
+        type: "POST",
+        url: link,
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        async: false,
+        dataType: "json",
+        success: function (jsonObj) {
+            for (i in jsonObj) {
+                dataCcu.values.push(jsonObj[i].descricao);
+                ccu.countries.push({ objId: jsonObj[i].centroCustoId, descricao: jsonObj[i].descricao })
+            };
+        }
+    });
+
+    function fillCCusto() {
+        for (i in ccu.countries) {
+            if (ccu.countries[i].descricao == $('#descricao_centroCusto').val()) {
+                $('#centroCustoId').val(ccu.countries[i].objId);
+            }
+        }
+    }
+
+    var ccuArray = $.map(ccu.countries, function (value, key) {
+        return {
+            value: value.descricao,
+            data: key.centroCustoId
+        };
+    });
+
+    // initialize autocomplete with custom appendTo
+    $('#descricao_centroCusto').autocomplete({
+        lookup: ccuArray,
+        appendTo: '#descricao_centroCusto-container'
+    });
+</script>

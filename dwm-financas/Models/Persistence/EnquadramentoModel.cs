@@ -92,7 +92,7 @@ namespace DWM.Models.Persistence
                     descricao_centroCusto = i.centroCustoId != null ? db.CentroCustos.Find(i.centroCustoId).descricao : "",
                     planoContaId = i.planoContaId,
                     codigoPleno = _codigoPleno,
-                    descricao_planoConta = i.planoContaId != 0 ? db.PlanoContas.Find(i.planoContaId).descricao : "",
+                    descricao_planoConta = i.planoContaId != 0 ? _codigoPleno + " " + db.PlanoContas.Find(i.planoContaId).descricao : "",
                     historicoId = i.historicoId,
                     descricao_historico = i.historicoId != 0 ? db.Historicos.Find(i.historicoId).descricao : "",
                     complementoHist = i.complementoHist,

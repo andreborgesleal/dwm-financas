@@ -1,0 +1,98 @@
+﻿@model System.Web.Mvc.PagedList<DWM.Models.Repositories.ContabilidadeViewModel>
+@using DWM.Models.Repositories;
+@{
+    Layout = null;
+}
+@if (Model != null)
+{
+    <div class="dashboard-widget-content">
+        <div class="table-responsive">
+            <table class="table table-striped jambo_table bulk_action dedo-indicador">
+                <thead>
+                    <tr class="headings">
+                        <th class="column-title text-center">Ação</th>
+                        <th class="column-title">ID</th>
+                        <th class="column-title">Data</th>
+                        <th class="column-title">Doc</th>
+                        <th class="column-title">Histórico</th>
+                        <th class="column-title text-right">Débitos</th>
+                        <th class="column-title text-right">Créditos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ContabilidadeViewModel contabilidade in Model)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" onclick="window.location='Edit?contabilidadeId=@contabilidade.contabilidadeId'"></button>
+                                <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" onclick="window.location='Delete?contabilidadeId=@contabilidade.contabilidadeId'"></button>
+                                <button type="button" class="btn btn-default btn-sm glyphicon glyphicon-floppy-disk" onclick="window.location='SaveAs?contabilidadeId=@contabilidade.contabilidadeId'"></button>
+                            </td>
+                            <td>
+                                <span>@contabilidade.contabilidadeId</span>
+                            </td>
+                            <td>
+                                <span>@contabilidade.dt_lancamento.ToString("dd/MM/yyyy")</span>
+                            </td>
+                            <td>
+                                <span>@contabilidade.documento</span>
+                            </td>
+                            <td class="col-md-6">
+                                <div id="accordion" role="tablist" aria-multiselectable="true">
+                                    <div role="tab" id="heading@(contabilidade.contabilidadeId)">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse@(contabilidade.contabilidadeId)" aria-expanded="true" aria-controls="collapse@(contabilidade.contabilidadeId)">
+                                            <span>@contabilidade.ContabilidadeItems.First().descricao_historico</span>
+                                        </a>
+                                    </div>
+                                    <div id="collapse@(contabilidade.contabilidadeId)" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading@(contabilidade.contabilidadeId)">
+                                        @foreach (ContabilidadeItemViewModel item in contabilidade.ContabilidadeItems)
+                                        {
+                                            <div class="row clearfix">
+                                                <div class="col-md-4"><small>-@Html.Editor("pc", "TRUNC", new { text = item.descricao_planoConta.Trim(), width = 40 })</small></div>
+                                                <div class="col-md-5 text-justify">
+                                                    <small>
+                                                        @Html.Editor("historico", "TRUNC", new { text = item.descricao_historico.Trim(), width = 60 })
+                                                        <p class="muted text-justify">
+                                                            @item.complementoHist
+                                                        </p>
+                                                    </small>
+                                                </div>
+                                                <div class="col-md-3 text-right">
+                                                    <small>
+                                                        @if (@item.tipoLancamento == "D")
+                                                        {
+                                                            @item.valor.ToString("###,###,##0.00") <span class="label label-danger">D</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            @item.valor.ToString("###,###,##0.00") <span class="label label-default">C</span>
+                                                        }
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <span>@contabilidade.ContabilidadeItems.Where(info => info.tipoLancamento.Trim() == "D").Sum(info => info.valor).ToString("###,###,##0.00")</span>
+                            </td>
+                            <td class="text-right">
+                                <span>@contabilidade.ContabilidadeItems.Where(info => info.tipoLancamento.Trim() == "C").Sum(info => info.valor).ToString("###,###,##0.00")</span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @Html.Partial("Paginacao", Model)
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+
+
+

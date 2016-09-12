@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="9927255" Data="12/09/2016 00:05:21">
+    <Sessao>c2hdwfccwxtwv434ruytj3b4</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Controllers.ContabilidadeController =&gt; contabilidade/edit</NameSpace>
+    <Context>exercicio="2016",empresaId="6",dt_lancamento="07/09/2016",documento="",contabilidadeId1="",descricao_conta="",planoContaId="0",codigoPleno="0",descricao_centroCusto="",centroCustoId="",descricao_historico="",historicoId="0",ContabilidadeItem.tipoLancamento="D",ContabilidadeItem.valor.1="0,00",ContabilidadeItem.valor="0",ContabilidadeItem.complementoHist="",btn-salvar="Salvar"</Context>
+    <StackTrace>   em App_Dominio.Pattern.Facade`3.Save(R value, Crud operation) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Facade.cs:linha 102
+   em App_Dominio.Controllers.DwmRootController`3.Update(R value) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Controllers\DwmRootController.cs:linha 272
+   em App_Dominio.Controllers.DwmRootController`3.SetEdit(R value, FormCollection collection, String breadCrumbText, IDictionary`2 text) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Controllers\DwmRootController.cs:linha 225</StackTrace>
+  </LOG>
+</LOG>

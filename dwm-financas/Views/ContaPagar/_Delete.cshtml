@@ -1,0 +1,34 @@
+﻿@using DWM.Models.Repositories
+@model ContaPagarViewModel
+@{
+    Layout = null;
+}
+
+<div>
+    @*@using (Html.BeginForm("DelOp", "ContaPagar", new AjaxOptions { HttpMethod = "GET" }, new { @class = "form", @id = "form2" }))*@
+    @using (Html.BeginForm("DelOp", "ContaPagar", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.HiddenFor(info => info.operacaoId)
+        <div class="well text-center margem-topo-10">Todos as contas serão excluídas. As contas já pagas ou amortizadas serão excluídas bem como suas movimentações e lançamentos contábeis.</div>
+        <input type="submit" class="btn btn-danger" value="Excluir">
+    }
+</div>
+
+@*<script type="text/javascript">
+    $(function () {
+        $('#form2').submit(function () {
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        $('#EditarOperacaoContaPagar').html(result);
+                    }
+                });
+            }
+            return false;
+        });
+    });
+</script>*@
+

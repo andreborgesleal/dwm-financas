@@ -1,0 +1,63 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@using App_Dominio.Enumeracoes
+@using App_Dominio.Controllers
+@model DWM.Models.Repositories.ContabilidadeViewModel
+@{
+    Layout = null;
+}
+
+@Html.Partial("FormItem", Model)
+
+<div class="row clearfix margem-topo">
+    <div class="col-md-6">
+        <button type="button" class="btn btn-primary" onclick="SaveItem();">Excluir Item</button>
+    </div>
+</div>
+<div id="div-ListItem">
+    @Html.Partial("_ListItem", Model)
+</div>
+
+<script type="text/javascript">
+
+    function SaveItem() {
+        CarregandoIn();
+
+        $("#nav-edit").removeClass('active');
+        $("#nav-new").addClass("active");
+        $("#nav-del").removeClass("active");
+
+        var link = '@Url.Action("CreateItem")';
+        link = encodeURI(link + '?sequencial=' + '@Model.ContabilidadeItem.sequencial' +
+            '&centroCustoId=' + $("#centroCustoId").val() +
+            '&descricao_centroCusto=' + $("#descricao_centroCusto").val() +
+            '&planoContaId=' + $("#planoContaId").val() +
+            '&codigoPleno=' + $("#codigoPleno").val() +
+            '&descricao_planoConta=' + $("#descricao_conta").val() +
+            '&historicoId=' + $("#historicoId").val() +
+            '&descricao_historico=' + $("#descricao_historico").val() +
+            '&complementoHist=' + $("#ContabilidadeItem_complementoHist").val() +
+            '&tipoLancamento=' + $("#ContabilidadeItem_tipoLancamento").val() +
+            '&valor=' + $("#ContabilidadeItem_valor_1").val() +
+            '&operacao=E' +
+            '&noCahce=' + new Date());
+
+        $('#div-item').load(link);
+
+        $(document).ajaxSuccess(function (event, xhr, settings) {
+            $('#carregando').css("visibility", "hidden");
+            $('#carregando').css("height", "0px");
+            $('#carregando').css("margin-top", "0%");
+            $('#carregando').css("margin-left", "0%");
+        }).error(function () {
+            $('#carregando').css("visibility", "hidden");
+            $('#carregando').css("height", "0px");
+            $('#carregando').css("margin-top", "0%");
+            $('#carregando').css("margin-left", "0%");
+        })
+
+    }
+
+</script>
+
+

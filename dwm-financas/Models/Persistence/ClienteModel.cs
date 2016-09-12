@@ -169,7 +169,7 @@ namespace DWM.Models.Persistence
 
             ClienteViewModel c = base.CreateRepository(Request);
             c.dt_inclusao = Funcoes.Brasilia();
-            c.ind_tipo_pessoa = "PJ";
+            c.ind_tipo_pessoa = "PF";
             return c;
         }
         #endregion

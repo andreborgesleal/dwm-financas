@@ -1,0 +1,42 @@
+﻿@using App_Dominio.Repositories
+@model DWM.Models.Repositories.GrupoCobrancaViewModel
+@{
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../GrupoCobranca/Create";
+    t[0].nomeCurto = "Incluir";
+    t[0].referencia = "";
+
+    t[1].url = "../Home/Default";
+}
+
+<div class="x_panel">
+    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Grupo de cobrança", Descricao = "Excluir grupo de cobrança", Transacao = t })
+    <div class="x_content">
+        @using (Html.BeginForm("Delete", "GrupoCobranca", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            @Html.HiddenFor(info => info.grupoCobrancaId)
+            @Html.HiddenFor(info => info.descricao)
+            @Html.HiddenFor(info => info.empresaId)
+            <div class="well well-sm">Atenção: Não será permitido excluir um grupo de cobrança se houver cobrança vinculada a ele.</div>
+            <div class="row">
+                <div class="col-md-6 col-xs-12 col-sm-12 col-lg-6">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.descricao, new { @class = "control-label" })
+                        <input type="text" class="form-control" name="descricao" id="descricao" value="@Model.descricao" maxlength="60" disabled />
+                    </div>
+                </div>
+            </div>
+            <p>&nbsp;</p>
+            <div class="row clearfix">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-danger" value="Excluir" name="btn-excluir" id="btn-excluir" />
+                        <input type="button" onclick="window.location = '../GrupoCobranca/Browse'" class="btn btn-default" value="Cancelar" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+    

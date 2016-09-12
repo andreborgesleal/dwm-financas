@@ -1,0 +1,28 @@
+﻿@model System.Web.Mvc.PagedList<DWM.Models.Repositories.EnquadramentoViewModel>
+@{
+    Layout = null;
+    Model.action = "../Enquadramentos/_ListEnquadramentoModal";
+}
+
+<div class="row">
+    <div class="col-md-12" style="margin: 0px">
+        @Html.Partial("_Filter", Model)
+        <div id="div-enq" class="no-padding">
+            @Html.Partial("../Enquadramentos/_ListEnquadramentoModal", Model)
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function Move(id, descricao) {
+        var url = 'Enquadramento';
+        url = encodeURI(url + '?enquadramentoId=' + id);
+        $('#div-item').load(url);
+        $("#btnModal").click();
+    }
+
+</script>
+
+
+

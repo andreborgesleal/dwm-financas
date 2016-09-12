@@ -135,7 +135,7 @@ namespace DWM.Controllers
                 int? _centroCustoId = centroCustoId != null && centroCustoId != "" ? int.Parse(centroCustoId) : _null;
                 int? _grupoId = grupoCredorId != null && grupoCredorId != "" ? int.Parse(grupoCredorId) : _null;
                 int? _bancoId = bancoId != null && bancoId != "" ? int.Parse(bancoId) : _null;
-                ListViewContaPagar list = new ListViewContaPagar();
+                ListViewContaPagarDemonstrativoBI list = new ListViewContaPagarDemonstrativoBI();
                 return this._List(index, pageSize, "Browse", list, _titulos_vencidos_atraso, _dt_vencidos_atraso1, _dt_vencidos_atraso2, _titulos_a_vencer,
                                     _dt_vencimento1, _dt_vencimento2, _titulos_amortizados, _titulos_nao_pagos, _baixa_liquidacao,
                                     _baixa_cancelamento, _dt_baixa1, _dt_baixa2, _credorId, _dt_emissao1, _dt_emissao2, _centroCustoId, _grupoId, _bancoId);
@@ -144,20 +144,34 @@ namespace DWM.Controllers
                 return View();
         }
 
+        public ActionResult _List(int? index, int? pageSize, string action, ListViewContaPagarDemonstrativoBI model, params object[] param)
+        {
+            if (ViewBag.ValidateRequest)
+            {
+                Factory<ContaPagarDemonstrativoViewModel, ApplicationContext> facadeCob = new Factory<ContaPagarDemonstrativoViewModel, ApplicationContext>();
+                IPagedList pagedList = facadeCob.PagedList(model, index, pageSize.Value, param);
+                UpdateBreadCrumb(this.ControllerContext.RouteData.Values["controller"].ToString(), action);
+                return View(pagedList);
+            }
+            else
+                return null;
+        }
+
+
         [AuthorizeFilter]
-        public ActionResult ListOperacaoParam(int? index, int? pageSize = 50, string credorId = null, string dt_emissao1 = null, string dt_emissao2 = null)
+        public ActionResult ListOperacaoParam(int? index, int? pageSize = 50, string clienteId = null, string dt_emissao1 = null, string dt_emissao2 = null)
         {
             ViewBag.ValidateRequest = true;
             if (ViewBag.ValidateRequest)
             {
                 int? _null = null;
-                int? _credorId = credorId != null && credorId != "" ? int.Parse(credorId) : _null;
+                int? _clienteId = clienteId != null && clienteId != "" ? int.Parse(clienteId) : _null;
                 DateTime? _dt_emissao1 = Funcoes.StringToDate(dt_emissao1);
                 DateTime? _dt_emissao2 = Funcoes.StringToDate(dt_emissao2);
                 ListViewContaPagarBI list = new ListViewContaPagarBI();
 
                 Factory<EditarContaPagarViewModel, ApplicationContext> factory = new Factory<EditarContaPagarViewModel, ApplicationContext>();
-                IPagedList pagedList = factory.PagedList(list, index, pageSize.Value, _credorId, _dt_emissao1, _dt_emissao2);
+                IPagedList pagedList = factory.PagedList(list, index, pageSize.Value, _clienteId, _dt_emissao1, _dt_emissao2);
                 return View(pagedList);
             }
             else

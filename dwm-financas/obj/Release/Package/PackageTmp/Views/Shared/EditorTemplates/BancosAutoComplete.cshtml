@@ -1,0 +1,75 @@
+﻿@{
+    var next = ViewData["nextField"];
+    var previous = ViewData["prevField"];
+    var value = ViewData["value"];
+    var Text = ViewData["Text"];
+    var tabindex = ViewData["tabindex"];
+}
+<div class="form-group">
+    <div id="div-lov"></div>
+    <label class="control-label" for="nome_banco">Banco</label>
+    <div class="input-group" id="BcoParent">
+        <input type="text" id="nome_banco" name="nome_banco" value="@Text" class="form-control" onblur="fillBco();" tabindex="@tabindex" />
+        <input type="hidden" id="bancoId" name="bancoId" value="@value" />
+        <div class="input-group-btn">
+            <button class="btn btn-primary" style="margin-left: -5px" type="button" onclick="showLookup('LovBancoModal');"><i class="glyphicon glyphicon-search"></i></button>
+            <button class="btn btn-instagram" style="margin-left: -5px" type="button" onclick="clean('bancoId', 'nome_banco');"><i class="glyphicon glyphicon-remove"></i></button>
+        </div>
+    </div>
+</div>
+<div id="nome_banco-container" class="panel panel-primary" style="position: relative; float: left; margin-top: -20px; border: none"></div>
+
+<script>
+    // Next Field
+    $('#BcoParent').on('keydown', '#nome_banco', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode == 9 && '@next' != '') {
+            e.preventDefault();
+            if (!e.shiftKey)
+                $('#@next').focus();
+            else
+                $('#@previous').focus();
+        }
+    });
+    // Fim-Next Field
+
+    var link = encodeURI('../Bancos/getNames?noCahce=' + new Date());
+    var data = { values: [] };
+    var bco = { countries: [] };
+    $.ajax({
+        type: "POST",
+        url: link,
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        async: false,
+        dataType: "json",
+        success: function (jsonObj) {
+            for (i in jsonObj) {
+                data.values.push(jsonObj[i].nome);
+                bco.countries.push({ objId: jsonObj[i].bancoId, nome: jsonObj[i].nome })
+            };
+        }
+    });
+
+    function fillBco() {
+        for (i in bco.countries) {
+            if (bco.countries[i].nome == $('#nome_banco').val()) {
+                $('#bancoId').val(bco.countries[i].objId);
+            }
+        }
+    }
+
+    var banArray = $.map(bco.countries, function (value, key) {
+        return {
+            value: value.nome,
+            data: key.bancoId
+        };
+    });
+
+    // initialize autocomplete with custom appendTo
+    $('#nome_banco').autocomplete({
+        lookup: banArray,
+        appendTo: '#nome_banco-container'
+    });
+</script>
+

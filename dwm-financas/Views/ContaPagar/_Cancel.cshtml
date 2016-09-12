@@ -1,0 +1,32 @@
+﻿@using DWM.Models.Repositories
+@model ContaPagarViewModel
+@{ 
+    Layout = null;
+}
+
+<div>
+    @using (Ajax.BeginForm("Cancel", "ContaPagar", new AjaxOptions { HttpMethod = "GET" }, new { @class = "form", @id = "form1" }))
+    {
+        @Html.HiddenFor(info => info.operacaoId)
+        <div class="well text-center margem-topo-10">Todos as contas em aberto serão baixadas por motivo de cancelamento. As contas já pagas ou amortizadas não sofrerão alterações.</div>
+        <input type="submit" class="btn btn-danger" value="Cancelar">
+    }
+</div>
+
+@*<script type="text/javascript">
+    $(function () {
+        $('#form1').submit(function () {
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        $('#Cancelar').html(result);
+                    }
+                });
+            }
+            return false;
+        });
+    });
+</script>*@

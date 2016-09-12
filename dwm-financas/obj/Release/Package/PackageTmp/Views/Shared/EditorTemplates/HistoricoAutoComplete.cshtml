@@ -1,0 +1,104 @@
+﻿@{
+    var next = ViewData["nextField"];
+    var previous = ViewData["prevField"];
+    var value = ViewData["value"];
+    var Text = ViewData["Text"];
+    var tabindex = ViewData["tabindex"];
+}
+<div class="form-group">
+    <div id="div-lov"></div>
+    <label class="control-label" for="descricao_historico">Histórico</label>
+    <div class="input-group" id="HistParent">
+        <input type="text" id="descricao_historico" name="descricao_historico" value="@Text" class="form-control" onblur="fillHist();" tabindex="@tabindex" />
+        <input type="hidden" id="historicoId" name="historicoId" value="@value" />
+        <div class="input-group-btn">
+            <button class="btn btn-primary" style="margin-left: -5px" type="button" onclick="showLookup('LovHistoricoContabilidadeModal');"><i class="glyphicon glyphicon-search"></i></button>
+            <button class="btn btn-bitbucket" style="margin-left: -5px" type="button" onclick="InsertModal('../Historicos/CrudHistoricoContabilidadeModal',
+                            'descricao' ,
+                            'historicoId' ,
+                            'descricao_historico' ,
+                            'descricao_historico' ,
+                            '@next' );"><i class="glyphicon glyphicon-plus"></i></button>
+            <button class="btn btn-instagram" style="margin-left: -5px" type="button" onclick="clean('historicoId', 'descricao_historico');"><i class="glyphicon glyphicon-remove"></i></button>
+        </div>
+    </div>
+</div>
+
+@*//  Formulário Modal para a mensagem*@
+<div class="modal fade" id="myMessageModalTypeahead_historicoId" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header panel-success">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel_historicoId">
+                    Mensagem
+                </h4>
+            </div>
+            <div class="modal-body">
+                <p><label id="catarina"></label></p>
+            </div>
+            <div class="modal-footer panel-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<a id="linkModal" href="#myMessageModalTypeahead_historicoId" data-toggle="modal"></a>
+@*// Fim-Formulário Modal*@
+<div id="descricao_historico-container" class="panel panel-primary" style="position: relative; float: left; margin-top: -20px; border: none"></div>
+<script>
+    // Next Field
+    $('#HistParent').on('keydown', '#descricao_historico', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode == 9 && '@next' != '') {
+            e.preventDefault();
+            if (!e.shiftKey)
+                $('#@next').focus();
+            else
+                $('#@previous').focus();
+        }
+    });
+    // Fim-Next Field
+
+    var link = encodeURI('../Historicos/getNames?noCahce=' + new Date());
+    var data = { values: [] };
+    var his = { countries: [] };
+    $.ajax({
+        type: "POST",
+        url: link,
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        async: false,
+        dataType: "json",
+        success: function (jsonObj) {
+            for (i in jsonObj) {
+                data.values.push(jsonObj[i].descricao);
+                his.countries.push({ objId: jsonObj[i].historicoId, descricao: jsonObj[i].descricao })
+            };
+        }
+    });
+
+    function fillHist() {
+        for (i in his.countries) {
+            if (his.countries[i].descricao == $('#descricao_historico').val()) {
+                $('#historicoId').val(his.countries[i].objId);
+            }
+        }
+    }
+
+    var hisArray = $.map(his.countries, function (value, key) {
+        return {
+            value: value.descricao,
+            data: key.historicoId
+        };
+    });
+
+    // initialize autocomplete with custom appendTo
+    $('#descricao_historico').autocomplete({
+        lookup: hisArray,
+        appendTo: '#descricao_historico-container'
+    });
+
+</script>
+

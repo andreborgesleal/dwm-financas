@@ -8,9 +8,9 @@ namespace dwm_condominios
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/Content-z/css").Include(
                       "~/Content/vendors/bootstrap/dist/css/bootstrap.min.css",
-                      "~/Content/vendors/font-awesome/css/font-awesome.min.css",
+                      //"~/Content/vendors/font-awesome/css/font-awesome.min.css",
                       "~/Content/vendors/iCheck/skins/flat/green.css",
                       "~/Content/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css",
                       "~/Content/production/css/maps/jquery-jvectormap-2.0.3.css",

@@ -1,0 +1,166 @@
+﻿@using App_Dominio.Repositories
+@using DWM.Models.Repositories;
+@model PagedList<EditarContaReceberViewModel>
+@{
+    Layout = null;
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../Cobranca/Create";
+    t[0].nomeCurto = "Incluir";
+    t[0].referencia = "";
+
+    t[1].url = "../Home/Default";
+}
+
+@if (Model != null)
+{
+    <div class="x_panel" id="panel-detail">
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Cobrança", Descricao = "Listagem de cobrança", Transacao = t })
+        <div class="x_content">
+            <!-- top tiles -->
+            <div class="row top_tiles">
+                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="tile-stats">
+                        <div class="icon">
+                            <i class="fa fa-barcode"></i>
+                        </div>
+                        <div class="count"><span class="h3"><strong>@Model.Sum(info => info.vr_principal).ToString("R$ ###,###,##0.00")</strong></span></div>
+                        <h3>Principal</h3>
+                        <p>total emitido no período</p>
+                    </div>
+                </div>
+                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="tile-stats">
+                        <div class="icon">
+                            <i class="glyphicon glyphicon-circle-arrow-up"></i>
+                        </div>
+                        <div class="count green"><span class="h3"><strong>@Model.Sum(info => info.vr_encargos ?? 0).ToString("R$ ###,###,##0.00")</strong></span></div>
+                        <h3>Encargos</h3>
+                        <p>juros e multa</p>
+                    </div>
+                </div>
+                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="tile-stats">
+                        <div class="icon">
+                            <i class="fa fa-check-square-o"></i>
+                        </div>
+                        <div class="count"><span class="h3"><strong>@Model.Sum(info => info.vr_amortizacao ?? 0).ToString("R$ ###,###,##0.00")</strong></span></div>
+                        <h3>Amortização</h3>
+                        <p>baixa parcial ou liquidação.</p>
+                    </div>
+                </div>
+                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="tile-stats">
+                        <div class="icon">
+                            <i class="glyphicon glyphicon-usd"></i>
+                        </div>
+                        <div class="count red"><span class="h3"><strong>@Model.Sum(info => info.vr_saldo_devedor ?? 0).ToString("R$ ###,###,##0.00")</strong></span></div>
+                        <h3>Em aberto</h3>
+                        <p>vencidos/a vencer.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- /top tiles -->
+            <div class="dashboard-widget-content">
+                <div class="row">
+                    <div class="col-md-5">
+                        Clique no botão de <code>Ação</code> para executar a ação desejada
+                    </div>
+                    <div class="col-md-1">
+                        <a href="../Cobranca/Create" class="text-primary">Incluir</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="#panel-top" class="info pull-right"><i class="fa fa-toggle-up"></i> Topo</a>
+                    </div>
+                </div>
+                <br />
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action dedo-indicador">
+                        <thead>
+                            <tr class="headings">
+                                <th class="column-title text-center nobr">Ação</th>
+                                <th class="column-title">ID</th>
+                                <th class="column-title">Emissão</th>
+                                <th class="column-title">Cliente</th>
+                                <th class="column-title">Últ. Pagto</th>
+                                <th class="column-title text-right">Principal</th>
+                                <th class="column-title text-right">Encargos</th>
+                                <th class="column-title text-right">Desconto</th>
+                                <th class="column-title text-right">Amortização</th>
+                                <th class="column-title text-right">Saldo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (EditarContaReceberViewModel pag in Model)
+                            {
+                                <tr class="even pointer">
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location = '_Index?operacaoId=@pag.operacaoId'"></button>
+                                    </td>
+                                    <td class="text-left">
+                                        <span>@(pag.operacaoId.ToString())</span>
+                                    </td>
+                                    <td class="text-left">
+                                        <span>@pag.dt_emissao.ToString("dd/MM/yyyy")</span>
+                                    </td>
+                                    <td class="text-left">
+                                        <span>@pag.nome_cliente</span>
+                                    </td>
+                                    <td class="text-left">
+                                        @if (pag.dt_ultima_amortizacao.HasValue)
+                                        {
+                                            <span>@pag.dt_ultima_amortizacao.Value.ToString("dd/MM/yyyy")</span>
+                                        }
+                                    </td>
+                                    <td class="text-right">
+                                        <span>@pag.vr_principal.ToString("###,###,###,##0.00")</span>
+                                    </td>
+                                    <td class="text-right">
+                                        @if (pag.vr_encargos.HasValue)
+                                        {
+                                            <span>@pag.vr_encargos.Value.ToString("###,###,###,##0.00")</span>
+                                        }
+                                    </td>
+                                    <td class="text-right">
+                                        @if (pag.vr_desconto.HasValue)
+                                        {
+                                            <span>@pag.vr_desconto.Value.ToString("###,###,###,##0.00")</span>
+                                        }
+                                    </td>
+                                    <td class="text-right">
+                                        @if (pag.vr_total_pago.HasValue)
+                                        {
+                                            <span>@pag.vr_total_pago.Value.ToString("###,###,###,##0.00")</span>
+                                        }
+                                    </td>
+                                    <td class="text-right">
+                                        @if (pag.vr_saldo_devedor.HasValue)
+                                        {
+                                            <span>@pag.vr_saldo_devedor.Value.ToString("###,###,###,##0.00")</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @Html.Partial("Paginacao", Model)
+                <a href="#panel-detail" class="info pull-right" id="linkTopo"><i class="fa fa-toggle-up"></i> Topo</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("linkTopo").click()
+    </script>
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+
+
+
+
+
+
+

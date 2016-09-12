@@ -1,0 +1,821 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@using App_Dominio.Enumeracoes
+@model ContaPagarViewModel
+@{
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../ContaPagar/Create";
+    t[0].nomeCurto = "Incluir";
+    t[0].referencia = "";
+
+    t[1].url = "../Home/Default";
+}
+<div class="container-cadastro">
+    <div class="x_panel" id="panel-top">
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Contas a pagar", Descricao = "Incluir conta a pagar", Transacao = t })
+        <div class="x_content">
+            @using (Html.BeginForm("Create", "ContaPagar", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data", @id = "formulario" }))
+        {
+                @Html.Partial("_AjaxAlert", "panel-top")
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                @Html.HiddenFor(info => info.empresaId)
+                @Html.HiddenFor(info => info.OperacaoParcela.OperacaoParcelaEvento.dt_movto)
+                @Html.HiddenFor(info => info.OperacaoParcela.OperacaoParcelaEvento.dt_ocorrencia)
+                <div class="row clearfix">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label margem-interna" for="dt_emissao">Emissão</label>
+                            @Html.EditorFor(info => info.dt_emissao, "DATE", new { identificador = "dt_emissao", readOnly = "false" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group col-md-12" id="teste">
+                            <label class="control-label margem-interna" for="documento">Documento</label>
+                            @Html.TextBoxFor(info => info.documento, new { @class = "form-control input-sm", @maxlength = "12" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <p>
+                            &nbsp;
+                        </p>
+                        @*@Html.CheckBoxFor(info => info.recorrencia_mensal, new { @onclick = "RecorrenciaMensal()" })<small>&nbsp;Recorrência mensal</small>*@
+                    </div>
+                    <div class="col-md-5">
+                        @Html.Editor("nome_credor1", "FornecedoresAutoComplete", new
+                   {
+                       value = Model.credorId > 0 ? Model.credorId.ToString() : "",
+                       Text = Model.nome_credor ?? "",
+                       nextField = "descricao_historico",
+                       prevField = "documento"
+                   })
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        @Html.Editor("descricao_historico1", "HistoricoAutoComplete", new
+                        {
+                            value = Model.historicoId > 0 ? Model.historicoId.ToString() : "",
+                            Text = Model.descricao_historico ?? "",
+                            nextField = "complementoHist",
+                            prevField = "nome_credor"
+                        })
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="control-label" for="complementoHist">Histórico complementar</label>
+                            @Html.TextAreaFor(m => m.complementoHist, 1, 1, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        @Html.Editor("descricao_centroCusto1", "CentroCustoAutoComplete", new
+                        {
+                            value = Model.centroCustoId != null ? Model.centroCustoId.ToString() : "",
+                            Text = Model.descricao_centroCusto ?? "",
+                            nextField = "descricao_enquadramento",
+                            prevField = "complementoHist"
+                        })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.Editor("descricao_enquadramento1", "EnquadramentoAutoComplete", new
+                        {
+                            value = Model.enquadramentoId != null ? Model.enquadramentoId.ToString() : "",
+                            Text = Model.descricao_enquadramento ?? "",
+                            nextField = "OperacaoParcela_num_titulo",
+                            prevField = "descricao_centroCusto"
+                        })
+                    </div>
+                </div>
+            /* Nº Título (Seu Número), Banco, Forma de pagamento */
+            <div class="row clearfix">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label" for="documento">Nº Título</label>
+                        @Html.TextBoxFor(info => info.OperacaoParcela.num_titulo, new { @class = "form-control input-sm", @maxlength = "20" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label" for="dt_emissao">Vencimento</label>
+                        @Html.EditorFor(info => info.OperacaoParcela.dt_vencimento, "DATE", new { identificador = "dt_vencimento", readOnly = "false", value = Model.OperacaoParcela.dt_vencimento })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label" for="drpFormaPagamento">Forma de pagamento</label>
+                        @Html.DropDownListFor(m => m.OperacaoParcela.ind_forma_pagamento, new DWM.Models.Enumeracoes.BindDropDownList().FormaPagamento("4"), new { @class = "form-control", @onchange="fnFormaPagto();" })
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    @Html.Editor("nome_banco1", "BancosAutoComplete", new
+                               {
+                                   value = Model.OperacaoParcela.bancoId != null ? Model.OperacaoParcela.bancoId.ToString() : "",
+                                   Text = Model.OperacaoParcela.nome_banco ?? "",
+                                   nextField = "OperacaoParcela_vr_principal",
+                                   prevField = "OperacaoParcela_ind_forma_pagamento"
+                               })
+                </div>
+            </div>
+
+            /* Dados FileUpload, Dados do cheque e Valores */
+            <div class="row clearfix">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">
+                                        Arquivo (boleto, nota fiscal, etc.)
+                                    </h2>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <input id="fileupload" type="file" name="files[]" multiple>
+                                        @Html.Hidden("fileBoleto", Model.fileBoleto)
+                                    </div>
+                                    <div class="file_name" id="file_name1"></div>
+                                    <div class="progress" id="progress1">
+                                        <div id="progress1-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                            <span class="sr-only">0% complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default margem-topo-sm" id="dados_cheque">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">
+                                        Dados do Cheque
+                                    </h2>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row clearfix">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label">Nº Banco</label>
+                                                @Html.TextBoxFor(info => info.OperacaoParcela.cheque_banco, "{0:##0}", new { @class = "form-control input-sm", @onkeypress = "return numeros()" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label">Agência</label>
+                                                @Html.TextBoxFor(info => info.OperacaoParcela.cheque_agencia, new { @class = "form-control input-sm", @maxlength = "5" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label">Nº Cheque</label>
+                                                @Html.TextBoxFor(info => info.OperacaoParcela.cheque_numero, new { @class = "form-control input-sm", @maxlength = "6" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-horizontal">
+                        <div class="row">
+                            <div class="col-md-12 no-padding altura-35">
+                                <div class="form-group">
+                                    <label class="col-md-6">Valor principal</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="OperacaoParcela_vr_principal" id="OperacaoParcela_vr_principal" class="form-control text-right" value="@Model.OperacaoParcela.vr_principal.ToString("###,###,##0.00")" onfocus="this.select();" onblur="return fnValorPrincipal(this);" />
+                                    </div>
+                                </div>
+                                @*@Html.EditorFor(m => m.OperacaoParcela.vr_principal, "DECIMAL", new
+                                    {
+                                        form = "horizontal",
+                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "return fnValorPrincipal(this);" }
+                                    })*@
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 no-padding altura-35">
+                                <div class="form-group">
+                                    <label class="col-md-6">Amortização inicial</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="OperacaoParcela_OperacaoParcelaEvento_valor" id="OperacaoParcela_OperacaoParcelaEvento_valor" class="form-control text-right" value="@Model.OperacaoParcela.OperacaoParcelaEvento.valor.ToString("###,###,##0.00")" onblur="return fnValorPrincipal(this);" />
+                                    </div>
+                                </div>
+                                @*@Html.EditorFor(m => m.OperacaoParcela.OperacaoParcelaEvento.valor, "DECIMAL", new
+                                    {
+                                        form = "horizontal",
+                                        label = "Amortização Inicial",
+                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return fnValorPrincipal(this);" }
+                                    })*@
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 no-padding altura-35">
+                                <div class="form-group">
+                                    <label class="col-md-6">Juros de mora</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="vr_jurosMora" id="vr_jurosMora" class="form-control text-right" value="@Model.vr_jurosMora" onblur="return Converte(this, 'vr_jurosMora')" />
+                                    </div>
+                                </div>
+                                @*@Html.EditorFor(m => m.vr_jurosMora, "DECIMAL", new
+                                    {
+                                        form = "horizontal",
+                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return Converte(this, 'vr_jurosMora')" }
+                                    })*@
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 no-padding altura-35">
+                                <div class="form-group">
+                                    <label class="col-md-6">Multa por atraso</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="vr_multa" id="vr_multa" class="form-control text-right" value="@Model.vr_multa" onblur="return Converte(this, 'vr_multa')" />
+                                    </div>
+                                </div>
+                                @*@Html.EditorFor(m => m.vr_multa, "DECIMAL", new
+                                    {
+                                        form = "horizontal",
+                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return Converte(this, 'vr_multa')" }
+                                    })*@
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 no-padding altura-35">
+                                <div class="form-group">
+                                    <label class="col-md-6">Saldo devedor</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="vr_saldoDevedor" id="vr_saldoDevedor" class="form-control text-right" disabled onblur="return Converte(this)" />
+                                    </div>
+                                </div>
+                                @*@Html.Editor("vr_saldoDevedor", "DECIMAL", new
+                                    {
+                                        form = "horizontal",
+                                        label = "Saldo devedor",
+                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @disabled = "disabled", @onblur = "return Converte(this)" }
+                                    })*@
+                            </div>
+                        </div>
+                        <div class="row" id="xpto">
+                            <div class="col-md-12 no-padding altura-35">
+                                <div class="form-group">
+                                    <label class="col-sm-6">Nº Parcelas</label>
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(info => info.num_parcelas, "{0:##0}", new { @class = "form-control input-sm text-right", @onblur = "HabilitaBotaoParcela()", @onkeypress = "return numeros()" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 margem-interna-10">
+                                <span>Clique na aba <code>amortização</code> para baixar/amortizar o título, ou na aba <code>Parcelamento</code> para parcelar o saldo devedor ou </span><a href="#" onclick="$('#btn-salvar').click()"><code>clique aqui para incluir o título</code></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            /* Tab-Panel Amortização e Parcelamento */
+            <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Amortização</a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false" onclick="fnGerarParcelas();">Parcelamento</a>
+                    </li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                        <div id="div-amortizacao">
+                            <div class="row clearfix">
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <div class="col-md-12 altura-35">
+                                            <div class="form-group">
+                                                <label class="col-md-6">Valor Amortizado</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" name="vr_amortizacao" id="vr_amortizacao" class="form-control text-right" disabled onblur="return Converte(this)" />
+                                                </div>
+                                            </div>
+                                            @*@Html.Editor("vr_amortizacao", "DECIMAL", new
+                                                {
+                                                    form = "horizontal",
+                                                    label = "Valor Amortizado",
+                                                    htmlAttributes = (object)new { @class = "form-control input-sm text-right", @disabled = "disabled", @onblur = "return Converte(this)" }
+                                                })*@
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 altura-35">
+                                            <div class="form-group">
+                                                <label class="col-md-6">Multa/Juros</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" name="vr_juros" id="vr_juros" class="form-control text-right" onfocus="this.select();" onblur="return fnValorTotal(this);" />
+                                                </div>
+                                            </div>
+                                            @*@Html.Editor("vr_juros", "DECIMAL", new
+                                                {
+                                                    form = "horizontal",
+                                                    label = "Multa/Juros",
+                                                    htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "return fnValorTotal(this);" }
+                                                })*@
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 altura-35">
+                                            <div class="form-group">
+                                                <label class="col-md-6">Mora</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" name="vr_mora" id="vr_mora" class="form-control text-right" onblur="return fnValorTotal(this);" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="col-md-12 altura-35">
+                                                @Html.Editor("vr_mora", "DECIMAL", new
+                                                   {
+                                                       form = "horizontal",
+                                                       label = "Mora",
+                                                       htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return fnValorTotal(this);" }
+                                                   })
+                                            </div>*@
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 altura-35">
+                                            <div class="form-group">
+                                                <label class="col-md-6">Desconto</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" name="vr_desconto" id="vr_desconto" class="form-control text-right" onblur="return fnValorTotal(this);" />
+                                                </div>
+                                            </div>
+                                            @*@Html.Editor("vr_desconto", "DECIMAL", new
+                                                {
+                                                    form = "horizontal",
+                                                    label = "Desconto",
+                                                    htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return fnValorTotal(this);" }
+                                                })*@
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 altura-35">
+                                            <div class="form-group">
+                                                <label class="col-md-6">Total</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" name="vr_total" id="vr_total" class="form-control text-right" disabled onblur="return Converte(this);" />
+                                                </div>
+                                            </div>
+                                            @*@Html.Editor("vr_total", "DECIMAL", new
+                                                {
+                                                    form = "horizontal",
+                                                    label = "Total",
+                                                    htmlAttributes = (object)new { @class = "form-control input-sm text-right", @disabled = "disabled", @onblur = "return Converte(this)" }
+                                                })*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="row clearfix">
+                                        <div class="col-md-12">
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">
+                                                    <h2 class="panel-title">
+                                                        Arquivo (comprovante, recibo, etc.)
+                                                    </h2>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <input id="fileUploadComprovante" type="file" name="files[]" multiple>
+                                                        @Html.Hidden("fileComprovante", Model.fileComprovante)
+                                                    </div>
+                                                    <div class="file_name" id="file_name2"></div>
+                                                    <div class="progress" id="progress2">
+                                                        <div id="progress2-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                                            <span class="sr-only">0% complete</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix">
+                                        <div class="col-md-12">
+                                            @Html.Editor("descricao_enquadramento2", "EnquadramentoAmortizacaoAutoComplete", new
+                                               {
+                                                   value = Model.enquadramento_amortizacaoId != null ? Model.enquadramento_amortizacaoId.ToString() : "",
+                                                   Text = Model.descricao_enquadramentoAmortizacao ?? "",
+                                                   nextField = "dt_ocorrencia",
+                                                   prevField = "fileUploadComprovante"
+                                               })
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label class="control-label" for="dt_ocorrencia">Dt.Amortização</label>
+                                                @Html.EditorFor(info => info.OperacaoParcela.OperacaoParcelaEvento.dt_ocorrencia, "DATE", new { identificador = "dt_ocorrencia", readOnly = "false" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="form-group">
+                                                <label class="control-label" for="dt_movto">Dt.Movimento</label>
+                                                @Html.EditorFor(info => info.OperacaoParcela.OperacaoParcelaEvento.dt_movto, "DATE", new { identificador = "dt_movto", readOnly = "false" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                        <div id="div-item"></div>
+                    </div>
+                </div>
+            </div>
+            /* Salvar */
+            <p>&nbsp;</p>
+            <div class="row clearfix">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success" value="Salvar" name="btn-salvar" id="btn-salvar" onclick="return Valida();" />
+                        <input type="button" onclick="window.location = '../ContaPagar/Browse'" class="btn btn-default" value="Cancelar" />
+                        <a href="#panel-top" class="info pull-right" id="topo"><i class="fa fa-toggle-up"></i> Topo</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        </div>
+    </div>
+</div>
+
+<div id="myModal1" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content hidden-xs">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="btnModal">×</button>
+                <h3 class="modal-title" id="myModalLabel">Modal title</h3>
+            </div>
+            <div class="modal-body" id="myModal1-body">
+                <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /.modal-dialog -->
+<div class="modal fade" id="myModal2">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body text-center" id="myModal2-body">
+                <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div>
+</div>
+<!-- /.modal -->
+
+<link href="~/Content/css/jquery.fileupload.css" rel="stylesheet" />
+<script src="~/Scripts/fileUpload/jquery.ui.widget.js"></script>
+<script src="~/Scripts/fileUpload/jquery.fileupload.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        FileUpload('fileupload', 'fileBoleto', 'progress1', 'file_name1', 'myModal1', 'arq1', 'trash1');
+        FileUpload('fileUploadComprovante', 'fileComprovante', 'progress2', 'file_name2', 'myModal2', 'arq2', 'trash2');
+    });
+</script>
+
+
+<script>
+            
+    function Valida() {
+        if ($("#dt_emissao").val() == '') {
+            ShowMessageAjaxAlert('Campo de preenchimento obrigatório: Data de Emissão', 'warning');
+            $('#dt_emissao').focus();
+            document.getElementById('topo').click();
+            return false;
+        }
+        if ($("#credorId").val() == '' || $('#credorId').val() == "0")
+        {
+            ShowMessageAjaxAlert('Campo de preenchimento obrigatório: Fornecedor', 'warning');
+            $('#nome_fornecedor').focus();
+            document.getElementById('topo').click();
+            return false;
+        }
+        if ($("#historicoId").val() == '' || $('#historicoId').val() == "0") {
+            ShowMessageAjaxAlert('Campo de preenchimento obrigatório: Histórico', 'warning');
+            $('#descricao_historico').focus();
+            document.getElementById('topo').click();
+            return false;
+        }
+        if ($("#dt_vencimento").val() == '') {
+            ShowMessageAjaxAlert('Campo de preenchimento obrigatório: Data de Vencimento', 'warning');
+            $('#dt_vencimento').focus();
+            document.getElementById('topo').click();
+            return false;
+        }
+
+        var _valorPrincipal = parseFloat($('#OperacaoParcela_vr_principal').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
+
+        if (_valorPrincipal <= 0) {
+            ShowMessageAjaxAlert('Campo de preenchimento obrigatório: Valor Principal', 'warning');
+            $('#OperacaoParcela_vr_principal').focus();
+            document.getElementById('topo').click();
+            return false;
+        }
+
+        if ($('#num_parcelas').val() == '')
+        {
+            ShowMessageAjaxAlert('Campo de preenchimento obrigatório: Nº de Parcelas', 'warning');
+            $('#num_parcelas').focus();
+            document.getElementById('topo').click();
+            return false;
+        }
+
+        var _num_parcelas = parseInt($('#num_parcelas').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
+
+        if (_num_parcelas <= 0) {
+            ShowMessageAjaxAlert('Nº de Parcelas deve ser maior que zero', 'warning');
+            $('#num_parcelas').focus();
+            document.getElementById('topo').click();
+            return false;
+        }
+
+        // data de emissão
+        var _dt_emissao = $("#dt_emissao").val().split("/");
+        var e = new Date(_dt_emissao[2], _dt_emissao[1] - 1, _dt_emissao[0]);
+
+        // data de vencimento
+        var _dt_vencimento = $("#dt_vencimento").val().split("/");
+        var v = new Date(_dt_vencimento[2], _dt_vencimento[1] - 1, _dt_vencimento[0]);
+
+        if (v < e)
+        {
+            ShowMessageAjaxAlert('Data de vencimento deve ser maior ou igual que a data de emissão', 'warning');
+            $('#dt_vencimento').focus();
+            document.getElementById('topo').click();
+            return false;
+        }
+
+        var _vr_amortizacao = parseFloat($('#OperacaoParcela_OperacaoParcelaEvento_valor').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
+
+        if (_vr_amortizacao > 0) {
+
+            var _valorJuros = parseFloat($('#vr_juros').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '')) / 100;
+            var _valorMora = parseFloat($('#vr_mora').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '')) / 100;
+            var _valorDesconto = parseFloat($('#vr_desconto').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '')) / 100;
+
+            var _valorTotal = (_vr_amortizacao/100 + _valorJuros + _valorMora - _valorDesconto) * 100;
+
+            if (_valorTotal <= 0) {
+                ShowMessageAlert('Valor da amortização deve ser um valor maior que zero.', 'warning');
+                return false;
+            }
+
+            if ($("#dt_ocorrencia").val() == '') {
+                ShowMessageAlert('Quando há pagamento, a Data da amortização deve ser informada', 'warning');
+                $('#dt_vencimento').focus();
+                return false;
+            }
+            if ($("#dt_movto").val() == '') {
+                ShowMessageAlert('Quando há pagamento, a Data do movimento deve ser informada', 'warning');
+                $('#dt_movto').focus();
+                return false;
+            }
+
+            // data da amortização
+            var _dt_amortizacao = $("#dt_ocorrencia").val().split("/");
+            var a = new Date(_dt_amortizacao[2], _dt_amortizacao[1] - 1, _dt_amortizacao[0]);
+
+            if (a < e) {
+                ShowMessageAlert('Data da amortização deve ser maior ou igual que a data de emissão', 'warning');
+                $('#dt_ocorrencia').focus();
+                return false;
+            }
+
+            // data do movimento bancario
+            var _dt_movto = $("#dt_movto").val().split("/");
+            var m = new Date(_dt_movto[2], _dt_movto[1] - 1, _dt_movto[0]);
+
+            if (m < a) {
+                ShowMessageAlert('Data do movimento deve ser maior ou igual que a data da amortização', 'warning');
+                $('#dt_movto').focus();
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function callEdit() {
+        if ($('#operacaoId1').val() != "")
+            window.location = 'Edit?operacaoId=' + $('#operacaoId1').val();
+    }
+
+    function NewItem() {
+        $("#nav-edit").removeClass('active');
+        $("#nav-new").addClass("active");
+
+        var link = '@Url.Action("NewItem")';
+        link = encodeURI(link + '?noCahce=' + new Date());
+        $('#div-item').load(link);
+    }
+
+    function HabilitaBotaoParcela() {
+        if ($('#OperacaoParcela_vr_principal').val() == '')
+            $('#OperacaoParcela_vr_principal').val('0,00');
+
+        if ($('#num_parcelas').val() == null || $('#num_parcelas').val() == '' || parseInt($('#num_parcelas').val()) < 2)
+            $('#div-item').html('');
+    }
+
+    function fnFormaPagto() {
+        if ($('#OperacaoParcela_ind_forma_pagamento').val() == "2")
+        {
+            $('#dados_cheque').removeClass('panel-default');
+            $('#dados_cheque').addClass('panel-primary');
+        }
+        else
+        {
+            $('#dados_cheque').removeClass('panel-primary');
+            $('#dados_cheque').addClass('panel-default');
+        }
+    }
+
+    function DesabilitaBotaoParcela() {
+        $('#num_parcelas').val('1');
+    }
+
+    function fnValorPrincipal(obj) {
+        if (!fnValidaValor(obj))
+            return false;
+
+        if ($('#OperacaoParcela_OperacaoParcelaEvento_valor').val() == '')
+            $('#OperacaoParcela_OperacaoParcelaEvento_valor').val('0,00');
+
+        if ($('#vr_juros').val() == '')
+            $('#vr_juros').val('0,00');
+
+        if ($('#vr_mora').val() == '')
+            $('#vr_mora').val('0,00');
+
+        if ($('#vr_desconto').val() == '')
+            $('#vr_desconto').val('0,00');
+
+        var _valorAmortizado = $('#OperacaoParcela_OperacaoParcelaEvento_valor').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
+        var _valorPrincipal = $('#OperacaoParcela_vr_principal').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
+
+        _valorAmortizado = parseInt(_valorAmortizado);
+        _valorPrincipal = parseInt(_valorPrincipal);
+
+        var _valorJuros = parseInt($('#vr_juros').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
+        var _valorMora = parseInt($('#vr_mora').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
+        var _valorDesconto = parseInt($('#vr_desconto').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
+
+        if (_valorAmortizado > _valorPrincipal) {
+            _valorAmortizado = _valorPrincipal;
+            $('#OperacaoParcela_OperacaoParcelaEvento_valor').val((_valorAmortizado).toString());
+            $('#OperacaoParcela_vr_amortizacao').val((_valorAmortizado).toString());
+            FormataNumero($("#OperacaoParcela_OperacaoParcelaEvento_valor")[0]);
+        }
+
+        var _saldoDevedor = (_valorPrincipal - _valorAmortizado);
+        var _valorTotal = (_valorAmortizado + _valorJuros + _valorMora - _valorDesconto);
+
+        $('#vr_saldoDevedor').val(_saldoDevedor.toString());
+        $('#vr_amortizacao').val((_valorAmortizado).toString());
+        $('#vr_total').val((_valorTotal).toString());
+
+        FormataNumero($("#vr_saldoDevedor")[0]);
+        FormataNumero($("#vr_amortizacao")[0]);
+        FormataNumero($("#vr_total")[0]);
+
+        if (_saldoDevedor > 0)
+            HabilitaBotaoParcela();
+        else
+        {
+            $('#div-item').html('');
+            DesabilitaBotaoParcela();
+        }
+
+        return true;
+    }
+
+    function fnValorTotal(obj) {
+        if (!fnValidaValor(obj))
+            return false;
+
+        if ($('#vr_juros').val() == '')
+            $('#vr_juros').val('0,00');
+
+        if ($('#vr_mora').val() == '')
+            $('#vr_mora').val('0,00');
+
+        if ($('#vr_desconto').val() == '')
+            $('#vr_desconto').val('0,00');
+
+        var _valorAmortizado = $('#OperacaoParcela_OperacaoParcelaEvento_valor').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
+        _valorAmortizado = parseInt(_valorAmortizado);
+
+        var _valorJuros = parseInt($('#vr_juros').val().replace('.', '').replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
+        var _valorMora = parseInt($('#vr_mora').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
+        var _valorDesconto = parseInt($('#vr_desconto').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
+
+        var _valorTotal = (_valorAmortizado + _valorJuros + _valorMora - _valorDesconto);
+
+        if (_valorTotal <= 0)
+        {
+            _valorAmortizado = _valorAmortizado;
+            $('#vr_juros').val('0,00');
+            $('#vr_mora').val('0,00');
+            $('#vr_desconto').val('0,00');
+            $('#vr_total').val(_valorAmortizado.toString());
+        }
+        else
+            $('#vr_total').val(_valorTotal.toString());
+
+        FormataNumero($("#vr_total")[0]);
+
+        return true;
+    }
+
+    function fnGerarParcelas() {
+        var _vr_saldoDevedor = parseInt($('#vr_saldoDevedor').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
+        if (_vr_saldoDevedor == 0) {
+            ShowMessageAjaxAlert('Saldo devedor deve ser maior que zero para gerar as parcelas', 'warning');
+            $('#OperacaoParcela_OperacaoParcelaEvento_valor').focus();
+            $('#div-item').html('');
+            document.getElementById('topo').click();
+            return false;
+        }
+
+        if ($('#bancoId').val() == null || $('#bancoId').val() == '') {
+            ShowMessageAjaxAlert('Banco deve deve informado para gerar as parcelas', 'warning');
+            $('#nome_banco').focus();
+            $('#div-item').html('');
+            document.getElementById('topo').click();
+            return false;
+        }
+
+        if ($('#num_parcelas').val() == null || $('#num_parcelas').val() == '' || parseInt($('#num_parcelas').val()) < 2)
+        {
+            ShowMessageAjaxAlert('Nº de parcelas deve ser maior que 1 para gerar as parcelas', 'warning');
+            $('#num_parcelas').focus();
+            $('#div-item').html('');
+            document.getElementById('topo').click();
+            return false;
+        }
+
+        $('#AjaxAlert').hide();
+
+        //$('#parcelaTab').removeClass('disabledTab');
+        //$('#parcelamentoLink').click();
+
+        CarregandoIn();
+
+        var _num_titulo = $('#OperacaoParcela_num_titulo').val();
+        var _dt_vencimento = $('#dt_vencimento').val();
+        var _ind_forma_pagamento = $('#OperacaoParcela_ind_forma_pagamento').val();
+        var _nome_banco = $('#nome_banco').val();
+        var _bancoId = $('#bancoId').val();
+        var _cheque_banco = $('#OperacaoParcela_cheque_banco').val();
+        var _cheque_agencia = $('#OperacaoParcela_cheque_agencia').val();
+        var _cheque_numero = $('#OperacaoParcela_cheque_numero').val();
+        var _vr_principal = $('#OperacaoParcela_vr_principal').val();
+        var _vr_amortizacao = $('#OperacaoParcela_OperacaoParcelaEvento_valor').val();
+        var _vr_juros = $('#vr_juros').val();
+        var _vr_mora = $('#vr_mora').val();
+        var _vr_desconto = $('#vr_desconto').val();
+        var _num_parcelas = $('#num_parcelas').val();
+
+        var link = '@Url.Action("ListParcelas")';
+        link = encodeURI(link + '?num_titulo=' + _num_titulo + '&dt_vencimento=' + _dt_vencimento + '&ind_forma_pagamento=' + _ind_forma_pagamento + '&bancoId=' + _bancoId + '&nome_banco=' + _nome_banco
+                                + '&cheque_banco=' + _cheque_banco + '&cheque_agencia=' + _cheque_agencia + '&cheque_numero=' + _cheque_numero + '&vr_principal=' + _vr_principal
+                                + '&vr_amortizacao=' + _vr_amortizacao + '&vr_juros=' + _vr_juros + '&vr_mora=' + _vr_mora + '&vr_desconto=' + _vr_desconto + '&num_parcelas=' + _num_parcelas
+                                + '&noCahce=' + new Date());
+        $('#div-item').load(link);
+
+        $(document).ajaxSuccess(function (event, xhr, settings) {
+            $('#carregando').css("visibility", "hidden");
+            $('#carregando').css("height", "0px");
+            $('#carregando').css("margin-top", "0%");
+            $('#carregando').css("margin-left", "0%");
+        }).error(function () {
+            $('#carregando').css("visibility", "hidden");
+            $('#carregando').css("height", "0px");
+            $('#carregando').css("margin-top", "0%");
+            $('#carregando').css("margin-left", "0%");
+        })
+    }
+
+</script>

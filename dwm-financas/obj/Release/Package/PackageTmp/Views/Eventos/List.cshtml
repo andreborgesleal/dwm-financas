@@ -1,0 +1,69 @@
+﻿@model System.Web.Mvc.PagedList<DWM.Models.Repositories.EventoViewModel>
+
+@{
+    Layout = null;
+}
+@if (Model != null)
+{
+    <div class="dashboard-widget-content">
+        <div class="col-md-5">
+            Clique nos botões de <code>Ação</code> para executar a ação desejada
+        </div>
+        <div class="col-md-1">
+            <a href="../Eventos/Create" class="text-primary">Incluir</a>
+        </div>
+        <div class="col-md-offset-9 col-lg-offset-9 col-xs-offset-7">
+            @Html.Partial("Filtro")
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped jambo_table bulk_action">
+                <thead>
+                    <tr class="headings">
+                        <th class="col-md-2 column-title text-center nobr">Ação</th>
+                        <th class="column-title">Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DWM.Models.Repositories.EventoViewModel eve in Model)
+                    {
+                        <tr class="even pointer">
+
+                            @if (eve.ind_eventoFixo == "N")
+                            {
+                                <td class="col-md-2 text-center">
+                                    <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='Edit?eventoId=@eve.eventoId'"></button>
+                                    <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="window.location='Delete?eventoId=@eve.eventoId'"></button>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="col-md-2 text-center">
+                                    <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar"data-toggle="popover" data-container="body" data-placement="left" data-content="Este é um evento fixo do sistema e não pode ser editado"></button>
+                                    <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" data-toggle="popover" data-container="body" data-placement="left" data-content="Este é um evento fixo do sistema e não pode ser excluído"></button>
+                                </td>
+                            }
+                            <td>
+                                <span>@eve.descricao</span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Partial("Paginacao", Model)
+    </div>
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+</script>
+
+
+

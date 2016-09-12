@@ -1,0 +1,166 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@model DWM.Models.Repositories.EditarContaPagarViewModel
+@{
+    ViewBag.Title = "DWM Finanças";
+    var path = Model.PathArquivos;
+}
+<div id="EditarContaPagar">
+    @Html.Partial("_Edit", Model)
+</div>
+
+<div class="modal fade" id="myModal1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Arquivo</h4>
+            </div>
+            <div class="modal-body text-center" id="myModal1-body">
+                <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="myModal2">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Movimentação Bancária</h4>
+            </div>
+            <div class="modal-body text-center" id="myModal1-body">
+                <table class="table table-striped">
+                    <tr class="active">
+                        <td><strong>ID</strong></td>
+                        <td class="text-left"><strong>Data</strong></td>
+                        <td class="text-left"><strong>Documento</strong></td>
+                        <td class="text-left"><strong>Banco</strong></td>
+                        <td class="text-left"><strong>Histórico</strong></td>
+                        <td><strong>Tipo</strong></td>
+                        <td class="text-right"><strong>Valor</strong></td>
+                    </tr>
+                    <tr>
+                        <td><small><span id="movtoBancarioId_"></span></small></td>
+                        <td class="text-left"><small><span id="dt_movto_"></span></small></td>
+                        <td class="text-left"><small><span id="documento_"></span></small></td>
+                        <td class="text-left"><small><span id="nome_banco_"></span></small></td>
+                        <td class="text-left"><small><span id="descricao_historico_"></span></small></td>
+                        <td><small><span id="tipo_"></span></small></td>
+                        <td class="text-right"><small><span id="valor_"></span></small></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="myModal3">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Contabilidade</h4>
+            </div>
+            <div class="modal-body text-center" id="myModal1-body">
+                <div id="myContabilidade"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@*<a href="#" id="movtoBancarioClick" data-toggle="modal" data-target="#myModal2"></a>*@
+
+<link href="~/Content/css/fileUpload/jquery.fileupload.css" rel="stylesheet" />
+<script src="~/Scripts/fileUpload/jquery.ui.widget.js"></script>
+<script src="~/Scripts/fileUpload/jquery.fileupload.js"></script>
+
+<script>
+    $(document).ready(function () {
+        FileUpload('fileupload', 'arquivo', 'progress1', 'file_name1', 'myModal1', 'arq1', 'trash1');
+    });
+
+
+    //$(document).ready(function () {
+    //    FileUpload('fileupload', 'fileBoleto', 'progress1', 'file_name1', 'myModal1', 'arq1', 'trash1');
+    //    FileUpload('fileUploadComprovante', 'fileComprovante', 'progress2', 'file_name2', 'myModal2', 'arq2', 'trash2');
+    //});
+
+    function visualizar(arquivo, extensao) {
+        if (extensao == '.jpeg' || extensao == '.jpg' || extensao == '.bmp' || extensao == '.png')
+            $('#myModal1-body').html('<img src="@path' + arquivo + '" class="img-responsive" alt="Responsive image" style="height: 600px">');
+        else if (extensao == '.pdf')
+            $('#myModal1-body').html('<iframe style="height: 600px; width: 100%" src="@path' + arquivo + '"></iframe>');
+    }
+
+    function showMovtoBancario(movtoBancarioId) {
+        var link = encodeURI("../Cobranca/getMovtoBancario?movtoBancarioId=" + movtoBancarioId);
+        $.getJSON(link, function (data) {
+            $("#movtoBancarioId_").html("#" + data.movtoBancarioId);
+            $("#dt_movto_").html(data.dt_movimento);
+            $("#documento_").html(data.documento);
+            $("#nome_banco_").html(data.nome_banco);
+            $("#descricao_historico_").html(data.descricao_historico + " " + data.complementoHist);
+            $("#tipo_").html(data.tipoMovto);
+            $("#valor_").html(data.valor);
+        });
+    }
+
+    function showContabilidade(contabilidadeId) {
+        var link = encodeURI("../Cobranca/getContabilidade?contabilidadeId=" + contabilidadeId);
+        var table = "";
+        var deb = 0;
+        var cred = 0;
+        $.getJSON(link, function (data) {
+            table = "<table class=\"table table-striped\">" +
+                    "   <tr class=\"active\">" +
+                    "       <td><strong>Conta</strong></td>" +
+                    "       <td class=\"text-left\"><strong>Descrição</strong></td>" +
+                    "       <td class=\"text-left\"><strong>Histórico</strong></td>" +
+                    "       <td class=\"text-right\"><strong>Débito</strong></td>" +
+                    "       <td class=\"text-right\"><strong>Crédito</strong></td>" +
+                    "  </tr>";
+
+            $.each(data, function (i, item) {
+                table += "<tr>" +
+                         "<td>" + item.codigoReduzido + "</td>" +
+                         "<td class=\"text-left\">" + item.descricao_planoConta + "</td>" +
+                         "<td class=\"text-left\">" + item.descricao_historico + "</td>";
+
+                if (item.tipoLancamento == "D") {
+                    table += "<td class=\"text-right\">" + item.valor + "</td>" +
+                             "<td>&nbsp;</td>";
+                    deb += item.valor;
+                }
+                else {
+                    table += "<td>&nbsp;</td>" +
+                             "<td class=\"text-right\">" + item.valor + "</td>";
+                    cred += item.valor;
+                }
+                table += "</tr>";
+
+            });
+
+            table += "<tr class=\"warning\">" +
+                     "<td colspan=\"2\">&nbsp;</td>" +
+                     "<td class=\"text-left\"><strong>Total</strong></td>" +
+                     "<td class=\"text-right\">" + deb + "</td>" +
+                     "<td class=\"text-right\">" + cred + "</td>" +
+                     "</tr>";
+
+            table += "</table>";
+            $("#myContabilidade").html(table);
+        });
+
+    }
+
+</script>

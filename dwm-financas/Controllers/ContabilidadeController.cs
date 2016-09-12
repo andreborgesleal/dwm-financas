@@ -69,6 +69,14 @@ namespace DWM.Controllers
         }
         #endregion
 
+        #region saveAs
+        [AuthorizeFilter]
+        public ActionResult SaveAs(int contabilidadeId)
+        {
+            return _Edit(new ContabilidadeViewModel() { contabilidadeId = contabilidadeId },"Replicar");
+        }
+        #endregion
+
         #region Delete
         [AuthorizeFilter]
         public ActionResult Delete(int contabilidadeId)

@@ -1,0 +1,114 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@using App_Dominio.Enumeracoes
+@model DWM.Models.Repositories.ContabilidadeViewModel
+@{
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../Contabilidade/Create";
+    t[0].nomeCurto = "Incluir";
+    t[0].referencia = "";
+
+    t[1].url = "../Home/Default";
+}
+<div class="container-cadastro">
+    @using (Html.BeginForm("Edit", "Contabilidade", FormMethod.Post, new { @class = "form" }))
+    {
+        @Html.ValidationSummary(false, "", new { @style = "margin-left: -20px" })
+        @Html.HiddenFor(info => info.exercicio)
+        @Html.HiddenFor(info => info.empresaId)
+        @Html.HiddenFor(info => info.contabilidadeId)
+        <div id="div-lov"></div>
+        <div class="x_panel" id="panel-top">
+            @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Lançamento contábil", Descricao = "Editar", Transacao = t })
+            <div class="x_content">
+                <div class="row clearfix">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label margem-interna" for="dt_lancamento">Data</label>
+                            @Html.EditorFor(info => info.dt_lancamento, "DATE", new { identificador = "dt_lancamento", readOnly = "false" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group col-md-8">
+                            <label class="control-label margem-interna" for="documento">Documento</label>
+                            @Html.TextBoxFor(info => info.documento, new { @class = "form-control input-sm", @maxlength = "20", @onblur = "$('#descricao_conta').focus();" })
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="col-md-offset-9">
+                            <div class="form-group">
+                                <label class="control-label col-md-2 margem-interna" for="contabilidadeId">ID</label>
+                                <div class="input-group col-md-10">
+                                    @Html.TextBox("contabilidadeId1", "", new { @class = "form-control input-sm" })
+                                    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true" onclick="callEdit()"></span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="x_panel" id="panel-item">
+            @{
+                TransacaoRepository[] tItem = { new TransacaoRepository(),
+                                                new TransacaoRepository(),
+                                                new TransacaoRepository(),
+                                                new TransacaoRepository() };
+                tItem[0].uri = "panel-top";
+                tItem[0].nomeCurto = "Novo";
+                tItem[0].referencia = "NewItem();";
+                tItem[0].exibir = "S";
+                tItem[0].glyph = "fa fa-file-o";
+
+                tItem[1].url = "../Razao/Browse?id=A";
+                tItem[1].nomeCurto = "Razão";
+                tItem[1].referencia = "";
+                tItem[1].exibir = "S";
+                tItem[1].glyph = "fa fa-list-alt";
+
+                tItem[2].uri = "panel-top";
+                tItem[2].nomeCurto = "Enquadramentos";
+                tItem[2].referencia = "showLookup('LovEnquadramentoModal', 'div-lov')";
+                tItem[2].exibir = "S";
+                tItem[2].glyph = "fa fa-table";
+
+                tItem[3].url = "../Home/Default";
+            }
+            @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Itens do lançamento", Descricao = "", Transacao = tItem })
+            <div class="x_content">
+                <div class="row clearfix margem-topo margem-interna">
+                    <div class="col-md-12">
+                        <div id="div-item">
+                            @Html.Partial("CreateItem", Model)
+                        </div>
+                    </div>
+                </div>
+                <p>&nbsp;</p>
+                <div class="row clearfix">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-success" value="Salvar" name="btn-salvar" id="btn-salvar" />
+                            <input type="button" onclick="window.location = '../Contabilidade/Browse'" class="btn btn-default" value="Cancelar" />
+                            <a href="#panel-item" class="info pull-right" id="topo-item"><i class="fa fa-toggle-up"></i> Topo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    function callEdit() {
+        if ($('#contabilidadeId1').val() != "")
+            window.location = 'Edit?contabilidadeId=' + $('#contabilidadeId1').val();
+    }
+
+    function NewItem() {
+        var link = '@Url.Action("NewItem")';
+        link = encodeURI(link + '?noCahce=' + new Date());
+        $('#div-item').load(link);
+    }
+
+</script>

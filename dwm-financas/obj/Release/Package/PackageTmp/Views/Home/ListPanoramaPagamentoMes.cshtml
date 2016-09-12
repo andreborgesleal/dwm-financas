@@ -1,0 +1,96 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Models
+@model PagedList<ContaPagarViewModel>
+@{
+    Layout = null;
+    DateTime Data1 = new DateTime(Funcoes.Brasilia().Year, Funcoes.Brasilia().Month, 1);
+    DateTime Data2 = Funcoes.Brasilia().Date;
+    decimal Principal = 0;
+    decimal Encargos = 0;
+    decimal Amortizacao = 0;
+    decimal Saldo_devedor = 0;
+}
+
+<table class="table table-striped table-advance table-hover" style="cursor: pointer">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Vencimento</th>
+            <th>Cliente</th>
+            <th>Últ. Pagto</th>
+            <th style="text-align: right">Principal</th>
+            <th style="text-align: right">Encargos</th>
+            <th style="text-align: right">Amortização</th>
+            <th style="text-align: right">Saldo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ContaPagarViewModel rec in Model.Where(info => info.OperacaoParcela.dt_ultima_amortizacao.HasValue && info.OperacaoParcela.dt_ultima_amortizacao.Value >= Data1 && info.OperacaoParcela.dt_ultima_amortizacao.Value <= Data2))
+        {
+            <tr>
+                <td class="text-left">
+                    @(rec.operacaoId.ToString() + "-" + rec.OperacaoParcela.parcelaId.ToString())
+                </td>
+                <td class="text-left">
+                    @rec.OperacaoParcela.dt_vencimento.ToString("dd/MM/yyyy")
+                </td>
+                <td class="text-left">
+                    @rec.nome_credor
+                </td>
+                <td class="text-left">
+                    @if (rec.OperacaoParcela.dt_ultima_amortizacao.HasValue)
+                    {
+                        @rec.OperacaoParcela.dt_ultima_amortizacao.Value.ToString("dd/MM/yyyy")
+                    }
+                </td>
+                <td class="text-right">
+                    @rec.OperacaoParcela.vr_principal.ToString("###,###,###,##0.00")
+                </td>
+                <td class="text-right">
+                    @if (rec.OperacaoParcela.vr_encargos.HasValue)
+                    {
+                        @rec.OperacaoParcela.vr_encargos.Value.ToString("###,###,###,##0.00")
+                    }
+                </td>
+                <td class="text-right">
+                    @if (rec.OperacaoParcela.vr_total_pago.HasValue)
+                    {
+                        @rec.OperacaoParcela.vr_total_pago.Value.ToString("###,###,###,##0.00")
+                    }
+                </td>
+                <td class="text-right">
+                    @if (rec.OperacaoParcela.vr_saldo_devedor.HasValue)
+                    {
+                        @rec.OperacaoParcela.vr_saldo_devedor.Value.ToString("###,###,###,##0.00")
+                    }
+                </td>
+            </tr>
+            Principal += rec.OperacaoParcela.vr_principal;
+            Encargos += rec.OperacaoParcela.vr_encargos.Value;
+            Amortizacao += rec.OperacaoParcela.vr_total_pago.Value;
+            Saldo_devedor += rec.OperacaoParcela.vr_saldo_devedor.Value;
+        }
+        <tr class="text-bold">
+            <td class="text-right" colspan="4">
+                Total:
+            </td>
+            <td class="text-right">
+                @Principal.ToString("###,###,###,##0.00")
+            </td>
+            <td class="text-right">
+                @Encargos.ToString("###,###,###,##0.00")
+            </td>
+            <td class="text-right">
+                @Amortizacao.ToString("###,###,###,##0.00")
+            </td>
+            <td class="text-right">
+                @Saldo_devedor.ToString("###,###,###,##0.00")
+            </td>
+        </tr>
+    </tbody>
+</table>
+@Html.Partial("Paginacao", Model)
+
+
+
+

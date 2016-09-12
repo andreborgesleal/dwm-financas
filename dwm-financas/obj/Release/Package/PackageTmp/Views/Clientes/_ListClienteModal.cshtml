@@ -1,0 +1,50 @@
+﻿@using DWM.Models.Repositories;
+@model System.Web.Mvc.PagedList<ClienteViewModel>
+@{
+    Layout = null;
+}
+
+@if (Model != null)
+{
+    <div class="row Scroll margem-negativa">
+        <div class="col-md-12 col-lg-12">
+            <table class="table table-striped jambo_table bulk_action" style="cursor: pointer">
+                <caption></caption>
+                <thead>
+                    <tr class="headings">
+                        <th>Nome do Cliente</th>
+                        <th>CPF/CNPJ</th>
+                        <th>Telefone</th>
+                        <th>Grupo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ClienteViewModel cli in Model)
+                    {
+                        <tr class="even pointer" onclick="Move('@cli.clienteId', '@cli.nome')">
+                            <td class="col-md-6 col-lg-6 col-sm-4">
+                                <small>@cli.nome</small><br />
+                                <small>@cli.email</small>
+                            </td>
+                            <td class="col-md-2 col-lg-2 col-sm-2">
+                                <small>@App_Dominio.Models.Funcoes.FormataCPFCNPJ(cli.cpf_cnpj)</small>
+                            </td>
+                            <td class="col-md-2 col-lg-2 col-sm-2">
+                                <small>@App_Dominio.Models.Funcoes.FormataTelefone(cli.fone1)</small>
+                            </td>
+                            <td class="col-md-2 col-lg-2 col-sm-3">
+                                <small>@cli.nome_grupo</small>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @Html.Partial("Paginacao", Model)
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+

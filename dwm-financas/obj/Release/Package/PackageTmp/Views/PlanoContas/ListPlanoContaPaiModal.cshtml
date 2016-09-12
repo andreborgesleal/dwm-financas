@@ -1,0 +1,34 @@
+﻿@model System.Web.Mvc.PagedList<DWM.Models.Repositories.PlanoContaViewModel>
+@{
+    Layout = null;
+    Model.action = "../PlanoContas/_ListPlanoContaPaiModal";
+}
+
+<div class="row">
+    <div class="col-md-12" style="margin: 0px">
+        @Html.Partial("_Filter", Model)
+        <div id="div-pc" style="padding-top: 0px">
+            @Html.Partial("../PlanoContas/_ListPlanoContaPaiModal", Model)
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    function Move(id, descricao) {
+        $("#planoContaId_pai").val(id);
+        $("#descricao_pai").val(descricao);
+        $("#descricao_pai1").val(descricao);
+        $("#btnModal").click();
+    }
+
+</script>
+
+
+
+
+
+
+
+

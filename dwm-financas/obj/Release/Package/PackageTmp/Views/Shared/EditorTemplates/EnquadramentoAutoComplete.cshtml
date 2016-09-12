@@ -1,0 +1,76 @@
+﻿@{
+    var next = ViewData["nextField"];
+    var previous = ViewData["prevField"];
+    var value = ViewData["value"];
+    var Text = ViewData["Text"];
+    var tabindex = ViewData["tabindex"];
+}
+<div class="form-group">
+    <label class="control-label" for="descricao_enquadramento">Enquadramento Contábil</label>
+    <div class="input-group" id="EnqParent">
+        <input type="text" id="descricao_enquadramento" name="descricao_enquadramento" onblur="fillEnq();" value="@Text" class="form-control" tabindex="@tabindex" />
+        <input type="hidden" id="enquadramentoId" name="enquadramentoId" value="@value" />
+        <div class="input-group-btn">
+            <button class="btn btn-primary" style="margin-left: -5px" type="button" onclick="showLookup('LovEnquadramentoOperacaoModal');"><i class="glyphicon glyphicon-search"></i></button>
+            <button class="btn btn-instagram" style="margin-left: -5px" type="button" onclick="clean('enquadramentoId', 'descricao_enquadramento');"><i class="glyphicon glyphicon-remove"></i></button>
+        </div>
+    </div>
+    <div id="div-lov"></div>
+</div>
+<div id="descricao_enquadramento-container" class="panel panel-primary" style="position: relative; float: left; margin-top: -20px; border: none"></div>
+<script>
+    // Next Field
+    $('#EnqParent').on('keydown', '#descricao_enquadramento', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode == 9 && '@next' != '') {
+            e.preventDefault();
+            if (!e.shiftKey)
+                $('#@next').focus();
+            else
+                $('#@previous').focus();
+        }
+    });
+    // Fim-Next Field
+
+    var link = encodeURI('../Enquadramentos/getNames?noCahce=' + new Date());
+    var dataEnq = { values: [] };
+    var enq = { countries: [] };
+    $.ajax({
+        type: "POST",
+        url: link,
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        async: false,
+        dataType: "json",
+        success: function (jsonObj) {
+            for (i in jsonObj) {
+                dataEnq.values.push(jsonObj[i].descricao);
+                enq.countries.push({ objId: jsonObj[i].enquadramentoId, descricao: jsonObj[i].descricao })
+            };
+        }
+    });
+
+
+    function fillEnq() {
+        for (i in enq.countries) {
+            if (enq.countries[i].descricao == $('#descricao_enquadramento').val()) {
+                $('#enquadramentoId').val(enq.countries[i].objId);
+            }
+        }
+    }
+
+    var enqArray = $.map(enq.countries, function (value, key) {
+        return {
+            value: value.descricao,
+            data: key.enquadramentoId
+        };
+    });
+
+    // initialize autocomplete with custom appendTo
+    $('#descricao_enquadramento').autocomplete({
+        lookup: enqArray,
+        appendTo: '#descricao_enquadramento-container'
+    });
+
+</script>
+

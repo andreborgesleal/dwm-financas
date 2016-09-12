@@ -1,0 +1,144 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@model System.Web.Mvc.PagedList<DWM.Models.Repositories.ContabilidadeViewModel>
+@{
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../Contabilidade/Create";
+    t[0].nomeCurto = "Incluir";
+    t[0].exibir = "S";
+    t[0].referencia = "";
+
+    t[1].url = "../Home/Default";
+}
+<div class="container-cadastro">
+    <div class="x_panel">
+        <div class="x_title">
+            <div class="row">
+                <div class="col-md-11">
+                    <h2>
+                        Lançamentos Contábeis
+                        <a href="../Contabilidade/Create"><small><i class="fa fa-file-o"></i> Incluir</small></a>
+                    </h2>
+                    <div class="form-group">
+                        <div class="input-group col-md-2 pull-right">
+                            @Html.TextBox("contabilidadeId1", "", new { @class = "form-control", @placeholder = "Buscar" })
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="button" onclick="callEdit();"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <ul class="nav navbar-right panel_toolbox pull-right">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                @{
+                                    for (int i = 0; i <= t.Length - 2; i++)
+                                    {
+                                        if (t[i].url != null && t[i].url.Trim() != "")
+                                        {
+                                            <li>
+                                                <a href="@t[i].url" onclick="@t[i].referencia">@t[i].nomeCurto</a>
+                                            </li>
+                                        }
+                                        else if (t[i].uri != null && t[i].uri.Trim() != "")
+                                        {
+                                            <li>
+                                                <a href="#@t[i].uri" onclick="@t[i].referencia">@t[i].nomeCurto</a>
+                                            </li>
+                                        }
+                                    }
+                                }
+                                @if (ViewData.Model is System.Web.Mvc.IPagedList)
+                                {
+                                    @Html.Partial("PaginacaoRegistros", (System.Web.Mvc.IPagedList)ViewData.Model)
+                                }
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="@t[t.Length-1].url" class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="x_content">
+            @using (Ajax.BeginForm("ListParam", "Contabilidade", new AjaxOptions { HttpMethod = "get", UpdateTargetId = "div-list" }, new { @role = "search", @id = "form000" }))
+            {
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        @Html.Editor("descricao_conta1", "PlanoContasAutoComplete", new { nextField = "descricao_centroCusto" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.Editor("descricao_centroCusto1", "CentroCustoAutoComplete", new { nextField = "descricao_historico", prevField = "descricao_conta" })
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        @Html.Editor("descricao_historico1", "HistoricoAutoComplete", new { nextField = "data1", prevField = "descricao_centroCusto" })
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label" for="data1">Período</label>
+                            <div class="row clearfix">
+                                <div class="col-md-4">
+                                    @Html.Editor("__data1", "DATE", new { identificador = "data1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-") + "01") })
+                                </div>
+                                <div class="col-md-1">
+                                    à
+                                </div>
+                                <div class="col-md-4">
+                                    @Html.Editor("__data2", "DATE", new { identificador = "data2", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-") + "01").AddDays(-1) })
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Buscar" />
+                            <input type="button" class="btn btn-default" onclick="window.location = '../Contabilidade/Create'" value="Incluir" />
+                        </div>
+                        @*<a href="#" class="btn btn-primary btn-sm link-default" onclick="Refresh(0, getPageSize(), '@Model.action', '@Model.DivId')"><span class="link-default col-md-10">Buscar</span></a>
+                            <a href="#" class="btn btn-default btn-sm link-default" onclick="window.location = 'Create'"><span class="link-default col-md-10">Incluir</span></a>*@
+                    </div>
+                </div>
+            }
+            <div id="div-list">
+                @Html.Partial("ListParam", Model)
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('#form000').submit(function () {
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        $('#div-list').html(result);
+                    }
+                });
+            }
+            return false;
+        });
+    });
+
+    function callEdit() {
+        if ($('#contabilidadeId1').val() != "")
+            window.location = 'Edit?contabilidadeId=' + $('#contabilidadeId1').val();
+    }
+
+</script>

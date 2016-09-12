@@ -1,0 +1,39 @@
+﻿@using DWM.Models.Repositories;
+@model System.Web.Mvc.PagedList<GrupoClienteViewModel>
+@{
+    Layout = null;
+}
+
+@if (Model != null)
+{
+    <div class="row Scroll" style="margin-top: -15px">
+        <div class="col-md-12" style="padding-right: 0px;">
+            <table class="table table-striped jambo_table bulk_action" style="cursor: pointer">
+                <caption></caption>
+                <thead>
+                    <tr class="headings">
+                        <th class="column-title">Nome do grupo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (GrupoClienteViewModel gcli in Model)
+                    {
+                        <tr class="even pointer" onclick="Move('@gcli.grupoClienteId', '@gcli.nome')">
+                            <td>
+                                <small>@gcli.nome</small>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @Html.Partial("Paginacao", Model)
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+
+

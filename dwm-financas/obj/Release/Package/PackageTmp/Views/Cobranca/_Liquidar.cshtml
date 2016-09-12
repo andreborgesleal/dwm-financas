@@ -1,0 +1,266 @@
+﻿@using DWM.Models.Repositories
+@model ContaReceberViewModel
+@{
+    Layout = null;
+}
+@using (Ajax.BeginForm("Liquidar", "Cobranca", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "EditarOperacaoContaReceber" }, new { @class = "form", @id = "form3", enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(info => info.operacaoId)
+    <div class="row clearfix">
+        <div class="col-md-6">
+            @Html.Editor("nome_banco1", "BancosAutoComplete", new
+               {
+                   value = Model.OperacaoParcela.bancoId != null ? Model.OperacaoParcela.bancoId.ToString() : "",
+                   Text = Model.OperacaoParcela.nome_banco ?? "",
+                   nextField = "dt_pagamento",
+                   prevField = ""
+               })
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label" for="dt_baixa">Dt.Pagamento</label>
+                @Html.EditorFor(info => info.OperacaoParcela.dt_baixa, "DATE", new { identificador = "dt_pagamento", readOnly = "false", value = Model.OperacaoParcela.dt_baixa })
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label" for="dt_ultima_amortizacao">Dt.Movimento</label>
+                @Html.EditorFor(info => info.dt_movto, "DATE", new { identificador = "dt_movto", readOnly = "false", value = Model.dt_movto })
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label" for="drpFormaPagamento">Forma de pagamento</label>
+                @Html.DropDownListFor(m => m.OperacaoParcela.ind_forma_pagamento, new DWM.Models.Enumeracoes.BindDropDownList().FormaPagamento(Model.OperacaoParcela.ind_forma_pagamento ?? ""), new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label">Saldo Devedor</label>
+                <input class="form-control text-right" readonly id="vr_saldo_devedor" name="vr_saldo_devedor" type="text" value="@Model.OperacaoParcela.vr_saldo_devedor.Value.ToString("###,###,###,##0.00")" onblur="return Converte(this, 'vr_saldo_devedor')">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label">Juros de mora</label>
+                <input class="form-control text-right" id="vr_juros_mora" name="vr_juros_mora" type="text" onblur="return calcularValor(this)">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label">Multa por atraso</label>
+                <input class="form-control text-right" id="vr_multa_atraso" name="vr_multa_atraso" type="text" onblur="return calcularValor(this)">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label">Desconto</label>
+                <input class="form-control text-right" id="vr_desconto" name="vr_desconto" type="text" value="@Model.OperacaoParcela.vr_desconto.GetValueOrDefault(0).ToString("###,###,##0.00")" onblur="return calcularValor(this)">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label">Valor p/ liquidação</label>
+                <input class="form-control text-right" readonly id="vr_liquidacao" name="vr_liquidacao" type="text" value="@Model.OperacaoParcela.vr_saldo_devedor.Value.ToString("###,###,##0.00")">
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Arquivo de comprovante</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input id="fileupload" type="file" name="files[]" multiple>
+                        @Html.Hidden("arquivo")
+                    </div>
+                    <div class="file_name" id="file_name1"></div>
+                    <div class="progress" id="progress1">
+                        <div id="progress1-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            <span class="sr-only">0% complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">
+                        Dados do Cheque
+                    </h2>
+                </div>
+                <div class="panel-body">
+                    <div class="row clearfix">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Nº Banco</label>
+                                @Html.TextBoxFor(info => info.OperacaoParcela.cheque_banco, "{0:##0}", new { @class = "form-control input-sm", @onkeypress = "return numeros()", @maxlength = "3" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Agência</label>
+                                @Html.TextBoxFor(info => info.OperacaoParcela.cheque_agencia, new { @class = "form-control input-sm", @maxlength = "5" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Nº Cheque</label>
+                                @Html.TextBoxFor(info => info.OperacaoParcela.cheque_numero, new { @class = "form-control input-sm", @maxlength = "6" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-6">
+            @Html.Editor("descricao_enquadramento1", "EnquadramentoAutoComplete", new
+            {
+                value = Model.enquadramentoId != null ? Model.enquadramentoId.ToString() : "",
+                Text = Model.descricao_enquadramento ?? "",
+                nextField = "btnSaveLiq",
+                prevField = "cheque_numero"
+            })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12">
+            <input type="submit" class="btn btn-success" id="btnSaveLiq" value="Salvar" onclick="return validaLiquidacao();" />
+            <input type="button" onclick="window.location = '../Cobranca/Browse'" class="btn btn-default" value="Cancelar" />
+            <a href="#panel-top" class="info pull-right" id="topo-baixa"><i class="fa fa-toggle-up"></i> Topo</a>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $(function () {
+        $('#form3').submit(function () {
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        $('#EditarOperacaoContaReceber').html(result);
+                    }
+                });
+            }
+            return false;
+        });
+    });
+
+    $(document).ready(function () {
+        FileUpload('fileupload', 'arquivo', 'progress1', 'file_name1', 'myModal1', 'arq1', 'trash1');
+    });
+
+    function calcularValor(obj) {
+        if (!fnValidaValor(obj))
+            return false;
+
+        if ($("#vr_juros_mora").val() == '')
+            $("#vr_juros_mora").val('0,00');
+
+        if ($("#vr_multa_atraso").val() == '')
+            $("#vr_multa_atraso").val('0,00');
+
+        if ($("#vr_desconto").val() == '')
+            $("#vr_desconto").val('0,00');
+
+        if ($("#vr_liquidacao").val() == '')
+            $("#vr_liquidacao").val('0,00');
+
+        var _vr_saldo_devedor = $("#vr_saldo_devedor").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
+        _vr_saldo_devedor = parseInt(_vr_saldo_devedor);
+
+        var _vr_juros_mora = $("#vr_juros_mora").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
+        _vr_juros_mora = parseInt(_vr_juros_mora);
+
+        var _vr_multa_atraso = $("#vr_multa_atraso").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
+        _vr_multa_atraso = parseInt(_vr_multa_atraso);
+
+        var _vr_desconto = $("#vr_desconto").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
+        _vr_desconto = parseInt(_vr_desconto);
+
+        if (_vr_desconto > _vr_saldo_devedor) {
+            _vr_desconto = 0;
+            $("#vr_desconto").val("0,00");
+        }
+
+        var _vr_liquidacao = _vr_saldo_devedor + _vr_juros_mora + _vr_multa_atraso - _vr_desconto;
+
+        $("#vr_liquidacao").val(_vr_liquidacao);
+
+        FormataNumero($("#vr_liquidacao")[0]);
+
+        return true;
+    }
+
+    function validaLiquidacao() {
+
+        if ($("#bancoId").val() == '' || $("#bancoId").val() == '0') {
+            ShowMessageAjaxAlert('Banco deve ser informado', 'warning');
+            $('#nome_banco').focus();
+            return false;
+        }
+
+        if ($("#dt_pagamento").val() == '') {
+            ShowMessageAjaxAlert('Data do pagamento deve ser informada', 'warning');
+            $('#dt_pagamento').focus();
+            return false;
+        }
+        if ($("#dt_movto").val() == '') {
+            ShowMessageAjaxAlert('Data do movimento bancário deve ser informada', 'warning');
+            $('#dt_movto').focus();
+            return false;
+        }
+
+        // data do pagamento
+        var _dt_pagamento = $("#dt_pagamento").val().split("/");
+        var p = new Date(_dt_pagamento[2], _dt_pagamento[1] - 1, _dt_pagamento[0]);
+
+        // data do movimento
+        var _dt_movto = $("#dt_movto").val().split("/");
+        var m = new Date(_dt_movto[2], _dt_movto[1] - 1, _dt_movto[0]);
+
+
+        if (m < p) {
+            ShowMessageAjaxAlert('Data do movimento deve ser maior ou igual que a data do pagamento', 'warning');
+            $('#dt_pagamento').focus();
+            return false;
+        }
+
+        var _vr_liquidacao = $("#vr_liquidacao").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
+        _vr_liquidacao = parseInt(_vr_liquidacao);
+
+        if (_vr_liquidacao <= 0) {
+            ShowMessageAjaxAlert('Valor pago deve ser maior que zero', 'warning');
+            $('#vr_liquidacao').focus();
+            return false;
+        }
+
+        var _vr_saldo_devedor = $("#vr_saldo_devedor").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
+        _vr_saldo_devedor = parseInt(_vr_saldo_devedor);
+
+        var _vr_desconto = $("#vr_desconto").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
+        _vr_desconto = parseInt(_vr_desconto);
+
+        if (_vr_desconto > _vr_saldo_devedor) {
+            ShowMessageAjaxAlert('Desconto não pode ser maior que o valor para liquidação', 'warning');
+            $('#vr_desconto').focus();
+            return false;
+        }
+
+        document.getElementById('topo-baixa').click();
+
+        return true;
+    }
+</script>
+

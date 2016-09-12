@@ -1,0 +1,55 @@
+﻿@using DWM.Models.Repositories;
+@model System.Web.Mvc.PagedList<BancoViewModel>
+@{
+    Layout = null;
+}
+
+@if (Model != null)
+{
+    <div class="row Scroll" style="margin-top: -15px">
+        <div class="col-md-12" style="padding-right: 0px;">
+            <table class="table table-striped jambo_table bulk_action" style="cursor: pointer">
+                <caption></caption>
+                <thead>
+                    <tr class="headings">
+                        <th class="column-title">Nome do Banco</th>
+                        <th class="column-title">Sigla</th>
+                        <th class="column-title text-center">Classificação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (BancoViewModel ban in Model)
+                    {
+                        <tr class="even pointer" onclick="Move('@ban.bancoId', '@ban.nome')">
+                            <td>
+                                <small>@ban.nome</small>
+                            </td>
+                            <td>
+                                <small>@ban.sigla</small>
+                            </td>
+                            <td class="text-center">
+                                <small>@ban.classificacao</small>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @Html.Partial("Paginacao", Model)
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+
+
+
+
+
+
+
+
+
+

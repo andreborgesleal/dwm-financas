@@ -1,0 +1,86 @@
+﻿@model System.Web.Mvc.PagedList<DWM.Models.Repositories.CobrancaViewModel>
+
+@{
+    Layout = null;
+}
+@if (Model != null)
+{
+    <div class="dashboard-widget-content">
+        <div class="col-md-5">
+            Clique nos botões de <code>Ação</code> para executar a ação desejada
+        </div>
+        <div class="col-md-1">
+            <a href="../CobrancaCad/Create" class="text-primary">Incluir</a>
+        </div>
+        <div class="col-md-offset-9 col-lg-offset-9 col-xs-offset-7">
+            @Html.Partial("Filtro")
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped jambo_table bulk_action">
+                <thead>
+                    <tr class="headings">
+                        <th class="col-md-2 column-title text-center nobr">Ação</th>
+                        <th class="column-title">Cobrança</th>
+                        <th class="column-title">Banco</th>
+                        <th class="column-title">Histórico</th>
+                        <th class="column-title">Enquadramento</th>
+                        <th class="column-title">Início</th>
+                        <th class="column-title">Fim</th>
+                        <th class="column-title text-center">Dia</th>
+                        <th class="column-title text-right">Valor</th>
+                        <th class="column-title text-center">Nº Clientes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DWM.Models.Repositories.CobrancaViewModel cob in Model)
+                    {
+                        <tr class="even pointer">
+                            <td class="col-md-2 text-center">
+                                <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='Edit?cobrancaId=@cob.cobrancaId'"></button>
+                                <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="window.location='Delete?cobrancaId=@cob.cobrancaId'"></button>
+                            </td>
+                            <td>
+                                <span>@cob.descricao_grupoCobranca</span>
+                            </td>
+                            <td>
+                                <span>@cob.nome_banco</span>
+                            </td>
+                            <td>
+                                <span>@cob.descricao_historico</span>
+                            </td>
+                            <td>
+                                <span>@cob.descricao_enquadramento</span>
+                            </td>
+                            <td>
+                                <span>@cob.dt_inicio.ToString("dd/MM/yyyy")</span>
+                            </td>
+                            <td>
+                                @if (cob.dt_fim.HasValue)
+                                {
+                                    <span>@cob.dt_fim.Value.ToString("dd/MM/yyyy")</span>
+                                }
+                            </td>
+                            <td class="text-center">
+                                <span>@cob.dia_vencimento</span>
+                            </td>
+                            <td class="text-right">
+                                <span>@cob.valor.ToString("###,###,###,##0.00")</span>
+                            </td>
+                            <td class="text-center">
+                                <span>@cob.total_clientes</span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Partial("Paginacao", Model)
+    </div>
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+
+

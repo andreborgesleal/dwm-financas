@@ -1,0 +1,150 @@
+﻿@using App_Dominio.Enumeracoes
+@using DWM.Models.Repositories
+@model System.Web.Mvc.PagedList<DWM.Models.Repositories.CobrancaViewModel>
+@{
+    Layout = null;
+    int i = 3;
+}
+@if (Model != null)
+{
+    <div class="dashboard-widget-content">
+        <div class="row">
+            <div class="col-md-8 col-lg-8">
+                Clique nos botões de <code>Ação</code> para executar a ação desejada ou no nome do <code>cliente</code> para editar os dados
+            </div>
+            <div class="col-md-2 col-lg-2">
+                <a href="#incluir-cliente" class="text-primary">Incluir</a>
+            </div>
+            <div class="col-md-offset-8 col-lg-offset-8 col-xs-offset-7">
+                @Html.Partial("Filtro")
+            </div>
+        </div>
+        <p>&nbsp;</p>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr class="headings">
+                                <th class="col-md-2 column-title text-center nobr">Ação</th>
+                                <th class="column-title">Cliente</th>
+                                <th class="column-title text-center">Vencimento</th>
+                                <th class="column-title text-right">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @using (Ajax.BeginForm("EditItem", "CobrancaCad", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div-create-cli" }, new { @class = "form", @id = "form" + i.ToString(), @name = "form" + i.ToString() }))
+                            {
+                                foreach (DWM.Models.Repositories.CobrancaViewModel item in Model)
+                                {
+                                    <tr class="even pointer">
+                                        <td class="col-md-2 text-center">
+                                            <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="Del('@item.cobrancaId', '@item.CobrancaClienteViewModel.clienteId')"></button>
+                                        </td>
+                                        <td>
+                                            <div class="panel-heading no-padding" role="tab" id="heading_@item.CobrancaClienteViewModel.clienteId.ToString()">
+                                                <h4 class="panel-title no-padding">
+                                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_@item.CobrancaClienteViewModel.clienteId.ToString()" aria-expanded="true" aria-controls="collapse_@item.CobrancaClienteViewModel.clienteId.ToString()">
+                                                        <span>@item.CobrancaClienteViewModel.nome_cliente</span>
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapse_@item.CobrancaClienteViewModel.clienteId.ToString()" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@item.CobrancaClienteViewModel.clienteId.ToString()">
+                                                <div class="panel-body">
+                                                    @{ i++; }
+                                                    @Html.Hidden("cobrancaId", item.cobrancaId)
+                                                    @Html.Hidden("dia_vencimento", item.dia_vencimento)
+                                                    @Html.Hidden("valor", item.valor)
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label class="control-label" for="dia_vencimento2">Vencimento</label>
+                                                                @Html.DropDownList("dia_vencimento3_" + item.CobrancaClienteViewModel.clienteId.ToString(), DropDownListEnum.Dias31(item.CobrancaClienteViewModel.dia_vencimento.ToString()), new { @class = "form-control" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                @Html.Editor("valor31_" + item.CobrancaClienteViewModel.clienteId.ToString(), "DECIMAL", new
+                                                                   {
+                                                                       label = "Valor",
+                                                                       value = item.CobrancaClienteViewModel.valor.Value,
+                                                                       htmlAttributes = (object)new { @class = "form-control text-right", @onfocus = "this.select();", @onblur = "fnValidaValor(this);" }
+                                                                   })
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <br />
+                                                            <input type="button" class="btn btn-primary" style="margin-top: 5px" value="Alterar" onclick="Edit(@item.cobrancaId, @item.CobrancaClienteViewModel.clienteId);" name="btn-save444" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center"><span>@item.CobrancaClienteViewModel.dia_vencimento</span></td>
+                                        <td class="text-right"><span>@item.CobrancaClienteViewModel.valor.Value.ToString("###,###,###,##0.00")</span></td>
+                                    </tr>
+                               }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        @Html.Partial("Paginacao", Model)
+    </div>
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+<script type="text/javascript">
+    $(function () {
+        for (i=3; i <= 17; i++ )
+        {
+            $('#form' + i).submit(function () {
+                if ($(this).valid()) {
+                    $.ajax({
+                        url: this.action,
+                        type: this.method,
+                        data: $(this).serialize(),
+                        success: function (result) {
+                            $('#div-create-cli').html(result);
+                        }
+                    });
+                }
+                return false;
+            });
+        }
+    });
+
+    function Del(cobrancaId, clienteId) {
+        var link = 'DelItem?cobrancaId=' + cobrancaId + '&clienteId=' + clienteId;
+
+        link = encodeURI(link + '&noCahce=' + new Date());
+
+        document.getElementById('linkTopo').click();
+
+        $('#div-create-cli').load(link);
+    }
+
+    function Edit(cobrancaId, clienteId) {
+        var dia_vencimento = $('#dia_vencimento').val();
+        var dia_vencimento3 = $('#dia_vencimento3_' + clienteId).val();
+        var valor = $('#valor').val();
+        var valor31 = $('#valor31_' + clienteId + '_1').val();
+
+        var link = 'EditItem?cobrancaId=' + cobrancaId + '&clienteId=' + clienteId + '&dia_vencimento=' + dia_vencimento + '&dia_vencimento3=' + dia_vencimento3 + '&valor=' + valor + '&valor31=' + valor31 ;
+
+        link = encodeURI(link + '&noCahce=' + new Date());
+
+        document.getElementById('linkTopo').click();
+
+        $('#div-create-cli').load(link);
+
+        
+    }
+
+</script>
+
+
