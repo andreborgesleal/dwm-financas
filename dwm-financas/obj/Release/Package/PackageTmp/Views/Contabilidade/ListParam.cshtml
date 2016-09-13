@@ -7,7 +7,7 @@
 {
     <div class="dashboard-widget-content">
         <div class="table-responsive">
-            <table class="table table-striped jambo_table bulk_action dedo-indicador">
+            <table class="table table-striped jambo_table bulk-action dedo-indicador">
                 <thead>
                     <tr class="headings">
                         <th class="column-title text-center">Ação</th>
@@ -22,7 +22,7 @@
                 <tbody>
                     @foreach (ContabilidadeViewModel contabilidade in Model)
                     {
-                        <tr>
+                        <tr class="even pointer">
                             <td class="text-center">
                                 <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" onclick="window.location='Edit?contabilidadeId=@contabilidade.contabilidadeId'"></button>
                                 <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" onclick="window.location='Delete?contabilidadeId=@contabilidade.contabilidadeId'"></button>

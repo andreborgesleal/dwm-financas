@@ -1,0 +1,119 @@
+﻿@model System.Web.Mvc.PagedList<DWM.Models.Repositories.DiarioViewModel>
+@using DWM.Models.Repositories;
+@{
+    Layout = null;
+    int contador = 0;
+    string vr_db = "";
+    string vr_cr = "";
+}   
+@if (Model != null)
+{
+    <div class="dashboard-widget-content">
+        <div class="table-responsive">
+            <table class="table table-striped jambo_table bulk-action dedo-indicador">
+                <thead>
+                    <tr class="heading">
+                        <th>Data</th>
+                        <th>ID</th>
+                        <th>Doc</th>
+                        <th>C.Custo</th>
+                        <th>Conta</th>
+                        <th>Histórico</th>
+                        <th style="text-align: right">Débito</th>
+                        <th style="text-align: right">Crédito</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DiarioViewModel diario in Model)
+                    {
+                        vr_db = "";
+                        vr_cr = "";
+                        <tr class="even pointer">
+                            <td>
+                                @if (@diario.dt_lancamento.HasValue)
+                                {
+                                    <span>@diario.dt_lancamento.Value.ToString("dd/MM/yyyy")</span>
+                                }
+                            </td>
+                            <td>
+                                <span>@diario.contabilidadeId</span>
+                            </td>
+                            <td>
+                                <span>@diario.documento</span>
+                            </td>
+                            <td>
+                                <span>@Html.Editor("descricao_ccusto", "TRUNC", new { text = diario.descricao_centroCusto ?? "", width = 10 })</span>
+                            </td>
+                            <td>
+                                @if (diario.codigoPleno != null)
+                                {
+                                    <span>@diario.descricao_planoConta</span><br />
+                                    <small>@diario.codigoPleno</small>
+                                }
+                            </td>
+                            @if (diario.codigoPleno != null)
+                            {
+                                if (diario.vr_debito.HasValue)
+                                {
+                                    vr_db = diario.vr_debito.Value.ToString("###,###,###,##0.00");
+                                }
+                                else
+                                {
+                                    vr_db = "";
+                                }
+                                if (diario.vr_credito.HasValue)
+                                {
+                                    vr_cr = diario.vr_credito.Value.ToString("###,###,###,##0.00");
+                                }
+                                else
+                                {
+                                    vr_cr = "";
+                                }
+                                <td class="text-left">
+                                    @diario.descricao_historico
+                                    @if (diario.complementoHist != null && diario.complementoHist.Trim() != "")
+                                    {
+                                        <small>@diario.complementoHist</small>
+                                    }
+                                </td>
+                                <td class="text-right">
+                                    <span>@Html.DisplayTextFor(info => vr_db)</span>
+                                </td>
+                                <td class="text-right">
+                                    <span>@Html.DisplayTextFor(info => vr_cr)</span>
+                                </td>
+                            }
+                            else
+                            {
+                                vr_db = diario.vr_debito.Value.ToString("###,###,###,##0.00");
+                                vr_cr = diario.vr_credito.Value.ToString("###,###,###,##0.00");
+                                <td class="text-left">
+                                    <h4><strong>@diario.descricao_historico.Replace("<b>","").Replace("</b>","")</strong></h4>
+                                </td>
+                                <td class="text-right">
+                                    <h4><strong>@Html.DisplayTextFor(info => vr_db)</strong></h4>
+                                </td>
+                                <td class="text-right">
+                                    <h4><strong>@Html.DisplayTextFor(info => vr_cr)</strong></h4>
+                                </td>
+                            }
+                        </tr>
+                        contador++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @Html.Partial("Paginacao", Model)
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+
+
+
+
+
+    

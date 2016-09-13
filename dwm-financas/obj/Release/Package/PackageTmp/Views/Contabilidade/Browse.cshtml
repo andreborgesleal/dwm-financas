@@ -1,6 +1,5 @@
-﻿@using DWM.Models.Repositories
-@using App_Dominio.Repositories
-@model System.Web.Mvc.PagedList<DWM.Models.Repositories.ContabilidadeViewModel>
+﻿@using App_Dominio.Repositories
+@model PagedList<DWM.Models.Repositories.ContabilidadeViewModel>
 @{
     TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
     t[0].url = "../Contabilidade/Create";

@@ -85,7 +85,7 @@
                         <span>@item.sequencial</span>
                     </td>
                     <td class="col-md-4 col-sm-2">
-                        <span>@(item.descricao_planoConta)</span>
+                        <span>@(item.codigoPleno + " " + item.descricao_planoConta)</span>
                     </td>
                     <td class="col-md-1 col-sm-2">
                         <span>@Html.Editor("descricao_ccusto", "TRUNC", new { text = item.descricao_centroCusto ?? "", width = 10 })</span>
@@ -119,6 +119,8 @@
             $('#carregando').css("height", "0px");
             $('#carregando').css("margin-top", "0%");
             $('#carregando').css("margin-left", "0%");
+            document.getElementById('topo-item').click();
+            $('#descricao_conta').focus();
         }).error(function () {
             $('#carregando').css("visibility", "hidden");
             $('#carregando').css("height", "0px");
@@ -140,6 +142,7 @@
             $('#carregando').css("height", "0px");
             $('#carregando').css("margin-top", "0%");
             $('#carregando').css("margin-left", "0%");
+            document.getElementById('topo-item').click();
         }).error(function () {
             $('#carregando').css("visibility", "hidden");
             $('#carregando').css("height", "0px");

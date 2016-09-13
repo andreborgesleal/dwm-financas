@@ -4320,6 +4320,12 @@
     <Content Include="Views\Contabilidade\ListParam.cshtml" />
     <Content Include="Views\Contabilidade\_ListItem.cshtml" />
     <Content Include="Views\Contabilidade\SaveAs.cshtml" />
+    <Content Include="Views\Diario\Browse.cshtml" />
+    <Content Include="Views\Diario\ListParam.cshtml" />
+    <Content Include="Views\Razao\Browse.cshtml" />
+    <Content Include="Views\Razao\ListParam.cshtml" />
+    <Content Include="Views\Razao\ListRazaoModal.cshtml" />
+    <Content Include="Views\Razao\_ListRazaoModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />

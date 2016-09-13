@@ -141,7 +141,7 @@ namespace DWM.Models.Persistence
                 }
                 if (operation == Crud.ALTERAR)
                 {
-                    if (db.Credores.Where(info => info.cpf_cnpj == value.cpf_cnpj.Replace(".", "").Replace("-", "").Replace("/","") && info.credorId != value.credorId).Count() > 0)
+                    if (db.Credores.Where(info => info.cpf_cnpj == value.cpf_cnpj.Replace(".", "").Replace("-", "").Replace("/","") && info.credorId != value.credorId && info.empresaId == sessaoCorrente.empresaId).Count() > 0)
                     {
                         value.mensagem.Code = 31;
                         value.mensagem.Message = MensagemPadrao.Message(31).ToString();
@@ -151,7 +151,7 @@ namespace DWM.Models.Persistence
                 }
                 else
                 {
-                    if (db.Credores.Where(info => info.cpf_cnpj == value.cpf_cnpj.Replace(".", "").Replace("-", "").Replace("/","")).Count() > 0)
+                    if (db.Credores.Where(info => info.cpf_cnpj == value.cpf_cnpj.Replace(".", "").Replace("-", "").Replace("/","") && info.empresaId == sessaoCorrente.empresaId).Count() > 0)
                     {
                         value.mensagem.Code = 31;
                         value.mensagem.Message = MensagemPadrao.Message(31).ToString();
@@ -199,6 +199,7 @@ namespace DWM.Models.Persistence
                         fone2 = cre.fone2,
                         email = cre.email,
                         endereco = cre.endereco,
+                        complemento = cre.complemento,
                         PageSize = pageSize,
                         TotalCount = (from cre1 in db.Credores
                                       join gru1 in db.GrupoCredores on cre1.grupoCredorId equals gru1.grupoCredorId into GRU1

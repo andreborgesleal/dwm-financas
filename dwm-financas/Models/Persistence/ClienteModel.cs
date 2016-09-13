@@ -140,7 +140,7 @@ namespace DWM.Models.Persistence
                 }
                 if (operation == Crud.ALTERAR)
                 {
-                    if (db.Clientes.Where(info => info.cpf_cnpj == value.cpf_cnpj.Replace(".", "").Replace("-", "").Replace("/", "") && info.clienteId != value.clienteId).Count() > 0)
+                    if (db.Clientes.Where(info => info.cpf_cnpj == value.cpf_cnpj.Replace(".", "").Replace("-", "").Replace("/", "") && info.clienteId != value.clienteId && info.empresaId == sessaoCorrente.empresaId).Count() > 0)
                     {
                         value.mensagem.Code = 31;
                         value.mensagem.Message = MensagemPadrao.Message(31).ToString();
@@ -150,7 +150,7 @@ namespace DWM.Models.Persistence
                 }
                 else
                 {
-                    if (db.Clientes.Where(info => info.cpf_cnpj == value.cpf_cnpj.Replace(".", "").Replace("-", "").Replace("/", "")).Count() > 0)
+                    if (db.Clientes.Where(info => info.cpf_cnpj == value.cpf_cnpj.Replace(".", "").Replace("-", "").Replace("/", "") && info.empresaId == sessaoCorrente.empresaId).Count() > 0)
                     {
                         value.mensagem.Code = 31;
                         value.mensagem.Message = MensagemPadrao.Message(31).ToString();
@@ -246,6 +246,7 @@ namespace DWM.Models.Persistence
                         fone2 = clnt.fone2,
                         email = clnt.email,
                         endereco = clnt.endereco,
+                        complemento = clnt.complemento,
                         PageSize = pageSize,
                         TotalCount = (from clnt1 in db.Clientes
                                       join gru1 in db.GrupoClientes on clnt1.grupoClienteId equals gru1.grupoClienteId into GRU1

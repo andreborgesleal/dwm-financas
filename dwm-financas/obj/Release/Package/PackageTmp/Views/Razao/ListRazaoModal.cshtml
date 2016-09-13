@@ -1,0 +1,152 @@
+﻿@model System.Web.Mvc.PagedList<DWM.Models.Repositories.RazaoViewModel>
+@{
+    Layout = null;
+    Model.action = "../Razao/_ListRazaoModal";
+}
+
+<div class="row">
+    <div class="col-md-12" style="margin: 0px">
+        <div class="panel-heading altura-50">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="h3 margem-interna">Razão</span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-info omo" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Filtro de Busca
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            @using (Ajax.BeginForm(null, null, new AjaxOptions { HttpMethod = "get" }, new { @style = "margin-left: 20px", @role = "search" }))
+                            {
+                                <div class="form">
+                                    <div class="row clearfix">
+                                        <div class="col-md-6">
+                                            @Html.Partial("../Typeahead/BuscaPlanoGenerico", new App_Dominio.Repositories.TypeaheadRepository()
+                                                                                        {
+                                                                                            ListName = "Plano de contas",
+                                                                                            label = "Plano de Contas",
+                                                                                            id = "planoContaId",
+                                                                                            text = "descricao_conta",
+                                                                                            lovModal = "LovPlanoContaModal",
+                                                                                            controller = "PlanoContas",
+                                                                                            descricao = "descricao",
+                                                                                            readOnly = false,
+                                                                                            values = new SelectItemsTypeahead()
+                                                                                                                    {
+                                                                                                                        Value = "",
+                                                                                                                        Text = "",
+                                                                                                                        nextField = "descricao_centroCusto"
+                                                                                                                    },
+                                                                                            disableButtons = false,
+                                                                                            nextField = "descricao_centroCusto"
+                                                                                        })
+                                        </div>
+                                        <div class="col-md-6">
+                                            @Html.Partial("../Typeahead/BuscaCentroCustoGenerico", new App_Dominio.Repositories.TypeaheadRepository()
+                                                                                        {
+                                                                                            ListName = "Centros de Custos",
+                                                                                            label = "Centro de Custo",
+                                                                                            id = "centroCustoId",
+                                                                                            text = "descricao_centroCusto",
+                                                                                            lovModal = "LovCentroCustoModal",
+                                                                                            controller = "CentroCustos",
+                                                                                            descricao = "descricao",
+                                                                                            readOnly = false,
+                                                                                            values = new SelectItemsTypeahead()
+                                                                                                                    {
+                                                                                                                        Value = "",
+                                                                                                                        Text = "",
+                                                                                                                        nextField = "data1"
+                                                                                                                    },
+                                                                                            disableButtons = false,
+                                                                                            nextField = "data1"
+                                                                                        })
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label" for="data1">Período</label>
+                                                <div class="input-group col-md-12">
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-4">
+                                                            @Html.Editor("data1", "DATE", new { identificador = "data1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-") + "01") })
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            à
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            @Html.Editor("data2", "DATE", new { identificador = "data2", readOnly = "false", value = DateTime.Today })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label class="control-label" for="totalizaConta">Totaliza por Conta</label>
+                                                <div class="input-group col-md-12">
+                                                    @Html.DropDownList("totalizaConta", App_Dominio.Enumeracoes.DropDownListEnum.SimNao("N"), new { @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label class="control-label" for="totalizaDia">Totaliza por Dia</label>
+                                                <div class="input-group col-md-12">
+                                                    @Html.DropDownList("totalizaDia", App_Dominio.Enumeracoes.DropDownListEnum.SimNao("N"), new { @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 margem-topo-30 margem-interna">
+                                            <a href="#" class="btn btn-primary btn-sm link-default" onclick="validaRazao()"><span class="link-default col-md-5">Buscar</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="div-raz">
+                @*@Html.Partial("../ListRazaoModal/_ListRazaoModal", Model)*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    function Move(id, descricao) {
+        $("#contabilidadeId1").val(id);
+        callEdit();
+
+        //var url = 'Enquadramento';
+        //url = encodeURI(url + '?enquadramentoId=' + id);
+        //$('#div-item').load(url);
+        //$("#btnModal").click();
+    }
+
+    function validaRazao() {
+        if ($('#planoContaId').val() == null || $('#planoContaId').val() == '')
+            ShowMessageAlert('É preciso informar a conta para a emissão do Razão', 'warning');
+        else
+            return Refresh(0, getPageSize(), '../Razao/_ListRazaoModal', 'div-raz');
+    }
+
+
+</script>
+
+
+
+
