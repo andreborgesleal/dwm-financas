@@ -1,0 +1,133 @@
+﻿@model PagedList<DWM.Models.Repositories.ExtratoViewModel>
+@using DWM.Models.Repositories;
+@{
+    Layout = null;
+    string vr_db = "";
+    string vr_cr = "";
+    string vr_sld = "";
+    string color = "#000";
+    string operacao = Request["id"] != null && Request["id"] == "E" ? "Delete" : "Edit";
+}
+@if (Model != null)
+{
+    <div class="dashboard-widget-content" id="panel-detail">
+        <div class="table-responsive">
+            <table class="table table-striped jambo_table bulk-action dedo-indicador">
+                <thead>
+                    <tr class="heading">
+                        <th class="text-center">Ação</th>
+                        <th>Data</th>
+                        <th>Doc</th>
+                        <th>Histórico</th>
+                        <th class="text-right">Débito</th>
+                        <th class="text-right">Crédito</th>
+                        <th class="text-right">Saldo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ExtratoViewModel extrato in Model.Where(info => info.descricao_historico != null))
+                    {
+                        string cor_db = "";
+                        string cor_cr = "";
+                        string cor_sld = "";
+                        vr_db = "";
+                        vr_cr = "";
+                        if (extrato.vr_debito.HasValue)
+                        {
+                            vr_db = extrato.vr_debito.HasValue ? extrato.vr_debito.Value.ToString("###,###,###,##0.00") : "";
+                            cor_db = "text-bold";
+                        }
+                        if (extrato.vr_credito.HasValue)
+                        {
+                            vr_cr = extrato.vr_credito.HasValue ? extrato.vr_credito.Value.ToString("###,###,###,##0.00") : "";
+                            cor_cr = "text-bold";
+                        }
+                        if (extrato.vr_saldo != null)
+                        {
+                            vr_sld = extrato.vr_saldo != null ? extrato.vr_saldo.Value.ToString("###,###,###,##0.00") : "";
+                            cor_sld = "text-bold";
+                        }
+                        if (extrato._dt_movto != null && extrato._dt_movto > DateTime.Today)
+                        {
+                            //color = "#ba4d00";
+                            color = "red";
+                        }
+                        else if (extrato._dt_movto > Convert.ToDateTime("1980-01-01"))
+                        {
+                            color = "";
+                        }
+                        <tr>
+                            <td class="text-center">
+                                @if (extrato.movtoBancarioId > 0 && extrato.dt_movto > DateTime.Today && extrato.vr_credito.HasValue && extrato.vr_credito > 0)
+                                {
+                                    <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='../Cobranca/_Index?OperacaoId=@extrato.movtoBancarioId.ToString()'"></button>
+                                }
+                                else if (extrato.movtoBancarioId > 0 && extrato.dt_movto > DateTime.Today && extrato.vr_debito.HasValue && extrato.vr_debito > 0)
+                                {
+                                    <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='../ContaPagar/_Index?OperacaoId=@extrato.movtoBancarioId.ToString()'"></button>
+                                }
+                                else
+                                {
+                                    <a href="#panel-top" class="btn btn-default btn-sm glyphicon glyphicon-edit" title="Não é possível editar" onclick="ShowMessageAjaxAlert('Este registro não pode ser editado porque já foi liquidado ou amortizado', 'warning');"></a>
+                                    @*<button type="button" class="btn btn-default btn-sm glyphicon glyphicon-edit" title="Editar" onclick="document.getElementById('panel-top').click();ShowMessageAjaxAlert('Este registro não pode ser editado porque já foi liquidado ou amortizado', 'warning');"></button>*@
+                                }
+                            </td>
+                            <td class="@color">
+                                @if (extrato._dt_movto > Convert.ToDateTime("1980-01-01"))
+                                {
+                                    <span>@extrato.dt_movto.ToString("dd/MM/yyyy")</span>
+                                }
+                            </td>
+                            <td class="@color">
+                                <span>@extrato.documento</span>
+                            </td>
+                            <td class="@color">
+                                @if (extrato.descricao_historico != null && extrato.descricao_historico.Contains("<b>"))
+                                {
+                                    <span><strong>@extrato.descricao_historico.Replace("<b>", "").Replace("</b>", "")</strong></span>
+                                }
+                                else
+                                {
+                                    <span>@extrato.descricao_historico</span>
+                                }
+                                @if (extrato.complementoHist != null && extrato.complementoHist.Trim() != "")
+                                {
+                                    <small>@Html.DisplayTextFor(info => extrato.complementoHist)</small>
+                                }
+                            </td>
+                            <td class="text-right @cor_db @color">
+                                <span>@Html.DisplayTextFor(info => vr_db)</span>
+                            </td>
+                            <td class="text-right @cor_cr @color">
+                                <span>@Html.DisplayTextFor(info => vr_cr)</span>
+                            </td>
+                            <td class="text-right @cor_sld @color">
+                                <span>@Html.DisplayTextFor(info => vr_sld)</span>
+                            </td>
+                        </tr>
+                        }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @Html.Partial("Paginacao", Model)
+}
+else if (TempData[App_Dominio.Controllers.Alerts.ATTENTION] != null)
+{
+    @Html.Partial("_alerts")
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -4326,6 +4326,13 @@
     <Content Include="Views\Razao\ListParam.cshtml" />
     <Content Include="Views\Razao\ListRazaoModal.cshtml" />
     <Content Include="Views\Razao\_ListRazaoModal.cshtml" />
+    <Content Include="Views\MovimentoBancario\Browse.cshtml" />
+    <Content Include="Views\MovimentoBancario\Create.cshtml" />
+    <Content Include="Views\MovimentoBancario\Delete.cshtml" />
+    <Content Include="Views\MovimentoBancario\Edit.cshtml" />
+    <Content Include="Views\MovimentoBancario\ListParam.cshtml" />
+    <Content Include="Views\Extrato\Browse.cshtml" />
+    <Content Include="Views\Extrato\ListParam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />

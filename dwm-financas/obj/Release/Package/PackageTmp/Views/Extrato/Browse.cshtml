@@ -1,0 +1,115 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@model PagedList<ExtratoViewModel>
+@{
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../MovimentoBancario/Create";
+    t[0].nomeCurto = "Movimento bancário";
+    t[0].exibir = "S";
+    t[0].referencia = "";
+    t[0].glyph = "fa fa-file-o";
+
+
+    t[1].url = "../Cobranca/Create";
+    t[1].nomeCurto = "Cobrança";
+    t[1].exibir = "S";
+    t[1].referencia = "";
+    t[1].glyph = "fa fa-barcode";
+
+    t[2].url = "../ContaPagar/Create";
+    t[2].nomeCurto = "Contas a pagar";
+    t[2].exibir = "S";
+    t[2].referencia = "";
+    t[2].glyph = "fa fa-dollar";
+
+    t[3].url = "../Home/Default";
+}
+
+<div class="container-cadastro">
+    <div class="x_panel" id="panel-top">
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Extrato bancário", Descricao = "", Transacao = t })
+        <div class="x_content">
+            @Html.Partial("_AjaxAlert", "panel-top")
+            @using (Ajax.BeginForm("ListParam", "Extrato", new AjaxOptions { HttpMethod = "get", UpdateTargetId = "div-list-extrato" }, new { @style = "margin-left: 20px", @role = "search", @id = "form000" }))
+            {
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        @Html.Editor("nome_banco1", "BancosAutoComplete", new { nextField = "data1" })
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label" for="dt_emissao1">Emissão</label>
+                            <div class="row clearfix">
+                                <div class="col-md-5">
+                                    @Html.Editor("data1", "DATE", new { identificador = "data1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.AddMonths(-1).ToString("yyyy-MM-01")) })
+                                </div>
+                                <div class="col-md-1">
+                                    à
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.Editor("data2", "DATE", new { identificador = "data2", readOnly = "false", value = DateTime.Today })
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Buscar" id="btn-buscar" name="btn-buscar" onclick="return validaExtrato();" />
+                            <input type="button" class="btn btn-default" onclick="window.location = '../MovimentoBancario/Create'" value="Incluir" />
+                        </div>
+                    </div>
+                </div>
+            }
+            <div id="div-list-extrato">
+                @if (Model != null)
+                {
+                    @Html.Partial("ListParam", Model)
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('#form000').submit(function () {
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        $('#div-list-extrato').html(result);
+                    }
+                });
+            }
+            return false;
+        });
+    });
+
+    function validaExtrato() {
+        if ($('#bancoId').val() == null || $('#bancoId').val() == '') {
+            ShowMessageAjaxAlert('É preciso informar o banco para a emissão do Extrato', 'warning');
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+
+    //function validaPDF()
+    //{
+    //    if ($('#bancoId').val() == null || $('#bancoId').val() == '') {
+    //        ShowMessageAjaxAlert('É preciso informar o banco para a emissão do Extrato', 'warning');
+    //        return false;
+    //    }
+    //    else
+    //        return true;
+    //}
+
+</script>
+

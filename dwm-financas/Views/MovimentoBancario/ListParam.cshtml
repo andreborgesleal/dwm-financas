@@ -1,0 +1,103 @@
+﻿@model PagedList<MovtoBancarioViewModel>
+@using DWM.Models.Repositories;
+@{
+    Layout = null;
+    string vr_db = "";
+    string vr_cr = "";
+}
+@if (Model != null)
+{
+    @Html.Partial("_AjaxAlert", "panel-detail")
+    <div class="dashboard-widget-content" id="panel-detail">
+        <div class="table-responsive">
+            <table class="table table-striped jambo_table bulk-action dedo-indicador">
+                <thead>
+                    <tr class="heading">
+                        <th class="text-center">Ação</th>
+                        <th>Data</th>
+                        <th>ID</th>
+                        <th>Doc</th>
+                        <th>Banco</th>
+                        <th>Histórico</th>
+                        <th style="text-align: right">Débito</th>
+                        <th style="text-align: right">Crédito</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (MovtoBancarioViewModel mov in Model)
+                    {
+                        vr_db = "";
+                        vr_cr = "";
+
+                        if (mov.tipoMovto == "D")
+                        {
+                            vr_db = mov.valor.ToString("###,###,###,##0.00");
+                            vr_cr = "";
+                        }
+                        else
+                        {
+                            vr_cr = mov.valor.ToString("###,###,###,##0.00");
+                            vr_db = "";
+                        }
+                        <tr>
+                            <td class="text-center">
+                                @if (mov.HasOperacao == "N")
+                                {
+                                    <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='Edit?movtoBancarioId=@mov.movtoBancarioId'"></button>
+                                    <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="window.location='Delete?movtoBancarioId=@mov.movtoBancarioId'"></button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-default btn-sm glyphicon glyphicon-edit" title="Editar" onclick="ShowMessageAjaxAlert('Este movimento não pode ser editado porque foi originado de uma cobrança ou contas a pagar', 'warning');"></button>
+                                    <button type="button" class="btn btn-default btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="ShowMessageAjaxAlert('Este movimento não pode ser excluído porque foi originado de uma cobrança ou contas a pagar', 'warning');"></button>
+                                }
+                            </td>
+                            <td>
+                                <span>@mov.dt_movto.ToString("dd/MM/yyyy")</span>
+                            </td>
+                            <td>
+                                <span>@mov.movtoBancarioId</span>
+                            </td>
+                            <td>
+                                <span>@mov.documento</span>
+                            </td>
+                            <td class="text-left">
+                                <span>@mov.nome_banco</span>
+                            </td>
+                            <td>
+                                <span>@mov.descricao_historico</span>
+                                @if (mov.complementoHist != null && mov.complementoHist.Trim() != "")
+                                {
+                                    <small>@Html.DisplayTextFor(info => mov.complementoHist)</small>
+                                }
+                            </td>
+                            <td class="text-right">
+                                @Html.DisplayTextFor(info => vr_db)
+                            </td>
+                            <td class="text-right">
+                                @Html.DisplayTextFor(info => vr_cr)
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @Html.Partial("Paginacao", Model)
+}
+else if (TempData[App_Dominio.Controllers.Alerts.ATTENTION] != null)
+{
+    @Html.Partial("_alerts")
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+
+
+
+
+
+

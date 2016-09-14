@@ -1,0 +1,92 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@model MovtoBancarioViewModel
+@{
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../MovimentoBancario/Create";
+    t[0].nomeCurto = "Incluir";
+    t[0].referencia = "";
+    t[0].exibir = "S";
+    t[0].glyph = "fa fa-file-o";
+
+    t[1].url = "../Home/Default";
+}
+
+<div class="container-cadastro">
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="x_panel" id="panel-top">
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Movimento bancário", Descricao = "", Transacao = t })
+        <div class="x_content">
+            @using (Html.BeginForm("Delete", "MovimentoBancario", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.HiddenFor(info => info.movtoBancarioId)
+                @Html.HiddenFor(info => info.valor)
+                <div class="row clearfix">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label" for="documento">Documento</label>
+                            @Html.TextBoxFor(info => info.documento, new { @class = "form-control", @maxlength = "12", @disabled = "disable" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label" for="dt_movto">Data</label>
+                            @Html.Editor("dt_movto1", "DATE", new { identificador = "dt_movto", readOnly = "true", value = Model.dt_movto })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label" for="drpTipoMovimento">Tipo</label>
+                            @Html.DropDownListFor(m => m.tipoMovto, App_Dominio.Enumeracoes.DropDownListEnum.NaturezaOperacao(Model.tipoMovto, ""), new { @class = "form-control", @disabled = "disable" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.Editor("nome_banco1", "BancosAutoComplete", new
+                   {
+                       value = Model.bancoId > 0 ? Model.bancoId.ToString() : "",
+                       Text = Model.nome_banco ?? "",
+                       nextField = "descricao_historico"
+                   })
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        @Html.Editor("descricao_historico1", "HistoricoAutoComplete", new
+                   {
+                       value = Model.historicoId > 0 ? Model.historicoId.ToString() : "",
+                       Text = Model.descricao_historico ?? "",
+                       nextField = "complementoHist",
+                       prevField = "nome_banco"
+                   })
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label" for="complementoHist">Histórico complementar</label>
+                            @Html.TextAreaFor(m => m.complementoHist, 1, 1, new { @class = "form-control", @disabled = "disable" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-2">
+                        <label class="control-label" for="valor">Valor</label>
+                        <input type="text" name="valor1" id="valor1" class="form-control text-right" disabled value="@Model.valor.ToString("###,###,##0.00")" onblur="FormataNumero(this);" />
+                    </div>
+                </div>
+                <p>&nbsp;</p>
+                <div class="row clearfix">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-danger" value="Excluir" name="btn-excluir" id="btn-excluir" />
+                            <input type="button" onclick="window.location = '../MovimentoBancario/Browse'" class="btn btn-default" value="Cancelar" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+
