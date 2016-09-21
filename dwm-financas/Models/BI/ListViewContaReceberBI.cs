@@ -172,6 +172,8 @@ namespace DWM.Models.BI
                      join par in db.ContaReceberParcelas on rec.operacaoId equals par.operacaoId
                      //join pge in db.ContaReceberParcelaEventos on new { par.operacaoId, par.parcelaId } equals new { pge.operacaoId, pge.parcelaId }
                      join cli in db.Clientes on rec.clienteId equals cli.clienteId
+                     join gru in db.GrupoClientes on cli.grupoClienteId equals gru.grupoClienteId into GRU
+                     from gru in GRU.DefaultIfEmpty()
                      where rec.empresaId.Equals(sessaoCorrente.empresaId)
                             && ((((titulos_vencidos_atraso && par.vr_saldo_devedor > 0
                                 && ((dt_vencidos_atraso1.HasValue && par.dt_vencimento >= dt_vencidos_atraso1 && par.dt_vencimento <= dt_vencidos_atraso2) ||
@@ -197,6 +199,7 @@ namespace DWM.Models.BI
                          dt_emissao = rec.dt_emissao,
                          documento = rec.documento,
                          recorrencia = rec.recorrencia,
+                         descricao_grupoCliente = gru.nome,
                          OperacaoParcela = new ContaReceberParcelaViewModel()
                          {
                              operacaoId = par.operacaoId,

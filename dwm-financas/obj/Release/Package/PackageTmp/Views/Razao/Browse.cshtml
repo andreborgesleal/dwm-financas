@@ -31,13 +31,13 @@
                             <label class="control-label" for="data1">Período</label>
                             <div class="row clearfix">
                                 <div class="col-md-4">
-                                    @Html.Editor("data1", "DATE", new { identificador = "data1", readOnly = "false", value = Request["data1"] == null ? Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-") + "01") : Convert.ToDateTime(Request["data1"]) })
+                                    @Html.Editor("data1", "DATE", new { identificador = "data1", readOnly = "false", value = Request["data1"] == null || Request["data1"].Contains("%") ? Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-") + "01") : Convert.ToDateTime(Request["data1"]) })
                                 </div>
                                 <div class="col-md-1">
                                     à
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.Editor("data2", "DATE", new { identificador = "data2", readOnly = "false", value = Request["data2"] == null ? Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-") + "01").AddDays(-1) : Convert.ToDateTime(Request["data2"]) })
+                                    @Html.Editor("data2", "DATE", new { identificador = "data2", readOnly = "false", value = Request["data2"] == null || Request["data2"].Contains("%") ? Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-") + "01").AddDays(-1) : Convert.ToDateTime(Request["data2"]) })
                                 </div>
                             </div>
                         </div>

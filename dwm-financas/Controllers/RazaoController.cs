@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DWM.Models.Enumeracoes;
 using DWM.Models.Report;
 using App_Dominio.Security;
+using App_Dominio.Models;
 
 namespace DWM.Controllers
 {
@@ -60,7 +61,7 @@ namespace DWM.Controllers
                 {
                     data1 = Request["data1"];
                     data2 = Request["data2"];
-                    if (Request["centroCustoId"] != "")
+                    if (Request["centroCustoId"] != null && Request["centroCustoId"] != "")
                         centroCustoId = int.Parse(Request["centroCustoid"]);
 
                     planoContaId = int.Parse(Request["planoContaId"]);
@@ -74,7 +75,7 @@ namespace DWM.Controllers
                     return View();
                 }   
 
-                if (data1 == "")
+                if (data1 == "" || data1.Contains("%"))
                 {
                     data1 = DateTime.Today.ToString("yyyy-MM-") + "01";
                     data2 = Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-") + "01").AddDays(-1).ToString("yyyy-MM-dd");

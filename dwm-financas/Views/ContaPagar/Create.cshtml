@@ -214,9 +214,9 @@
                         <div class="row">
                             <div class="col-md-12 no-padding altura-35">
                                 <div class="form-group">
-                                    <label class="col-md-6">Juros de mora</label>
+                                    <label class="col-md-6">Juros de mora a.d.(%)</label>
                                     <div class="col-md-6">
-                                        <input type="text" name="vr_jurosMora" id="vr_jurosMora" class="form-control text-right" value="@Model.vr_jurosMora" onblur="return Converte(this, 'vr_jurosMora')" />
+                                        <input type="text" name="vr_jurosMora" id="vr_jurosMora" class="form-control text-right" value="@Model.vr_jurosMora" />
                                     </div>
                                 </div>
                                 @*@Html.EditorFor(m => m.vr_jurosMora, "DECIMAL", new
@@ -229,7 +229,7 @@
                         <div class="row">
                             <div class="col-md-12 no-padding altura-35">
                                 <div class="form-group">
-                                    <label class="col-md-6">Multa por atraso</label>
+                                    <label class="col-md-6">Multa por atraso (%)</label>
                                     <div class="col-md-6">
                                         <input type="text" name="vr_multa" id="vr_multa" class="form-control text-right" value="@Model.vr_multa" onblur="return Converte(this, 'vr_multa')" />
                                     </div>
@@ -310,7 +310,7 @@
                                     <div class="row">
                                         <div class="col-md-12 altura-35">
                                             <div class="form-group">
-                                                <label class="col-md-6">Multa/Juros</label>
+                                                <label class="col-md-6">Multa (R$)</label>
                                                 <div class="col-md-6">
                                                     <input type="text" name="vr_juros" id="vr_juros" class="form-control text-right" onfocus="this.select();" onblur="return fnValorTotal(this);" />
                                                 </div>
@@ -326,7 +326,7 @@
                                     <div class="row">
                                         <div class="col-md-12 altura-35">
                                             <div class="form-group">
-                                                <label class="col-md-6">Mora</label>
+                                                <label class="col-md-6">Juros (R$)</label>
                                                 <div class="col-md-6">
                                                     <input type="text" name="vr_mora" id="vr_mora" class="form-control text-right" onblur="return fnValorTotal(this);" />
                                                 </div>
@@ -344,7 +344,7 @@
                                     <div class="row">
                                         <div class="col-md-12 altura-35">
                                             <div class="form-group">
-                                                <label class="col-md-6">Desconto</label>
+                                                <label class="col-md-6">Desconto (R$)</label>
                                                 <div class="col-md-6">
                                                     <input type="text" name="vr_desconto" id="vr_desconto" class="form-control text-right" onblur="return fnValorTotal(this);" />
                                                 </div>
@@ -560,13 +560,13 @@
         var _dt_vencimento = $("#dt_vencimento").val().split("/");
         var v = new Date(_dt_vencimento[2], _dt_vencimento[1] - 1, _dt_vencimento[0]);
 
-        if (v < e)
-        {
-            ShowMessageAjaxAlert('Data de vencimento deve ser maior ou igual que a data de emissão', 'warning');
-            $('#dt_vencimento').focus();
-            document.getElementById('topo').click();
-            return false;
-        }
+        //if (v < e)
+        //{
+        //    ShowMessageAjaxAlert('Data de vencimento deve ser maior ou igual que a data de emissão', 'warning');
+        //    $('#dt_vencimento').focus();
+        //    document.getElementById('topo').click();
+        //    return false;
+        //}
 
         var _vr_amortizacao = parseFloat($('#OperacaoParcela_OperacaoParcelaEvento_valor').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
 

@@ -113,6 +113,10 @@
                             </td>
                             @if (razao.descricao_historico.Contains("<b>"))
                             {
+                                if (razao.descricao_historico.Contains("geral:"))
+                                {
+                                    vr_sld = (decimal.Parse(vr_db) - decimal.Parse(vr_cr)).ToString("###,###,###,##0.00");
+                                }
                                 <td class="col-md-5" style="color: @color">
                                     <h4><strong>@razao.descricao_historico.Replace("<b>", "").Replace("</b>", "")</strong></h4>
                                     @if (razao.complementoHist != null && razao.complementoHist.Trim() != "")

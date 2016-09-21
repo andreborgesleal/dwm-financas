@@ -104,9 +104,9 @@
                             }
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4 tile_stats_count">
-                            <span class="count_top"><i class="fa fa-bank"></i> Banco</span>
-                            <div class="count"><h3>@Model.nome_banco</h3></div>
-                            <span class="count_bottom"><i class="primary"><i class="fa fa-sort-asc"></i></i> @Model.classificacao</span>
+                            <span class="count_top"><i class="fa fa-money"></i> Valor Principal</span>
+                            <div class="count"><h3>@Model.vr_principal.ToString("R$ ###,###,##0.00")</h3></div>
+                            <span class="count_bottom"><i class="primary"><i class="fa fa-sort-asc"></i></i> @Model.nome_banco</span>
                         </div>
                         <div class="col-md-5 col-sm-12 col-xs-12 col-lg-5 tile_stats_count">
                             <span class="count_top"><i class="fa fa-dollar"></i> Saldo devedor</span>

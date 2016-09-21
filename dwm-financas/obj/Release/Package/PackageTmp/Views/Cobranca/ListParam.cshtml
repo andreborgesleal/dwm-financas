@@ -77,6 +77,7 @@
                             <tr class="headings">
                                 <th class="column-title text-center nobr">Ação</th>
                                 <th class="column-title">ID</th>
+                                <th class="column-title">Documento</th>
                                 <th class="column-title">Vencimento</th>
                                 <th class="column-title">Perm</th>
                                 <th class="column-title">Cliente</th>
@@ -104,6 +105,11 @@
                                     </td>
                                     <td class="text-left">
                                         <span>
+                                            @ope.documento
+                                        </span>
+                                    </td>
+                                    <td class="text-left">
+                                        <span>
                                             @ope.OperacaoParcela.dt_vencimento.ToString("dd/MM/yyyy")
                                         </span>
                                     </td>
@@ -114,7 +120,7 @@
                                     </td>
                                     <td class="text-left">
                                         <span>
-                                            @ope.nome_cliente
+                                            @ope.nome_cliente (<small class="green">@ope.descricao_grupoCliente</small>)
                                         </span>
                                     </td>
                                     <td class="text-left">

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="930692851" Data="20/09/2016 10:35:49">
+    <Sessao>bcihcdckgre0ucgnhgde1yua</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Cadeia de caracteres não foi reconhecida como DateTime válido.</Mensagem>
+    <NameSpace>DWM.Models.Report.RazaoReport =&gt; razao/browse</NameSpace>
+    <Context />
+    <StackTrace>   em System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   em System.Convert.ToDateTime(String value)
+   em DWM.Models.Report.RazaoReport.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\sistemas\dwm-financas\dwm-financas\Models\Report\RazaoReport.cs:linha 17
+   em DWM.Models.Repositories.ReportViewModel`1.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\sistemas\dwm-financas\dwm-financas\Models\Repositories\ReportViewModel.cs:linha 22
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+  <LOG ID="341681808" Data="20/09/2016 10:50:28">
+    <Sessao>bcihcdckgre0ucgnhgde1yua</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Cadeia de caracteres não foi reconhecida como DateTime válido.</Mensagem>
+    <NameSpace>DWM.Models.Report.RazaoReport =&gt; razao/browse</NameSpace>
+    <Context />
+    <StackTrace>   em System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   em System.Convert.ToDateTime(String value)
+   em DWM.Models.Report.RazaoReport.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\sistemas\dwm-financas\dwm-financas\Models\Report\RazaoReport.cs:linha 17
+   em DWM.Models.Repositories.ReportViewModel`1.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\sistemas\dwm-financas\dwm-financas\Models\Repositories\ReportViewModel.cs:linha 22
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+  <LOG ID="1095312044" Data="20/09/2016 11:00:22">
+    <Sessao>bcihcdckgre0ucgnhgde1yua</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Cadeia de caracteres não foi reconhecida como DateTime válido.</Mensagem>
+    <NameSpace>DWM.Models.Report.RazaoReport =&gt; razao/browse</NameSpace>
+    <Context />
+    <StackTrace>   em System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   em System.Convert.ToDateTime(String value)
+   em DWM.Models.Report.RazaoReport.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\sistemas\dwm-financas\dwm-financas\Models\Report\RazaoReport.cs:linha 17
+   em DWM.Models.Repositories.ReportViewModel`1.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\sistemas\dwm-financas\dwm-financas\Models\Repositories\ReportViewModel.cs:linha 22
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+</LOG>
