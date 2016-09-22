@@ -37,5 +37,12 @@ namespace DWM.Models.Entidades
         public DbSet<ContaReceberParcelaEvento> ContaReceberParcelaEventos { get; set; }
         public DbSet<Cobranca> Cobrancas { get; set; }
         public DbSet<CobrancaCliente> CobrancaClientes { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ContaReceber>().Property(info => info.vr_jurosMora).HasPrecision(12, 8);
+            modelBuilder.Entity<ContaPagar>().Property(info => info.vr_jurosMora).HasPrecision(12, 8);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

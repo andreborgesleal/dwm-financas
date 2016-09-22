@@ -90,15 +90,15 @@
                             {
                                 <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>@Model.atraso dias</i> atasado</span>
                             }
-                            else if (Model.dt_vencimento > App_Dominio.Models.Funcoes.Brasilia().Date && Model.ind_baixa == null)
+                            else if (Model.dt_vencimento >= App_Dominio.Models.Funcoes.Brasilia().Date && Model.ind_baixa == null)
                             {
                                 <span class="count_bottom"><i class="red"><i class="fa fa-sort-asc"></i>@Model.dt_vencimento.Subtract(App_Dominio.Models.Funcoes.Brasilia().Date).TotalDays dias</i> para vencer</span>
                             }
-                            else if (App_Dominio.Models.Funcoes.Brasilia().Date.Subtract(Model.dt_ultima_amortizacao.Value.Date).TotalDays == 0)
+                            else if (Model.dt_ultima_amortizacao.HasValue && App_Dominio.Models.Funcoes.Brasilia().Date.Subtract(Model.dt_ultima_amortizacao.Value.Date).TotalDays == 0)
                             {
                                 <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> pago hoje</i></span>
                             }
-                            else if (App_Dominio.Models.Funcoes.Brasilia().Date.Subtract(Model.dt_ultima_amortizacao.Value.Date).TotalDays < 0)
+                            else if (Model.dt_ultima_amortizacao.HasValue && App_Dominio.Models.Funcoes.Brasilia().Date.Subtract(Model.dt_ultima_amortizacao.Value.Date).TotalDays < 0)
                             {
                                 <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> conta liquidada</i></span>
                             }
