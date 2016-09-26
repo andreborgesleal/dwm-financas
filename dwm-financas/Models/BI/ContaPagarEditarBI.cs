@@ -30,7 +30,8 @@ namespace DWM.Models.BI
                      join ccu in db.CentroCustos on cr.centroCustoId equals ccu.centroCustoId into CCU
                      from ccu in CCU.DefaultIfEmpty()
                      join par in db.ContaPagarParcelas on cr.operacaoId equals par.operacaoId
-                     join ban in db.Bancos on par.bancoId equals ban.bancoId
+                     join ban in db.Bancos on par.bancoId equals ban.bancoId into BAN
+                     from ban in BAN.DefaultIfEmpty()
                      where cr.operacaoId == r.operacaoId
                              && par.parcelaId == r.parcelaId
                      select new EditarContaPagarViewModel()

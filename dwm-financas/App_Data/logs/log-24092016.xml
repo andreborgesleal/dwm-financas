@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="1043099773" Data="24/09/2016 14:59:53">
+    <Sessao>ta433qywex4swkn4fbw50eco</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaController =&gt; cobranca/edit</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Models.BI.ContaReceberEditarBI.Run(Repository value) na C:\sistemas\dwm-financas\dwm-financas\Models\BI\ContaReceberEditarBI.cs:linha 171
+   em App_Dominio.Pattern.Factory`2.Execute(IProcess`2 proc, Repository value) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Factory.cs:linha 27
+   em DWM.Controllers.OperacaoController`19.Edit(Int32 operacaoId, Int32 parcelaId) na C:\sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 145</StackTrace>
+  </LOG>
+  <LOG ID="1722764458" Data="24/09/2016 15:10:20">
+    <Sessao>ta433qywex4swkn4fbw50eco</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaController =&gt; cobranca/edit</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Models.BI.ContaReceberEditarBI.Run(Repository value) na C:\sistemas\dwm-financas\dwm-financas\Models\BI\ContaReceberEditarBI.cs:linha 171
+   em App_Dominio.Pattern.Factory`2.Execute(IProcess`2 proc, Repository value) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Factory.cs:linha 27
+   em DWM.Controllers.OperacaoController`19.Edit(Int32 operacaoId, Int32 parcelaId) na C:\sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 145</StackTrace>
+  </LOG>
+  <LOG ID="633528136" Data="24/09/2016 15:14:01">
+    <Sessao>ta433qywex4swkn4fbw50eco</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaController =&gt; cobranca/edit</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Models.BI.ContaReceberEditarBI.Run(Repository value) na C:\sistemas\dwm-financas\dwm-financas\Models\BI\ContaReceberEditarBI.cs:linha 171
+   em App_Dominio.Pattern.Factory`2.Execute(IProcess`2 proc, Repository value) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Factory.cs:linha 27
+   em DWM.Controllers.OperacaoController`19.Edit(Int32 operacaoId, Int32 parcelaId) na C:\sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 145</StackTrace>
+  </LOG>
+  <LOG ID="1655838055" Data="24/09/2016 15:14:42">
+    <Sessao>ta433qywex4swkn4fbw50eco</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-K3RDLHQ\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaController =&gt; cobranca/edit</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Models.BI.ContaReceberEditarBI.Run(Repository value) na C:\sistemas\dwm-financas\dwm-financas\Models\BI\ContaReceberEditarBI.cs:linha 171
+   em App_Dominio.Pattern.Factory`2.Execute(IProcess`2 proc, Repository value) na C:\sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Factory.cs:linha 27
+   em DWM.Controllers.OperacaoController`19.Edit(Int32 operacaoId, Int32 parcelaId) na C:\sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 145</StackTrace>
+  </LOG>
+</LOG>
