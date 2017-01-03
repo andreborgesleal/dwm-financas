@@ -249,6 +249,7 @@
     <Compile Include="Models\BI\ContaReceberLiquidarOperacaoBI.cs" />
     <Compile Include="Models\BI\ContaReceberModifyBI.cs" />
     <Compile Include="Models\BI\ContaReceberParcelaEventoBI.cs" />
+    <Compile Include="Models\BI\ExercicioBI.cs" />
     <Compile Include="Models\BI\HomeBI.cs" />
     <Compile Include="Models\BI\ListViewContaPagarBI.cs" />
     <Compile Include="Models\BI\ListViewContaReceberBI.cs" />
@@ -356,6 +357,7 @@
     <Compile Include="Models\Repositories\EnquadramentoItemViewModel.cs" />
     <Compile Include="Models\Repositories\EnquadramentoViewModel.cs" />
     <Compile Include="Models\Repositories\EventoViewModel.cs" />
+    <Compile Include="Models\Repositories\ExercicioViewModel.cs" />
     <Compile Include="Models\Repositories\FeriadoViewModel.cs" />
     <Compile Include="Models\Repositories\GrupoClienteViewModel.cs" />
     <Compile Include="Models\Repositories\GrupoCobrancaViewModel.cs" />

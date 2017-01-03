@@ -297,7 +297,6 @@ function Refresh(index, pagesize, action, DivId) {
         if (this.id != '' && this.id != null)
             link += '&' + this.id + '=' + $(this).val()
     });
-
     $('#carregando').css("visibility", "visible");
     $('#carregando').css("width", "100%");
     $('#carregando').css("height", "100%");

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="1207915086" Data="31/12/2016 10:02:58">
+    <Sessao>belf3puz5hhdncbv0fbqpui3</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; account/login</NameSpace>
+    <Context>__RequestVerificationToken="HHYtxdkkBwRl7R5SdVhJyN0APAMlkc3UboPCAMBEQxrzWlwGTB8z7EgzIQezm7NINNsXZTBqYXKToUQwN198wrkK4QGaj1ykoFuIxqO3bDk1",UserName="andreborgesleal@live.com",Password="EvergladesFin"</Context>
+    <StackTrace />
+  </LOG>
+  <LOG ID="250115404" Data="31/12/2016 10:02:58">
+    <Sessao>belf3puz5hhdncbv0fbqpui3</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; account/login</NameSpace>
+    <Context>__RequestVerificationToken="HHYtxdkkBwRl7R5SdVhJyN0APAMlkc3UboPCAMBEQxrzWlwGTB8z7EgzIQezm7NINNsXZTBqYXKToUQwN198wrkK4QGaj1ykoFuIxqO3bDk1",UserName="andreborgesleal@live.com",Password="EvergladesFin"</Context>
+    <StackTrace />
+  </LOG>
+</LOG>

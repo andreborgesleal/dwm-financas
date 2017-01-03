@@ -1,17 +1,10 @@
 ﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using App_Dominio.Component;
 
-namespace DWM.Models.Entidades
+namespace DWM.Models.Repositories
 {
-    [Table("Exercicio")]
-    public class Exercicio
+    public class ExercicioViewModel : Repository
     {
-        [Key, Column(Order = 0)]
-        [DisplayName("EmpresaID")]
-        public int empresaId { get; set; }
-
-        [Key, Column(Order = 1)]
         [DisplayName("Exercicio")]
         public int exercicio { get; set; }
 

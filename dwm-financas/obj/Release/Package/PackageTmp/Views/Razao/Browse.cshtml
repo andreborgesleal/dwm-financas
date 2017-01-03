@@ -14,7 +14,7 @@
 <div class="x_panel">
     @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Razão contábil", Descricao = "", Transacao = t })
     <div class="x_content">
-        @using (Ajax.BeginForm("ListParam", "Razao", new AjaxOptions { HttpMethod = "get", UpdateTargetId = "div-list-static2" }, new { @role = "search", @id = "form000", @name = "form000" }))
+        @using (Ajax.BeginForm("ListParam", "Razao", new AjaxOptions { HttpMethod = "get", UpdateTargetId = "div-list-static2" }, new { @role = "search", @id = "form0", @name = "form0" }))
             {
             <div class="container-cadastro">
                 <div class="row clearfix">
@@ -31,13 +31,13 @@
                             <label class="control-label" for="data1">Período</label>
                             <div class="row clearfix">
                                 <div class="col-md-4">
-                                    @Html.Editor("data1", "DATE", new { identificador = "data1", readOnly = "false", value = Request["data1"] == null || Request["data1"].Contains("%") ? Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-") + "01") : Convert.ToDateTime(Request["data1"]) })
+                                    @Html.Editor("data1", "DATE", new { identificador = "data1", readOnly = "false", value = Request["data1"] == null || Request["data1"].Contains("%") ? (DateTime)ViewData["dt_lancamento_inicio"] : Convert.ToDateTime(Request["data1"]) })
                                 </div>
                                 <div class="col-md-1">
                                     à
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.Editor("data2", "DATE", new { identificador = "data2", readOnly = "false", value = Request["data2"] == null || Request["data2"].Contains("%") ? Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-") + "01").AddDays(-1) : Convert.ToDateTime(Request["data2"]) })
+                                    @Html.Editor("data2", "DATE", new { identificador = "data2", readOnly = "false", value = Request["data2"] == null || Request["data2"].Contains("%") ? (DateTime)ViewData["dt_lancamento_fim"] : Convert.ToDateTime(Request["data2"]) })
                                 </div>
                             </div>
                         </div>
@@ -62,25 +62,24 @@
                 <div class="row clearfix">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <input type="submit" class="btn btn-primary" value="Buscar" id="btn-buscar" name="btn-buscar" onclick="return validaRazao();" />
+                            <a href="#panel-detail" class="btn btn-primary" onclick="validaRazao();">Buscar</a>
                             <input type="button" class="btn btn-default" onclick="window.location = '../Contabilidade/Create'" value="Incluir" />
                         </div>
                     </div>
                 </div>
             </div>
         }
-        <div id="div-list-static2">
-            @if (Model != null)
-            {
-                @Html.Partial("ListParam", Model)
-            }
-        </div>
     </div>
 </div>
-
+<div id="div-list-static2">
+    @if (Model != null)
+    {
+        @Html.Partial("ListParam", Model)
+    }
+</div>
 <script>
     $(function () {
-        $('#form000').submit(function () {
+        $('#form0').submit(function () {
             if ($(this).valid()) {
                 $.ajax({
                     url: this.action,
@@ -98,10 +97,12 @@
     function validaRazao() {
         if ($('#planoContaId').val() == null || $('#planoContaId').val() == '') {
             ShowMessageAjaxAlert('É preciso informar a conta para a emissão do Razão', 'warning');
-            return false;
         }
         else
-            return true;
+        {
+            Refresh(0, getPageSize(), 'ListParam', 'div-list-static2');
+            $('#div-list-static2').html('');
+        }
     }
 
 

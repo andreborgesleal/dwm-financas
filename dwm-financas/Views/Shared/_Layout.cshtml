@@ -7,6 +7,12 @@
     Usuario usuario = security.getUsuario();
 }
 <!DOCTYPE html>
+<script>
+    $(document).ready(function () {
+        $('.div-ajax-carregamento-pagina').fadeOut('fast');
+    });
+</script>
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -207,6 +213,10 @@
 
             </div>
             <!-- /page content -->
+            <div id="carregando" style="visibility: hidden; height: 0px; background-repeat: no-repeat; z-index: 5; background-image: url(../Content/images/loader.gif); background-position-x: 50%; background-position-y: 30%">
+                @*<img src="../Content/images/carregando.gif" /><br />*@
+                <label>Carregando...</label>
+            </div>
 
             <!-- footer content -->
             <footer>
@@ -218,6 +228,9 @@
             <!-- /footer content -->
         </div>
     </div>
+    <div class="div-ajax-carregamento-pagina" id="carregando">Teste</div>
+
+
     <!-- jQuery -->
     @Scripts.Render("~/bundles/fastclick")
     @Scripts.Render("~/bundles/nprogress")

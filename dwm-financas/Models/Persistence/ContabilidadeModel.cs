@@ -260,6 +260,12 @@ namespace DWM.Models.Persistence
                 value[1] = exe.dt_fim.ToString("dd/MM/yyyy");
             }
 
+            if (exe.dt_lancamento_inicio.HasValue && (data < exe.dt_lancamento_inicio.Value || data > exe.dt_lancamento_fim.Value))
+            {
+                value[0] = exe.dt_inicio.ToString("dd/MM/yyyy");
+                value[1] = exe.dt_fim.ToString("dd/MM/yyyy");
+            }
+
             return value;
         }
 
