@@ -49,7 +49,7 @@ fundoModal
 
     .Scroll {
         overflow-y: scroll;
-        height: 500px;
+        height: 750px;
     }
 
     .Listagem {
@@ -397,5 +397,3 @@ a.list-group-item:focus {
 .text-bold {
     font-weight: bold;
 }
-
-

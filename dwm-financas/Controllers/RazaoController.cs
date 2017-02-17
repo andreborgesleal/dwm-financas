@@ -64,6 +64,15 @@ namespace DWM.Controllers
                 return View();
         }
 
+        public ActionResult ListParamModal(int? index, int? pageSize = 50, string data1 = "", string data2 = "",
+                                int? centroCustoId = null, string descricao_centroCusto = "",
+                                int? planoContaId = null, string descricao_conta = "", string codigoPleno = "",
+                                string totalizaConta = "", string totalizaDia = "")
+        {
+            return ListParam(index, pageSize, data1, data2, centroCustoId, descricao_centroCusto, planoContaId, descricao_conta, codigoPleno, totalizaConta, totalizaDia);
+        }
+
+
         [AuthorizeFilter]
         public ActionResult ListParam(int? index, int? pageSize = 50, string data1 = "", string data2 = "", 
                                         int? centroCustoId = null, string descricao_centroCusto = "",

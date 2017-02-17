@@ -1,0 +1,102 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@model PagedList<BalanceteViewModel>
+@{
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../Contabilidade/Create";
+    t[0].nomeCurto = "Incluir";
+    t[0].exibir = "S";
+    t[0].referencia = "";
+
+    t[1].url = "../Home/Default";
+}
+<div class="container-cadastro">
+    @Html.Partial("_AjaxAlert", "")
+    <div class="x_panel">
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Balancete", Descricao = "", Transacao = t })
+        <div class="x_content">
+            @using (Ajax.BeginForm("ListParam", "Balancete", new AjaxOptions { HttpMethod = "get", UpdateTargetId = "div-list-static" }, new { @role = "search", @id = "form0", @name = "form0" }))
+            {
+                @Html.Hidden("planoContaId")
+                @Html.Hidden("descricao_conta")
+                @Html.Hidden("codigoPleno")
+                @Html.Hidden("totalizaConta", "S")
+                @Html.Hidden("totalizaDia", "N")
+                @Html.Hidden("grauPC", "0")
+
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        @Html.Editor("descricao_centroCusto1", "CentroCustoAutoComplete", new { nextField = "data1", prevField = "descricao_conta" })
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label" for="data1">Período</label>
+                            <div class="row clearfix">
+                                <div class="col-md-4">
+                                    @Html.Editor("data1", "DATE", new { identificador = "data1", readOnly = "false", value = Request["data1"] == null || Request["data1"].Contains("%") ? (DateTime)ViewData["dt_lancamento_inicio"] : Convert.ToDateTime(Request["data1"]) })
+                                </div>
+                                <div class="col-md-1">
+                                    à
+                                </div>
+                                <div class="col-md-4">
+                                    @Html.Editor("data2", "DATE", new { identificador = "data2", readOnly = "false", value = Request["data2"] == null || Request["data2"].Contains("%") ? (DateTime)ViewData["dt_lancamento_fim"] : Convert.ToDateTime(Request["data2"]) })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <a href="#panel-detail" class="btn btn-primary" onclick="validaBal(0);">Buscar</a>
+                            <input type="button" class="btn btn-default" onclick="window.location = '../Contabilidade/Create'" value="Incluir" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div id="div-list-static">
+        @if (Model != null)
+        {
+            @Html.Partial("ListParam", Model)
+        }
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('#form0').submit(function () {
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        $('#div-list-static').html(result);
+                    }
+                });
+            }
+            return false;
+        });
+    });
+
+    function validaBal(grauPC) {
+        $('#grauPC').val(grauPC);
+        Refresh(0, getPageSize(), 'ListParam', 'div-list-static');
+        $('#div-list-static').html('');
+    }
+
+
+    //function validaPDF()
+    //{
+    //    if ($('#planoContaId').val() == null || $('#planoContaId').val() == '') {
+    //        ShowMessageAlert('É preciso informar a conta para a emissão do Razão', 'warning');
+    //        return false;
+    //    }
+    //    else
+    //        return true;
+    //}
+
+</script>
+

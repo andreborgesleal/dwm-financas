@@ -1,0 +1,176 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@using DWM.Models.Repositories;
+@model PagedList<BalanceteViewModel>
+@{
+    Layout = null;
+
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "#";
+    t[0].nomeCurto = "Balancete Nível 1";
+    t[0].exibir = "S";
+    t[0].referencia = "validaBal(1)";
+
+    t[1].url = "#";
+    t[1].nomeCurto = "Balancete Nível 2";
+    t[1].exibir = "S";
+    t[1].referencia = "validaBal(2)";
+
+    t[2].url = "#";
+    t[2].nomeCurto = "Balancete Nível 3";
+    t[2].exibir = "S";
+    t[2].referencia = "validaBal(3)";
+
+    t[3].url = "#";
+    t[3].nomeCurto = "Balancete todos os níveis";
+    t[3].exibir = "S";
+    t[3].referencia = "validaBal(0)";
+
+    t[4].url = "../Home/Default";
+}
+@if (Model != null)
+{
+    string font = "normal";
+    <div class="x_panel" id="panel-detail">
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Balancete", Descricao = "", Transacao = t })
+        <div class="x_content">
+            <div class="dashboard-widget-content">
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk-action dedo-indicador">
+                        <thead>
+                            <tr class="headings">
+                                <th class="column-title text-center">Código Pleno</th>
+                                <th class="column-title">Descrição</th>
+                                <th style="text-align: right">Saldo Anterior</th>
+                                <th style="text-align: right">Débito</th>
+                                <th style="text-align: right">Crédito</th>
+                                <th style="text-align: right">Saldo</th>
+                                <th class="column-title no-link last text-center">
+                                    <span class="nobr">Ação</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (BalanceteViewModel balancete in Model)
+                            {
+                                if (balancete.planoContaId_pai.HasValue)
+                                {
+                                    font = "normal";
+                                }
+                                else
+                                {
+                                    font = "bold";
+                                }
+                                <tr class="even pointer" style="font-weight: @font">
+                                    @*<td class="col-md-2 text-center">
+                                        <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='Edit?planoContaId=@planoConta.planoContaId'"></button>
+                                        <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="window.location='Delete?planoContaId=@planoConta.planoContaId'"></button>
+                                    </td>*@
+                                    <td class="text-center">
+                                        <span>@balancete.codigoPleno</span>
+                                    </td>
+                                    <td style="text-indent: @((balancete.grauPc - 1) * 20)px">
+                                        <span>@balancete.descricao</span>
+                                    </td>
+                                    <td class="text-right">
+                                        <span>@balancete.vr_saldo_ant.ToString("###,###,##0.00")</span>
+                                    </td>
+                                    <td class="text-right">
+                                        <span>@balancete.vr_debito.ToString("###,###,##0.00")</span>
+                                    </td>
+                                    <td class="text-right">
+                                        <span>@balancete.vr_credito.ToString("###,###,##0.00")</span>
+                                    </td>
+                                    <td class="text-right">
+                                        <span>@balancete.vr_saldo_atual.ToString("###,###,##0.00")</span>
+                                    </td>
+                                    <td class="text-center">
+                                        @if (balancete.tipoConta == "A")
+                                        {
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno')"><i class="fa fa-1x fa-search-plus"></i></a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @Html.Partial("Paginacao", Model)
+            <a href="#panel-detail" class="info pull-right" id="linkTopo"><i class="fa fa-toggle-up"></i> Topo</a>
+        </div>
+    </div>
+    <!-- Formulário Modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+        <div class="modal-dialog modal-lg" style="width: 70%; height: 300px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Razão Modal</h4>
+                </div>
+                <div class="modal-body Scroll" id="myBody">
+                    <p>Aguarde...&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <script>
+        document.getElementById("linkTopo").click();
+    </script>
+}
+else if (TempData[App_Dominio.Controllers.Alerts.ATTENTION] != null)
+{
+    @Html.Partial("_alerts")
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+<script>
+    function Razao(planoContaId, descricao, codigoPleno) {
+        $('#carregando').css("visibility", "visible");
+        $('#carregando').css("width", "100%");
+        $('#carregando').css("height", "100%");
+        $('#carregando').css("position", "absolute");
+        $('#carregando').css("background-color", "black");
+        $('#carregando').css("filter", "alpha(opacity=60)");
+        $('#carregando').css("opacity", "0.6");
+        $('#carregando').css("left", "0%");
+        $('#carregando').css("top", "0%");
+
+        $('#planoContaId').val(planoContaId);
+        $('#descricao_conta').val(descricao);
+        $('#codigoPleno').val(codigoPleno);
+
+        $.ajax({
+            type: "GET",
+            url: "../Razao/ListParamModal",
+            data: {
+                index: 0,
+                pageSize: 1000,
+                data1: $('#data1').val(),
+                data2: $('#data2').val(),
+                centroCustoId: $('#centroCustoId').val(),
+                descricao_centroCusto: $('#descricao_centroCusto1').val(),
+                planoContaId: planoContaId,
+                descricao_conta: descricao,
+                codigoPleno: codigoPleno,
+                totalizaConta: 'S',
+                totalizaDia: 'N',
+                hoje: new Date()
+            },
+            success: function (data) {
+                $('#myBody').html(data);
+                $('#msgs').html("");
+                $('#carregando').css("visibility", "hidden");
+            }
+        });
+    }
+</script>
+
+
+

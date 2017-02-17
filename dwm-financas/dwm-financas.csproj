@@ -203,6 +203,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BalanceteController.cs" />
     <Compile Include="Controllers\BancosController.cs" />
     <Compile Include="Controllers\CentroCustosController.cs" />
     <Compile Include="Controllers\CidadesController.cs" />
@@ -251,6 +252,7 @@
     <Compile Include="Models\BI\ContaReceberParcelaEventoBI.cs" />
     <Compile Include="Models\BI\ExercicioBI.cs" />
     <Compile Include="Models\BI\HomeBI.cs" />
+    <Compile Include="Models\BI\ListViewBalanceteBI.cs" />
     <Compile Include="Models\BI\ListViewContaPagarBI.cs" />
     <Compile Include="Models\BI\ListViewContaReceberBI.cs" />
     <Compile Include="Models\BI\OperacaoBaixarBI.cs" />
@@ -330,6 +332,7 @@
     <Compile Include="Models\Report\DiarioReport.cs" />
     <Compile Include="Models\Report\ExtratoReport.cs" />
     <Compile Include="Models\Report\RazaoReport.cs" />
+    <Compile Include="Models\Repositories\BalanceteViewModel.cs" />
     <Compile Include="Models\Repositories\BancoViewModel.cs" />
     <Compile Include="Models\Repositories\CentroCustoViewModel.cs" />
     <Compile Include="Models\Repositories\CidadeViewModel.cs" />
@@ -4335,6 +4338,9 @@
     <Content Include="Views\MovimentoBancario\ListParam.cshtml" />
     <Content Include="Views\Extrato\Browse.cshtml" />
     <Content Include="Views\Extrato\ListParam.cshtml" />
+    <Content Include="Views\Balancete\Browse.cshtml" />
+    <Content Include="Views\Balancete\ListParam.cshtml" />
+    <Content Include="Views\Razao\ListParamModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />
