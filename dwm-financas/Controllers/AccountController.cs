@@ -17,6 +17,10 @@ using DWM.Models;
 using App_Dominio.Enumeracoes;
 using App_Dominio.Repositories;
 using DWM.Models.Entidades;
+using DWM.Models.Repositories;
+using DWM.Models.Pattern;
+using DWM.Models.BI;
+using App_Dominio.Pattern;
 
 namespace DWM.Controllers
 {
@@ -113,6 +117,129 @@ namespace DWM.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+
+        #region Termo de Uso e Política de Privacidade
+        [AllowAnonymous]
+        public ActionResult TermoUso()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult Politica()
+        {
+            return View();
+        }
+        #endregion
+
+        #region Alterar Senha
+        public ActionResult AlterarSenha()
+        {
+            return View();
+        }
+
+        #endregion
+
+        #region Esqueci minha senha
+        [AllowAnonymous]
+        public ActionResult Forgot(int id)
+        {
+            return View();
+        }
+
+        [ValidateInput(false)]
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult Forgot(UsuarioViewModel value, FormCollection collection)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(collection["empresaId"]))
+                    throw new Exception("Identificador do condomínio não localizado. Favor entrar em contato com a administração.");
+
+                value.uri = this.ControllerContext.Controller.GetType().Name.Replace("Controller", "") + "/" + this.ControllerContext.RouteData.Values["action"].ToString();
+                FactoryLocalhost<UsuarioViewModel, ApplicationContext> factory = new FactoryLocalhost<UsuarioViewModel, ApplicationContext>();
+                value = factory.Execute(new EsqueciMinhaSenhaBI(), value);
+                if (factory.Mensagem.Code > 0)
+                    throw new App_DominioException(factory.Mensagem);
+
+                Success("E-mail com as intruções de renovação de senha enviado com sucesso");
+            }
+            catch (App_DominioException ex)
+            {
+                ModelState.AddModelError("", ex.Result.MessageBase); // mensagem amigável ao usuário
+                Error(ex.Result.Message); // Mensagem em inglês com a descrição detalhada do erro e fica no topo da tela
+                return View(value);
+            }
+            catch (Exception ex)
+            {
+                App_DominioException.saveError(ex, GetType().FullName);
+                ModelState.AddModelError("", MensagemPadrao.Message(17).ToString()); // mensagem amigável ao usuário
+                Error(ex.Message); // Mensagem em inglês com a descrição detalhada do erro e fica no topo da tela
+                return View(value);
+            }
+
+            return RedirectToAction("Login", "Account");
+        }
+
+        [AllowAnonymous]
+        public ActionResult EsqueciMinhaSenha(string id, string key)
+        {
+            UsuarioRepository value = new UsuarioRepository();
+            if (id != null && id != "")
+            {
+                value.usuarioId = int.Parse(id);
+                value.keyword = key;
+                Factory<UsuarioRepository, ApplicationContext> factory = new Factory<UsuarioRepository, ApplicationContext>();
+                value = factory.Execute(new CodigoValidacaoBI(), value);
+                if (value.mensagem.Code == -1)
+                    return View(value);
+                else
+                {
+                    ModelState.AddModelError("", value.mensagem.MessageBase); // mensagem amigável ao usuário
+                    Error(value.mensagem.Message); // Mensagem em inglês com a descrição detalhada do erro e fica no topo da tela
+                }
+            }
+            return RedirectToAction("Login", "Account");
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult EsqueciMinhaSenha(UsuarioRepository value)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (value.usuarioId != 0)
+                    {
+                        Factory<UsuarioRepository, ApplicationContext> factory = new Factory<UsuarioRepository, ApplicationContext>();
+                        value = factory.Execute(new CodigoAtivacaoBI(), value);
+                        if (value.mensagem.Code > 0)
+                            throw new App_DominioException(value.mensagem);
+                        Success("Senha alterada com sucesso. Faça seu login para acessar o sistema");
+                        return RedirectToAction("Login", "Account");
+                    };
+                }
+                catch (App_DominioException ex)
+                {
+                    ModelState.AddModelError("", ex.Result.MessageBase); // mensagem amigável ao usuário
+                    Error(ex.Result.Message); // Mensagem em inglês com a descrição detalhada do erro e fica no topo da tela
+                }
+                catch (Exception ex)
+                {
+                    App_DominioException.saveError(ex, GetType().FullName);
+                    ModelState.AddModelError("", MensagemPadrao.Message(17).ToString()); // mensagem amigável ao usuário
+                    Error(ex.Message); // Mensagem em inglês com a descrição detalhada do erro e fica no topo da tela
+                }
+            }
+            else
+                Error("Dados incorretos");
+
+            return View(value);
+        }
+        #endregion
 
         //
         // GET: /Account/Register

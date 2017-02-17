@@ -203,6 +203,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlterarSenhaController.cs" />
     <Compile Include="Controllers\BalanceteController.cs" />
     <Compile Include="Controllers\BancosController.cs" />
     <Compile Include="Controllers\CentroCustosController.cs" />
@@ -234,6 +235,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BI\CalcularEncargosParcelaBI.cs" />
     <Compile Include="Models\BI\CobrancaCadastrarBI.cs" />
+    <Compile Include="Models\BI\CodigoAtivacaoBI.cs" />
     <Compile Include="Models\BI\ContaPagarBaixarBI.cs" />
     <Compile Include="Models\BI\ContaPagarCancelarOperacaoBI.cs" />
     <Compile Include="Models\BI\ContaPagarEditarBI.cs" />
@@ -250,6 +252,8 @@
     <Compile Include="Models\BI\ContaReceberLiquidarOperacaoBI.cs" />
     <Compile Include="Models\BI\ContaReceberModifyBI.cs" />
     <Compile Include="Models\BI\ContaReceberParcelaEventoBI.cs" />
+    <Compile Include="Models\BI\EnviarEmailBI.cs" />
+    <Compile Include="Models\BI\EsqueciMinhaSenhaBI.cs" />
     <Compile Include="Models\BI\ExercicioBI.cs" />
     <Compile Include="Models\BI\HomeBI.cs" />
     <Compile Include="Models\BI\ListViewBalanceteBI.cs" />
@@ -264,6 +268,7 @@
     <Compile Include="Models\BI\OperacaoModifyBI.cs" />
     <Compile Include="Models\BI\OperacaoParcelaEventoBI.cs" />
     <Compile Include="Models\BI\TransferenciaBancariaBI.cs" />
+    <Compile Include="Models\Contratos\ICrudModelLocal.cs" />
     <Compile Include="Models\Entidades\ApplicationContext.cs" />
     <Compile Include="Models\Entidades\Banco.cs" />
     <Compile Include="Models\Entidades\CentroCusto.cs" />
@@ -280,6 +285,8 @@
     <Compile Include="Models\Entidades\ContaReceberParcela.cs" />
     <Compile Include="Models\Entidades\ContaReceberParcelaEvento.cs" />
     <Compile Include="Models\Entidades\Credor.cs" />
+    <Compile Include="Models\Entidades\DWMContextLocal.cs" />
+    <Compile Include="Models\Entidades\DWMSessaoLocal.cs" />
     <Compile Include="Models\Entidades\EmpresaInterna.cs" />
     <Compile Include="Models\Entidades\Enquadramento.cs" />
     <Compile Include="Models\Entidades\EnquadramentoItem.cs" />
@@ -296,11 +303,15 @@
     <Compile Include="Models\Entidades\OperacaoParcelaEvento.cs" />
     <Compile Include="Models\Entidades\Parametro.cs" />
     <Compile Include="Models\Entidades\PlanoConta.cs" />
+    <Compile Include="Models\Entidades\SessaoLocal.cs" />
     <Compile Include="Models\Enumeracoes\BindDropDownList.cs" />
     <Compile Include="Models\Enumeracoes\DwmFinancasEnum.cs" />
     <Compile Include="Models\Enumeracoes\Enumeradores.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Interfaces\IPathArquivos.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Pattern\FacadeLocalhost.cs" />
+    <Compile Include="Models\Pattern\FactoryLocalhost.cs" />
     <Compile Include="Models\Persistence\BancoModel.cs" />
     <Compile Include="Models\Persistence\CentroCustoModel.cs" />
     <Compile Include="Models\Persistence\CidadeModel.cs" />
@@ -376,6 +387,7 @@
     <Compile Include="Models\Repositories\ReportViewModel.cs" />
     <Compile Include="Models\Repositories\SelectItemsTypeahead.cs" />
     <Compile Include="Models\Repositories\TransferenciaBancariaViewModel.cs" />
+    <Compile Include="Models\Repositories\UsuarioViewModel.cs" />
     <Compile Include="Models\UploadFilesResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -4341,6 +4353,7 @@
     <Content Include="Views\Balancete\Browse.cshtml" />
     <Content Include="Views\Balancete\ListParam.cshtml" />
     <Content Include="Views\Razao\ListParamModal.cshtml" />
+    <Content Include="Views\Account\Forgot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />

@@ -6,12 +6,12 @@ using System.Web;
 
 namespace DWM.Models.Enumeracoes
 {
-    public class Enumeradores
+    public static class Enumeradores
     {
         public enum Param
         {
             //GRUPO_USUARIO = 1,
-            //SISTEMA = 2,
+            SISTEMA = 3,
             //EMPRESA = 3,
             HABILITA_EMAIL = 6,
             FUSO_HORARIO = 7
@@ -136,6 +136,42 @@ namespace DWM.Models.Enumeracoes
             [StringDescription("Evento de cobrança")]
             [StringValue("C")]
             COBRANCA,
+        }
+
+        public enum EmailTipo
+        {
+            [StringDescription("Informativo")]
+            [StringValue("1")]
+            INFORMATIVO = 1,
+
+            [StringDescription("Cadastro Condômino")]
+            [StringValue("2")]
+            CADASTRO_CONDOMINO = 2,
+
+            [StringDescription("Cadastro Convite (token)")]
+            [StringValue("3")]
+            CADASTRO_CONVITE = 3,
+
+            [StringDescription("Cadastro Proprietário")]
+            [StringValue("4")]
+            CADASTRO_PROPRIETARIO = 4,
+
+            [StringDescription("Cadastro Credenciado")]
+            [StringValue("5")]
+            CADASTRO_CREDENCIADO = 5,
+
+            [StringDescription("Chamado")]
+            [StringValue("6")]
+            CHAMADO = 6,
+
+            [StringDescription("Esqueci minha senha")]
+            [StringValue("7")]
+            FORGOT = 7,
+
+            [StringDescription("Outros")]
+            [StringValue("9")]
+            OUTROS = 9,
+
         }
     }
 }
