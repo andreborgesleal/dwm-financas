@@ -11,6 +11,7 @@
     t[1].url = "../Home/Default";
 }
 <div class="container-cadastro">
+    @Html.Partial("_alerts")
     @using (Html.BeginForm("Edit", "Enquadramentos", FormMethod.Post, new { @class = "form" }))
     {
         @Html.ValidationSummary(false, "", new { @style = "margin-left: -20px" })

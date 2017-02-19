@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin.Security;
 using App_Dominio.Security;
 using App_Dominio.Contratos;
 using App_Dominio.Controllers;
@@ -117,7 +111,6 @@ namespace DWM.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
 
         #region Termo de Uso e Política de Privacidade
         [AllowAnonymous]
@@ -307,7 +300,5 @@ namespace DWM.Controllers
 
             return RedirectToAction("Login", "Account");
         }
-
-
     }
 }

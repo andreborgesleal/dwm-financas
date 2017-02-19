@@ -11,6 +11,7 @@
     t[1].url = "../Home/Default";
 }
 <div class="x_panel">
+    @Html.Partial("_alerts")
     @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Diário da contabilidade", Descricao = "", Transacao = t })
     <div class="x_content">
         @using (Ajax.BeginForm("Listparam", "Diario", new AjaxOptions { HttpMethod = "get", UpdateTargetId = "div-list-static" }, new { @role = "search", @id = "form000" }))

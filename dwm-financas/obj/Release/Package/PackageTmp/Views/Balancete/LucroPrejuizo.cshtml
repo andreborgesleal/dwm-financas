@@ -1,0 +1,44 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@using DWM.Models.Repositories;
+@model System.Web.Mvc.PagedList<DWM.Models.Repositories.BalanceteViewModel>
+@{
+    Layout = null;
+
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../Contabilidade/Create";
+    t[0].nomeCurto = "Incluir";
+    t[0].exibir = "S";
+    t[0].referencia = "";
+
+    t[1].url = "../Home/Default";
+
+    decimal vr_saldo_anterior = Model.ElementAt(0).vr_saldo_ant + Model.ElementAt(1).vr_saldo_ant;
+    decimal vr_debitos = Model.Select(info => info.vr_debito).Sum();
+    decimal vr_creditos = Model.Select(info => info.vr_credito).Sum();
+    decimal vr_total = vr_creditos - vr_debitos;
+    decimal vr_saldo_atual = Model.ElementAt(0).vr_saldo_atual + Model.ElementAt(1).vr_saldo_atual;
+}
+@if (Model != null)
+{
+    <p><span style="font-family: 'Courier New'" class="h4">Saldo Anterior......: @vr_saldo_anterior.ToString("R$ ###,###,###,##0.00")</span></p>
+    <p>&nbsp;</p>
+    <p><span style="font-family: 'Courier New'" class="h4">Total de Receitas...: @vr_creditos.ToString("R$ ###,###,###,##0.00")</span></p>
+    <p><span style="font-family: 'Courier New'; border-bottom: solid 1px" class="h4">Total de Despesas...: @vr_debitos.ToString("R$ ###,###,###,##0.00")</span></p>
+    <p><span style="font-family: 'Courier New'" class="h4">Receita - Despesa...: @vr_total.ToString("R$ ###,###,###,##0.00")</span></p>
+    <p>&nbsp;</p>
+    <p><span style="font-family: 'Courier New'" class="text-bold h4" >Saldo Atual.........: @vr_saldo_atual.ToString("R$ ###,###,###,##0.00")</span></p>
+}
+else if (TempData[App_Dominio.Controllers.Alerts.ATTENTION] != null)
+{
+    @Html.Partial("_alerts")
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+
+
+
+

@@ -44,11 +44,13 @@ namespace DWM.Models.BI
             int grauPC = (int)param[2];
             DateTime dt1 = Convert.ToDateTime(param[3].ToString());
             DateTime dt2 = Convert.ToDateTime(param[4].ToString());
+            string RecDesp = (string)param[6];
 
             SqlParameter empresaIdParam = new SqlParameter("@pEmpresaId", SqlDbType.Int);
             SqlParameter centroCustoIdParam = new SqlParameter("@pCentroCustoID", SqlDbType.Int);
             SqlParameter exercicioIdParam = new SqlParameter("@pExercicio", SqlDbType.Int);
             SqlParameter grauPCParam = new SqlParameter("@pGrauPC", SqlDbType.Int);
+            SqlParameter RecDespParam = new SqlParameter("@pRecDesp", SqlDbType.NChar, 1);
             SqlParameter pageSizeParam = new SqlParameter("@pageSize", SqlDbType.Int);
             SqlParameter totalCountParam = new SqlParameter("@totalCount", SqlDbType.Int);
             SqlParameter Cod_erroParam = new SqlParameter("@pCod_erro", SqlDbType.Int);
@@ -58,6 +60,7 @@ namespace DWM.Models.BI
             centroCustoIdParam.Value = centroCustoId;
             exercicioIdParam.Value = exercicio;
             grauPCParam.Value = grauPC;
+            RecDespParam.Value = RecDesp;
             pageSizeParam.Value = pageSize;
 
             totalCountParam.Direction = ParameterDirection.Output;
@@ -71,13 +74,14 @@ namespace DWM.Models.BI
             #endregion
 
 
-            IEnumerable<BalanceteViewModel> bal = db.Database.SqlQuery<BalanceteViewModel>("spr_balancete @pEmpresaId, @pCentroCustoID, @pExercicio, @pGrauPC, @pData1, @pData2, @pageSize, @pageNumber, @totalCount out, @pCod_erro out, @pDesc_erro out",
+            IEnumerable<BalanceteViewModel> bal = db.Database.SqlQuery<BalanceteViewModel>("spr_balancete @pEmpresaId, @pCentroCustoID, @pExercicio, @pGrauPC, @pData1, @pData2, @pRecDesp, @pageSize, @pageNumber, @totalCount out, @pCod_erro out, @pDesc_erro out",
                                                                                             empresaIdParam,
                                                                                             centroCustoIdParam,
                                                                                             exercicioIdParam,
                                                                                             grauPCParam,
                                                                                             new SqlParameter("@pData1", dt1),
                                                                                             new SqlParameter("@pData2", dt2),
+                                                                                            RecDespParam,
                                                                                             pageSizeParam,
                                                                                             new SqlParameter("@pageNumber", ++index),
                                                                                             totalCountParam,

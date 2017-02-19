@@ -87,6 +87,5 @@ C:\sistemas\dwm-financas\dwm-financas\bin\Microsoft.Owin.Security.Google.xml
 C:\sistemas\dwm-financas\dwm-financas\bin\Microsoft.Owin.Security.Twitter.xml
 C:\sistemas\dwm-financas\dwm-financas\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\sistemas\dwm-financas\dwm-financas\bin\Microsoft.Threading.Tasks.xml
-C:\sistemas\dwm-financas\dwm-financas\obj\Release\dwm-financas.csprojResolveAssemblyReference.cache
 C:\sistemas\dwm-financas\dwm-financas\obj\Release\dwm-financas.dll
 C:\sistemas\dwm-financas\dwm-financas\obj\Release\dwm-financas.pdb

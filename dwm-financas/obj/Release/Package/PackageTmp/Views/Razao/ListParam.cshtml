@@ -1,7 +1,7 @@
 ﻿@using DWM.Models.Repositories
 @using App_Dominio.Repositories
-@model System.Web.Mvc.PagedList<DWM.Models.Repositories.RazaoViewModel>
 @using DWM.Models.Repositories;
+@model PagedList<DWM.Models.Repositories.RazaoViewModel>
 @{
     Layout = null;
     int contador = 0;
@@ -13,15 +13,21 @@
     string color = "#000";
     string operacao = Request["id"] != null && Request["id"] == "E" ? "Delete" : "Edit";
     string onClick = "";
+    decimal vr_sld_ant = 0;
 
-
-    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
     t[0].url = "../Contabilidade/Create";
     t[0].nomeCurto = "Incluir";
     t[0].exibir = "S";
     t[0].referencia = "";
 
-    t[1].url = "../Home/Default";
+    t[1].url = "#";
+    t[1].nomeCurto = "Imprimir";
+    t[1].exibir = "S";
+    t[1].referencia = "Print()";
+    //t[1].glyph = "_blank";
+
+    t[2].url = "../Home/Default";
 }
 @if (Model != null)
 {
@@ -90,7 +96,7 @@
                                         vr_sld = razao.vr_saldo.HasValue ? razao.vr_saldo.Value.ToString("###,###,###,##0.00") : "";
                                         cor_sld = "text-bold";
                                     }
-
+                                    vr_sld_ant += razao.vr_saldo ?? 0;
                                     onClick = "";
                                 }
                                 if (razao.codigoPleno != null)
@@ -129,7 +135,7 @@
                                     {
                                         if (razao.descricao_historico.Contains("geral:"))
                                         {
-                                            vr_sld = (decimal.Parse(vr_db) - decimal.Parse(vr_cr)).ToString("###,###,###,##0.00");
+                                            vr_sld = (vr_sld_ant + decimal.Parse(vr_db) - decimal.Parse(vr_cr)).ToString("###,###,###,##0.00");
                                         }
                                         <td class="col-md-5" style="color: @color">
                                             <h4><strong>@razao.descricao_historico.Replace("<b>", "").Replace("</b>", "")</strong></h4>
@@ -192,4 +198,19 @@ else
 }
 
 
+<script>
+    function Print() {
+        var link = "../Razao/Imprimir?data1=" + $('#data1').val() +
+                   "&data2=" + $('#data2').val() +
+                   "&centroCustoId=" + $('#centroCustoId').val() +
+                   "&descricao_centroCusto=" + $('#descricao_centroCusto').val() +
+                   "&planoContaId=" + $('#planoContaId').val() +
+                   "&descricao_conta=" + $('#descricao_conta').val() +
+                   "&codigoPleno=" + $('#codigoPleno').val() +
+                   "&totalizaConta=" + $('#totalizaConta').val() +
+                   "&totalizaDia=" + $('#totalizaDia').val() +
+                   "&hoje=" + new Date();
 
+        window.open(link);
+    }
+</script>

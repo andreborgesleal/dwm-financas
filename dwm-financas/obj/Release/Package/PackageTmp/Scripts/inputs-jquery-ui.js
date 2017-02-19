@@ -431,7 +431,7 @@ function DoColapse(colapse, glyph) {
 }
 
 function getPageSize() {
-    return 50;
+    return 100;
 }
 
 function MoveId(_descricao, id, data) {

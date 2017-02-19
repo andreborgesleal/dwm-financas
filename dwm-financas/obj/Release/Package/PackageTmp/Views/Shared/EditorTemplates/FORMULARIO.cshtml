@@ -11,11 +11,11 @@
             {
                 if (trans.url != null && trans.url.Trim() != "")
                 {
-                    <a href="@trans.url" onclick="@trans.referencia"><small><i class="@trans.glyph"></i> @trans.nomeCurto</small></a>
+                    <a href="@trans.url" onclick="@trans.referencia" target="@trans.glyph"><small><i class="@trans.glyph"></i> @trans.nomeCurto</small></a>
                 }
                 else if (trans.uri != null && trans.uri.Trim() != "")
                 {
-                    <a href="#@trans.uri" onclick="@trans.referencia"><small><i class="@trans.glyph"></i> @trans.nomeCurto</small></a>
+                    <a href="#@trans.uri" onclick="@trans.referencia" target="@trans.glyph"><small><i class="@trans.glyph"></i> @trans.nomeCurto</small></a>
                 }
             }
         </h2>
@@ -37,15 +37,21 @@
                         if (t[i].url != null && t[i].url.Trim() != "")
                         {
                             <li>
-                                <a href="@t[i].url" onclick="@t[i].referencia">@t[i].nomeCurto</a>
+                                <a href="@t[i].url" onclick="@t[i].referencia" target="@t[i].glyph">@t[i].nomeCurto</a>
                             </li>
                         }
                         else if (t[i].uri != null && t[i].uri.Trim() != "")
                         {
                             <li>
-                                <a href="#@t[i].uri" onclick="@t[i].referencia">@t[i].nomeCurto</a>
+                                <a href="#@t[i].uri" onclick="@t[i].referencia" target="@t[i].glyph">@t[i].nomeCurto</a>
                             </li>
                         }
+                        // linha horizontal
+                        if (t[i].PageSize == 1)
+                        {
+                            <li role="separator" class="divider"></li>
+                        }
+
                     }
                 }
                 @if (ViewData.Model is System.Web.Mvc.IPagedList)

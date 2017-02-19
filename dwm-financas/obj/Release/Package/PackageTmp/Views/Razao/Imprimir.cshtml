@@ -1,0 +1,183 @@
+﻿@using App_Dominio.Entidades;
+@using App_Dominio.Security;
+@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@using DWM.Models.Repositories;
+@model PagedList<DWM.Models.Repositories.RazaoViewModel>
+@{
+    Layout = null;
+    string font = "normal";
+    int contador = 0;
+    string plano_c = "";
+    string vr_db = "";
+    string vr_cr = "";
+    string vr_sld = "";
+    decimal vr_sld_ant = 0;
+    IList<RazaoSinteticoViewModel> list = new List<RazaoSinteticoViewModel>();
+    string color = "#000";
+    string operacao = Request["id"] != null && Request["id"] == "E" ? "Delete" : "Edit";
+    EmpresaSecurity<SecurityContext> security = new EmpresaSecurity<SecurityContext>();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Razão</title>
+    @Styles.Render("~/Content-z/css")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body style="background-color: #fff">
+    <h2 style="text-align: center">Razão</h2>
+    <h2 style="text-align: center">Empresa: @security.getEmpresa().nome</h2>
+    <h2 style="text-align: center">Período: @(Request ["data1"]) à @(Request ["data2"])</h2>
+    <h2 style="text-align: center">Conta: @(Request ["descricao_conta"])</h2>
+    @if (Request["descricao_centroCusto"] != "")
+    {
+        <h2 style="text-align: center">Centro de custo: @(Request["descricao_centroCusto"])</h2>
+    }
+    <hr />
+    <table class="table" style="orphans: 3;">
+        <thead>
+            <tr class="headings">
+                <th>Data</th>
+                <th>ID</th>
+                <th>Doc</th>
+                <th>C.Custo</th>
+                <th>Histórico</th>
+                <th style="text-align: right">Débito</th>
+                <th style="text-align: right">Crédito</th>
+                <th style="text-align: right">Saldo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (RazaoViewModel razao in Model)
+            {
+                string cor_db = "";
+                string cor_cr = "";
+                string cor_sld = "";
+                vr_db = "";
+                vr_cr = "";
+                if (razao.contabilidadeId != null)
+                {
+                    if (razao.vr_debito.HasValue)
+                    {
+                        vr_db = razao.vr_debito.Value.ToString("###,###,###,##0.00");
+                    }
+                    else
+                    {
+                        vr_db = "";
+                    }
+                    if (razao.vr_credito.HasValue)
+                    {
+                        vr_cr = razao.vr_credito.Value.ToString("###,###,###,##0.00");
+                    }
+                    else
+                    {
+                        vr_cr = "";
+                    }
+                    vr_sld = razao.vr_saldo.Value.ToString("###,###,###,##0.00");
+                    color = "#000";
+                }
+                else
+                {
+                    if (razao.vr_debito.HasValue)
+                    {
+                        vr_db = razao.vr_debito.HasValue ? razao.vr_debito.Value.ToString("###,###,###,##0.00") : "";
+                        cor_db = "text-bold";
+                    }
+                    if (razao.vr_credito.HasValue)
+                    {
+                        vr_cr = razao.vr_credito.HasValue ? razao.vr_credito.Value.ToString("###,###,###,##0.00") : "";
+                        cor_cr = "text-bold";
+                    }
+                    if (razao.vr_saldo.HasValue)
+                    {
+                        vr_sld = razao.vr_saldo.HasValue ? razao.vr_saldo.Value.ToString("###,###,###,##0.00") : "";
+                        cor_sld = "text-bold";
+                    }
+                    vr_sld_ant += razao.vr_saldo ?? 0;
+                }
+                if (razao.codigoPleno != null)
+                {
+                    plano_c = razao.codigoPleno + "-" + razao.descricao_planoConta;
+                    color = "#000";
+                    <tr>
+                        <td colspan="8"><strong>@Html.DisplayTextFor(info => plano_c)</strong></td>
+                    </tr>
+                }
+                if (razao._dt_lancamento.HasValue && razao._dt_lancamento.Value > DateTime.Today)
+                {
+                    color = "#ba4d00";
+                }
+                else if (!razao._dt_lancamento.HasValue)
+                {
+                    color = "#000";
+                }
+                <tr>
+                    <td style="color: @color">
+                        @if (razao.dt_lancamento.HasValue)
+                        {
+                            <small>@razao.dt_lancamento.Value.ToString("dd/MM/yyyy")</small>
+                        }
+                    </td>
+                    <td style="color: @color">
+                        <small>@razao.contabilidadeId</small>
+                    </td>
+                    <td style="color: @color">
+                        <small>@razao.documento</small>
+                    </td>
+                    <td style="color: @color">
+                        <small>@razao.descricao_centroCusto</small>
+                    </td>
+                    @if (razao.descricao_historico.Contains("<b>"))
+                    {
+                        if (razao.descricao_historico.Contains("geral:"))
+                        {
+                            vr_sld = (vr_sld_ant + decimal.Parse(vr_db) - decimal.Parse(vr_cr)).ToString("###,###,###,##0.00");
+                        }
+                        <td style="color: @color">
+                            <h4><strong>@razao.descricao_historico.Replace("<b>", "").Replace("</b>", "")</strong></h4>
+                            @if (razao.complementoHist != null && razao.complementoHist.Trim() != "")
+                            {
+                                <small>@Html.DisplayTextFor(info => razao.complementoHist)</small>
+                            }
+                        </td>
+                        <td class="text-right @cor_db" style="color: @color">
+                            <h4><strong>@vr_db</strong></h4>
+                        </td>
+                        <td class="text-right @cor_cr" style="right; color: @color">
+                            <h4><strong>@vr_cr</strong></h4>
+                        </td>
+                        <td class="text-right @cor_sld" style="right; color: @color">
+                            <h4><strong>@vr_sld</strong></h4>
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="color: @color">
+                            <small>@razao.descricao_historico</small>
+                            @if (razao.complementoHist != null && razao.complementoHist.Trim() != "")
+                            {
+                                <small>@Html.DisplayTextFor(info => razao.complementoHist)</small>
+                            }
+                        </td>
+                        <td class="text-right @cor_db" style="color: @color">
+                            <small>@vr_db</small>
+                        </td>
+                        <td class="text-right @cor_cr" style="right; color: @color">
+                            <small>@vr_cr</small>
+                        </td>
+                        <td class="text-right @cor_sld" style="right; color: @color">
+                            <small>@vr_sld</small>
+                        </td>
+                    }
+                </tr>
+                contador++;
+            }
+        </tbody>
+    </table>
+</body>
+</html>
+

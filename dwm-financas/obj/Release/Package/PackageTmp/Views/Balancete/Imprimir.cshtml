@@ -1,0 +1,79 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@using DWM.Models.Repositories;
+
+@model PagedList<BalanceteViewModel>
+@{
+    Layout = null;
+    string font = "normal";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Balancete</title>
+    @Styles.Render("~/Content-z/css")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body style="background-color: #fff">
+    <h2 style="text-align: center">Balancete</h2>
+    <h2 style="text-align: center">Empresa: @Model.Filtros.ElementAt(5).valor</h2>
+    <h2 style="text-align: center">Período: @Model.Filtros.ElementAt(3).valor à @Model.Filtros.ElementAt(4).valor</h2>
+    <h2 style="text-align: center">Centro de custo: @Model.Filtros.ElementAt(6).valor</h2>
+    <hr />
+    <table class="table" style="orphans: 3;">
+        <thead>
+            <tr class="headings">
+                <th class="column-title text-center">Código Pleno</th>
+                <th class="column-title">Descrição</th>
+                <th style="text-align: right">Saldo Anterior</th>
+                <th style="text-align: right">Débito</th>
+                <th style="text-align: right">Crédito</th>
+                <th style="text-align: right">Saldo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (BalanceteViewModel balancete in Model)
+            {
+                if (balancete.planoContaId_pai.HasValue)
+                {
+                    font = "normal";
+                }
+                else
+                {
+                    font = "bold";
+                }
+                <tr class="even pointer" style="font-weight: @font">
+                    <td class="text-center">
+                        <span>@balancete.codigoPleno</span>
+                    </td>
+                    <td>
+                        @if (balancete.tipoConta != "A")
+                        {
+                            <span>@balancete.descricao</span>
+                        }
+                        else
+                        {
+                            <span style="font-style: italic">@balancete.descricao</span>
+                        }
+                    </td>
+                    <td class="text-right">
+                        <span>@balancete.vr_saldo_ant.ToString("###,###,##0.00")</span>
+                    </td>
+                    <td class="text-right">
+                        <span>@balancete.vr_debito.ToString("###,###,##0.00")</span>
+                    </td>
+                    <td class="text-right">
+                        <span>@balancete.vr_credito.ToString("###,###,##0.00")</span>
+                    </td>
+                    <td class="text-right">
+                        <span>@balancete.vr_saldo_atual.ToString("###,###,##0.00")</span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

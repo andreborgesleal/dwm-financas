@@ -9,6 +9,7 @@
     t[1].url = "../Home/Default";
 }
 <div class="container-cadastro">
+    @Html.Partial("_alerts")
     <div class="x_panel">
         @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Grupo de Clientes", Descricao = "Listagem de Grupos de Clientes", Transacao = t })
         <div class="x_content">

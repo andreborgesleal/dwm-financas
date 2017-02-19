@@ -11,6 +11,7 @@
     t[1].url = "../Home/Default";
 }
 @Html.Partial("_AjaxAlert","")
+@Html.Partial("_alerts")
 <div class="x_panel">
     @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Razão contábil", Descricao = "", Transacao = t })
     <div class="x_content">

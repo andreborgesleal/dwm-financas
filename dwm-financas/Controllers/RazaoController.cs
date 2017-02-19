@@ -50,7 +50,17 @@ namespace DWM.Controllers
         #region List
         public override ActionResult List(int? index, int? PageSize, string descricao = null)
         {
-            return ListParam(index, PageSize);
+            int? _null = null;
+
+            if (Request["planoContaid"] != null && Request["planoContaid"] != "")
+                return ListParam(index, PageSize, Request["data1"], Request["data2"], 
+                                Request["centroCustoId"] != null && Request["centroCustoId"] != "" ? int.Parse(Request["centroCustoId"]) : _null,
+                                Request["descricao_centroCusto"],
+                                Request["planoContaId"] != null && Request["planoContaId"] != "" ? int.Parse(Request["planoContaId"]) : _null,
+                                Request["descricao_conta"], Request["codigoPleno"],
+                                Request["totalizaConta"], Request["totalizaDia"]);
+            else
+                return ListParam(index, PageSize);
         }
 
         public ActionResult _ListRazaoModal(int? index, int? pageSize = 50, string descricao = null)
@@ -107,8 +117,8 @@ namespace DWM.Controllers
 
                     if (e.mensagem.Code == 0 && e.dt_lancamento_inicio.HasValue)
                     {
-                        data1 = e.dt_lancamento_inicio.Value.ToString("dd/MM/yyyy");
-                        data1 = e.dt_lancamento_fim.Value.ToString("dd/MM/yyyy");
+                        data1 = e.dt_lancamento_inicio.Value.ToString("yyyy-MM-dd");
+                        data2 = e.dt_lancamento_fim.Value.ToString("yyyy-MM-dd");
                     }
                     else
                     {
@@ -163,6 +173,18 @@ namespace DWM.Controllers
             return this.ListModal(index, pageSize, l, "Razão", data1, data2, centroCustoId, planoContaId, totalizaConta, totalizaDia);
         }
 
+        #endregion
+
+        #region Imprimir
+        [AuthorizeFilter]
+        public ActionResult Imprimir(string data1 = "", string data2 = "",
+                                        int? centroCustoId = null, string descricao_centroCusto = "",
+                                        int? planoContaId = null, string descricao_conta = "", string codigoPleno = "",
+                                        string totalizaConta = "", string totalizaDia = "")
+        {
+            return ListParam(0, 10000, data1, data2, centroCustoId, descricao_centroCusto, planoContaId, 
+                                descricao_conta, codigoPleno, totalizaConta, totalizaDia);
+        }
         #endregion
     }
 
