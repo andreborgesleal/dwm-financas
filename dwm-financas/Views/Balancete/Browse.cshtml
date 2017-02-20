@@ -9,6 +9,15 @@
     t[0].referencia = "";
 
     t[1].url = "../Home/Default";
+
+    string value = "";
+    string Text = "";
+
+    if (Request ["centroCustoId"] != null && Request["centroCustoId"] != "")
+    {
+        value = Request["centroCustoId"];
+        Text = Request["descricao_centroCusto"];
+    }
 }
 <div class="container-cadastro">
     @Html.Partial("_alerts")
@@ -28,7 +37,7 @@
 
                 <div class="row clearfix">
                     <div class="col-md-6">
-                        @Html.Editor("descricao_centroCusto1", "CentroCustoAutoComplete", new { nextField = "data1", prevField = "descricao_conta" })
+                        @Html.Editor("descricao_centroCusto1", "CentroCustoAutoComplete", new { nextField = "data1", prevField = "descricao_conta", value = value, Text = Text })
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">

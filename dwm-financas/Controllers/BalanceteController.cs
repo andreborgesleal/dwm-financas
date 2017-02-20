@@ -57,7 +57,8 @@ namespace DWM.Controllers
         {
             if (Request["data1"] != null && Request["data1"] != "")
                 return ListParam(index, PageSize, Request ["data1"], Request["data2"], 
-                                Request["centroCustoId"] != null ? int.Parse(Request["centroCustoid"]) : 0, Request["grauPC"] != null ? int.Parse(Request["grauPC"]) : 0, 
+                                Request["centroCustoId"] != null && Request["centroCustoId"] != "" ? int.Parse(Request["centroCustoid"]) : 0, 
+                                Request["grauPC"] != null && Request["grauPC"] != "" ? int.Parse(Request["grauPC"]) : 0, 
                                 Request["descricao_centroCusto"], Request["RecDesp"]);
             else
                 return ListParam(index, PageSize);

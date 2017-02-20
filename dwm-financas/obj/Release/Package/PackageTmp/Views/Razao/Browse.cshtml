@@ -9,6 +9,23 @@
     t[0].referencia = "";
 
     t[1].url = "../Home/Default";
+
+    string CentroCustoValue = "";
+    string CentroCustoText = "";
+    string PlanoContaValue = "";
+    string PlanoContaText = "";
+
+    if (Request["centroCustoId"] != null && Request["centroCustoId"] != "")
+    {
+        CentroCustoValue = Request["centroCustoId"];
+        CentroCustoText = Request["descricao_centroCusto"];
+    }
+
+    if (Request["planoContaId"] != null && Request["planoContaId"] != "")
+    {
+        PlanoContaValue = Request["planoContaId"];
+        PlanoContaText = Request["descricao_conta"];
+    }
 }
 @Html.Partial("_AjaxAlert","")
 @Html.Partial("_alerts")
@@ -20,10 +37,10 @@
             <div class="container-cadastro">
                 <div class="row clearfix">
                     <div class="col-md-6">
-                        @Html.Editor("descricao_conta1", "PlanoContasAutoComplete", new { nextField = "descricao_centroCusto" })
+                        @Html.Editor("descricao_conta1", "PlanoContasAutoComplete", new { nextField = "descricao_centroCusto", value = PlanoContaValue, Text = PlanoContaText})
                     </div>
                     <div class="col-md-6">
-                        @Html.Editor("descricao_centroCusto1", "CentroCustoAutoComplete", new { nextField = "data1", prevField = "descricao_conta" })
+                        @Html.Editor("descricao_centroCusto1", "CentroCustoAutoComplete", new { nextField = "data1", prevField = "descricao_conta", value = CentroCustoValue, Text = CentroCustoText })
                     </div>
                 </div>
                 <div class="row clearfix">
