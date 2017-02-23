@@ -112,7 +112,9 @@ namespace DWM.Models.Persistence
 
         public override Contabilidade Find(ContabilidadeViewModel key)
         {
-            int _exercicio = int.Parse(sessaoCorrente.value1);
+            //int _exercicio = int.Parse(sessaoCorrente.value1);
+            int _exercicio = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EXERCICIO_CONTABIL, sessaoCorrente.empresaId).valor);
+
             Contabilidade entity = db.Contabilidades.Find(key.contabilidadeId);
             if (entity != null && (entity.ContabilidadeItems.Count() == 0 || entity.empresaId != sessaoCorrente.empresaId || entity.exercicio != _exercicio))
                 return null;
@@ -179,14 +181,16 @@ namespace DWM.Models.Persistence
 
         public override ContabilidadeViewModel CreateRepository(System.Web.HttpRequestBase Request = null)
         {
-            int _exercicio = int.Parse(sessaoCorrente.value1);
+            //int _exercicio = int.Parse(sessaoCorrente.value1);
+            int _exercicio = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EXERCICIO_CONTABIL, sessaoCorrente.empresaId).valor);
+
             DateTime d = DateTime.Today;
             if (db.Contabilidades.ToList().Where(info => info.empresaId.Equals(sessaoCorrente.empresaId) && info.exercicio == _exercicio).Count() > 0)
                 d = db.Contabilidades.ToList().Where(info => info.empresaId.Equals(sessaoCorrente.empresaId) && info.exercicio == _exercicio).OrderByDescending(ord => ord.contabilidadeId).Take(1).Last().dt_lancamento;
 
             ContabilidadeViewModel r = new ContabilidadeViewModel()
             {
-                exercicio = int.Parse(sessaoCorrente.value1),
+                exercicio = _exercicio,
                 empresaId = sessaoCorrente.empresaId,
                 dt_lancamento = d,
                 ContabilidadeItem = new ContabilidadeItemViewModel(),
@@ -249,7 +253,9 @@ namespace DWM.Models.Persistence
         {
             string[] value = { "", "" };
 
-            Exercicio exe = db.Exercicios.Find(sessaoCorrente.empresaId, int.Parse(sessaoCorrente.value1));
+            int _exercicio = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EXERCICIO_CONTABIL, sessaoCorrente.empresaId).valor);
+
+            Exercicio exe = db.Exercicios.Find(sessaoCorrente.empresaId, _exercicio);
 
             if (exe == null)
                 throw new Exception("Exercício contábil não encontrado");
@@ -262,8 +268,8 @@ namespace DWM.Models.Persistence
 
             if (exe.dt_lancamento_inicio.HasValue && (data < exe.dt_lancamento_inicio.Value || data > exe.dt_lancamento_fim.Value))
             {
-                value[0] = exe.dt_inicio.ToString("dd/MM/yyyy");
-                value[1] = exe.dt_fim.ToString("dd/MM/yyyy");
+                value[0] = exe.dt_lancamento_inicio.Value.ToString("dd/MM/yyyy");
+                value[1] = exe.dt_lancamento_fim.Value.ToString("dd/MM/yyyy");
             }
 
             return value;
@@ -293,7 +299,8 @@ namespace DWM.Models.Persistence
             DateTime dt1 = Convert.ToDateTime(param[0].ToString());
             DateTime dt2 = Convert.ToDateTime(param[1].ToString());
 
-            int _exercicio = int.Parse(sessaoCorrente.value1);
+            //int _exercicio = int.Parse(sessaoCorrente.value1);
+            int _exercicio = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EXERCICIO_CONTABIL, sessaoCorrente.empresaId).valor);
 
             #region LINQ
             var q = (from c in db.Contabilidades

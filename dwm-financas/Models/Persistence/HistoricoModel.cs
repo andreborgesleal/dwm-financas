@@ -7,7 +7,6 @@ using App_Dominio.Component;
 using DWM.Models.Repositories;
 using DWM.Models.Entidades;
 using App_Dominio.Enumeracoes;
-using App_Dominio.Models;
 
 namespace DWM.Models.Persistence
 {

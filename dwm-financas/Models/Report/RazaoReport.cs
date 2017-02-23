@@ -21,7 +21,8 @@ namespace DWM.Models.Report
             totalizaColuna1 = param[4].ToString();
             totalizaColuna2 = param[5].ToString();
 
-            int _exercicio = int.Parse(sessaoCorrente.value1);
+            //int _exercicio = int.Parse(sessaoCorrente.value1);
+            int _exercicio = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EXERCICIO_CONTABIL, sessaoCorrente.empresaId).valor);
 
             SqlParameter centroCustoIdParam = new SqlParameter("@centroCustoId", SqlDbType.Int);
             SqlParameter pageSizeParam = new SqlParameter("@pageSize", SqlDbType.Int);
@@ -81,7 +82,8 @@ namespace DWM.Models.Report
             totalizaColuna1 = param[4].ToString();
             totalizaColuna2 = param[5].ToString();
 
-            int _exercicio = int.Parse(sessaoCorrente.value1);
+            //int _exercicio = int.Parse(sessaoCorrente.value1);
+            int _exercicio = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EXERCICIO_CONTABIL, sessaoCorrente.empresaId).valor);
 
             SqlParameter centroCustoIdParam = new SqlParameter("@centroCustoId", SqlDbType.Int);
             SqlParameter pageSizeParam = new SqlParameter("@pageSize", SqlDbType.Int);

@@ -1,0 +1,79 @@
+﻿@using App_Dominio.Repositories
+@model DWM.Models.Repositories.ExercicioViewModel
+@{
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../Exercicios/Create";
+    t[0].nomeCurto = "Incluir";
+    t[0].referencia = "";
+
+    t[1].url = "../Home/Default";
+}
+<div class="container-cadastro">
+    @Html.Partial("_alerts")
+    <div class="x_panel">
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Exercício contábil", Descricao = "Alterar parâmetros da contabilidade.", Transacao = t })
+        <div class="x_content">
+            @using (Html.BeginForm("Edit", "Exercicios", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.HiddenFor(info => info.empresaId)
+                @Html.HiddenFor(info => info.exercicio)
+                <div class="row">
+                    <div class="col-md-3 col-xs-12 col-sm-12 col-lg-3">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.exercicio, new { @class = "control-label" })
+                            @Html.DropDownListFor(m => m.exercicio, new DWM.Models.Enumeracoes.BindDropDownList().Exercicio(Model.exercicio.ToString()), new { @class = "form-control" , @disabled = "disabled" })
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-12 col-sm-12 col-lg-3">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.mascaraPc, new { @class = "control-label" })
+                            <input type="text" class="form-control" name="mascaraPc" id="mascaraPc" value="@Model.mascaraPc" maxlength="25" />
+                        </div>
+                    </div>
+                    <div class="com-md-3 col-lg-3 col-xs-12 col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label" for="data1">Início</label>
+                            @Html.Editor("dt_inicio1", "DATE", new { identificador = "dt_inicio", readOnly = "false", value = Model.dt_inicio })
+                        </div>
+                    </div>
+                    <div class="com-md-3 col-lg-3 col-xs-12 col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label" for="data1">Fim</label>
+                            @Html.Editor("dt_fim1", "DATE", new { identificador = "dt_fim", readOnly = "false", value = Model.dt_fim })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="com-md-3 col-lg-3 col-xs-12 col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label" for="data1">Dt. lançamento inicial</label>
+                            @Html.Editor("dt_inicio1", "DATE", new { identificador = "dt_lancamento_inicio", readOnly = "false", value = Model.dt_lancamento_inicio })
+                        </div>
+                    </div>
+                    <div class="com-md-3 col-lg-3 col-xs-12 col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label" for="data1">Dt. lançamento final</label>
+                            @Html.Editor("dt_lancamento_fim1", "DATE", new { identificador = "dt_lancamento_fim", readOnly = "false", value = Model.dt_lancamento_fim })
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xs-12 col-sm-12 col-lg-2">
+                        <div class="form-group">
+                            <label class="control-label" for="Encerrado">Encerrado</label>
+                            @Html.DropDownListFor(m => m.encerrado, App_Dominio.Enumeracoes.DropDownListEnum.SimNao(Model.encerrado), new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-success" value="Salvar" name="btn-salvar" id="btn-salvar" />
+                            <input type="button" onclick="window.location = '../Exercicios/Browse'" class="btn btn-default" value="Cancelar" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+

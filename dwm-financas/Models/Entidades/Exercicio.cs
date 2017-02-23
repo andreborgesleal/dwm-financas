@@ -34,3 +34,4 @@ namespace DWM.Models.Entidades
         public string encerrado { get; set; }
     }
 }
+

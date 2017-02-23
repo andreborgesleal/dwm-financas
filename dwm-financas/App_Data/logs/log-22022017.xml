@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="536872259" Data="22/02/2017 13:56:12">
+    <Sessao>ql1as3ehp3ta02qn1112ju0q</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Models.Persistence.ListViewExercicio =&gt; exercicios/browse</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Models.Persistence.ListViewExercicio.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Persistence\ExercicioModel.cs:linha 194
+   em App_Dominio.Component.ListViewRepository`2.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 62
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+  <LOG ID="669334755" Data="22/02/2017 13:56:53">
+    <Sessao>ql1as3ehp3ta02qn1112ju0q</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Models.Persistence.ListViewExercicio =&gt; exercicios/browse</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Models.Persistence.ListViewExercicio.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Persistence\ExercicioModel.cs:linha 194
+   em App_Dominio.Component.ListViewRepository`2.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 62
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+  <LOG ID="30191682" Data="22/02/2017 13:57:02">
+    <Sessao>ql1as3ehp3ta02qn1112ju0q</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Models.Persistence.ListViewExercicio =&gt; exercicios/browse</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Models.Persistence.ListViewExercicio.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Persistence\ExercicioModel.cs:linha 194
+   em App_Dominio.Component.ListViewRepository`2.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 62
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+</LOG>

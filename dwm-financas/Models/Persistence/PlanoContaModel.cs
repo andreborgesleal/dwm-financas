@@ -37,7 +37,8 @@ namespace DWM.Models.Persistence
             if (entity.planoContaId_pai.HasValue)
                 planoContaPai = db.PlanoContas.Find(entity.planoContaId_pai);
 
-            int _exercicio = int.Parse(sessaoCorrente.value1);
+            //int _exercicio = int.Parse(sessaoCorrente.value1);
+            int _exercicio = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EXERCICIO_CONTABIL, sessaoCorrente.empresaId).valor);
 
             return new PlanoContaViewModel()
             {
@@ -223,7 +224,8 @@ namespace DWM.Models.Persistence
         {
             using (ApplicationContext db = this.Create())
             {
-                int _exercicio = int.Parse(sessaoCorrente.value1);
+                //int _exercicio = int.Parse(sessaoCorrente.value1);
+                int _exercicio = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EXERCICIO_CONTABIL, sessaoCorrente.empresaId).valor);
                 PlanoContaViewModel r = new PlanoContaViewModel()
                 {
                     exercicio = _exercicio,
@@ -250,7 +252,9 @@ namespace DWM.Models.Persistence
             string _descricao = param != null && param.Count() > 0 && param[0] != null ? param[0].ToString() : null;
             string sintetica = Enumeradores.TipoContaContabil.SINTETICA.GetStringDescription();
             string analitica = Enumeradores.TipoContaContabil.ANALITICA.GetStringDescription();
-            int _exercicio = int.Parse(sessaoCorrente.value1);
+            //int _exercicio = int.Parse(sessaoCorrente.value1);
+
+            int _exercicio = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EXERCICIO_CONTABIL, sessaoCorrente.empresaId).valor);
 
             return (from c in db.PlanoContas
                     where c.empresaId.Equals(sessaoCorrente.empresaId)

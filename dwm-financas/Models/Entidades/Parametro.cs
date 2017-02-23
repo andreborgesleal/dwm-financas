@@ -7,9 +7,13 @@ namespace DWM.Models.Entidades
     [Table("Parametro")]
     public class Parametro
     {
-        [Key]
+        [Key, Column(Order = 0)]
         [DisplayName("ID")]
         public int paramId { get; set; }
+
+        [Key, Column(Order = 1)]
+        [DisplayName("EmpresaID")]
+        public int empresaId { get; set; }
 
         [DisplayName("Nome")]
         public string nome { get; set; }

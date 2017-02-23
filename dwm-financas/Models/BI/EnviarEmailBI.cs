@@ -31,7 +31,7 @@ namespace DWM.Models.BI
         public UsuarioViewModel Run(Repository value)
         {
             UsuarioViewModel rec = (UsuarioViewModel)value;
-            string habilitaEmail = db.Parametros.Find(rec.empresaId, (int)Enumeracoes.Enumeradores.Param.HABILITA_EMAIL).valor;
+            string habilitaEmail = db.Parametros.Find((int)Enumeracoes.Enumeradores.Param.HABILITA_EMAIL, rec.empresaId).valor;
             if (habilitaEmail == "S")
             {
                 SendEmail sendMail = new SendEmail();

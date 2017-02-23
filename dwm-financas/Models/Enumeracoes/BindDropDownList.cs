@@ -256,6 +256,24 @@ namespace DWM.Models.Enumeracoes
         }
         #endregion
 
+        #region DropDownList Exercicio
+        public IEnumerable<SelectListItem> Exercicio(string selectedValue = "", string header = "")
+        {
+            List<SelectListItem> drp = new List<SelectListItem>();
+
+            for (int i=2016; i <= 2050; i++)
+            {
+                SelectListItem s = new SelectListItem()
+                {
+                    Value = i.ToString(),
+                    Text = i.ToString()
+                };
+                drp.Add(s);
+            };
+
+            return Funcoes.SelectListEnum(drp, selectedValue, header);
+        }
+        #endregion
 
     }
 }

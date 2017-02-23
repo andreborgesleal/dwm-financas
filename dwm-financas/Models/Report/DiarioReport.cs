@@ -16,7 +16,8 @@ namespace DWM.Models.Report
             DateTime dt1 = Convert.ToDateTime(param[0].ToString());
             DateTime dt2 = Convert.ToDateTime(param[1].ToString());
 
-            int _exercicio = int.Parse(sessaoCorrente.value1);
+            //int _exercicio = int.Parse(sessaoCorrente.value1);
+            int _exercicio = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EXERCICIO_CONTABIL, sessaoCorrente.empresaId).valor);
 
             totalizaColuna1 = param[3].ToString();
             totalizaColuna2 = param[4].ToString();
@@ -87,7 +88,8 @@ namespace DWM.Models.Report
             DateTime dt1 = Convert.ToDateTime(param[0].ToString());
             DateTime dt2 = Convert.ToDateTime(param[1].ToString());
 
-            int _exercicio = int.Parse(sessaoCorrente.value1);
+            //int _exercicio = int.Parse(sessaoCorrente.value1);
+            int _exercicio = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EXERCICIO_CONTABIL, sessaoCorrente.empresaId).valor);
 
             totalizaColuna1 = param[3].ToString();
             totalizaColuna2 = param[4].ToString();

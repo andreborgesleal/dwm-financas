@@ -109,7 +109,8 @@ namespace DWM.Models.Persistence
 
         public override Enquadramento Find(EnquadramentoViewModel key)
         {
-            int _exercicio = int.Parse(sessaoCorrente.value1);
+            //int _exercicio = int.Parse(sessaoCorrente.value1);
+            int _exercicio = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EXERCICIO_CONTABIL, sessaoCorrente.empresaId).valor);
             Enquadramento entity = db.Enquadramentos.Find(key.enquadramentoId);
             if (entity != null && (entity.EnquadramentoItems.Count() == 0 || entity.empresaId != sessaoCorrente.empresaId || entity.exercicio != _exercicio))
                 return null;
@@ -163,9 +164,10 @@ namespace DWM.Models.Persistence
 
         public override EnquadramentoViewModel CreateRepository(System.Web.HttpRequestBase Request = null)
         {
+            int _exercicio = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EXERCICIO_CONTABIL, sessaoCorrente.empresaId).valor);
             EnquadramentoViewModel r = new EnquadramentoViewModel()
             {
-                exercicio = int.Parse(sessaoCorrente.value1),
+                exercicio = _exercicio,
                 empresaId = sessaoCorrente.empresaId,
                 EnquadramentoItem = new EnquadramentoItemViewModel(),
                 EnquadramentoItems = new List<EnquadramentoItemViewModel>()
@@ -190,7 +192,8 @@ namespace DWM.Models.Persistence
         public override IEnumerable<EnquadramentoViewModel> Bind(int? index, int pageSize = 50, params object[] param)
         {
             string _descricao = param != null && param.Count() > 0 && param[0] != null ? param[0].ToString() : null;
-            int _exercicio = int.Parse(sessaoCorrente.value1);
+            //int _exercicio = int.Parse(sessaoCorrente.value1);
+            int _exercicio = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EXERCICIO_CONTABIL, sessaoCorrente.empresaId).valor);
             var q = (from c in db.Enquadramentos
                      where c.empresaId.Equals(sessaoCorrente.empresaId)
                             && c.exercicio == _exercicio

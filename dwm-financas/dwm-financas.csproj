@@ -216,6 +216,7 @@
     <Compile Include="Controllers\DiarioController.cs" />
     <Compile Include="Controllers\EnquadramentosController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
+    <Compile Include="Controllers\ExerciciosController.cs" />
     <Compile Include="Controllers\ExtratoController.cs" />
     <Compile Include="Controllers\FeriadosController.cs" />
     <Compile Include="Controllers\FornecedoresController.cs" />
@@ -330,6 +331,7 @@
     <Compile Include="Models\Persistence\EnquadramentoItemModel.cs" />
     <Compile Include="Models\Persistence\EnquadramentoModel.cs" />
     <Compile Include="Models\Persistence\EventoModel.cs" />
+    <Compile Include="Models\Persistence\ExercicioModel.cs" />
     <Compile Include="Models\Persistence\FeriadoModel.cs" />
     <Compile Include="Models\Persistence\GrupoClienteModel.cs" />
     <Compile Include="Models\Persistence\GrupoCobrancaModel.cs" />
@@ -4429,6 +4431,11 @@
     <Content Include="Views\Balancete\Imprimir.cshtml" />
     <Content Include="Views\Balancete\LucroPrejuizo.cshtml" />
     <Content Include="Views\Razao\Imprimir.cshtml" />
+    <Content Include="Views\Exercicios\Create.cshtml" />
+    <Content Include="Views\Exercicios\Browse.cshtml" />
+    <Content Include="Views\Exercicios\List.cshtml" />
+    <Content Include="Views\Exercicios\Edit.cshtml" />
+    <Content Include="Views\Exercicios\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />

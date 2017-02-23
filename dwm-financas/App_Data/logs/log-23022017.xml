@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="1226504996" Data="23/02/2017 11:43:35">
+    <Sessao>hhefhdhz2y0obczm3revwaa0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The number of primary key values passed must match number of primary key values defined on the entity.
+Nome do parâmetro: keyValues</Mensagem>
+    <NameSpace>DWM.Models.Persistence.ListViewPlanoConta =&gt; planocontas/browse</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Internal.WrappedEntityKey..ctor(EntitySet entitySet, String entitySetName, Object[] keyValues, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em DWM.Models.Persistence.ListViewPlanoConta.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Persistence\PlanoContaModel.cs:linha 256
+   em App_Dominio.Component.ListViewRepository`2.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 62
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+  <LOG ID="1859011900" Data="23/02/2017 11:43:43">
+    <Sessao>hhefhdhz2y0obczm3revwaa0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The number of primary key values passed must match number of primary key values defined on the entity.
+Nome do parâmetro: keyValues</Mensagem>
+    <NameSpace>DWM.Models.Persistence.ListViewPlanoConta =&gt; planocontas/browse</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Internal.WrappedEntityKey..ctor(EntitySet entitySet, String entitySetName, Object[] keyValues, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em DWM.Models.Persistence.ListViewPlanoConta.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Persistence\PlanoContaModel.cs:linha 256
+   em App_Dominio.Component.ListViewRepository`2.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 62
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+  <LOG ID="1779617158" Data="23/02/2017 11:43:49">
+    <Sessao>hhefhdhz2y0obczm3revwaa0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The number of primary key values passed must match number of primary key values defined on the entity.
+Nome do parâmetro: keyValues</Mensagem>
+    <NameSpace>DWM.Models.Persistence.ListViewPlanoConta =&gt; planocontas/browse</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Internal.WrappedEntityKey..ctor(EntitySet entitySet, String entitySetName, Object[] keyValues, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em DWM.Models.Persistence.ListViewPlanoConta.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Persistence\PlanoContaModel.cs:linha 256
+   em App_Dominio.Component.ListViewRepository`2.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 62
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+  <LOG ID="1092613414" Data="23/02/2017 11:51:01">
+    <Sessao>hhefhdhz2y0obczm3revwaa0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The number of primary key values passed must match number of primary key values defined on the entity.
+Nome do parâmetro: keyValues</Mensagem>
+    <NameSpace>DWM.Models.Persistence.ListViewPlanoConta =&gt; planocontas/browse</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Internal.WrappedEntityKey..ctor(EntitySet entitySet, String entitySetName, Object[] keyValues, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em DWM.Models.Persistence.ListViewPlanoConta.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Persistence\PlanoContaModel.cs:linha 256
+   em App_Dominio.Component.ListViewRepository`2.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 62
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+  <LOG ID="1655555641" Data="23/02/2017 12:07:58">
+    <Sessao>hhefhdhz2y0obczm3revwaa0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Models.Persistence.ListViewPlanoConta =&gt; planocontas/browse</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Models.Persistence.ListViewPlanoConta.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Persistence\PlanoContaModel.cs:linha 256
+   em App_Dominio.Component.ListViewRepository`2.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 62
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+  <LOG ID="777137692" Data="23/02/2017 12:12:58">
+    <Sessao>hhefhdhz2y0obczm3revwaa0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Models.Persistence.ListViewPlanoConta =&gt; planocontas/browse</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Models.Persistence.ListViewPlanoConta.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Persistence\PlanoContaModel.cs:linha 256
+   em App_Dominio.Component.ListViewRepository`2.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 62
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+  <LOG ID="742394004" Data="23/02/2017 12:30:58">
+    <Sessao>hhefhdhz2y0obczm3revwaa0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Models.Persistence.ListViewPlanoConta =&gt; planocontas/browse</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Models.Persistence.ListViewPlanoConta.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Persistence\PlanoContaModel.cs:linha 258
+   em App_Dominio.Component.ListViewRepository`2.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 62
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+</LOG>

@@ -65,9 +65,12 @@ namespace DWM.Controllers
                     #region Alterar sessão - Atualizar Exercício Corrente
                     using (ApplicationContext db = new ApplicationContext())
                     {
-                        Exercicio ex = null;
-                        if (db.Exercicios.Where(info => info.empresaId == s.empresaId && info.encerrado == "N").Count() > 0)
-                            ex = db.Exercicios.Where(info => info.empresaId == s.empresaId && info.encerrado == "N").FirstOrDefault();
+                        Factory<ExercicioViewModel, ApplicationContext> facade = new Factory<ExercicioViewModel, ApplicationContext>();
+                        ExercicioViewModel ex = facade.Execute(new ExercicioBI(), new ExercicioViewModel());
+
+                        //Exercicio ex = null;
+                        //if (db.Exercicios.Where(info => info.empresaId == s.empresaId && info.encerrado == "N").Count() > 0)
+                        //    ex = db.Exercicios.Where(info => info.empresaId == s.empresaId && info.encerrado == "N").FirstOrDefault();
                         if (ex != null)
                         {
                             result = security.AlterarSessao(ex.exercicio.ToString());

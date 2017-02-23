@@ -14,7 +14,8 @@ namespace DWM.Models.Enumeracoes
             SISTEMA = 3,
             //EMPRESA = 3,
             HABILITA_EMAIL = 6,
-            FUSO_HORARIO = 7
+            FUSO_HORARIO = 7,
+            EXERCICIO_CONTABIL = 15
         }
 
         /// <summary>

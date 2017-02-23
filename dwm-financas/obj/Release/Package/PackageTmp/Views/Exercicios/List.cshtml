@@ -1,0 +1,85 @@
+﻿@model System.Web.Mvc.PagedList<DWM.Models.Repositories.ExercicioViewModel>
+
+@{
+    Layout = null;
+}
+@if (Model != null)
+{
+    <div class="dashboard-widget-content">
+        <div class="row">
+            <div class="col-md-5">
+                Clique nos botões de <code>Ação</code> para executar a ação desejada
+            </div>
+            <div class="col-md-1">
+                <a href="../Exercicios/Create" class="text-primary">Incluir</a>
+            </div>
+            <div class="col-md-offset-9 col-lg-offset-9 col-xs-offset-7">
+                @Html.Partial("Filtro")
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped jambo_table bulk_action">
+                <thead>
+                    <tr class="headings">
+                        <th class="col-md-2 column-title text-center nobr">Ação</th>
+                        <th class="column-title text-center">Exercício</th>
+                        <th class="column-title">Início</th>
+                        <th class="column-title">Fim</th>
+                        <th class="column-title text-center">Dt.lançamento inicial</th>
+                        <th class="column-title text-center">Dt.lançamento final</th>
+                        <th class="column-title text-center">Máscara Plano Contas</th>
+                        <th class="column-title text-center">Encerrado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DWM.Models.Repositories.ExercicioViewModel exe in Model)
+                    {
+                        <tr class="even pointer">
+                            <td class="col-md-2 text-center">
+                                @if (exe.encerrado == "N")
+                                {
+                                    <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='Edit?empresaId=@(exe.empresaId)&exercicio=@(exe.exercicio)'"></button>
+                                    <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="window.location='Delete?empresaId=@(exe.empresaId)&exercicio=@(exe.exercicio)'"></button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-default btn-sm glyphicon glyphicon-edit" title="Editar" onclick="ShowMessageAjaxAlert('Este exercício já está encerrado e não pode ser editado', 'warning');"></button>
+                                    <button type="button" class="btn btn-default btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="ShowMessageAjaxAlert('Este exercício já está encerrado e não pode ser excluído', 'warning');"></button>
+                                }
+                            </td>
+                            <td class="text-center">
+                                <h3>@exe.exercicio</h3>
+                            </td>
+                            <td style="vertical-align: middle">
+                                <span>@exe.dt_inicio.ToString("dd/MM/yyyy")</span>
+                            </td>
+                            <td style="vertical-align: middle">
+                                <span>@exe.dt_fim.ToString("dd/MM/yyyy")</span>
+                            </td>
+                            <td class="text-center" style="vertical-align: middle">
+                                <span>@exe.dt_lancamento_inicio.Value.ToString("dd/MM/yyyy")</span>
+                            </td>
+                            <td class="text-center" style="vertical-align: middle">
+                                <span>@exe.dt_lancamento_fim.Value.ToString("dd/MM/yyyy")</span>
+                            </td>
+                            <td class="text-center" style="vertical-align: middle">
+                                <span>@exe.mascaraPc</span>
+                            </td>
+                            <td class="text-center" style="vertical-align: middle">
+                                <span>@(exe.encerrado == "S" ? "SIM" : "NÃO")</span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Partial("Paginacao", Model)
+    </div>
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+
+

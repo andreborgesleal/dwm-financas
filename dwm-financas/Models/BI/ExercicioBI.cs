@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using DWM.Models.Enumeracoes;
 
 
 namespace DWM.Models.BI
@@ -29,7 +30,9 @@ namespace DWM.Models.BI
             ExercicioViewModel r = (ExercicioViewModel)value;
             try
             {
-                Exercicio exercicio = db.Exercicios.Where(info => info.empresaId == sessaoCorrente.empresaId && info.encerrado == "N").FirstOrDefault();
+                int _exercicio = int.Parse(db.Parametros.Find((int)Enumeradores.Param.EXERCICIO_CONTABIL, sessaoCorrente.empresaId).valor);
+
+                Exercicio exercicio = db.Exercicios.Where(info => info.empresaId == sessaoCorrente.empresaId && info.exercicio == _exercicio).FirstOrDefault();
                 r = new ExercicioViewModel()
                 {
                     empresaId = sessaoCorrente.empresaId,

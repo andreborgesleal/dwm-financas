@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="243718619" Data="21/02/2017 21:37:30">
+    <Sessao>fa0apazs2bn2urxtmxavovqx</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Erro de rede ou específico à instância ao estabelecer conexão com o SQL Server. O servidor não foi encontrado ou não estava acessível. Verifique se o nome da instância está correto e se o SQL Server está configurado para permitir conexões remotas. (provider: SQL Network Interfaces, error: 26 - Erro ao Localizar Servidor/Instância Especificada) *** The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; razao/listparam</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   em System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   em System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.&lt;&gt;c__DisplayClass7.&lt;GetResults&gt;b__5()
+   em System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.&lt;System.Collections.Generic.IEnumerable&lt;T&gt;.GetEnumerator&gt;b__0()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 225</StackTrace>
+  </LOG>
+  <LOG ID="1190153370" Data="21/02/2017 21:40:12">
+    <Sessao>fa0apazs2bn2urxtmxavovqx</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; account/login</NameSpace>
+    <Context>__RequestVerificationToken="dEDytb_YM64Ms_mxT_00RQRC81F3f3lcLBLG-647UlWNU5QtoiNYviiRD60mTAO69EELIm4p7ZYs8xPQihj37T7BhOBcP9siW1uA2Axyx2Q1",UserName="andreborgesleal@live.com",Password="EvergladesFin"</Context>
+    <StackTrace />
+  </LOG>
+  <LOG ID="1609309407" Data="21/02/2017 21:40:12">
+    <Sessao>fa0apazs2bn2urxtmxavovqx</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; account/login</NameSpace>
+    <Context>__RequestVerificationToken="dEDytb_YM64Ms_mxT_00RQRC81F3f3lcLBLG-647UlWNU5QtoiNYviiRD60mTAO69EELIm4p7ZYs8xPQihj37T7BhOBcP9siW1uA2Axyx2Q1",UserName="andreborgesleal@live.com",Password="EvergladesFin"</Context>
+    <StackTrace />
+  </LOG>
+  <LOG ID="897862525" Data="21/02/2017 21:40:26">
+    <Sessao>fa0apazs2bn2urxtmxavovqx</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; account/login</NameSpace>
+    <Context>__RequestVerificationToken="R5F6xauEG0ilARm23q6STlAsTgygB5ejLYUi12XzSEgLRFPvY4iXaYa5xNOlr9sW7CsMxumUL0N5-mKp2kDZSLLyWiqIQWCsQDJ8joozo-g1",UserName="andreborgesleal@live.com",Password="EvergladesFin"</Context>
+    <StackTrace />
+  </LOG>
+  <LOG ID="1668390453" Data="21/02/2017 21:40:26">
+    <Sessao>fa0apazs2bn2urxtmxavovqx</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; account/login</NameSpace>
+    <Context>__RequestVerificationToken="R5F6xauEG0ilARm23q6STlAsTgygB5ejLYUi12XzSEgLRFPvY4iXaYa5xNOlr9sW7CsMxumUL0N5-mKp2kDZSLLyWiqIQWCsQDJ8joozo-g1",UserName="andreborgesleal@live.com",Password="EvergladesFin"</Context>
+    <StackTrace />
+  </LOG>
+  <LOG ID="409260600" Data="21/02/2017 21:40:52">
+    <Sessao>fa0apazs2bn2urxtmxavovqx</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; account/login</NameSpace>
+    <Context>__RequestVerificationToken="8tkiTFgzr8ZpPhmNwgpKLk95eHvEO-dbsqJMy7NX_fpC-W53ST_jcq9mLlfg5DPzK8g1NIpOFREtyVG7G8CFCQv9Y45x3x7vgPeZJQPHEf81",UserName="andreborgesleal@live.com",Password="EvergladesFin"</Context>
+    <StackTrace />
+  </LOG>
+  <LOG ID="409260600" Data="21/02/2017 21:40:52">
+    <Sessao>fa0apazs2bn2urxtmxavovqx</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; account/login</NameSpace>
+    <Context>__RequestVerificationToken="8tkiTFgzr8ZpPhmNwgpKLk95eHvEO-dbsqJMy7NX_fpC-W53ST_jcq9mLlfg5DPzK8g1NIpOFREtyVG7G8CFCQv9Y45x3x7vgPeZJQPHEf81",UserName="andreborgesleal@live.com",Password="EvergladesFin"</Context>
+    <StackTrace />
+  </LOG>
+</LOG>
