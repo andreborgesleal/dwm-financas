@@ -174,7 +174,8 @@ namespace DWM.Models.Persistence
                              vr_desconto = par.vr_desconto,
                              vr_amortizacao = par.vr_amortizacao,
                              vr_total_pago = par.vr_total_pago,
-                             vr_saldo_devedor = par.vr_saldo_devedor
+                             vr_saldo_devedor = par.vr_saldo_devedor,
+                             ind_autorizacao = par.ind_autorizacao ?? "N"
                          },
                          PageSize = receSize,
                          TotalCount = (from rec1 in db.ContaPagars

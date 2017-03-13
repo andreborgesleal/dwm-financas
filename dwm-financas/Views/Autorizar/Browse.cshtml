@@ -1,0 +1,18 @@
+﻿@using App_Dominio.Repositories
+@model System.Web.Mvc.PagedList<DWM.Models.Repositories.ContaPagarDemonstrativoViewModel>
+@{
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../ContaPagar/Create";
+    t[0].nomeCurto = "Incluir";
+    t[0].referencia = "";
+
+    t[1].url = "../Home/Default";
+}
+<div class="container-cadastro">
+    <div id="div-list">
+        @Html.Partial("List", Model)
+    </div>
+    <div class="altura-35">
+        @Html.Partial("_defaultListButtons", new List<ButtonRepository> { new ButtonRepository() { linkText = "Incluir", actionName = "Create", controllerName = "ContaPagar", buttonType = "link" } })
+    </div>
+</div>

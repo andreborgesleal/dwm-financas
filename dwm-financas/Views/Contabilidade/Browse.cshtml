@@ -70,6 +70,9 @@
         <div class="x_content">
             @using (Ajax.BeginForm("ListParam", "Contabilidade", new AjaxOptions { HttpMethod = "get", UpdateTargetId = "div-list" }, new { @role = "search", @id = "form000" }))
             {
+                DateTime? d1 = Request["data1"] == null || Request["data1"].Contains("%") ? (DateTime)ViewData["dt_lancamento_inicio"] : Convert.ToDateTime(Request["data1"]);
+                DateTime? d2 = Request["data2"] == null || Request["data2"].Contains("%") ? (DateTime)ViewData["dt_lancamento_fim"] : Convert.ToDateTime(Request["data2"]);
+
                 <div class="row clearfix">
                     <div class="col-md-6">
                         @Html.Editor("descricao_conta1", "PlanoContasAutoComplete", new { nextField = "descricao_centroCusto" })
@@ -87,13 +90,13 @@
                             <label class="control-label" for="data1">Período</label>
                             <div class="row clearfix">
                                 <div class="col-md-4">
-                                    @Html.Editor("__data1", "DATE", new { identificador = "data1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-") + "01") })
+                                    <input type="date" class="form-control" name="data1" id="data1" value="@d1.Value.ToString("yyyy-MM-dd")" />
                                 </div>
                                 <div class="col-md-1">
                                     à
                                 </div>
                                 <div class="col-md-4">
-                                    @Html.Editor("__data2", "DATE", new { identificador = "data2", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-") + "01").AddDays(-1) })
+                                    <input type="date" class="form-control" name="data2" id="data2" value="@d2.Value.ToString("yyyy-MM-dd")" />
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>
@@ -106,8 +109,6 @@
                             <input type="submit" class="btn btn-primary" value="Buscar" />
                             <input type="button" class="btn btn-default" onclick="window.location = '../Contabilidade/Create'" value="Incluir" />
                         </div>
-                        @*<a href="#" class="btn btn-primary btn-sm link-default" onclick="Refresh(0, getPageSize(), '@Model.action', '@Model.DivId')"><span class="link-default col-md-10">Buscar</span></a>
-                            <a href="#" class="btn btn-default btn-sm link-default" onclick="window.location = 'Create'"><span class="link-default col-md-10">Incluir</span></a>*@
                     </div>
                 </div>
             }

@@ -180,4 +180,3 @@ C:\sistemas\dwm-financas\dwm-financas\dwm-financas\bin\Microsoft.Threading.Tasks
 C:\sistemas\dwm-financas\dwm-financas\dwm-financas\obj\Debug\dwm-financas.csprojResolveAssemblyReference.cache
 C:\sistemas\dwm-financas\dwm-financas\dwm-financas\obj\Debug\dwm-financas.dll
 C:\sistemas\dwm-financas\dwm-financas\dwm-financas\obj\Debug\dwm-financas.pdb
-C:\Sistemas\dwm-financas\dwm-financas\obj\Debug\dwm-financas.csprojResolveAssemblyReference.cache

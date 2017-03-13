@@ -6,5 +6,6 @@
         public string nome_credor { get; set; }
         public System.Nullable<int> grupoCredorId { get; set; }
         public string descricao_grupoCredor { get; set; }
+        public string ind_autorizacao { get; set; }
     }
 }

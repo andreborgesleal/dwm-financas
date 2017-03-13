@@ -55,13 +55,13 @@
                                     <label class="control-label" for="dt_vencidos_atraso1">Período</label>
                                     <div class="row clearfix">
                                         <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
-                                            @Html.Editor("dt_vencidos_atraso1", "DATE", new { identificador = "dt_vencidos_atraso1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.AddMonths(-2).ToString("yyyy-MM-") + "01") })
+                                            <input type="date" class="form-control" name="dt_vencidos_atraso1" id="dt_vencidos_atraso1" value="@Convert.ToDateTime(DateTime.Today.AddMonths(-2).ToString("yyyy-MM-") + "01").ToString("yyyy-MM-dd")" />
                                         </div>
                                         <div class="col-md-1">
                                             à
                                         </div>
                                         <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
-                                            @Html.Editor("dt_vencidos_atraso2", "DATE", new { identificador = "dt_vencidos_atraso2", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-dd")).AddDays(-1) })
+                                            <input type="date" class="form-control" name="dt_vencidos_atraso2" id="dt_vencidos_atraso2" value="@Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-dd")).AddDays(-1).ToString("yyyy-MM-dd")" />
                                         </div>
                                         <div class="col-md-1"></div>
                                     </div>
@@ -79,13 +79,13 @@
                                     <label class="control-label" for="dt_vencimento1">Período</label>
                                     <div class="row clearfix">
                                         <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
-                                            @Html.Editor("dt_vencimento1", "DATE", new { identificador = "dt_vencimento1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-dd")) })
+                                            <input type="date" class="form-control" name="dt_vencimento1" id="dt_vencimento1" value="@Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-dd")).ToString("yyyy-MM-dd")" />
                                         </div>
                                         <div class="col-md-1">
                                             à
                                         </div>
                                         <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
-                                            @Html.Editor("dt_vencimento2", "DATE", new { identificador = "dt_vencimento2", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-") + "01").AddDays(-1) })
+                                            <input type="date" class="form-control" name="dt_vencimento2" id="dt_vencimento2" value="@Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-") + "01").AddDays(-1).ToString("yyyy-MM-dd")" />
                                         </div>
                                         <div class="col-md-1"></div>
                                     </div>
@@ -113,13 +113,13 @@
                             <label class="control-label" for="dt_emissao1">Emissão</label>
                             <div class="row clearfix">
                                 <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
-                                    @Html.Editor("dt_emissao1", "DATE", new { identificador = "dt_emissao1", readOnly = "false" })
+                                    <input type="date" class="form-control" name="dt_emissao1" id="dt_emissao1" />
                                 </div>
                                 <div class="col-md-1">
                                     à
                                 </div>
                                 <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
-                                    @Html.Editor("dt_emissao2", "DATE", new { identificador = "dt_emissao2", readOnly = "false" })
+                                    <input type="date" class="form-control" name="dt_emissao2" id="dt_emissao2" />
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>
@@ -161,13 +161,13 @@
                                     <label class="control-label" for="dt_baixa1">Período</label>
                                     <div class="row clearfix">
                                         <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
-                                            @Html.Editor("dt_baixa1", "DATE", new { identificador = "dt_baixa1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-") + "01") })
+                                            <input type="date" class="form-control" name="dt_baixa1" id="dt_baixa1" value="@Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-") + "01").ToString("yyyy-MM-dd")" />
                                         </div>
                                         <div class="col-md-1">
                                             à
                                         </div>
                                         <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
-                                            @Html.Editor("dt_baixa2", "DATE", new { identificador = "dt_baixa2", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-dd")) })
+                                            <input type="date" class="form-control" name="dt_baixa2" id="dt_baixa2" value="@Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-dd")).ToString("yyyy-MM-dd")" />
                                         </div>
                                         <div class="col-md-1"></div>
                                     </div>

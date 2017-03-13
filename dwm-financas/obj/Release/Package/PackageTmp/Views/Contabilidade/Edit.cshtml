@@ -20,13 +20,13 @@
         @Html.HiddenFor(info => info.contabilidadeId)
         <div id="div-lov"></div>
         <div class="x_panel" id="panel-top">
-            @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Lançamento contábil", Descricao = "Editar", Transacao = t })
+            @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Lançamento contábil", Descricao = "Editar #" + Model.contabilidadeId.ToString(), Transacao = t })
             <div class="x_content">
                 <div class="row clearfix">
                     <div class="col-md-2">
                         <div class="form-group">
                             <label class="control-label margem-interna" for="dt_lancamento">Data</label>
-                            @Html.EditorFor(info => info.dt_lancamento, "DATE", new { identificador = "dt_lancamento", readOnly = "false" })
+                            <input type="date" class="form-control" name="dt_lancamento" id="dt_lancamento" value="@Model.dt_lancamento.ToString("yyyy-MM-dd")" />
                         </div>
                     </div>
                     <div class="col-md-3">

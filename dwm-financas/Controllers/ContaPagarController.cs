@@ -113,7 +113,7 @@ namespace DWM.Controllers
                                         string dt_emissao1 = null, string dt_emissao2 = null, string centroCustoId = null,
                                         string grupoCredorId = null, string bancoId = null)
         {
-            ViewBag.ValidateRequest = true;
+            //ViewBag.ValidateRequest = true;
             if (ViewBag.ValidateRequest)
             {
                 int? _null = null;

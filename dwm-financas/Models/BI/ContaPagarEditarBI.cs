@@ -103,6 +103,7 @@ namespace DWM.Models.BI
                          cheque_banco = par.cheque_banco,
                          cheque_agencia = par.cheque_agencia,
                          cheque_numero = par.cheque_numero,
+                         ind_autorizacao = par.ind_autorizacao,
                          OperacaoParcelaEventos = (from creve in db.ContaPagarParcelaEventos
                                                    join eve in db.Eventos on creve.eventoId equals eve.eventoId
                                                    where creve.operacaoId == r.operacaoId && creve.parcelaId == r.parcelaId

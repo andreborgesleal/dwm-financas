@@ -204,6 +204,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlterarSenhaController.cs" />
+    <Compile Include="Controllers\AutorizarController.cs" />
     <Compile Include="Controllers\BalanceteController.cs" />
     <Compile Include="Controllers\BancosController.cs" />
     <Compile Include="Controllers\CentroCustosController.cs" />
@@ -237,6 +238,7 @@
     <Compile Include="Models\BI\CalcularEncargosParcelaBI.cs" />
     <Compile Include="Models\BI\CobrancaCadastrarBI.cs" />
     <Compile Include="Models\BI\CodigoAtivacaoBI.cs" />
+    <Compile Include="Models\BI\ContaPagarAutorizarBI.cs" />
     <Compile Include="Models\BI\ContaPagarBaixarBI.cs" />
     <Compile Include="Models\BI\ContaPagarCancelarOperacaoBI.cs" />
     <Compile Include="Models\BI\ContaPagarEditarBI.cs" />
@@ -258,6 +260,7 @@
     <Compile Include="Models\BI\ExercicioBI.cs" />
     <Compile Include="Models\BI\HomeBI.cs" />
     <Compile Include="Models\BI\ListViewBalanceteBI.cs" />
+    <Compile Include="Models\BI\ListViewContaPagarAutorizarBI.cs" />
     <Compile Include="Models\BI\ListViewContaPagarBI.cs" />
     <Compile Include="Models\BI\ListViewContaReceberBI.cs" />
     <Compile Include="Models\BI\OperacaoBaixarBI.cs" />
@@ -4436,6 +4439,8 @@
     <Content Include="Views\Exercicios\List.cshtml" />
     <Content Include="Views\Exercicios\Edit.cshtml" />
     <Content Include="Views\Exercicios\Delete.cshtml" />
+    <Content Include="Views\Autorizar\List.cshtml" />
+    <Content Include="Views\Autorizar\Browse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />

@@ -5,6 +5,7 @@ using DWM.Models.Repositories;
 using DWM.Models.Entidades;
 using System;
 using App_Dominio.Component;
+using App_Dominio.Models;
 
 namespace DWM.Models.Persistence
 {
@@ -22,6 +23,24 @@ namespace DWM.Models.Persistence
                 return null;
 
             return db.ContaPagarParcelas.SingleOrDefault(info => info.operacaoId == key.operacaoId && info.parcelaId == key.parcelaId); //db.ContaPagarParcelas.Find(new { key.operacaoId, key.parcelaId });
+        }
+
+        public override ContaPagarParcela MapToEntity(ContaPagarParcelaViewModel value)
+        {
+            ContaPagarParcela entity = base.MapToEntity(value);
+
+            if (!String.IsNullOrEmpty(value.ind_autorizacao))
+                entity.ind_autorizacao = value.ind_autorizacao;
+            else if (String.IsNullOrEmpty(entity.ind_autorizacao))
+                entity.ind_autorizacao = "N";
+            return entity;
+        }
+
+        public override ContaPagarParcelaViewModel MapToRepository(ContaPagarParcela entity)
+        {
+            ContaPagarParcelaViewModel value = base.MapToRepository(entity);
+            value.ind_autorizacao = String.IsNullOrEmpty(entity.ind_autorizacao) ? "N" : entity.ind_autorizacao;
+            return value;
         }
         #endregion
 
@@ -114,7 +133,8 @@ namespace DWM.Models.Persistence
                         vr_amortizacao = (cont == 1 && _vr_amortizacao > 0 ? _vr_amortizacao : 0),
                         vr_encargos = (cont == 1 && _vr_amortizacao > 0 ? _vr_juros + _vr_mora : 0),
                         vr_desconto = (cont == 1 && _vr_amortizacao > 0 ? _vr_desconto : 0),
-                        vr_saldo_devedor = (cont == 1 && _vr_amortizacao > 0 ? 0 : vr_parcela)
+                        vr_saldo_devedor = (cont == 1 && _vr_amortizacao > 0 ? 0 : vr_parcela),
+                        ind_autorizacao = "N"
                     };
 
                     Parcelas.Add(p);
@@ -155,5 +175,76 @@ namespace DWM.Models.Persistence
     public class ListViewContaPagarParcela2 : ListViewOperacaoParcela<ContaPagarParcelaViewModel, ContaPagarParcelaEventoViewModel>
     {
 
+    }
+
+    public class ListViewContaPagarAutorizar : ListViewModel<ContaPagarViewModel, ApplicationContext>
+    {
+        #region Constructor
+        public ListViewContaPagarAutorizar() { }
+        public ListViewContaPagarAutorizar(ApplicationContext _db, SecurityContext _seguranca_db)
+        {
+            base.Create(_db, _seguranca_db);
+        }
+        #endregion
+
+        #region Métodos da classe ListViewRepository
+        public override IEnumerable<ContaPagarViewModel> Bind(int? index, int receSize = 50, params object[] param)
+        {
+            DateTime proximos5dias = Funcoes.Brasilia().Date.AddDays(5);
+
+            #region LINQ
+            var q = (from pag in db.ContaPagars
+                     join par in db.ContaPagarParcelas on pag.operacaoId equals par.operacaoId
+                     join cre in db.Credores on pag.credorId equals cre.credorId
+                     where pag.empresaId.Equals(sessaoCorrente.empresaId)
+                           && par.dt_vencimento <= proximos5dias
+                           && (par.ind_baixa == null || par.ind_baixa=="")
+                     orderby par.dt_vencimento
+                     select new ContaPagarViewModel
+                     {
+                         operacaoId = pag.operacaoId,
+                         empresaId = pag.empresaId,
+                         nome_credor = cre.nome,
+                         dt_emissao = pag.dt_emissao,
+                         documento = pag.documento,
+                         OperacaoParcela = new ContaPagarParcelaViewModel()
+                         {
+                             operacaoId = par.operacaoId,
+                             parcelaId = par.parcelaId,
+                             dt_vencimento = par.dt_vencimento,
+                             ind_baixa = par.ind_baixa,
+                             dt_baixa = par.dt_baixa,
+                             dt_ultima_amortizacao = par.dt_ultima_amortizacao,
+                             vr_principal = par.vr_principal,
+                             vr_encargos = par.vr_encargos,
+                             vr_desconto = par.vr_desconto,
+                             vr_amortizacao = par.vr_amortizacao,
+                             vr_total_pago = par.vr_total_pago,
+                             vr_saldo_devedor = par.vr_saldo_devedor,
+                             ind_autorizacao = par.ind_autorizacao ?? "N"
+                         },
+                         PageSize = receSize,
+                         TotalCount = (from pag1 in db.ContaPagars
+                                       join par1 in db.ContaPagarParcelas on pag1.operacaoId equals par1.operacaoId
+                                       join cre1 in db.Credores on pag1.credorId equals cre1.credorId
+                                       where pag1.empresaId.Equals(sessaoCorrente.empresaId)
+                                             && par1.dt_vencimento <= proximos5dias
+                                             && (par1.ind_baixa == null || par1.ind_baixa == "")
+                                       orderby par1.dt_vencimento
+                                       select pag1).Count()
+                     }).Skip((index ?? 0) * receSize).Take(receSize).ToList();
+            #endregion
+
+            return q;
+        }
+
+        public override Repository getRepository(Object id)
+        {
+            ContaPagarModel model = new ContaPagarModel();
+            model.Create(this.db, this.seguranca_db);
+            return model.getObject((ContaPagarViewModel)id);
+        }
+
+        #endregion
     }
 }

@@ -136,8 +136,16 @@
                             else
                             {
                                 <div class="count"><h3>Pendente</h3></div>
-                            }
+                                if (Model.ind_autorizacao == "S")
+                                {
+                                    <span class="count_bottom green">Pagamento autorizado</span>
+                                }
+                                else
+                                {
+                                    <span class="count_bottom red">Aguardando autorização</span>
+                                }
 
+                            }
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4 tile_stats_count">
                             <span class="count_top"><i class="fa fa-spinner"></i> Forma Pagamento</span>

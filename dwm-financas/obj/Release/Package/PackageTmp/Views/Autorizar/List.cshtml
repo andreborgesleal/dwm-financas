@@ -1,9 +1,9 @@
 ﻿@using App_Dominio.Repositories
-@model System.Web.Mvc.PagedList<DWM.Models.Repositories.ContaReceberDemonstrativoViewModel>
+@model System.Web.Mvc.PagedList<DWM.Models.Repositories.ContaPagarDemonstrativoViewModel>
 @{
     Layout = null;
     TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
-    t[0].url = "../Cobranca/Create";
+    t[0].url = "../ContaPagar/Create";
     t[0].nomeCurto = "Incluir";
     t[0].referencia = "";
 
@@ -12,7 +12,7 @@
 @if (Model != null)
 {
     <div class="x_panel" id="panel-detail">
-        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Cobrança", Descricao = "Listagem de títulos em cobrança", Transacao = t })
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Pagamentos pendentes", Descricao = "Autorização de pagamento", Transacao = t })
         <div class="x_content">
             <!-- top tiles -->
             <div class="row top_tiles">
@@ -21,7 +21,7 @@
                         <div class="icon">
                             <i class="fa fa-barcode"></i>
                         </div>
-                        @if (Model.Count > 0)
+                        @if (Model.Count > 0 && Model[0].TotalEmitido.HasValue)
                         {
                             <div class="count"><span class="h2"><strong>@Model[0].TotalEmitido.Value.ToString("R$ ###,###,##0.00")</strong></span></div>
                         }
@@ -30,7 +30,7 @@
                             <div class="count"><span class="h2"><strong>R$ 0,00</strong></span></div>
                         }
                         <h3>Total emitido</h3>
-                        <p>títulos emitidos no período.</p>
+                        <p>contas emitidas no período.</p>
                     </div>
                 </div>
                 <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -38,7 +38,7 @@
                         <div class="icon">
                             <i class="fa fa-check-square-o"></i>
                         </div>
-                        @if (Model.Count > 0)
+                        @if (Model.Count > 0 && Model[0].TotalAmortizado.HasValue)
                         {
                             <div class="count green"><span class="h2"><strong>@Model[0].TotalAmortizado.Value.ToString("R$ ###,###,##0.00")</strong></span></div>
                         }
@@ -46,8 +46,8 @@
                         {
                             <div class="count"><span class="h2"><strong>R$ 0,00</strong></span></div>
                         }
-                        <h3>Total amortizado</h3>
-                        <p>títulos com pagamento parcial/total</p>
+                        <h3>Total Autorizado</h3>
+                        <p>pagamentos autorizados</p>
                     </div>
                 </div>
                 <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -55,7 +55,7 @@
                         <div class="icon">
                             <i class="fa fa-sort-amount-desc"></i>
                         </div>
-                        @if (Model.Count > 0)
+                        @if (Model.Count > 0 && Model[0].TotalEmAberto.HasValue)
                         {
                             <div class="count red"><span class="h2"><strong>@Model[0].TotalEmAberto.Value.ToString("R$ ###,###,##0.00")</strong></span></div>
                         }
@@ -64,7 +64,7 @@
                             <div class="count"><span class="h2"><strong>R$ 0,00</strong></span></div>
                         }
                         <h3>Total em aberto</h3>
-                        <p>títulos a vencer/vencidos.</p>
+                        <p>pagamentos pendentes.</p>
                     </div>
                 </div>
                 <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -80,8 +80,8 @@
                         {
                             <div class="count"><span class="h2"><strong>R$ 0,00</strong></span></div>
                         }
-                        <h3>Títulos emitidos</h3>
-                        <p>títulos em carteira.</p>
+                        <h3>Contas emitidas</h3>
+                        <p>contas a vencer/vencidas</p>
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                         Clique nos botões de <code>Ação</code> para executar a ação desejada
                     </div>
                     <div class="col-md-1">
-                        <a href="../Cobranca/Create" class="text-primary">Incluir</a>
+                        <a href="../ContaPagar/Create" class="text-primary">Incluir</a>
                     </div>
                     <div class="col-md-6">
                         <a href="#panel-top" class="info pull-right"><i class="fa fa-toggle-up"></i> Topo</a>
@@ -105,35 +105,35 @@
                             <tr class="headings">
                                 <th class="column-title text-center nobr">Ação</th>
                                 <th class="column-title">ID</th>
-                                <th class="column-title">Documento</th>
                                 <th class="column-title">Vencimento</th>
                                 <th class="column-title">Perm</th>
-                                <th class="column-title">Cliente</th>
+                                <th class="column-title">Fornecedor</th>
                                 <th class="column-title">Situação</th>
-                                <th class="column-title">Dt.Baixa</th>
-                                <th class="column-title">Últ. Pagto</th>
+                                <th class="column-title">Ordem de pagamento</th>
                                 <th class="column-title text-right">Principal</th>
                                 <th class="column-title text-right">Encargos</th>
                                 <th class="column-title text-right">Desconto</th>
-                                <th class="column-title text-right">Amortização</th>
                                 <th class="column-title text-right">Saldo</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (DWM.Models.Repositories.ContaReceberDemonstrativoViewModel ope in Model)
+                            @foreach (DWM.Models.Repositories.ContaPagarDemonstrativoViewModel ope in Model)
                             {
                                 <tr class="even pointer">
                                     <td class="text-center">
-                                        <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='Edit?operacaoId=@(ope.operacaoId)&parcelaId=@(ope.OperacaoParcela.parcelaId)'"></button>
+                                        @if (ope.OperacaoParcela.ind_autorizacao != "S")
+                                        {
+                                            <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-plus" title="Autorizar" onclick="Edit('@ope.operacaoId', '@ope.OperacaoParcela.parcelaId')"></button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="btn btn-success btn-sm glyphicon glyphicon-ok" title="Revogar" onclick="Del('@ope.operacaoId', '@ope.OperacaoParcela.parcelaId')"></button>
+                                        }
+                                        <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='../ContaPagar/Edit?operacaoId=@(ope.operacaoId)&parcelaId=@(ope.OperacaoParcela.parcelaId)'"></button>
                                     </td>
                                     <td class="text-left">
                                         <span>
                                             @(ope.operacaoId.ToString() + "-" + ope.OperacaoParcela.parcelaId.ToString())
-                                        </span>
-                                    </td>
-                                    <td class="text-left">
-                                        <span>
-                                            @ope.documento
                                         </span>
                                     </td>
                                     <td class="text-left">
@@ -148,7 +148,7 @@
                                     </td>
                                     <td class="text-left">
                                         <span>
-                                            @ope.nome_cliente (<small class="green">@ope.descricao_grupoCliente</small>)
+                                            @ope.nome_credor
                                         </span>
                                     </td>
                                     <td class="text-left">
@@ -157,18 +157,16 @@
                                         </span>
                                     </td>
                                     <td class="text-left">
-                                        @if (ope.OperacaoParcela.dt_baixa.HasValue)
+                                        @if (ope.OperacaoParcela.ind_autorizacao == "S")
                                         {
-                                            <span>
-                                                @ope.OperacaoParcela.dt_baixa.Value.ToString("dd/MM/yyyy")
+                                            <span class="text-success">
+                                                <i class="fa fa-check"></i> Autorizado para pagamento
                                             </span>
                                         }
-                                    </td>
-                                    <td class="text-left">
-                                        @if (ope.OperacaoParcela.dt_ultima_amortizacao.HasValue)
+                                        else
                                         {
-                                            <span>
-                                                @ope.OperacaoParcela.dt_ultima_amortizacao.Value.ToString("dd/MM/yyyy")
+                                            <span class="text-danger">
+                                                <i class="fa fa-bookmark"></i> Aguardando autorização
                                             </span>
                                         }
                                     </td>
@@ -190,14 +188,6 @@
                                         {
                                             <span>
                                                 @ope.OperacaoParcela.vr_desconto.Value.ToString("###,###,###,##0.00")
-                                            </span>
-                                        }
-                                    </td>
-                                    <td class="text-right">
-                                        @if (ope.OperacaoParcela.vr_total_pago.HasValue)
-                                        {
-                                            <span>
-                                                @ope.OperacaoParcela.vr_total_pago.Value.ToString("###,###,###,##0.00")
                                             </span>
                                         }
                                     </td>
@@ -228,3 +218,14 @@ else
     @Html.Partial("_AcessoNegadoModal")
 }
 
+<script>
+    function Edit(operacaoId, parcelaId) {
+        var link = "../Autorizar/Edit?operacaoId=" + operacaoId + "&parcelaId=" + parcelaId;
+        $('#div-list').load(encodeURI(link));
+    }
+
+    function Del(operacaoId, parcelaId) {
+        var link = "../Autorizar/Delete?operacaoId=" + operacaoId + "&parcelaId=" + parcelaId;
+        $('#div-list').load(encodeURI(link));
+    }
+</script>

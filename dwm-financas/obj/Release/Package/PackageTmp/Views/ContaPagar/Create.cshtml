@@ -26,7 +26,8 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label class="control-label margem-interna" for="dt_emissao">Emissão</label>
-                            @Html.EditorFor(info => info.dt_emissao, "DATE", new { identificador = "dt_emissao", readOnly = "false" })
+                            @*@Html.EditorFor(info => info.dt_emissao, "DATE", new { identificador = "dt_emissao", readOnly = "false" })*@
+                            <input type="date" class="form-control" name="dt_emissao" id="dt_emissao" value="@Model.dt_emissao.ToString("yyyy-MM-dd")" />
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -99,7 +100,8 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <label class="control-label" for="dt_emissao">Vencimento</label>
-                        @Html.EditorFor(info => info.OperacaoParcela.dt_vencimento, "DATE", new { identificador = "dt_vencimento", readOnly = "false", value = Model.OperacaoParcela.dt_vencimento })
+                        @*@Html.EditorFor(info => info.OperacaoParcela.dt_vencimento, "DATE", new { identificador = "dt_vencimento", readOnly = "false", value = Model.OperacaoParcela.dt_vencimento })*@
+                        <input type="date" class="form-control" name="dt_vencimento" id="dt_vencimento" value="@Model.OperacaoParcela.dt_vencimento.ToString("yyyy-MM-dd")" />
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -414,13 +416,15 @@
                                         <div class="col-md-5">
                                             <div class="form-group">
                                                 <label class="control-label" for="dt_ocorrencia">Dt.Amortização</label>
-                                                @Html.EditorFor(info => info.OperacaoParcela.OperacaoParcelaEvento.dt_ocorrencia, "DATE", new { identificador = "dt_ocorrencia", readOnly = "false" })
+                                                @*@Html.EditorFor(info => info.OperacaoParcela.OperacaoParcelaEvento.dt_ocorrencia, "DATE", new { identificador = "dt_ocorrencia", readOnly = "false" })*@
+                                                <input type="date" class="form-control" name="dt_ocorrencia" id="dt_ocorrencia" value="@Model.OperacaoParcela.OperacaoParcelaEvento.dt_ocorrencia.ToString("yyyy-MM-dd")" />
                                             </div>
                                         </div>
                                         <div class="col-md-7">
                                             <div class="form-group">
                                                 <label class="control-label" for="dt_movto">Dt.Movimento</label>
-                                                @Html.EditorFor(info => info.OperacaoParcela.OperacaoParcelaEvento.dt_movto, "DATE", new { identificador = "dt_movto", readOnly = "false" })
+                                                @*@Html.EditorFor(info => info.OperacaoParcela.OperacaoParcelaEvento.dt_movto, "DATE", new { identificador = "dt_movto", readOnly = "false" })*@
+                                                <input type="date" class="form-control" name="dt_movto" id="dt_movto" value="@Model.OperacaoParcela.OperacaoParcelaEvento.dt_movto.ToString("yyyy-MM-dd")" />
                                             </div>
                                         </div>
                                     </div>

@@ -21,7 +21,14 @@
                         <div class="icon">
                             <i class="fa fa-barcode"></i>
                         </div>
-                        <div class="count"><span class="h2"><strong>@Model[0].TotalEmitido.Value.ToString("R$ ###,###,##0.00")</strong></span></div>
+                        @if (Model.Count > 0)
+                        {
+                            <div class="count"><span class="h2"><strong>@Model[0].TotalEmitido.Value.ToString("R$ ###,###,##0.00")</strong></span></div>
+                        }
+                        else
+                        {
+                            <div class="count"><span class="h2"><strong>R$ 0,00</strong></span></div>
+                        }
                         <h3>Total emitido</h3>
                         <p>contas emitidas no período.</p>
                     </div>
@@ -31,7 +38,14 @@
                         <div class="icon">
                             <i class="fa fa-check-square-o"></i>
                         </div>
-                        <div class="count green"><span class="h2"><strong>@Model[0].TotalAmortizado.Value.ToString("R$ ###,###,##0.00")</strong></span></div>
+                        @if (Model.Count > 0)
+                        {
+                            <div class="count green"><span class="h2"><strong>@Model[0].TotalAmortizado.Value.ToString("R$ ###,###,##0.00")</strong></span></div>
+                        }
+                        else
+                        {
+                            <div class="count"><span class="h2"><strong>R$ 0,00</strong></span></div>
+                        }
                         <h3>Total amortizado</h3>
                         <p>contas com pagamento parcial/total</p>
                     </div>
@@ -41,7 +55,14 @@
                         <div class="icon">
                             <i class="fa fa-sort-amount-desc"></i>
                         </div>
-                        <div class="count red"><span class="h2"><strong>@Model[0].TotalEmAberto.Value.ToString("R$ ###,###,##0.00")</strong></span></div>
+                        @if (Model.Count > 0)
+                        {
+                            <div class="count red"><span class="h2"><strong>@Model[0].TotalEmAberto.Value.ToString("R$ ###,###,##0.00")</strong></span></div>
+                        }
+                        else
+                        {
+                            <div class="count"><span class="h2"><strong>R$ 0,00</strong></span></div>
+                        }
                         <h3>Total em aberto</h3>
                         <p>contas a vencer/vencidas.</p>
                     </div>
@@ -51,7 +72,14 @@
                         <div class="icon">
                             <i class="glyphicon glyphicon-list"></i>
                         </div>
-                        <div class="count">@Model[0].TotalCount.ToString("###,###,##0")</div>
+                        @if (Model.Count > 0)
+                        {
+                            <div class="count">@Model[0].TotalCount.ToString("###,###,##0")</div>
+                        }
+                        else
+                        {
+                            <div class="count"><span class="h2"><strong>R$ 0,00</strong></span></div>
+                        }
                         <h3>Contas emitidas</h3>
                         <p>contas a pagar/pagas.</p>
                     </div>

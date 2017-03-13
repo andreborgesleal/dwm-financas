@@ -33,7 +33,10 @@
     @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Razão contábil", Descricao = "", Transacao = t })
     <div class="x_content">
         @using (Ajax.BeginForm("ListParam", "Razao", new AjaxOptions { HttpMethod = "get", UpdateTargetId = "div-list-static2" }, new { @role = "search", @id = "form0", @name = "form0" }))
-            {
+        {
+            DateTime? d1 = Request["data1"] == null || Request["data1"].Contains("%") ? (DateTime)ViewData["dt_lancamento_inicio"] : Convert.ToDateTime(Request["data1"]);
+            DateTime? d2 = Request["data2"] == null || Request["data2"].Contains("%") ? (DateTime)ViewData["dt_lancamento_fim"] : Convert.ToDateTime(Request["data2"]);
+
             <div class="container-cadastro">
                 <div class="row clearfix">
                     <div class="col-md-6">
@@ -49,13 +52,13 @@
                             <label class="control-label" for="data1">Período</label>
                             <div class="row clearfix">
                                 <div class="col-md-4">
-                                    @Html.Editor("data1", "DATE", new { identificador = "data1", readOnly = "false", value = Request["data1"] == null || Request["data1"].Contains("%") ? (DateTime)ViewData["dt_lancamento_inicio"] : Convert.ToDateTime(Request["data1"]) })
+                                    <input type="date" class="form-control" name="data1" id="data1" value="@d1.Value.ToString("yyyy-MM-dd")" />
                                 </div>
                                 <div class="col-md-1">
                                     à
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.Editor("data2", "DATE", new { identificador = "data2", readOnly = "false", value = Request["data2"] == null || Request["data2"].Contains("%") ? (DateTime)ViewData["dt_lancamento_fim"] : Convert.ToDateTime(Request["data2"]) })
+                                    <input type="date" class="form-control" name="data2" id="data2" value="@d2.Value.ToString("yyyy-MM-dd")" />
                                 </div>
                             </div>
                         </div>

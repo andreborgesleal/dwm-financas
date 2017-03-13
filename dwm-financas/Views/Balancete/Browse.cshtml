@@ -35,6 +35,9 @@
                 @Html.Hidden("grauPC", "0")
                 @Html.Hidden("RecDesp", "N")
 
+                DateTime? d1 = Request["data1"] == null || Request["data1"].Contains("%") ? (DateTime)ViewData["dt_lancamento_inicio"] : Convert.ToDateTime(Request["data1"]);
+                DateTime? d2 = Request["data2"] == null || Request["data2"].Contains("%") ? (DateTime)ViewData["dt_lancamento_fim"] : Convert.ToDateTime(Request["data2"]);
+
                 <div class="row clearfix">
                     <div class="col-md-6">
                         @Html.Editor("descricao_centroCusto1", "CentroCustoAutoComplete", new { nextField = "data1", prevField = "descricao_conta", value = value, Text = Text })
@@ -44,13 +47,13 @@
                             <label class="control-label" for="data1">Período</label>
                             <div class="row clearfix">
                                 <div class="col-md-4">
-                                    @Html.Editor("data1", "DATE", new { identificador = "data1", readOnly = "false", value = Request["data1"] == null || Request["data1"].Contains("%") ? (DateTime)ViewData["dt_lancamento_inicio"] : Convert.ToDateTime(Request["data1"]) })
+                                    <input type="date" class="form-control" name="data1" id="data1" value="@d1.Value.ToString("yyyy-MM-dd")" />
                                 </div>
                                 <div class="col-md-1">
                                     à
                                 </div>
                                 <div class="col-md-4">
-                                    @Html.Editor("data2", "DATE", new { identificador = "data2", readOnly = "false", value = Request["data2"] == null || Request["data2"].Contains("%") ? (DateTime)ViewData["dt_lancamento_fim"] : Convert.ToDateTime(Request["data2"]) })
+                                    <input type="date" class="form-control" name="data2" id="data2" value="@d2.Value.ToString("yyyy-MM-dd")" />
                                 </div>
                             </div>
                         </div>
