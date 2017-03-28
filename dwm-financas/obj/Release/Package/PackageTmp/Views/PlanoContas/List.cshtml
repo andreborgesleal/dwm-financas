@@ -23,6 +23,7 @@
                 <thead>
                     <tr class="headings">
                         <th class="col-md-2 column-title text-center nobr">Ação</th>
+                        <th class="column-title text-center">#ID</th>
                         <th class="column-title text-center">Código Pleno</th>
                         <th class="column-title">Descrição</th>
                         <th class="column-title text-center">Código Reduzido</th>
@@ -44,6 +45,9 @@
                             <td class="col-md-2 text-center">
                                 <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='Edit?planoContaId=@planoConta.planoContaId'"></button>
                                 <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="window.location='Delete?planoContaId=@planoConta.planoContaId'"></button>
+                            </td>
+                            <td class="text-center">
+                                <span>@planoConta.planoContaId</span>
                             </td>
                             <td class="text-center">
                                 <span>@planoConta.codigoPleno</span>

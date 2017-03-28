@@ -272,13 +272,13 @@ namespace DWM.Models.Persistence
                         descricao = c.descricao,
                         tipoConta = c.tipoConta == "S" ? sintetica : analitica,
                         vr_saldo_inicial = c.vr_saldo_inicial,
-                        PageSize = pageSize,
-                        TotalCount = (from c1 in db.PlanoContas
-                                      where c1.empresaId.Equals(sessaoCorrente.empresaId)
-                                            && c1.exercicio == _exercicio
-                                            && (_descricao == null || String.IsNullOrEmpty(_descricao) || c1.descricao.StartsWith(_descricao.Trim()) || c1.codigoPleno.StartsWith(_descricao.Trim()))
-                                      select c1).Count()
-                    }).Skip((index ?? 0) * pageSize).Take(pageSize).ToList();
+                        //PageSize = pageSize,
+                        //TotalCount = (from c1 in db.PlanoContas
+                        //              where c1.empresaId.Equals(sessaoCorrente.empresaId)
+                        //                    && c1.exercicio == _exercicio
+                        //                    && (_descricao == null || String.IsNullOrEmpty(_descricao) || c1.descricao.StartsWith(_descricao.Trim()) || c1.codigoPleno.StartsWith(_descricao.Trim()))
+                        //              select c1).Count()
+                    }).ToList();
         }
 
         public override Repository getRepository(Object id)

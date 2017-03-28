@@ -3,26 +3,19 @@
 @{
     Layout = null;
 }
+<!-- Datatables -->
+<link href="../Content/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+
 @if (Model != null)
 {
     string font = "normal";
     <div class="dashboard-widget-content">
-        <div class="row">
-            <div class="col-md-5">
-                Clique nos botões de <code>Ação</code> para executar a ação desejada
-            </div>
-            <div class="col-md-1">
-                <a href="../PlanoContas/Create" class="text-primary">Incluir</a>
-            </div>
-            <div class="col-md-offset-9 col-lg-offset-9 col-xs-offset-7">
-                @Html.Partial("Filtro")
-            </div>
-        </div>
         <div class="table-responsive">
-            <table class="table table-striped jambo_table bulk_action">
+            <table id="datatable" class="table table-striped table-bordered">
                 <thead>
                     <tr class="headings">
                         <th class="col-md-2 column-title text-center nobr">Ação</th>
+                        <th class="column-title text-center">#ID</th>
                         <th class="column-title text-center">Código Pleno</th>
                         <th class="column-title">Descrição</th>
                         <th class="column-title text-center">Código Reduzido</th>
@@ -44,6 +37,9 @@
                             <td class="col-md-2 text-center">
                                 <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='Edit?planoContaId=@planoConta.planoContaId'"></button>
                                 <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="window.location='Delete?planoContaId=@planoConta.planoContaId'"></button>
+                            </td>
+                            <td class="text-center">
+                                <span>@planoConta.planoContaId</span>
                             </td>
                             <td class="text-center">
                                 <span>@planoConta.codigoPleno</span>
@@ -69,3 +65,20 @@ else
 {
     @Html.Partial("_AcessoNegadoModal")
 }
+
+<!-- Datatables -->
+<script src="../Content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../Content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- Datatables -->
+<script>
+      $(document).ready(function() {
+        $('#datatable').DataTable({
+            "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Todos"]],
+            "scrollY": 400,
+            "language": {
+                "url": "../Scripts/DataTablePtBr.txt"
+            }
+        });
+      });
+</script>
+<!-- /Datatables -->
