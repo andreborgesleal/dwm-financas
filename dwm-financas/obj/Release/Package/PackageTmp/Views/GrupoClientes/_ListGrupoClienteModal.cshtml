@@ -6,34 +6,44 @@
 
 @if (Model != null)
 {
-    <div class="row Scroll" style="margin-top: -15px">
-        <div class="col-md-12" style="padding-right: 0px;">
-            <table class="table table-striped jambo_table bulk_action" style="cursor: pointer">
-                <caption></caption>
-                <thead>
-                    <tr class="headings">
-                        <th class="column-title">Nome do grupo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (GrupoClienteViewModel gcli in Model)
-                    {
-                        <tr class="even pointer" onclick="Move('@gcli.grupoClienteId', '@gcli.nome')">
-                            <td>
-                                <small>@gcli.nome</small>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-    @Html.Partial("Paginacao", Model)
+    <table class="table table-striped jambo_table bulk_action" style="width: 100%" id="datatableGCLI">
+        <thead>
+            <tr class="headings">
+                <th class="col-md-2 column-title text-center nobr">Ação</th>
+                <th class="column-title">Nome do grupo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (GrupoClienteViewModel gcli in Model)
+            {
+                <tr class="even pointer" >
+                    <td class="col-md-2 text-center">
+                        <button type="button" class="fa fa-check" title="Selecionar" onclick="Move('@gcli.grupoClienteId', '@gcli.nome')"></button>
+                    </td>
+                    <td>
+                        <small>@gcli.nome</small>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 else
 {
     @Html.Partial("_AcessoNegadoModal")
 }
 
+<!-- Datatables -->
+<script src="../Content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../Content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
+<script>
+    $('#datatableGCLI').DataTable({
+        lengthMenu: [[15, 25, 50, 100, -1], [15, 25, 50, 100, "Todos"]],
+        iDisplayLength: 50,
+        language: {
+            "url": "../Scripts/DataTablePtBr.txt"
+        },
+    });
+</script>
 

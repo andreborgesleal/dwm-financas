@@ -27,6 +27,9 @@
         PlanoContaText = Request["descricao_conta"];
     }
 }
+<!-- Datatables -->
+<link href="../Content/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+
 @Html.Partial("_AjaxAlert","")
 @Html.Partial("_alerts")
 <div class="x_panel">
@@ -98,6 +101,7 @@
         @Html.Partial("ListParam", Model)
     }
 </div>
+
 <script>
     $(function () {
         $('#form0').submit(function () {
@@ -125,16 +129,5 @@
             $('#div-list-static2').html('');
         }
     }
-
-
-    //function validaPDF()
-    //{
-    //    if ($('#planoContaId').val() == null || $('#planoContaId').val() == '') {
-    //        ShowMessageAlert('É preciso informar a conta para a emissão do Razão', 'warning');
-    //        return false;
-    //    }
-    //    else
-    //        return true;
-    //}
 
 </script>

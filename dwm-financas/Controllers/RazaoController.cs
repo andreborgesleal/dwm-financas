@@ -10,9 +10,21 @@ using App_Dominio.Models;
 using App_Dominio.Pattern;
 using DWM.Models.Entidades;
 using DWM.Models.BI;
+using App_Dominio.Contratos;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace DWM.Controllers
 {
+    public class DataTable
+    {
+        public int draw { get; set; }
+        public int recordsTotal { get; set; }
+        public int recordsFiltered { get; set; }
+        public RazaoViewModel[] data { get; set; }
+    }
+
     public class RazaoController : ReportController<RazaoViewModel>
     {
         #region Herança
@@ -87,7 +99,7 @@ namespace DWM.Controllers
         public ActionResult ListParam(int? index, int? pageSize = 50, string data1 = "", string data2 = "", 
                                         int? centroCustoId = null, string descricao_centroCusto = "",
                                         int? planoContaId = null, string descricao_conta = "", string codigoPleno = "",
-                                        string totalizaConta = "", string totalizaDia = "")
+                                        string totalizaConta = "N", string totalizaDia = "N")
         {
             ViewBag.ValidateRequest = true;
             if (ViewBag.ValidateRequest)

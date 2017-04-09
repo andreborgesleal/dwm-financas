@@ -12,12 +12,10 @@
             <div class="col-md-1">
                 <a href="../Fornecedores/Create" class="text-primary">Incluir</a>
             </div>
-            <div class="col-md-offset-9 col-lg-offset-9 col-xs-offset-7">
-                @Html.Partial("Filtro")
-            </div>
         </div>
+        <p>&nbsp;</p>
         <div class="table-responsive">
-            <table class="table table-striped jambo_table bulk_action">
+            <table class="table table-striped jambo_table bulk_action" id="datatable">
                 <thead>
                     <tr class="headings">
                         <th class="col-md-2 column-title text-center nobr">Ação</th>
@@ -58,7 +56,6 @@
                 </tbody>
             </table>
         </div>
-        @Html.Partial("Paginacao", Model)
     </div>
 }
 else
@@ -66,4 +63,18 @@ else
     @Html.Partial("_AcessoNegadoModal")
 }
 
+
+<!-- Datatables -->
+<script src="../Content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../Content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+<script>
+    $('#datatable').DataTable({
+        lengthMenu: [[15, 25, 50, 100, -1], [15, 25, 50, 100, "Todos"]],
+        iDisplayLength: 50,
+        language: {
+            "url": "../Scripts/DataTablePtBr.txt"
+        },
+    });
+</script>
 

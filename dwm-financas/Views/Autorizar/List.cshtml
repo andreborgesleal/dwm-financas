@@ -100,7 +100,7 @@
                 </div>
                 <br />
                 <div class="table-responsive">
-                    <table class="table table-striped jambo_table bulk_action dedo-indicador">
+                    <table class="table table-striped jambo_table bulk_action" id="datatable">
                         <thead>
                             <tr class="headings">
                                 <th class="column-title text-center nobr">Ação</th>
@@ -204,7 +204,6 @@
                         </tbody>
                     </table>
                 </div>
-                @Html.Partial("Paginacao", Model)
                 <a href="#panel-detail" class="info pull-right" id="linkTopo"><i class="fa fa-toggle-up"></i> Topo</a>
             </div>
         </div>
@@ -217,6 +216,21 @@ else
 {
     @Html.Partial("_AcessoNegadoModal")
 }
+<!-- Datatables -->
+<script src="../Content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../Content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+<script>
+    $('#datatable').DataTable({
+        lengthMenu: [[15, 25, 50, 100, -1], [15, 25, 50, 100, "Todos"]],
+        iDisplayLength: 100,
+        language: {
+            "url": "../Scripts/DataTablePtBr.txt"
+        },
+        "bSort": true,
+    });
+</script>
+
 
 <script>
     function Edit(operacaoId, parcelaId) {

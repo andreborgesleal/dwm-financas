@@ -6,43 +6,55 @@
 
 @if (Model != null)
 {
-    <div class="row Scroll" style="margin-top: -15px">
-        <div class="col-md-12" style="padding-right: 0px;">
-            <table class="table table-striped jambo_table bulk_action" style="cursor: pointer">
-                <caption></caption>
-                <thead>
-                    <tr class="headings">
-                        <th class="column-title">Nome do Banco</th>
-                        <th class="column-title">Sigla</th>
-                        <th class="column-title text-center">Classificação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (BancoViewModel ban in Model)
-                    {
-                        <tr class="even pointer" onclick="Move('@ban.bancoId', '@ban.nome')">
-                            <td>
-                                <small>@ban.nome</small>
-                            </td>
-                            <td>
-                                <small>@ban.sigla</small>
-                            </td>
-                            <td class="text-center">
-                                <small>@ban.classificacao</small>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-    @Html.Partial("Paginacao", Model)
+    <table class="table table-striped jambo_table bulk_action" style="width: 100%" id="datatableBAN">
+        <caption></caption>
+        <thead>
+            <tr class="headings">
+                <th class="col-md-2 column-title text-center nobr">Ação</th>
+                <th class="column-title">Nome do Banco</th>
+                <th class="column-title">Sigla</th>
+                <th class="column-title text-center">Classificação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (BancoViewModel ban in Model)
+            {
+                <tr class="even pointer" >
+                    <td class="col-md-2 text-center">
+                        <button type="button" class="fa fa-check" title="Selecionar" onclick="Move('@ban.bancoId', '@ban.nome')"></button>
+                    </td>
+                    <td>
+                        <small>@ban.nome</small>
+                    </td>
+                    <td>
+                        <small>@ban.sigla</small>
+                    </td>
+                    <td class="text-center">
+                        <small>@ban.classificacao</small>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 else
 {
     @Html.Partial("_AcessoNegadoModal")
 }
 
+<!-- Datatables -->
+<script src="../Content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../Content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+<script>
+    $('#datatableBAN').DataTable({
+        lengthMenu: [[15, 25, 50, 100, -1], [15, 25, 50, 100, "Todos"]],
+        iDisplayLength: 50,
+        language: {
+            "url": "../Scripts/DataTablePtBr.txt"
+        },
+    });
+</script>
 
 
 

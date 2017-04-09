@@ -106,7 +106,7 @@ namespace DWM.Models.BI
                                              && (par1.ind_baixa == null || par1.ind_baixa == "")
                                        orderby par1.dt_vencimento
                                        select pag1).Count() // quantidade de títulos pendentes + quantidade de títulos autorizados
-                     }).Skip((index ?? 0) * pageSize).Take(pageSize).ToList();
+                     }).ToList();
             #endregion
 
             IPagedList pagedList = new PagedList<ContaPagarDemonstrativoViewModel>(q.ToList(), pageIndex, pageSize, q.Count() > 0 ? q.First().TotalCount : 0, "List", null, "div-list-static");

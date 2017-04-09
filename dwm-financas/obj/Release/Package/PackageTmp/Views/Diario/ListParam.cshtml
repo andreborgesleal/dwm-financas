@@ -10,7 +10,7 @@
 {
     <div class="dashboard-widget-content">
         <div class="table-responsive">
-            <table class="table table-striped jambo_table bulk-action dedo-indicador">
+            <table class="table table-striped jambo_table bulk_action" id="datatable">
                 <thead>
                     <tr class="heading">
                         <th>Data</th>
@@ -88,7 +88,7 @@
                                 vr_db = diario.vr_debito.Value.ToString("###,###,###,##0.00");
                                 vr_cr = diario.vr_credito.Value.ToString("###,###,###,##0.00");
                                 <td class="text-left">
-                                    <h4><strong>@diario.descricao_historico.Replace("<b>","").Replace("</b>","")</strong></h4>
+                                    <h4><strong>@diario.descricao_historico.Replace("<b>", "").Replace("</b>", "")</strong></h4>
                                 </td>
                                 <td class="text-right">
                                     <h4><strong>@Html.DisplayTextFor(info => vr_db)</strong></h4>
@@ -104,14 +104,26 @@
             </table>
         </div>
     </div>
-    @Html.Partial("Paginacao", Model)
 }
 else
 {
     @Html.Partial("_AcessoNegadoModal")
 }
 
+<!-- Datatables -->
+<script src="../Content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../Content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
+<script>
+    $('#datatable').DataTable({
+        lengthMenu: [[15, 25, 50, 100, -1], [15, 25, 50, 100, "Todos"]],
+        iDisplayLength: 100,
+        bSort: false,
+        language: {
+            "url": "../Scripts/DataTablePtBr.txt"
+        },
+    });
+</script>
 
 
 

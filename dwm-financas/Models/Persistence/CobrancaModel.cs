@@ -298,15 +298,16 @@ namespace DWM.Models.Persistence
                         vr_multa = cob.vr_multa,
                         total_clientes = (from cobcli in db.CobrancaClientes where cobcli.cobrancaId == cob.cobrancaId select cobcli.cobrancaId).Count(),
                         PageSize = pageSize,
-                        TotalCount = (from cob1 in db.Cobrancas
-                                      join gcob1 in db.GrupoCobrancas on cob1.grupoCobrancaId equals gcob1.grupoCobrancaId
-                                      join ban1 in db.Bancos on cob1.bancoId equals ban1.bancoId
-                                      join his1 in db.Historicos on cob1.historicoId equals his1.historicoId
-                                      join enq1 in db.Enquadramentos on cob1.enquadramentoId equals enq1.enquadramentoId
-                                      where cob1.empresaId.Equals(sessaoCorrente.empresaId) &&
-                                            (_descricao == null || String.IsNullOrEmpty(_descricao) || gcob1.descricao.Contains(_descricao.Trim()))
-                                      select cob1).Count()
-                    }).Skip((index ?? 0) * pageSize).Take(pageSize).ToList();
+                        TotalCount = 0
+                        //TotalCount = (from cob1 in db.Cobrancas
+                        //              join gcob1 in db.GrupoCobrancas on cob1.grupoCobrancaId equals gcob1.grupoCobrancaId
+                        //              join ban1 in db.Bancos on cob1.bancoId equals ban1.bancoId
+                        //              join his1 in db.Historicos on cob1.historicoId equals his1.historicoId
+                        //              join enq1 in db.Enquadramentos on cob1.enquadramentoId equals enq1.enquadramentoId
+                        //              where cob1.empresaId.Equals(sessaoCorrente.empresaId) &&
+                        //                    (_descricao == null || String.IsNullOrEmpty(_descricao) || gcob1.descricao.Contains(_descricao.Trim()))
+                        //              select cob1).Count()
+                    }).ToList();
         }
 
         public override Repository getRepository(Object id)
@@ -375,19 +376,20 @@ namespace DWM.Models.Persistence
                         },
                         total_clientes = (from cobcli in db.CobrancaClientes where cobcli.cobrancaId == cob.cobrancaId select cobcli.cobrancaId).Count(),
                         PageSize = pageSize,
-                        TotalCount = (from cob1 in db.Cobrancas
-                                      join cob_cli1 in db.CobrancaClientes on cob1.cobrancaId equals cob_cli1.cobrancaId
-                                      join cli1 in db.Clientes on cob_cli1.clienteId equals cli1.clienteId
-                                      join gcob1 in db.GrupoCobrancas on cob1.grupoCobrancaId equals gcob1.grupoCobrancaId
-                                      join ban1 in db.Bancos on cob1.bancoId equals ban1.bancoId
-                                      join his1 in db.Historicos on cob1.historicoId equals his1.historicoId
-                                      join enq1 in db.Enquadramentos on cob1.enquadramentoId equals enq1.enquadramentoId
-                                      where cob1.cobrancaId == _cobrancaId &&
-                                            cob1.empresaId.Equals(sessaoCorrente.empresaId) &&
-                                            (_descricao == null || String.IsNullOrEmpty(_descricao) || cli1.nome.Contains(_descricao.Trim()))
-                                      orderby cli1.nome
-                                      select cob1).Count()
-                    }).Skip((index ?? 0) * pageSize).Take(pageSize).ToList();
+                        TotalCount = 0
+                        //TotalCount = (from cob1 in db.Cobrancas
+                        //              join cob_cli1 in db.CobrancaClientes on cob1.cobrancaId equals cob_cli1.cobrancaId
+                        //              join cli1 in db.Clientes on cob_cli1.clienteId equals cli1.clienteId
+                        //              join gcob1 in db.GrupoCobrancas on cob1.grupoCobrancaId equals gcob1.grupoCobrancaId
+                        //              join ban1 in db.Bancos on cob1.bancoId equals ban1.bancoId
+                        //              join his1 in db.Historicos on cob1.historicoId equals his1.historicoId
+                        //              join enq1 in db.Enquadramentos on cob1.enquadramentoId equals enq1.enquadramentoId
+                        //              where cob1.cobrancaId == _cobrancaId &&
+                        //                    cob1.empresaId.Equals(sessaoCorrente.empresaId) &&
+                        //                    (_descricao == null || String.IsNullOrEmpty(_descricao) || cli1.nome.Contains(_descricao.Trim()))
+                        //              orderby cli1.nome
+                        //              select cob1).Count()
+                    }).ToList();
         }
 
         public override string action()

@@ -201,13 +201,14 @@ namespace DWM.Models.Persistence
                         endereco = cre.endereco,
                         complemento = cre.complemento,
                         PageSize = pageSize,
-                        TotalCount = (from cre1 in db.Credores
-                                      join gru1 in db.GrupoCredores on cre1.grupoCredorId equals gru1.grupoCredorId into GRU1
-                                      from gru1 in GRU1.DefaultIfEmpty()
-                                      where cre1.empresaId == sessaoCorrente.empresaId &&
-                                            (_nome == null || String.IsNullOrEmpty(_nome) || cre1.nome.Contains(_nome.Trim()) || cre1.cpf_cnpj == _nome || (gru1 != null && gru1.nome.Contains(_nome.Trim())))
-                                      select cre1.credorId).Count()
-                    }).Skip((index ?? 0) * pageSize).Take(pageSize).ToList();
+                        TotalCount = 0
+                        //TotalCount = (from cre1 in db.Credores
+                        //              join gru1 in db.GrupoCredores on cre1.grupoCredorId equals gru1.grupoCredorId into GRU1
+                        //              from gru1 in GRU1.DefaultIfEmpty()
+                        //              where cre1.empresaId == sessaoCorrente.empresaId &&
+                        //                    (_nome == null || String.IsNullOrEmpty(_nome) || cre1.nome.Contains(_nome.Trim()) || cre1.cpf_cnpj == _nome || (gru1 != null && gru1.nome.Contains(_nome.Trim())))
+                        //              select cre1.credorId).Count()
+                    }).ToList();
         }
 
         public override Repository getRepository(Object id)

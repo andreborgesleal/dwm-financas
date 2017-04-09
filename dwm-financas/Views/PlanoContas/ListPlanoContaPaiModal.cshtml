@@ -4,15 +4,12 @@
     Model.action = "../PlanoContas/_ListPlanoContaPaiModal";
 }
 
-<div class="row">
-    <div class="col-md-12" style="margin: 0px">
-        @Html.Partial("_Filter", Model)
-        <div id="div-pc" style="padding-top: 0px">
-            @Html.Partial("../PlanoContas/_ListPlanoContaPaiModal", Model)
-        </div>
-    </div>
-</div>
+<p><h4>Plano de Contas</h4></p>
+<hr />
 
+<div id="div-pc">
+    @Html.Partial("../PlanoContas/_ListPlanoContaPaiModal", Model)
+</div>
 
 <script type="text/javascript">
 

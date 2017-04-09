@@ -178,28 +178,29 @@ namespace DWM.Models.Persistence
                              vr_saldo_devedor = par.vr_saldo_devedor
                          },
                          PageSize = receSize,
-                         TotalCount = (from rec1 in db.ContaRecebers
-                                        join par1 in db.ContaReceberParcelas on rec1.operacaoId equals par1.operacaoId
-                                        join cli1 in db.Clientes on rec1.clienteId equals cli1.clienteId
-                                        where rec1.empresaId.Equals(sessaoCorrente.empresaId)
-                                               && ((((titulos_vencidos_atraso && par1.vr_saldo_devedor > 0
-                                                   && ((dt_vencidos_atraso1.HasValue && par1.dt_vencimento >= dt_vencidos_atraso1 && par1.dt_vencimento <= dt_vencidos_atraso2) ||
-                                                        (!dt_vencidos_atraso1.HasValue && par1.dt_vencimento < hoje)))
-                                                       || (titulos_a_vencer && par1.vr_saldo_devedor > 0
-                                                           && ((dt_vencimento1.HasValue && par1.dt_vencimento >= dt_vencimento1 && par1.dt_vencimento <= dt_vencimento2) ||
-                                                            (!dt_vencimento1.HasValue && par1.dt_vencimento >= hoje))))
-                                                   && ((titulos_amortizados && par1.vr_saldo_devedor > 0 && par1.vr_amortizacao > 0)
-                                                       || (titulos_nao_recos && par1.vr_saldo_devedor > 0 && par1.vr_amortizacao == 0)))
-                                                   || (baixa_liquidacao && par1.ind_baixa == "4" && par1.dt_baixa >= dt_baixa1 && par1.dt_baixa <= dt_baixa2)
-                                                   || (baixa_cancelamento && par1.ind_baixa == "5" && par1.dt_baixa >= dt_baixa1 && par1.dt_baixa <= dt_baixa2))
-                                               && (!clienteId.HasValue || rec1.clienteId == clienteId)
-                                               && (!centroCustoId.HasValue || rec1.centroCustoId == centroCustoId)
-                                               && (!grupoId.HasValue || cli1.grupoClienteId.Value == grupoId)
-                                               && (!bancoId.HasValue || par1.bancoId.Value == bancoId)
-                                               && (!dt_emissao1.HasValue || rec1.dt_emissao >= dt_emissao1 && rec1.dt_emissao <= dt_emissao2)
-                                        orderby par1.dt_vencimento
-                                        select rec1).Count()
-                     }).Skip((index ?? 0) * receSize).Take(receSize).ToList();
+                         TotalCount = 0,
+                         //TotalCount = (from rec1 in db.ContaRecebers
+                         //               join par1 in db.ContaReceberParcelas on rec1.operacaoId equals par1.operacaoId
+                         //               join cli1 in db.Clientes on rec1.clienteId equals cli1.clienteId
+                         //               where rec1.empresaId.Equals(sessaoCorrente.empresaId)
+                         //                      && ((((titulos_vencidos_atraso && par1.vr_saldo_devedor > 0
+                         //                          && ((dt_vencidos_atraso1.HasValue && par1.dt_vencimento >= dt_vencidos_atraso1 && par1.dt_vencimento <= dt_vencidos_atraso2) ||
+                         //                               (!dt_vencidos_atraso1.HasValue && par1.dt_vencimento < hoje)))
+                         //                              || (titulos_a_vencer && par1.vr_saldo_devedor > 0
+                         //                                  && ((dt_vencimento1.HasValue && par1.dt_vencimento >= dt_vencimento1 && par1.dt_vencimento <= dt_vencimento2) ||
+                         //                                   (!dt_vencimento1.HasValue && par1.dt_vencimento >= hoje))))
+                         //                          && ((titulos_amortizados && par1.vr_saldo_devedor > 0 && par1.vr_amortizacao > 0)
+                         //                              || (titulos_nao_recos && par1.vr_saldo_devedor > 0 && par1.vr_amortizacao == 0)))
+                         //                          || (baixa_liquidacao && par1.ind_baixa == "4" && par1.dt_baixa >= dt_baixa1 && par1.dt_baixa <= dt_baixa2)
+                         //                          || (baixa_cancelamento && par1.ind_baixa == "5" && par1.dt_baixa >= dt_baixa1 && par1.dt_baixa <= dt_baixa2))
+                         //                      && (!clienteId.HasValue || rec1.clienteId == clienteId)
+                         //                      && (!centroCustoId.HasValue || rec1.centroCustoId == centroCustoId)
+                         //                      && (!grupoId.HasValue || cli1.grupoClienteId.Value == grupoId)
+                         //                      && (!bancoId.HasValue || par1.bancoId.Value == bancoId)
+                         //                      && (!dt_emissao1.HasValue || rec1.dt_emissao >= dt_emissao1 && rec1.dt_emissao <= dt_emissao2)
+                         //               orderby par1.dt_vencimento
+                         //               select rec1).Count()
+                     }).ToList();
             #endregion
 
             return q;

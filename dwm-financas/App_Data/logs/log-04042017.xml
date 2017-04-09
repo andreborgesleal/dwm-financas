@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="1241199349" Data="04/04/2017 21:08:00">
+    <Sessao>ydropnuk23hekoujn5fhrxum</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Cadeia de caracteres não foi reconhecida como DateTime válido.</Mensagem>
+    <NameSpace>DWM.Models.Report.RazaoReport =&gt; razao/listparam</NameSpace>
+    <Context />
+    <StackTrace>   em System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   em System.Convert.ToDateTime(String value)
+   em DWM.Models.Report.RazaoReport.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Report\RazaoReport.cs:linha 18
+   em DWM.Models.Repositories.ReportViewModel`1.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Repositories\ReportViewModel.cs:linha 22
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+  <LOG ID="490321254" Data="04/04/2017 21:09:43">
+    <Sessao>ydropnuk23hekoujn5fhrxum</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Models.Report.RazaoReport =&gt; razao/listparam</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Models.Report.RazaoReport.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Report\RazaoReport.cs:linha 21
+   em DWM.Models.Repositories.ReportViewModel`1.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Repositories\ReportViewModel.cs:linha 22
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+</LOG>

@@ -10,6 +10,9 @@
 
     t[1].url = "../Home/Default";
 }
+<!-- Datatables -->
+<link href="../Content/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+
 <div class="x_panel">
     @Html.Partial("_alerts")
     @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Diário da contabilidade", Descricao = "", Transacao = t })

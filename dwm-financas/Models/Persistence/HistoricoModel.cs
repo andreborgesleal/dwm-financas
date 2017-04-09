@@ -116,12 +116,13 @@ namespace DWM.Models.Persistence
                         descricao = c.descricao,
                         ind_tipoHistorico = c.ind_tipoHistorico,
                         PageSize = pageSize,
-                        TotalCount = (from c1 in db.Historicos
-                                      where c1.empresaId.Equals(sessaoCorrente.empresaId) &&
-                                            (_descricao == null || String.IsNullOrEmpty(_descricao) || c1.descricao.Contains(_descricao.Trim())) &&
-                                            (_ind_tipoHistorico == null || c1.ind_tipoHistorico == _ind_tipoHistorico)
-                                      select c1).Count()
-                    }).Skip((index ?? 0) * pageSize).Take(pageSize).ToList();
+                        TotalCount = 0
+                        //TotalCount = (from c1 in db.Historicos
+                        //              where c1.empresaId.Equals(sessaoCorrente.empresaId) &&
+                        //                    (_descricao == null || String.IsNullOrEmpty(_descricao) || c1.descricao.Contains(_descricao.Trim())) &&
+                        //                    (_ind_tipoHistorico == null || c1.ind_tipoHistorico == _ind_tipoHistorico)
+                        //              select c1).Count()
+                    }).ToList();
         }
 
         public override Repository getRepository(Object id)

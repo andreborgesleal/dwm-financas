@@ -229,7 +229,7 @@ namespace DWM.Models.Persistence
                                             (_exercicio == null || ex1.exercicio == _exercicio)
                                       orderby ex1.exercicio descending
                                       select ex1).Count()
-                    }).Skip((index ?? 0) * pageSize).Take(pageSize).ToList();
+                    }).ToList();
         }
 
         public override Repository getRepository(Object id)

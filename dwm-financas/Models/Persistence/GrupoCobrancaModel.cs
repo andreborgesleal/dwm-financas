@@ -120,11 +120,12 @@ namespace DWM.Models.Persistence
                         grupoCobrancaId = b.grupoCobrancaId,
                         descricao = b.descricao,
                         PageSize = pageSize,
-                        TotalCount = (from b1 in db.GrupoCobrancas
-                                      where b1.empresaId.Equals(sessaoCorrente.empresaId) &&
-                                            (_descricao == null || String.IsNullOrEmpty(_descricao) || b1.descricao.Contains(_descricao.Trim()))
-                                      select b1).Count()
-                    }).Skip((index ?? 0) * pageSize).Take(pageSize).ToList();
+                        TotalCount = 0
+                        //TotalCount = (from b1 in db.GrupoCobrancas
+                        //              where b1.empresaId.Equals(sessaoCorrente.empresaId) &&
+                        //                    (_descricao == null || String.IsNullOrEmpty(_descricao) || b1.descricao.Contains(_descricao.Trim()))
+                        //              select b1).Count()
+                    }).ToList();
         }
 
         public override Repository getRepository(Object id)

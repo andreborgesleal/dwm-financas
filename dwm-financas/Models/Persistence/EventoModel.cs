@@ -154,7 +154,7 @@ namespace DWM.Models.Persistence
                                       where e1.empresaId.Equals(sessaoCorrente.empresaId) &&
                                             (_descricao == null || String.IsNullOrEmpty(_descricao) || e1.descricao.Contains(_descricao.Trim()))
                                       select e1).Count()
-                    }).Skip((index ?? 0) * pageSize).Take(pageSize).ToList();
+                    }).ToList();
         }
 
         public override Repository getRepository(Object id)

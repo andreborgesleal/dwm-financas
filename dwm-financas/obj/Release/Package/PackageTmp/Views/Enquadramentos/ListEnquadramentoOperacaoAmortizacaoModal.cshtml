@@ -3,14 +3,13 @@
     Layout = null;
     Model.action = "../Enquadramentos/_ListEnquadramentoOperacaoAmortizacaoModal";
 }
-<div class="row">
-    <div class="col-md-12" style="margin: 0px">
-        @Html.Partial("_Filter", Model)
-        <div id="div-amort" class="no-padding">
-            @Html.Partial("../Enquadramentos/_ListEnquadramentoOperacaoAmortizacaoModal", Model)
-        </div>
-    </div>
+
+<p><h4>Enquadramentos</h4></p>
+<hr />
+<div id="div-amort">
+    @Html.Partial("../Enquadramentos/_ListEnquadramentoOperacaoAmortizacaoModal", Model)
 </div>
+
 <script type="text/javascript">
 
     function Move(id, descricao) {

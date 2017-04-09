@@ -38,7 +38,7 @@ namespace DWM.Controllers
                 ViewData["dt_lancamento_fim"] = Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-") + "01").AddDays(-1);
             }
 
-            return Request ["data1"] != null && Request ["data1"] != "";
+            return true; // Request ["data1"] != null && Request ["data1"] != "";
         }
 
         public override string getListName()
@@ -56,12 +56,12 @@ namespace DWM.Controllers
         public override ActionResult List(int? index, int? PageSize, string descricao = null)
         {
             if (Request["data1"] != null && Request["data1"] != "")
-                return ListParam(index, PageSize, Request ["data1"], Request["data2"], 
+                return ListParam(0, 1000, Request ["data1"], Request["data2"], 
                                 Request["centroCustoId"] != null && Request["centroCustoId"] != "" ? int.Parse(Request["centroCustoid"]) : 0, 
                                 Request["grauPC"] != null && Request["grauPC"] != "" ? int.Parse(Request["grauPC"]) : 0, 
                                 Request["descricao_centroCusto"], Request["RecDesp"]);
             else
-                return ListParam(index, PageSize);
+                return ListParam(0, 1000);
         }
 
         [AuthorizeFilter]

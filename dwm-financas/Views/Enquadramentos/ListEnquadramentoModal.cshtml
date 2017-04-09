@@ -4,13 +4,10 @@
     Model.action = "../Enquadramentos/_ListEnquadramentoModal";
 }
 
-<div class="row">
-    <div class="col-md-12" style="margin: 0px">
-        @Html.Partial("_Filter", Model)
-        <div id="div-enq" class="no-padding">
-            @Html.Partial("../Enquadramentos/_ListEnquadramentoModal", Model)
-        </div>
-    </div>
+<p><h4>Enquadramentos</h4></p>
+<hr />
+<div id="div-enq">
+    @Html.Partial("../Enquadramentos/_ListEnquadramentoModal", Model)
 </div>
 
 <script type="text/javascript">

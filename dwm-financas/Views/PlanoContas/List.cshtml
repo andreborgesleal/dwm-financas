@@ -3,15 +3,21 @@
 @{
     Layout = null;
 }
-<!-- Datatables -->
-<link href="../Content/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-
 @if (Model != null)
 {
     string font = "normal";
     <div class="dashboard-widget-content">
+        <div class="row">
+            <div class="col-md-11">
+                Clique nos botões de <code>Ação</code> para executar a ação desejada ou informe as iniciais da <code>Descrição da conta</code> ou <code>Código Pleno</code> para buscar o registro
+            </div>
+            <div class="col-md-1 pull-right">
+                <a href="../PlanoContas/Create" class="text-primary">Incluir</a>
+            </div>
+        </div>
+        <p>&nbsp;</p>
         <div class="table-responsive">
-            <table id="datatable" class="table table-striped table-bordered">
+            <table class="table table-striped jambo_table bulk_action" id="datatable">
                 <thead>
                     <tr class="headings">
                         <th class="col-md-2 column-title text-center nobr">Ação</th>
@@ -58,27 +64,49 @@
                 </tbody>
             </table>
         </div>
-        @Html.Partial("Paginacao", Model)
     </div>
 }
 else
 {
     @Html.Partial("_AcessoNegadoModal")
 }
-
 <!-- Datatables -->
 <script src="../Content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="../Content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<!-- Datatables -->
+
 <script>
-      $(document).ready(function() {
-        $('#datatable').DataTable({
-            "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Todos"]],
-            "scrollY": 400,
-            "language": {
-                "url": "../Scripts/DataTablePtBr.txt"
+    $('#datatable').DataTable({
+        lengthMenu: [[15, 25, 50, 100, -1], [15, 25, 50, 100, "Todos"]],
+        iDisplayLength: 50,
+        bSort: false,
+        language: {
+            "url": "../Scripts/DataTablePtBr.txt"
+        },
+    });
+
+    var table = $("#datatable").DataTable();
+    $.fn.dataTable.ext.search.push(
+    function (settings, data, dataIndex) {
+        var term = $('#datatable_filter input')
+                .val()
+                .toLowerCase();
+
+        for (var i = 0; i < data.length; i++) {
+            value = data[i]
+                .toString()
+                .toLowerCase();
+
+            if (value.indexOf(term) == 0) {
+                return true;
             }
-        });
-      });
+        };
+        return false;
+    }
+);
 </script>
-<!-- /Datatables -->
+
+
+
+
+
+

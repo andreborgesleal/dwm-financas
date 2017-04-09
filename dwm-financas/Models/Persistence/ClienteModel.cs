@@ -207,13 +207,14 @@ namespace DWM.Models.Persistence
                         email = clnt.email,
                         endereco = clnt.endereco,
                         PageSize = pageSize,
-                        TotalCount = (from clnt1 in db.Clientes
-                                      join gru1 in db.GrupoClientes on clnt1.grupoClienteId equals gru1.grupoClienteId into GRU1
-                                      from gru1 in GRU1.DefaultIfEmpty()
-                                      where clnt1.empresaId == sessaoCorrente.empresaId &&
-                                            (_nome == null || String.IsNullOrEmpty(_nome) || clnt1.nome.Contains(_nome.Trim()) || clnt1.cpf_cnpj == _nome || (gru1 != null && gru1.nome.Contains(_nome.Trim())))
-                                      select clnt1.clienteId).Count()
-                    }).Skip((index ?? 0) * pageSize).Take(pageSize).ToList();
+                        TotalCount = 0
+                        //TotalCount = (from clnt1 in db.Clientes
+                        //              join gru1 in db.GrupoClientes on clnt1.grupoClienteId equals gru1.grupoClienteId into GRU1
+                        //              from gru1 in GRU1.DefaultIfEmpty()
+                        //              where clnt1.empresaId == sessaoCorrente.empresaId &&
+                        //                    (_nome == null || String.IsNullOrEmpty(_nome) || clnt1.nome.Contains(_nome.Trim()) || clnt1.cpf_cnpj == _nome || (gru1 != null && gru1.nome.Contains(_nome.Trim())))
+                        //              select clnt1.clienteId).Count()
+                    }).ToList();
         }
 
         public override Repository getRepository(Object id)
@@ -248,13 +249,14 @@ namespace DWM.Models.Persistence
                         endereco = clnt.endereco,
                         complemento = clnt.complemento,
                         PageSize = pageSize,
-                        TotalCount = (from clnt1 in db.Clientes
-                                      join gru1 in db.GrupoClientes on clnt1.grupoClienteId equals gru1.grupoClienteId into GRU1
-                                      from gru1 in GRU1.DefaultIfEmpty()
-                                      where clnt1.empresaId == sessaoCorrente.empresaId &&
-                                            (_nome == null || String.IsNullOrEmpty(_nome) || clnt1.nome.Contains(_nome.Trim()) || clnt1.cpf_cnpj == _nome || (gru1 != null && gru1.nome.Contains(_nome.Trim())))
-                                      select clnt1.clienteId).Count()
-                    }).Skip((index ?? 0) * pageSize).Take(pageSize).ToList();
+                        TotalCount = 0
+                        //TotalCount = (from clnt1 in db.Clientes
+                        //              join gru1 in db.GrupoClientes on clnt1.grupoClienteId equals gru1.grupoClienteId into GRU1
+                        //              from gru1 in GRU1.DefaultIfEmpty()
+                        //              where clnt1.empresaId == sessaoCorrente.empresaId &&
+                        //                    (_nome == null || String.IsNullOrEmpty(_nome) || clnt1.nome.Contains(_nome.Trim()) || clnt1.cpf_cnpj == _nome || (gru1 != null && gru1.nome.Contains(_nome.Trim())))
+                        //              select clnt1.clienteId).Count()
+                    }).ToList();
         }
 
         public override Repository getRepository(Object id)

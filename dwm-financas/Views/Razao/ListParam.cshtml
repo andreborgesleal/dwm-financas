@@ -2,6 +2,7 @@
 @using App_Dominio.Repositories
 @using DWM.Models.Repositories;
 @model PagedList<DWM.Models.Repositories.RazaoViewModel>
+
 @{
     Layout = null;
     int contador = 0;
@@ -36,7 +37,7 @@
         <div class="x_content">
             <div class="dashboard-widget-content">
                 <div class="table-responsive">
-                    <table class="table table-striped jambo_table bulk-action dedo-indicador">
+                    <table class="table table-striped jambo_table bulk_action" id="datatable">
                         <thead>
                             <tr class="heading">
                                 <th>Data</th>
@@ -47,6 +48,9 @@
                                 <th style="text-align: right">Débito</th>
                                 <th style="text-align: right">Crédito</th>
                                 <th style="text-align: right">Saldo</th>
+                                <th class="column-title no-link last text-center">
+                                    <span class="nobr">Ação</span>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -103,9 +107,6 @@
                                 {
                                     plano_c = razao.codigoPleno + "-" + razao.descricao_planoConta;
                                     color = "#000";
-                                    <tr>
-                                        <td colspan="8"><strong>@Html.DisplayTextFor(info => plano_c)</strong></td>
-                                    </tr>
                                 }
                                 if (razao._dt_lancamento.HasValue && razao._dt_lancamento.Value > DateTime.Today)
                                 {
@@ -115,7 +116,7 @@
                                 {
                                     color = "#000";
                                 }
-                                <tr onclick=@onClick>
+                                <tr class="dedo-indicador">
                                     <td class="col-md-1" style="color: @color">
                                         @if (razao.dt_lancamento.HasValue)
                                         {
@@ -157,6 +158,10 @@
                                     else
                                     {
                                         <td class="col-md-5" style="color: @color">
+                                            @if (razao.descricao_historico == "Saldo Anterior")
+                                            {
+                                                <h4><strong>@Html.DisplayTextFor(info => plano_c)</strong></h4>
+                                            }
                                             <span>@razao.descricao_historico</span>
                                             @if (razao.complementoHist != null && razao.complementoHist.Trim() != "")
                                             {
@@ -173,6 +178,9 @@
                                             <span>@vr_sld</span>
                                         </td>
                                     }
+                                    <td class="text-center">
+                                        <a href="#" title="Razão contábil" onclick=@onClick><i class="fa fa-2x fa-edit"></i></a>
+                                    </td>
                                 </tr>
                                 contador++;
                             }
@@ -180,7 +188,7 @@
                     </table>
                 </div>
             </div>
-            @Html.Partial("Paginacao", Model)
+            @*@Html.Partial("Paginacao", Model)*@
             <a href="#panel-detail" class="info pull-right" id="linkTopo"><i class="fa fa-toggle-up"></i> Topo</a>
         </div>
     </div>
@@ -197,8 +205,20 @@ else
     @Html.Partial("_AcessoNegadoModal")
 }
 
+<!-- Datatables -->
+<script src="../Content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../Content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 <script>
+    $('#datatable').DataTable({
+        lengthMenu: [[15, 25, 50, 100, -1], [15, 25, 50, 100, "Todos"]],
+        iDisplayLength: 100,
+        language: {
+            "url": "../Scripts/DataTablePtBr.txt"
+        },
+        "bSort": false,
+    });
+
     function Print() {
         var link = "../Razao/Imprimir?data1=" + $('#data1').val() +
                    "&data2=" + $('#data2').val() +

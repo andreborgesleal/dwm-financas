@@ -3,13 +3,10 @@
     Layout = null;
     Model.action = "../GrupoClientes/_ListGrupoClienteModal";
 }
-<div class="row">
-    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="margin: 0px">
-        @Html.Partial("_Filter", Model)
-        <div id="div-gcli" class="no-padding">
-            @Html.Partial("../GrupoClientes/_ListGrupoClienteModal", Model)
-        </div>
-    </div>
+<p><h4>Grupos de Pagadores</h4></p>
+<hr />
+<div id="div-gcli">
+    @Html.Partial("../GrupoClientes/_ListGrupoClienteModal", Model)
 </div>
 
 <script type="text/javascript">

@@ -3,14 +3,12 @@
     Layout = null;
     Model.action = "../Bancos/_ListBanco3Modal";
 }
-<div class="row">
-    <div class="col-md-12" style="margin: 0px">
-        @Html.Partial("_Filter", Model)
-        <div id="div-ban3" class="no-padding">
-            @Html.Partial("../Bancos/_ListBanco3Modal", Model)
-        </div>
-    </div>
+<p><h4>Bancos</h4></p>
+<hr />
+<div id="div-ban3">
+    @Html.Partial("../Bancos/_ListBanco3Modal", Model)
 </div>
+
 <script type="text/javascript">
 
     function Move(id, descricao) {

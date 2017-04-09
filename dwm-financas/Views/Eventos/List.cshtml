@@ -6,17 +6,17 @@
 @if (Model != null)
 {
     <div class="dashboard-widget-content">
-        <div class="col-md-5">
-            Clique nos botões de <code>Ação</code> para executar a ação desejada
+        <div class="row">
+            <div class="col-md-8">
+                Clique nos botões de <code>Ação</code> para executar a ação desejada
+            </div>
+            <div class="col-md-1 pull-right">
+                <a href="../Eventos/Create" class="text-primary">Incluir</a>
+            </div>
         </div>
-        <div class="col-md-1">
-            <a href="../Eventos/Create" class="text-primary">Incluir</a>
-        </div>
-        <div class="col-md-offset-9 col-lg-offset-9 col-xs-offset-7">
-            @Html.Partial("Filtro")
-        </div>
+        <p>&nbsp;</p>
         <div class="table-responsive">
-            <table class="table table-striped jambo_table bulk_action">
+            <table class="table table-striped jambo_table bulk_action" id="datatable">
                 <thead>
                     <tr class="headings">
                         <th class="col-md-2 column-title text-center nobr">Ação</th>
@@ -38,7 +38,7 @@
                             else
                             {
                                 <td class="col-md-2 text-center">
-                                    <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar"data-toggle="popover" data-container="body" data-placement="left" data-content="Este é um evento fixo do sistema e não pode ser editado"></button>
+                                    <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" data-toggle="popover" data-container="body" data-placement="left" data-content="Este é um evento fixo do sistema e não pode ser editado"></button>
                                     <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" data-toggle="popover" data-container="body" data-placement="left" data-content="Este é um evento fixo do sistema e não pode ser excluído"></button>
                                 </td>
                             }
@@ -50,7 +50,6 @@
                 </tbody>
             </table>
         </div>
-        @Html.Partial("Paginacao", Model)
     </div>
 }
 else
@@ -58,6 +57,19 @@ else
     @Html.Partial("_AcessoNegadoModal")
 }
 
+<!-- Datatables -->
+<script src="../Content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../Content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+<script>
+    $('#datatable').DataTable({
+        lengthMenu: [[15, 25, 50, 100, -1], [15, 25, 50, 100, "Todos"]],
+        iDisplayLength: 50,
+        language: {
+            "url": "../Scripts/DataTablePtBr.txt"
+        },
+    });
+</script>
 
 <script>
     $(function () {

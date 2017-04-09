@@ -220,12 +220,13 @@ namespace DWM.Models.Persistence
                                                   valor = i.valor
                                               },
                          PageSize = pageSize,
-                         TotalCount = (from c1 in db.Enquadramentos
-                                       where c1.empresaId.Equals(sessaoCorrente.empresaId)
-                                             && c1.exercicio == _exercicio
-                                             && (_descricao == null || String.IsNullOrEmpty(_descricao) || c1.descricao.StartsWith(_descricao.Trim()))
-                                       select c1).Count()
-                     }).Skip((index ?? 0) * pageSize).Take(pageSize).ToList();
+                         TotalCount = 0
+                         //TotalCount = (from c1 in db.Enquadramentos
+                         //              where c1.empresaId.Equals(sessaoCorrente.empresaId)
+                         //                    && c1.exercicio == _exercicio
+                         //                    && (_descricao == null || String.IsNullOrEmpty(_descricao) || c1.descricao.StartsWith(_descricao.Trim()))
+                         //              select c1).Count()
+                     }).ToList();
 
             return q;
         }

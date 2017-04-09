@@ -11,7 +11,7 @@
 <div class="container-cadastro">
     @Html.Partial("_alerts")
     <div class="x_panel">
-        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Grupo de Clientes", Descricao = "Incluir Grupo de Cliente. Ex: Médicos, Condôminos, Imobiliárias, Mensalistas, Cliente Eventuais, Cliente Diversos", Transacao = t })
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Grupo de Pagador", Descricao = "Incluir Grupo de Pagador. Ex: Médicos, Condôminos, Imobiliárias, Mensalistas, Cliente Eventuais, Cliente Diversos", Transacao = t })
         <div class="x_content">
             @using (Html.BeginForm("Create", "GrupoClientes", FormMethod.Post, new { @class = "form-horizontal" }))
             {

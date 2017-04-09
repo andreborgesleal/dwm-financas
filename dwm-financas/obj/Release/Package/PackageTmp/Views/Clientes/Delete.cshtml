@@ -10,7 +10,7 @@
 }
 <div class="container-cadastro">
     <div class="x_panel">
-        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Clientes", Descricao = "Excluir cliente", Transacao = t })
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Pagadores", Descricao = "Excluir pagador", Transacao = t })
         <div class="x_content">
             @using (Html.BeginForm("Delete", "Clientes", FormMethod.Post, new { @class = "form-horizontal" }))
             {

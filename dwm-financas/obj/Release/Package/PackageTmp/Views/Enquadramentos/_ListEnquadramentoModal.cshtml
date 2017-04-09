@@ -6,31 +6,46 @@
 
 @if (Model != null)
 {
-    <div class="row Scroll margem-negativa">
-        <div class="col-md-12">
-            <table class="table table-striped jambo_table bulk_action" style="cursor: pointer">
-                <caption></caption>
-                <thead>
-                    <tr class="headings">
-                        <th>Enquadramento</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (EnquadramentoViewModel enq in Model)
-                    {
-                        <tr class="even pointer" onclick="Move('@enq.enquadramentoId', '@enq.descricao')">
-                            <td class="col-md-7 col-sm-2">
-                                <small>@enq.descricao</small>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-    @Html.Partial("Paginacao", Model)
+    <table class="table table-striped jambo_table bulk_action" style="width: 100%" id="datatableENQ">
+        <thead>
+            <tr class="headings">
+                <th class="col-md-2 column-title text-center nobr">Ação</th>
+                <th>Enquadramento</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (EnquadramentoViewModel enq in Model)
+            {
+                <tr class="even pointer" >
+                    <td class="col-md-2 text-center">
+                        <button type="button" class="fa fa-check" title="Selecionar" onclick="Move('@enq.enquadramentoId', '@enq.descricao')"></button>
+                    </td>
+                    <td>
+                        <small>@enq.descricao</small>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 else
 {
     @Html.Partial("_AcessoNegadoModal")
 }
+<!-- Datatables -->
+<script src="../Content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../Content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+<script>
+    $('#datatableENQ').DataTable({
+        lengthMenu: [[15, 25, 50, 100, -1], [15, 25, 50, 100, "Todos"]],
+        iDisplayLength: 50,
+        language: {
+            "url": "../Scripts/DataTablePtBr.txt"
+        },
+    });
+</script>
+
+
+
+

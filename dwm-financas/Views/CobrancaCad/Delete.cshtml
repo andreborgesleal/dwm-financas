@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-md-6 col-xs-12 col-sm-12 col-lg-6">
                     <div class="form-group">
-                        <label class="control-label" for="grupoClienteId">Clientes</label>
+                        <label class="control-label" for="grupoClienteId">Pagadores</label>
                         @Html.DropDownListFor(m => m.grupoClienteId, new DWM.Models.Enumeracoes.BindDropDownList().GrupoClientesParaCobranca(Model.grupoClienteId.ToString()), new { @class = "form-control", @disabled = "disable" })
                     </div>
                 </div>

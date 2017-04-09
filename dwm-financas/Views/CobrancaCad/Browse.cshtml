@@ -8,6 +8,10 @@
 
     t[1].url = "../Home/Default";
 }
+<!-- Datatables -->
+<link href="../Content/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+
+
 @Html.Partial("_alerts")
 <div class="x_panel">
     @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Cadastro de Cobrança", Descricao = "Listagem do cadastro de cobrança", Transacao = t })

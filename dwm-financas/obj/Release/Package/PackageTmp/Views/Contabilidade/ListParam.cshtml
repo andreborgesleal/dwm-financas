@@ -7,7 +7,7 @@
 {
     <div class="dashboard-widget-content">
         <div class="table-responsive">
-            <table class="table table-striped jambo_table bulk-action dedo-indicador">
+            <table class="table table-striped jambo_table bulk_action" id="datatable">
                 <thead>
                     <tr class="headings">
                         <th class="column-title text-center">Ação</th>
@@ -86,13 +86,24 @@
             </table>
         </div>
     </div>
-    @Html.Partial("Paginacao", Model)
 }
 else
 {
     @Html.Partial("_AcessoNegadoModal")
 }
+<!-- Datatables -->
+<script src="../Content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../Content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
+<script>
+    $('#datatable').DataTable({
+        lengthMenu: [[15, 25, 50, 100, -1], [15, 25, 50, 100, "Todos"]],
+        iDisplayLength: 50,
+        language: {
+            "url": "../Scripts/DataTablePtBr.txt"
+        },
+    });
+</script>
 
 
 

@@ -61,7 +61,7 @@ namespace DWM.Models.BI
             exercicioIdParam.Value = exercicio;
             grauPCParam.Value = grauPC;
             RecDespParam.Value = RecDesp;
-            pageSizeParam.Value = pageSize;
+            pageSizeParam.Value = 10000;
 
             totalCountParam.Direction = ParameterDirection.Output;
             totalCountParam.Value = 0;
@@ -83,12 +83,13 @@ namespace DWM.Models.BI
                                                                                             new SqlParameter("@pData2", dt2),
                                                                                             RecDespParam,
                                                                                             pageSizeParam,
-                                                                                            new SqlParameter("@pageNumber", ++index),
+                                                                                            //new SqlParameter("@pageNumber", ++index),
+                                                                                            new SqlParameter("@pageNumber", 1),
                                                                                             totalCountParam,
                                                                                             Cod_erroParam,
                                                                                             Desc_erroParam);
 
-            return new PagedList<BalanceteViewModel>(bal.ToList(), pageIndex, pageSize, (int)totalCountParam.Value, "ListParam", null, "div-list-static");
+            return new PagedList<BalanceteViewModel>(bal.ToList(), 0, 1000, (int)totalCountParam.Value, "ListParam", null, "div-list-static");
         }
 
     }

@@ -61,7 +61,7 @@ namespace DWM.Models.Report
                                              && c1.dt_lancamento >= dt1 && c.dt_lancamento <= dt2
                                              && (centroCustoId == null || i1.centroCustoId == centroCustoId)
                                        select c1).Count()
-                     }).Skip((index ?? 0) * pageSize).Take(pageSize).ToList();
+                     }).ToList();
             #endregion
 
             return q;

@@ -81,27 +81,28 @@ namespace DWM.Models.BI
                          vr_total_pago = PAR.Sum(info => info.vr_total_pago),
                          vr_saldo_devedor = PAR.Sum(info => info.vr_saldo_devedor),
                          PageSize = receSize,
-                         TotalCount = (from rec1 in db.ContaRecebers
-                                       join cli1 in db.Clientes on rec1.clienteId equals cli1.clienteId
-                                       join his1 in db.Historicos on rec1.historicoId equals his1.historicoId
-                                       join par1 in db.ContaReceberParcelas on rec1.operacaoId equals par1.operacaoId
-                                       group par1 by new
-                                       {
-                                           rec1.empresaId,
-                                           par1.operacaoId,
-                                           rec1.dt_emissao,
-                                           cli1.clienteId,
-                                           cli1.nome,
-                                           his1.historicoId,
-                                           rec1.complementoHist,
-                                           his1.descricao,
-                                       } into PAR1
-                                       where (PAR1.Key.empresaId == sessaoCorrente.empresaId
-                                              && !clienteId.HasValue || PAR1.Key.clienteId == clienteId)
-                                              && (!dt_emissao1.HasValue || PAR1.Key.dt_emissao >= dt_emissao1 && PAR1.Key.dt_emissao <= dt_emissao2)
-                                       orderby PAR1.Key.nome, PAR1.Key.operacaoId
-                                       select PAR1).Count()
-                     }).Skip((index ?? 0) * receSize).Take(receSize).ToList();
+                         TotalCount = 0
+                         //TotalCount = (from rec1 in db.ContaRecebers
+                         //              join cli1 in db.Clientes on rec1.clienteId equals cli1.clienteId
+                         //              join his1 in db.Historicos on rec1.historicoId equals his1.historicoId
+                         //              join par1 in db.ContaReceberParcelas on rec1.operacaoId equals par1.operacaoId
+                         //              group par1 by new
+                         //              {
+                         //                  rec1.empresaId,
+                         //                  par1.operacaoId,
+                         //                  rec1.dt_emissao,
+                         //                  cli1.clienteId,
+                         //                  cli1.nome,
+                         //                  his1.historicoId,
+                         //                  rec1.complementoHist,
+                         //                  his1.descricao,
+                         //              } into PAR1
+                         //              where (PAR1.Key.empresaId == sessaoCorrente.empresaId
+                         //                     && !clienteId.HasValue || PAR1.Key.clienteId == clienteId)
+                         //                     && (!dt_emissao1.HasValue || PAR1.Key.dt_emissao >= dt_emissao1 && PAR1.Key.dt_emissao <= dt_emissao2)
+                         //              orderby PAR1.Key.nome, PAR1.Key.operacaoId
+                         //              select PAR1).Count()
+                     }).ToList();
             #endregion
 
             return new PagedList<EditarContaReceberViewModel>(q.ToList(), receIndex, receSize, q.Count() > 0 ? q.First().TotalCount : 0, "ListOperacaoParam", null, "div-list-static");
@@ -301,7 +302,7 @@ namespace DWM.Models.BI
                                               && (!dt_emissao1.HasValue || rec1.dt_emissao >= dt_emissao1 && rec1.dt_emissao <= dt_emissao2)
                                        orderby par1.dt_vencimento
                                        select rec1).Count()
-                     }).Skip((index ?? 0) * receSize).Take(receSize).ToList();
+                     }).ToList();
             #endregion
 
             IPagedList pagedList = new PagedList<ContaReceberDemonstrativoViewModel>(q.ToList(), receIndex, receSize, q.Count() > 0 ? q.First().TotalCount : 0, "ListPanorama", null, "div-list-static");

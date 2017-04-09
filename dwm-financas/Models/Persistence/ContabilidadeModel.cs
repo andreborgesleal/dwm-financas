@@ -345,20 +345,21 @@ namespace DWM.Models.Persistence
                                                   valor = i.valor
                                               },
                          PageSize = pageSize,
-                         TotalCount = (from c1 in db.Contabilidades
-                                       where c1.empresaId.Equals(sessaoCorrente.empresaId)
-                                             && c1.exercicio == _exercicio
-                                             && (c1.contabilidadeId == contabilidadeId ||
-                                                (contabilidadeId == null
-                                                 && c1.dt_lancamento >= dt1 && c1.dt_lancamento <= dt2
-                                                 && (from item in db.ContabilidadeItems
-                                                     where (item.contabilidadeId == c1.contabilidadeId)
-                                                            && (planoContaId == null || item.planoContaId == planoContaId)
-                                                            && (centroCustoId == null || item.centroCustoId == centroCustoId)
-                                                            && (historicoId == null || item.historicoId == historicoId)
-                                                     select item).Count() > 0))
-                                       select c1).Count()
-                     }).Skip((index ?? 0) * pageSize).Take(pageSize).ToList();
+                         TotalCount = 0
+                         //TotalCount = (from c1 in db.Contabilidades
+                         //              where c1.empresaId.Equals(sessaoCorrente.empresaId)
+                         //                    && c1.exercicio == _exercicio
+                         //                    && (c1.contabilidadeId == contabilidadeId ||
+                         //                       (contabilidadeId == null
+                         //                        && c1.dt_lancamento >= dt1 && c1.dt_lancamento <= dt2
+                         //                        && (from item in db.ContabilidadeItems
+                         //                            where (item.contabilidadeId == c1.contabilidadeId)
+                         //                                   && (planoContaId == null || item.planoContaId == planoContaId)
+                         //                                   && (centroCustoId == null || item.centroCustoId == centroCustoId)
+                         //                                   && (historicoId == null || item.historicoId == historicoId)
+                         //                            select item).Count() > 0))
+                         //              select c1).Count()
+                     }).ToList();
             #endregion
 
             return q;

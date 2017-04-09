@@ -94,8 +94,8 @@ namespace DWM.Models.Enumeracoes
 
                 IList<SelectListItem> q = new List<SelectListItem>();
 
-                q.Add(new SelectListItem() { Value = "-1", Text = "Nenhum cliente..." });
-                q.Add(new SelectListItem() { Value = "0", Text = "Todos os clientes..." });
+                q.Add(new SelectListItem() { Value = "-1", Text = "Nenhum pagador..." });
+                q.Add(new SelectListItem() { Value = "0", Text = "Todos os pagadores..." });
 
                 q = q.Union(from e in db.GrupoClientes.AsEnumerable()
                             where e.empresaId == sessao.empresaId

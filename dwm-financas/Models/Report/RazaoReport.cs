@@ -13,7 +13,7 @@ namespace DWM.Models.Report
         #region Métodos da classe ReportRepository
         public override IEnumerable<RazaoViewModel> Bind(int? index, int pageSize = 50, params object[] param)
         {
-            index = index ?? 0;
+            index = 0; // index ?? 0;
             DateTime dt1 = Convert.ToDateTime(param[0].ToString());
             DateTime dt2 = Convert.ToDateTime(param[1].ToString());
             int? centroCustoId = (int?)param[2];
@@ -41,7 +41,7 @@ namespace DWM.Models.Report
 
             string codigoPleno = getContasAnaliticas(listPC, planoContaId.Value);
 
-            pageSizeParam.Value = pageSize;
+            pageSizeParam.Value = 10000;
 
             #region stored procedure
             IEnumerable<RazaoViewModel> raz = db.Database.SqlQuery<RazaoViewModel>("spr_razao @data1, @data2, @centroCustoId, @codigoPlenoList, @exercicio, @empresaId, @pageSize, @pageNumber",

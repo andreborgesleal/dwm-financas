@@ -100,11 +100,12 @@ namespace DWM.Models.Persistence
                         centroCustoId = c.centroCustoId,
                         descricao = c.descricao,
                         PageSize = pageSize,
-                        TotalCount = (from c1 in db.CentroCustos
-                                      where c1.empresaId.Equals(sessaoCorrente.empresaId)
-                                            && (_descricao == null || String.IsNullOrEmpty(_descricao) || c1.descricao.StartsWith(_descricao.Trim()))
-                                      select c1).Count()
-                    }).Skip((index ?? 0) * pageSize).Take(pageSize).ToList();
+                        TotalCount = 0
+                        //TotalCount = (from c1 in db.CentroCustos
+                        //              where c1.empresaId.Equals(sessaoCorrente.empresaId)
+                        //                    && (_descricao == null || String.IsNullOrEmpty(_descricao) || c1.descricao.StartsWith(_descricao.Trim()))
+                        //              select c1).Count()
+                    }).ToList();
         }
 
         public override Repository getRepository(Object id)

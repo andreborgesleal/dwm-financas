@@ -3,13 +3,10 @@
     Layout = null;
     Model.action = "../Historicos/_ListHistoricoContabilidadeModal";
 }
-<div class="row">
-    <div class="col-md-12" style="margin: 0px">
-        @Html.Partial("_Filter", Model)
-        <div id="div-his" class="no-padding">
-            @Html.Partial("../Historicos/_ListHistoricoModal", Model)
-        </div>
-    </div>
+<p><h4>Históricos</h4></p>
+<hr />
+<div id="div-his">
+    @Html.Partial("../Historicos/_ListHistoricoModal", Model)
 </div>
 
 <script type="text/javascript">

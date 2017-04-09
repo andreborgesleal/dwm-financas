@@ -81,27 +81,28 @@ namespace DWM.Models.BI
                          vr_total_pago = PAR.Sum(info => info.vr_total_pago),
                          vr_saldo_devedor = PAR.Sum(info => info.vr_saldo_devedor),
                          PageSize = pageSize,
-                         TotalCount = (from pag1 in db.ContaPagars
-                                       join cre1 in db.Credores on pag1.credorId equals cre1.credorId
-                                       join his1 in db.Historicos on pag1.historicoId equals his1.historicoId
-                                       join par1 in db.ContaPagarParcelas on pag1.operacaoId equals par1.operacaoId
-                                       group par1 by new
-                                       {
-                                           pag1.empresaId,
-                                           par1.operacaoId,
-                                           pag1.dt_emissao,
-                                           cre1.credorId,
-                                           cre1.nome,
-                                           his1.historicoId,
-                                           pag1.complementoHist,
-                                           his1.descricao,
-                                       } into PAR1
-                                       where (PAR1.Key.empresaId == sessaoCorrente.empresaId
-                                              && !credorId.HasValue || PAR1.Key.credorId == credorId)
-                                              && (!dt_emissao1.HasValue || PAR1.Key.dt_emissao >= dt_emissao1 && PAR1.Key.dt_emissao <= dt_emissao2)
-                                       orderby PAR1.Key.nome, PAR1.Key.operacaoId
-                                       select PAR1).Count()
-                     }).Skip((index ?? 0) * pageSize).Take(pageSize).ToList();
+                         TotalCount = 0
+                         //TotalCount = (from pag1 in db.ContaPagars
+                         //              join cre1 in db.Credores on pag1.credorId equals cre1.credorId
+                         //              join his1 in db.Historicos on pag1.historicoId equals his1.historicoId
+                         //              join par1 in db.ContaPagarParcelas on pag1.operacaoId equals par1.operacaoId
+                         //              group par1 by new
+                         //              {
+                         //                  pag1.empresaId,
+                         //                  par1.operacaoId,
+                         //                  pag1.dt_emissao,
+                         //                  cre1.credorId,
+                         //                  cre1.nome,
+                         //                  his1.historicoId,
+                         //                  pag1.complementoHist,
+                         //                  his1.descricao,
+                         //              } into PAR1
+                         //              where (PAR1.Key.empresaId == sessaoCorrente.empresaId
+                         //                     && !credorId.HasValue || PAR1.Key.credorId == credorId)
+                         //                     && (!dt_emissao1.HasValue || PAR1.Key.dt_emissao >= dt_emissao1 && PAR1.Key.dt_emissao <= dt_emissao2)
+                         //              orderby PAR1.Key.nome, PAR1.Key.operacaoId
+                         //              select PAR1).Count()
+                     }).ToList();
             #endregion
 
             return new PagedList<EditarContaPagarViewModel>(q.ToList(), pageIndex, pageSize, q.Count() > 0 ? q.First().TotalCount : 0, "ListOperacaoParam", null, "div-list-static");
@@ -299,7 +300,7 @@ namespace DWM.Models.BI
                                               && (!dt_emissao1.HasValue || pag1.dt_emissao >= dt_emissao1 && pag1.dt_emissao <= dt_emissao2)
                                        orderby par1.dt_vencimento
                                        select pag1).Count()
-                     }).Skip((index ?? 0) * pageSize).Take(pageSize).ToList();
+                     }).ToList();
             #endregion
 
             IPagedList pagedList = new PagedList<ContaPagarDemonstrativoViewModel>(q.ToList(), pageIndex, pageSize, q.Count() > 0 ? q.First().TotalCount : 0, "ListPanorama", null, "div-list-static");

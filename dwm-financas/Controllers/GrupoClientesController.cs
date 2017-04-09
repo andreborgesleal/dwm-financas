@@ -12,7 +12,7 @@ namespace DWM.Controllers
         public override int _sistema_id() { return (int)Sistema.DWMFINANCAS; }
         public override string getListName()
         {
-            return "Listar Grupos de Clientes";
+            return "Listar";
         }
 
         #region List

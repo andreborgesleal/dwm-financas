@@ -106,7 +106,7 @@ namespace DWM.Models.Persistence
                         TotalCount = (from gru1 in db.GrupoCredores
                                       where (gru1.empresaId == sessaoCorrente.empresaId && (_nome == null || String.IsNullOrEmpty(_nome) || gru1.nome.Contains(_nome.Trim())))
                                       select gru1).Count()
-                    }).Skip((index ?? 0) * pageSize).Take(pageSize).ToList();
+                    }).ToList();
         }
 
         public override Repository getRepository(Object id)
