@@ -69,6 +69,16 @@ namespace DWM.Models.Persistence
                 #region Check if has file to transfer from Temp Folder to Users_Data Folder 
                 if (value.arquivo != null && value.arquivo != "")
                 {
+                    #region Check if directory "arquivos" exists. If do not, create it
+                    // Define destination
+                    var folderName = "/Users_Data/Empresas/" + sessaoCorrente.empresaId.ToString() + "/arquivos";
+                    var serverPath = System.Web.HttpContext.Current.Server.MapPath(folderName);
+                    if (Directory.Exists(serverPath) == false)
+                    {
+                        Directory.CreateDirectory(serverPath);
+                    }
+                    #endregion
+
                     #region Move the file from Temp Folder to Users_Data Folder
                     System.IO.FileInfo f = new System.IO.FileInfo(Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Temp"), value.arquivo));
                     if (f.Exists)
