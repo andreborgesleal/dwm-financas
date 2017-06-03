@@ -165,8 +165,9 @@
             {
                 TransacaoRepository[] tContabilidade = { new TransacaoRepository(), new TransacaoRepository() };
                 tContabilidade[0].url = "../Contabilidade/Edit?contabilidadeId=" + Model.Contabilidades.FirstOrDefault().contabilidadeId;
-                tContabilidade[0].nomeCurto = "Editar lançamento contábil";
+                tContabilidade[0].nomeCurto = "Editar";
                 tContabilidade[0].referencia = "";
+                tContabilidade[0].exibir = "S";
 
                 tContabilidade[1].url = "../Home/Default";
 

@@ -22,7 +22,8 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label class="control-label" for="dt_baixa">Dt.Vencimento</label>
-                @Html.EditorFor(info => info.dt_vencimento, "DATE", new { identificador = "dt_vencimento", readOnly = "false", value = Model.dt_vencimento })
+                @*@Html.EditorFor(info => info.dt_vencimento, "DATE", new { identificador = "dt_vencimento", readOnly = "false", value = Model.dt_vencimento })*@
+                <input type="date" class="form-control" name="dt_vencimento" id="dt_vencimento" value="@Model.dt_vencimento.ToString("yyyy-MM-dd")" />
             </div>
         </div>
         <div class="col-md-2">

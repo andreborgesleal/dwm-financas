@@ -10,5 +10,6 @@ namespace DWM.Models.Repositories
     {
         public MovtoBancarioViewModel movtoBancarioOrigemViewModel { get; set; }
         public MovtoBancarioViewModel movtoBancarioDestinoViewModel { get; set; }
+        public int? enquadramentoId { get; set; }
     }
 }

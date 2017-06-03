@@ -63,6 +63,8 @@ namespace DWM.Models.Repositories
         public decimal? vr_debito { get; set; }
         public decimal? vr_credito { get; set; }
         public decimal? vr_saldo { get; set; }
+        public int? operacaoId { get; set; }
+        public int? parcelaId { get; set; }
 
         #region métodos da Interface
         public object getValueColumn1()

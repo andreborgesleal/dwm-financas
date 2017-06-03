@@ -148,7 +148,14 @@
                                     </td>
                                     <td class="text-left">
                                         <span>
-                                            @ope.nome_cliente (<small class="green">@ope.descricao_grupoCliente</small>)
+                                            @if (!String.IsNullOrEmpty(ope.descricao_grupoCliente))
+                                            {
+                                                @ope.nome_cliente <small>(@ope.descricao_grupoCliente)</small> 
+                                            }
+                                            else
+                                            {
+                                                @ope.nome_cliente 
+                                            }
                                         </span>
                                     </td>
                                     <td class="text-left">

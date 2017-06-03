@@ -27,7 +27,7 @@ namespace DWM.Models.Report
 
             pBancoId.Value = bancoId;
             pEmpresaId.Value = sessaoCorrente.empresaId;
-            pPageSize.Value = pageSize;
+            pPageSize.Value = 5000;
             pPageNumber.Value = ++index;
 
             #region stored procedure

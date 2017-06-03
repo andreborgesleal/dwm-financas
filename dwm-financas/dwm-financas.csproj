@@ -4432,6 +4432,7 @@
     <Content Include="Views\Exercicios\Delete.cshtml" />
     <Content Include="Views\Autorizar\List.cshtml" />
     <Content Include="Views\Autorizar\Browse.cshtml" />
+    <Content Include="Views\MovimentoBancario\Transferencia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />

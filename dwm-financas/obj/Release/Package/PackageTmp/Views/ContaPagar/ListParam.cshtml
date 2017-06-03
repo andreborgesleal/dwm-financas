@@ -142,7 +142,14 @@
                                     </td>
                                     <td class="text-left">
                                         <span>
-                                            @ope.nome_credor
+                                            @if (!String.IsNullOrEmpty(ope.descricao_grupoCredor))
+                                            {
+                                                @ope.nome_credor <small>(@ope.descricao_grupoCredor)</small>
+                                            }
+                                            else
+                                            {
+                                                @ope.nome_credor
+                                            }
                                         </span>
                                     </td>
                                     <td class="text-left">

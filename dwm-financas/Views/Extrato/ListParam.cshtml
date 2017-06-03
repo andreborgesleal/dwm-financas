@@ -12,16 +12,16 @@
 {
     <div class="dashboard-widget-content" id="panel-detail">
         <div class="table-responsive">
-            <table class="table table-striped jambo_table bulk-action dedo-indicador">
+            <table class="table table-striped jambo_table bulk_action" id="datatable">
                 <thead>
                     <tr class="heading">
-                        <th class="text-center">Ação</th>
                         <th>Data</th>
                         <th>Doc</th>
                         <th>Histórico</th>
                         <th class="text-right">Débito</th>
                         <th class="text-right">Crédito</th>
                         <th class="text-right">Saldo</th>
+                        <th class="text-center">Ação</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,12 +32,12 @@
                         string cor_sld = "";
                         vr_db = "";
                         vr_cr = "";
-                        if (extrato.vr_debito.HasValue)
+                        if (extrato.vr_debito.HasValue && extrato.vr_debito > 0)
                         {
                             vr_db = extrato.vr_debito.HasValue ? extrato.vr_debito.Value.ToString("###,###,###,##0.00") : "";
                             cor_db = "text-bold";
                         }
-                        if (extrato.vr_credito.HasValue)
+                        if (extrato.vr_credito.HasValue && extrato.vr_credito > 0)
                         {
                             vr_cr = extrato.vr_credito.HasValue ? extrato.vr_credito.Value.ToString("###,###,###,##0.00") : "";
                             cor_cr = "text-bold";
@@ -49,39 +49,35 @@
                         }
                         if (extrato._dt_movto != null && extrato._dt_movto > DateTime.Today)
                         {
-                            //color = "#ba4d00";
-                            color = "red";
+                            if (color != "#A4A4A4")
+                            {
+                                <tr style="background-color: #D8D8D8">
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class="text-center text-mama-africa"><h4><strong>Operações Agendadas</strong></h4></td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            }
+                            color = "#A4A4A4";
                         }
                         else if (extrato._dt_movto > Convert.ToDateTime("1980-01-01"))
                         {
                             color = "";
                         }
                         <tr>
-                            <td class="text-center">
-                                @if (extrato.movtoBancarioId > 0 && extrato.dt_movto > DateTime.Today && extrato.vr_credito.HasValue && extrato.vr_credito > 0)
-                                {
-                                    <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='../Cobranca/_Index?OperacaoId=@extrato.movtoBancarioId.ToString()'"></button>
-                                }
-                                else if (extrato.movtoBancarioId > 0 && extrato.dt_movto > DateTime.Today && extrato.vr_debito.HasValue && extrato.vr_debito > 0)
-                                {
-                                    <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='../ContaPagar/_Index?OperacaoId=@extrato.movtoBancarioId.ToString()'"></button>
-                                }
-                                else
-                                {
-                                    <a href="#panel-top" class="btn btn-default btn-sm glyphicon glyphicon-edit" title="Não é possível editar" onclick="ShowMessageAjaxAlert('Este registro não pode ser editado porque já foi liquidado ou amortizado', 'warning');"></a>
-                                    @*<button type="button" class="btn btn-default btn-sm glyphicon glyphicon-edit" title="Editar" onclick="document.getElementById('panel-top').click();ShowMessageAjaxAlert('Este registro não pode ser editado porque já foi liquidado ou amortizado', 'warning');"></button>*@
-                                }
-                            </td>
-                            <td class="@color">
+                            <td style="color: @color">
                                 @if (extrato._dt_movto > Convert.ToDateTime("1980-01-01"))
                                 {
                                     <span>@extrato.dt_movto.ToString("dd/MM/yyyy")</span>
                                 }
                             </td>
-                            <td class="@color">
+                            <td style="color: @color">
                                 <span>@extrato.documento</span>
                             </td>
-                            <td class="@color">
+                            <td style="color: @color">
                                 @if (extrato.descricao_historico != null && extrato.descricao_historico.Contains("<b>"))
                                 {
                                     <span><strong>@extrato.descricao_historico.Replace("<b>", "").Replace("</b>", "")</strong></span>
@@ -95,22 +91,42 @@
                                     <small>@Html.DisplayTextFor(info => extrato.complementoHist)</small>
                                 }
                             </td>
-                            <td class="text-right @cor_db @color">
-                                <span>@Html.DisplayTextFor(info => vr_db)</span>
+                            <td style="color: @color" class="text-right @cor_db">
+                                @*<span>@Html.DisplayTextFor(info => vr_db)</span>*@
+                                <span>@vr_db</span>
                             </td>
-                            <td class="text-right @cor_cr @color">
-                                <span>@Html.DisplayTextFor(info => vr_cr)</span>
+                            <td style="color: @color" class="text-right @cor_cr">
+                                @*<span>@Html.DisplayTextFor(info => vr_cr)</span>*@
+                                <span>@vr_cr</span>
                             </td>
-                            <td class="text-right @cor_sld @color">
+                            <td style="color: @color" class="text-right @cor_sld">
                                 <span>@Html.DisplayTextFor(info => vr_sld)</span>
                             </td>
+                            <td style="color: @color" class="text-center">
+                                @if (extrato.movtoBancarioId > 0 && extrato.vr_credito.HasValue && extrato.vr_credito > 0)
+                                {
+                                    <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='../Cobranca/Edit?OperacaoId=@extrato.operacaoId.ToString()&parcelaId=@extrato.parcelaId.ToString()'"></button>
+                                }
+                                else if (extrato.movtoBancarioId > 0 && extrato.vr_debito.HasValue && extrato.vr_debito > 0)
+                                {
+                                    <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='../ContaPagar/Edit?OperacaoId=@extrato.operacaoId.ToString()&parcelaId=@extrato.parcelaId.ToString()'"></button>
+                                }
+                                else
+                                {
+                                    <a href="#panel-top" class="btn btn-default btn-sm glyphicon glyphicon-edit" title="Não é possível editar" onclick="ShowMessageAjaxAlert('Este registro não pode ser editado.', 'warning');"></a>
+                                    @*<button type="button" class="btn btn-default btn-sm glyphicon glyphicon-edit" title="Editar" onclick="document.getElementById('panel-top').click();ShowMessageAjaxAlert('Este registro não pode ser editado porque já foi liquidado ou amortizado', 'warning');"></button>*@
+                                }
+                            </td>
                         </tr>
-                        }
+                    }
                 </tbody>
             </table>
+            <a href="#panel-detail" class="info pull-right" id="linkTopo"><i class="fa fa-toggle-up"></i> Topo</a>
         </div>
     </div>
-    @Html.Partial("Paginacao", Model)
+    <script>
+        document.getElementById("linkTopo").click();
+    </script>
 }
 else if (TempData[App_Dominio.Controllers.Alerts.ATTENTION] != null)
 {
@@ -122,7 +138,20 @@ else
 }
 
 
+<!-- Datatables -->
+<script src="../Content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../Content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
+<script>
+    $('#datatable').DataTable({
+        lengthMenu: [[15, 25, 50, 100, -1], [15, 25, 50, 100, "Todos"]],
+        iDisplayLength: 100,
+        language: {
+            "url": "../Scripts/DataTablePtBr.txt"
+        },
+        "bSort": false,
+    });
+</script>
 
 
 

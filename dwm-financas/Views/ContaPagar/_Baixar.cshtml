@@ -23,13 +23,15 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label class="control-label" for="dt_baixa">Dt.Pagamento</label>
-                @Html.EditorFor(info => info.dt_pagamento, "DATE", new { identificador = "dt_pagamento", readOnly = "false", value = Model.dt_pagamento })
+                @*@Html.EditorFor(info => info.dt_pagamento, "DATE", new { identificador = "dt_pagamento", readOnly = "false", value = Model.dt_pagamento })*@
+                <input type="date" class="form-control" name="dt_pagamento" id="dt_pagamento" value="@Model.dt_pagamento.Value.ToString("yyyy-MM-dd")" />
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label class="control-label" for="dt_ultima_amortizacao">Dt.Movimento</label>
-                @Html.EditorFor(info => info.dt_movto, "DATE", new { identificador = "dt_movto", readOnly = "false", value = Model.dt_movto })
+                @*@Html.EditorFor(info => info.dt_movto, "DATE", new { identificador = "dt_movto", readOnly = "false", value = Model.dt_movto })*@
+                <input type="date" class="form-control" name="dt_movto" id="dt_movto" value="@Model.dt_movto.Value.ToString("yyyy-MM-dd")" />
             </div>
         </div>
         <div class="col-md-2">

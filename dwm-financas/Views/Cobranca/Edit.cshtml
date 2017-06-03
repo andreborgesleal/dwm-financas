@@ -67,7 +67,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Contabilidade</h4>
+                <h4 class="modal-title">Contabilidade &nbsp;<span class="small" id="modal-contabilidade-editar"></span></h4> 
             </div>
             <div class="modal-body text-center" id="myModal1-body">
                 <div id="myContabilidade"></div>
@@ -120,6 +120,7 @@
         var table = "";
         var deb = 0;
         var cred = 0;
+        $("#modal-contabilidade-editar").html('<a href="../Contabilidade/Edit?contabilidadeId=' + contabilidadeId + '">Editar</a>');
         $.getJSON(link, function (data) {
             table = "<table class=\"table table-striped\">" +
                     "   <tr class=\"active\">" +

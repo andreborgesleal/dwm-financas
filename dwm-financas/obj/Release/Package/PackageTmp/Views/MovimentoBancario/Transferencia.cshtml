@@ -1,6 +1,5 @@
 ﻿@using DWM.Models.Repositories
 @using App_Dominio.Repositories
-@model MovtoBancarioViewModel
 @{
     TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
     t[0].url = "../MovimentoBancario/Create";
@@ -15,63 +14,66 @@
 <div class="container-cadastro">
     @Html.Partial("_AjaxAlert", "panel-top")
     @Html.Partial("_alerts")
-    @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="x_panel" id="panel-top">
-        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Movimento bancário", Descricao = "", Transacao = t })
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Transferência Bancária", Descricao = "", Transacao = t })
         <div class="x_content">
-            @using (Html.BeginForm("Edit", "MovimentoBancario", FormMethod.Post, new { @class = "form-horizontal" }))
+            @using (Html.BeginForm("Transferencia", "MovimentoBancario", FormMethod.Post, new { @class = "form-horizontal" }))
             {
-                @Html.HiddenFor(info => info.movtoBancarioId)
                 <div class="row clearfix">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="control-label" for="documento">Documento</label>
-                            @Html.TextBoxFor(info => info.documento, new { @class = "form-control", @maxlength = "12" })
-                        </div>
-                    </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label class="control-label" for="dt_movto">Data</label>
-                            <input type="date" class="form-control" name="dt_movto" id="dt_movto" value="@Model.dt_movto.ToString("yyyy-MM-01")" />
+                            <input type="date" class="form-control" name="dt_movto" id="dt_movto" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="control-label" for="drpTipoMovimento">Tipo</label>
-                            @Html.DropDownListFor(m => m.tipoMovto, App_Dominio.Enumeracoes.DropDownListEnum.NaturezaOperacao(Model.tipoMovto, ""), new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         @Html.Editor("nome_banco1", "BancosAutoComplete", new
-                   {
-                       value = Model.bancoId > 0 ? Model.bancoId.ToString() : "",
-                       Text = Model.nome_banco ?? "",
-                       nextField = "descricao_historico"
-                   })
+                           {
+                               //value = Model.bancoId > 0 ? Model.bancoId.ToString() : "",
+                               //Text = Model.nome_banco ?? "",
+                               nextField = "nome_banco2"
+                           })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.Editor("nome_banco2", "Bancos2AutoComplete", new
+                           {
+                               //value = Model.bancoId > 0 ? Model.bancoId.ToString() : "",
+                               //Text = Model.nome_banco ?? "",
+                               nextField = "descricao_historico",
+                               prevField = "nome_banco"
+                           })
                     </div>
                 </div>
                 <div class="row clearfix">
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         @Html.Editor("descricao_historico1", "HistoricoAutoComplete", new
-                   {
-                       value = Model.historicoId > 0 ? Model.historicoId.ToString() : "",
-                       Text = Model.descricao_historico ?? "",
-                       nextField = "complementoHist",
-                       prevField = "nome_banco"
-                   })
+                           {
+                               //value = Model.historicoId > 0 ? Model.historicoId.ToString() : "",
+                               //Text = Model.descricao_historico ?? "",
+                               nextField = "complementoHist",
+                               prevField = "nome_banco2"
+                           })
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label class="control-label" for="complementoHist">Histórico complementar</label>
-                            @Html.TextAreaFor(m => m.complementoHist, 1, 1, new { @class = "form-control" })
+                            <input type="text" id="complementoHist" name="complementoHist" maxlength="60" class="form-control" />
                         </div>
                     </div>
                 </div>
                 <div class="row clearfix">
+                    <div class="col-md-7">
+                        @Html.Editor("descricao_enquadramento1", "EnquadramentoAutoComplete", new
+                           {
+                               //value = Model.enquadramentoId != null ? Model.enquadramentoId.ToString() : "",
+                               //Text = Model.descricao_enquadramento ?? "",
+                               nextField = "DECIMAL",
+                               prevField = "complementoHist"
+                           })
+                    </div>
                     <div class="col-md-2">
                         <label class="control-label" for="valor">Valor</label>
-                        @*<input type="text" name="valor" id="valor" class="form-control text-right" value="@Model.valor.ToString("###,###,##0.00")" onblur="FormataNumero(this);" />*@
-                        @Html.EditorFor(m => m.valor, "DECIMAL", new
+                        @Html.Editor("valor", "", "DECIMAL", new
                            {
                                htmlAttributes = (object)new { @class = "form-control text-right", @onblur = "return Converte(this, 'valor')" }
                            })
@@ -100,11 +102,18 @@
             return false;
         }
         if ($("#nome_banco").val() == '') {
-            ShowMessageAjaxAlert('Campo de preenchimento obrigatório: Banco', 'warning');
+            ShowMessageAjaxAlert('Campo de preenchimento obrigatório: Banco origem', 'warning');
             $('#nome_banco').focus();
             document.getElementById('panel-top').click();
             return false;
         }
+        if ($("#nome_banco2").val() == '') {
+            ShowMessageAjaxAlert('Campo de preenchimento obrigatório: Banco destino', 'warning');
+            $('#nome_banco2').focus();
+            document.getElementById('panel-top').click();
+            return false;
+        }
+
         if ($("#descricao_historico").val() == '') {
             ShowMessageAjaxAlert('Campo de preenchimento obrigatório: Histórico', 'warning');
             $('#descricao_historico').focus();
@@ -123,5 +132,4 @@
         return true;
     }
 </script>
-
 

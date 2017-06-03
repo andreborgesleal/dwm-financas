@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="437913268" Data="03/06/2017 16:56:56">
+    <Sessao>szll1dp42n54u4efpatfc3yz</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The cast to value type 'System.Int32' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.</Mensagem>
+    <NameSpace>DWM.Models.Report.ExtratoReport =&gt; extrato/listparam</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   em lambda_method(Closure , Shaper )
+   em System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   em System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   em DWM.Models.Report.ExtratoReport.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Report\ExtratoReport.cs:linha 42
+   em DWM.Models.Repositories.ReportViewModel`1.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Repositories\ReportViewModel.cs:linha 22
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+  <LOG ID="1927265662" Data="03/06/2017 16:56:56">
+    <Sessao>szll1dp42n54u4efpatfc3yz</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The cast to value type 'System.Int32' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.</Mensagem>
+    <NameSpace>DWM.Models.Report.ExtratoReport =&gt; extrato/listparam</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   em lambda_method(Closure , Shaper )
+   em System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   em System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   em DWM.Models.Report.ExtratoReport.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Report\ExtratoReport.cs:linha 42
+   em DWM.Models.Repositories.ReportViewModel`1.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Repositories\ReportViewModel.cs:linha 22
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+  <LOG ID="236459648" Data="03/06/2017 16:56:57">
+    <Sessao>szll1dp42n54u4efpatfc3yz</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The cast to value type 'System.Int32' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.</Mensagem>
+    <NameSpace>DWM.Models.Report.ExtratoReport =&gt; extrato/listparam</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   em lambda_method(Closure , Shaper )
+   em System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   em System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   em DWM.Models.Report.ExtratoReport.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Report\ExtratoReport.cs:linha 42
+   em DWM.Models.Repositories.ReportViewModel`1.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Repositories\ReportViewModel.cs:linha 22
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+  <LOG ID="373480583" Data="03/06/2017 16:58:50">
+    <Sessao>szll1dp42n54u4efpatfc3yz</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The cast to value type 'System.Int32' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.</Mensagem>
+    <NameSpace>DWM.Models.Report.ExtratoReport =&gt; extrato/listparam</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   em lambda_method(Closure , Shaper )
+   em System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   em System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   em DWM.Models.Report.ExtratoReport.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Report\ExtratoReport.cs:linha 42
+   em DWM.Models.Repositories.ReportViewModel`1.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Repositories\ReportViewModel.cs:linha 22
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+  <LOG ID="569157687" Data="03/06/2017 19:42:16">
+    <Sessao>szll1dp42n54u4efpatfc3yz</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Sua sessão expirou. Faça um novo login no sistema</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/transferencia</NameSpace>
+    <Context>dt_movto="2017-06-05",nome_banco="Itaú 7914 07060-7",bancoId="6",nome_banco2="Banco do Brasil 1882-1 6362-2",banco2Id="5",descricao_historico="Transferência Bancária",historicoId="56",complementoHist="de Banco Itaú para Banco do Brasil",descricao_enquadramento="Transferência Bancária - De Itaú para B.Brasil",enquadramentoId="76",DECIMAL="270,00",btn-salvar="Salvar"</Context>
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Transferencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 150</StackTrace>
+  </LOG>
+</LOG>

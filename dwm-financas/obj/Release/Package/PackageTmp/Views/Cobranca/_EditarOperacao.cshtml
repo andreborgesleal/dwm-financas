@@ -5,12 +5,17 @@
     Layout = null;
     var path = System.Configuration.ConfigurationManager.AppSettings["Users_Data"];
 
-    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
-    t[0].url = "../Cobranca/Create";
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../Contabilidade/Create";
     t[0].nomeCurto = "Incluir";
     t[0].referencia = "";
 
-    t[1].url = "../Home/Default";
+    t[1].url = "../Contabilidade/Edit?contabilidadeId=" + Model.Contabilidade.contabilidadeId.ToString();
+    t[1].nomeCurto = "Alterar";
+    t[1].referencia = "";
+    t[1].exibir = "S";
+
+    t[2].url = "../Home/Default";
 }
 <div id="div-lov"></div>
 <div class="container-cadastro">
@@ -84,7 +89,7 @@
             </div>
         </div>
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-            <h1 class="green"><strong>@(Model.clienteId.ToString() + "-" + Model.nome_cliente)</strong> &nbsp;&nbsp;<small><span class="info">(@Model.descricao_grupoCliente)</span></small></h1>
+            <h1 class="green"><strong>@(Model.clienteId.ToString() + "-" + Model.nome_cliente)</strong> &nbsp;&nbsp;<small><span class="info">@(!String.IsNullOrEmpty(Model.descricao_grupoCliente) ? "(" + Model.descricao_grupoCliente + ")" : "")</span></small></h1>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
                     <div class="x_panel">

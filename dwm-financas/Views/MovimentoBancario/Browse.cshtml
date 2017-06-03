@@ -11,6 +11,7 @@
     t[1].url = "../Home/Default";
 }
 <div class="container-cadastro">
+    @Html.Partial("_alerts")
     <div class="x_panel">
         @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Movimento bancário", Descricao = "", Transacao = t })
         <div class="x_content">
@@ -25,13 +26,15 @@
                             <label class="control-label" for="dt_emissao1">Emissão</label>
                             <div class="row clearfix">
                                 <div class="col-md-5">
-                                    @Html.Editor("data1", "DATE", new { identificador = "data1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.AddMonths(-1).ToString("yyyy-MM-01")) })
+                                    @*@Html.Editor("data1", "DATE", new { identificador = "data1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.AddMonths(-1).ToString("yyyy-MM-01")) })*@
+                                    <input type="date" class="form-control" name="data1" id="data1" value="@DateTime.Today.ToString("yyyy-MM-01")" />
                                 </div>
                                 <div class="col-md-1">
                                     à
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.Editor("data2", "DATE", new { identificador = "data2", readOnly = "false", value = DateTime.Today })
+                                    @*@Html.Editor("data2", "DATE", new { identificador = "data2", readOnly = "false", value = DateTime.Today })*@
+                                    <input type="date" class="form-control" name="data2" id="data2" value="@Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-01")).AddDays(-1).ToString("yyyy-MM-dd")" />
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>

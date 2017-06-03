@@ -34,12 +34,12 @@ namespace DWM.Controllers
             if (Request ["bancoId"] == null)
                 return ListParam(index, PageSize);
             else
-                return ListParam(index, PageSize, Request["data1"], Request["data2"], int.Parse(Request["bancoId"]));
+                return ListParam(index, PageSize, Request["data1"], Request["data2"], int.Parse(Request["bancoId"]), Request["nome_banco"]);
         }
 
         [AuthorizeFilter]
         public ActionResult ListParam(int? index, int? pageSize = 50, string data1 = "", string data2 = "",
-                                        int? bancoId = null)
+                                        int? bancoId = null, string nome_banco = "")
         {
             if (ViewBag.ValidateRequest)
             {

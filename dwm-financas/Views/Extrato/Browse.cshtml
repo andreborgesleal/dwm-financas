@@ -23,31 +23,45 @@
     t[2].glyph = "fa fa-dollar";
 
     t[3].url = "../Home/Default";
+
+    string BancoValue = "";
+    string BancoText = "";
+
+    if (Request["bancoId"] != null && Request["bancoId"] != "")
+    {
+        BancoValue = Request["bancoId"];
+        BancoText = Request["nome_banco"];
+    }
+
 }
+<!-- Datatables -->
+<link href="../Content/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
 
 <div class="container-cadastro">
+    @Html.Partial("_AjaxAlert", "")
+    @Html.Partial("_alerts")
     <div class="x_panel" id="panel-top">
         @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Extrato bancário", Descricao = "", Transacao = t })
         <div class="x_content">
             @Html.Partial("_AjaxAlert", "panel-top")
-            @using (Ajax.BeginForm("ListParam", "Extrato", new AjaxOptions { HttpMethod = "get", UpdateTargetId = "div-list-extrato" }, new { @style = "margin-left: 20px", @role = "search", @id = "form000" }))
+            @using (Ajax.BeginForm("ListParam", "Extrato", new AjaxOptions { HttpMethod = "get", UpdateTargetId = "div-list-extrato" }, new { @role = "search", @id = "form0" }))
             {
                 <div class="row clearfix">
                     <div class="col-md-6">
-                        @Html.Editor("nome_banco1", "BancosAutoComplete", new { nextField = "data1" })
+                        @Html.Editor("nome_banco1", "BancosAutoComplete", new { nextField = "data1", value = BancoValue, Text = BancoText })
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="control-label" for="dt_emissao1">Emissão</label>
                             <div class="row clearfix">
                                 <div class="col-md-5">
-                                    @Html.Editor("data1", "DATE", new { identificador = "data1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.AddMonths(-1).ToString("yyyy-MM-01")) })
+                                    <input type="date" class="form-control" name="data1" id="data1" value="@DateTime.Today.ToString("yyyy-MM-01")" />
                                 </div>
                                 <div class="col-md-1">
                                     à
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.Editor("data2", "DATE", new { identificador = "data2", readOnly = "false", value = DateTime.Today })
+                                    <input type="date" class="form-control" name="data2" id="data2" value="@Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-01")).AddDays(-1).ToString("yyyy-MM-dd")" />
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>
@@ -57,7 +71,8 @@
                 <div class="row clearfix">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <input type="submit" class="btn btn-primary" value="Buscar" id="btn-buscar" name="btn-buscar" onclick="return validaExtrato();" />
+                            @*<input type="submit" class="btn btn-primary" value="Buscar" id="btn-buscar" name="btn-buscar" onclick="return validaExtrato();" />*@
+                            <a href="#panel-detail" class="btn btn-primary" onclick="validaExtrato();">Buscar</a>
                             <input type="button" class="btn btn-default" onclick="window.location = '../MovimentoBancario/Create'" value="Incluir" />
                         </div>
                     </div>
@@ -93,10 +108,10 @@
     function validaExtrato() {
         if ($('#bancoId').val() == null || $('#bancoId').val() == '') {
             ShowMessageAjaxAlert('É preciso informar o banco para a emissão do Extrato', 'warning');
-            return false;
         }
         else {
-            return true;
+            Refresh(0, getPageSize(), 'ListParam', 'div-list-extrato');
+            $('#div-list-extrato').html('');
         }
     }
 

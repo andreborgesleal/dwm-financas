@@ -14,7 +14,7 @@
 
 <div class="container-cadastro">
     @Html.Partial("_AjaxAlert", "panel-top")
-    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @Html.Partial("_alerts")
     <div class="x_panel" id="panel-top">
         @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Movimento bancário", Descricao = "", Transacao = t })
         <div class="x_content">
@@ -30,7 +30,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label class="control-label" for="dt_movto">Data</label>
-                            @Html.Editor("dt_movto1", "DATE", new { identificador = "dt_movto", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-01")) })
+                            <input type="date" class="form-control" name="dt_movto" id="dt_movto" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -68,7 +68,11 @@
                 <div class="row clearfix">
                     <div class="col-md-2">
                         <label class="control-label" for="valor">Valor</label>
-                        <input type="text" name="valor" id="valor" class="form-control text-right" value="@Model.valor.ToString("###,###,##0.00")" onblur="FormataNumero(this);" />
+                        @*<input type="text" name="valor" id="valor" class="form-control text-right" value="@Model.valor.ToString("###,###,##0.00")" onblur="FormataNumero(this);" />*@
+                        @Html.EditorFor(m => m.valor, "DECIMAL", new
+                        {
+                            htmlAttributes = (object)new { @class = "form-control text-right", @onblur = "return Converte(this, 'valor')" }
+                        })
                     </div>
                 </div>
                 <p>&nbsp;</p>
