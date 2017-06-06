@@ -62,5 +62,16 @@ namespace DWM.Controllers
                 return View();
         }
         #endregion
+
+        #region Imprimir
+        [AuthorizeFilter]
+        public ActionResult Imprimir(string data1 = "", string data2 = "",
+                                        int? bancoId = null, string nome_banco = "")
+        {
+            return ListParam(0, 10000, data1, data2, bancoId, nome_banco);
+        }
+        #endregion
+
+
     }
 }

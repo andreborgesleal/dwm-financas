@@ -2,7 +2,7 @@
 @using App_Dominio.Repositories
 @model PagedList<ExtratoViewModel>
 @{
-    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
     t[0].url = "../MovimentoBancario/Create";
     t[0].nomeCurto = "Movimento bancário";
     t[0].exibir = "S";
@@ -22,7 +22,12 @@
     t[2].referencia = "";
     t[2].glyph = "fa fa-dollar";
 
-    t[3].url = "../Home/Default";
+    t[3].url = "#";
+    t[3].nomeCurto = "Imprimir";
+    t[3].exibir = "S";
+    t[3].referencia = "Print()";
+
+    t[4].url = "../Home/Default";
 
     string BancoValue = "";
     string BancoText = "";
@@ -89,21 +94,21 @@
 </div>
 
 <script>
-    $(function () {
-        $('#form000').submit(function () {
-            if ($(this).valid()) {
-                $.ajax({
-                    url: this.action,
-                    type: this.method,
-                    data: $(this).serialize(),
-                    success: function (result) {
-                        $('#div-list-extrato').html(result);
-                    }
-                });
-            }
-            return false;
-        });
-    });
+    //$(function () {
+    //    $('#form000').submit(function () {
+    //        if ($(this).valid()) {
+    //            $.ajax({
+    //                url: this.action,
+    //                type: this.method,
+    //                data: $(this).serialize(),
+    //                success: function (result) {
+    //                    $('#div-list-extrato').html(result);
+    //                }
+    //            });
+    //        }
+    //        return false;
+    //    });
+    //});
 
     function validaExtrato() {
         if ($('#bancoId').val() == null || $('#bancoId').val() == '') {
@@ -115,6 +120,20 @@
         }
     }
 
+    function Print() {
+        if ($('#bancoId').val() == null || $('#bancoId').val() == '') {
+            ShowMessageAjaxAlert('É preciso informar o banco para a emissão do Extrato', 'warning');
+            return;
+        }
+
+        var link = "../Extrato/Imprimir?data1=" + $('#data1').val() +
+                   "&data2=" + $('#data2').val() +
+                   "&bancoId=" + $('#bancoId').val() +
+                   "&nome_banco=" + $('#nome_banco').val() +
+                   "&hoje=" + new Date();
+
+        window.open(link);
+    }
 
     //function validaPDF()
     //{

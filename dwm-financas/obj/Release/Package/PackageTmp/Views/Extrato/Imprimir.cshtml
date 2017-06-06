@@ -1,0 +1,124 @@
+﻿@using App_Dominio.Entidades;
+@using App_Dominio.Security;
+@using DWM.Models.Repositories
+@using DWM.Models.Repositories;
+@model PagedList<DWM.Models.Repositories.ExtratoViewModel>
+@{
+    Layout = null;
+    string vr_db = "";
+    string vr_cr = "";
+    string vr_sld = "";
+    string color = "#000";
+    EmpresaSecurity<SecurityContext> security = new EmpresaSecurity<SecurityContext>();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Extrato Bancário</title>
+    @Styles.Render("~/Content-z/css")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body style="background-color: #fff">
+    <h2 style="text-align: center">Extrato Bancário</h2>
+    <h2 style="text-align: center">Empresa: @security.getEmpresa().nome</h2>
+    <h2 style="text-align: center">Período: @(Request["data1"]) à @(Request["data2"])</h2>
+    <h2 style="text-align: center">Banco: @(Request["nome_banco"])</h2>
+    <hr />
+    <table class="table" style="orphans: 3;">
+        <thead>
+            <tr class="headings">
+                <th>Data</th>
+                <th>Doc</th>
+                <th>Histórico</th>
+                <th class="text-right">Débito</th>
+                <th class="text-right">Crédito</th>
+                <th class="text-right">Saldo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ExtratoViewModel extrato in Model.Where(info => info.descricao_historico != null))
+            {
+                string cor_db = "";
+                string cor_cr = "";
+                string cor_sld = "";
+                vr_db = "";
+                vr_cr = "";
+                if (extrato.vr_debito.HasValue && extrato.vr_debito > 0)
+                {
+                    vr_db = extrato.vr_debito.HasValue ? extrato.vr_debito.Value.ToString("###,###,###,##0.00") : "";
+                    cor_db = "text-bold";
+                }
+                if (extrato.vr_credito.HasValue && extrato.vr_credito > 0)
+                {
+                    vr_cr = extrato.vr_credito.HasValue ? extrato.vr_credito.Value.ToString("###,###,###,##0.00") : "";
+                    cor_cr = "text-bold";
+                }
+                if (extrato.vr_saldo != null)
+                {
+                    vr_sld = extrato.vr_saldo != null ? extrato.vr_saldo.Value.ToString("###,###,###,##0.00") : "";
+                    cor_sld = "text-bold";
+                }
+                if (extrato._dt_movto != null && extrato._dt_movto > DateTime.Today)
+                {
+                    if (color != "#A4A4A4")
+                    {
+                        <tr style="background-color: #D8D8D8">
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td class="text-center text-mama-africa"><h4><strong>Operações Agendadas</strong></h4></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    }
+                    color = "#A4A4A4";
+                }
+                else if (extrato._dt_movto > Convert.ToDateTime("1980-01-01"))
+                {
+                    color = "";
+                }
+                <tr>
+                    <td style="color: @color">
+                        @if (extrato._dt_movto > Convert.ToDateTime("1980-01-01"))
+                        {
+                            <span>@extrato.dt_movto.ToString("dd/MM/yyyy")</span>
+                        }
+                    </td>
+                    <td style="color: @color">
+                        <span>@extrato.documento</span>
+                    </td>
+                    <td style="color: @color">
+                        @if (extrato.descricao_historico != null && extrato.descricao_historico.Contains("<b>"))
+                        {
+                            <span><strong>@extrato.descricao_historico.Replace("<b>", "").Replace("</b>", "")</strong></span>
+                        }
+                        else
+                        {
+                            <span>@extrato.descricao_historico</span>
+                        }
+                        @if (extrato.complementoHist != null && extrato.complementoHist.Trim() != "")
+                        {
+                            <small>@Html.DisplayTextFor(info => extrato.complementoHist)</small>
+                        }
+                    </td>
+                    <td style="color: @color" class="text-right @cor_db">
+                        <span>@vr_db</span>
+                    </td>
+                    <td style="color: @color" class="text-right @cor_cr">
+                        <span>@vr_cr</span>
+                    </td>
+                    <td style="color: @color" class="text-right @cor_sld">
+                        <span>@Html.DisplayTextFor(info => vr_sld)</span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+

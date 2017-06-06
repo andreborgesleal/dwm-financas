@@ -35,21 +35,21 @@
                         if (extrato.vr_debito.HasValue && extrato.vr_debito > 0)
                         {
                             vr_db = extrato.vr_debito.HasValue ? extrato.vr_debito.Value.ToString("###,###,###,##0.00") : "";
-                            cor_db = "text-bold";
+                            cor_db = "";
                         }
                         if (extrato.vr_credito.HasValue && extrato.vr_credito > 0)
                         {
                             vr_cr = extrato.vr_credito.HasValue ? extrato.vr_credito.Value.ToString("###,###,###,##0.00") : "";
-                            cor_cr = "text-bold";
+                            cor_cr = "";
                         }
                         if (extrato.vr_saldo != null)
                         {
                             vr_sld = extrato.vr_saldo != null ? extrato.vr_saldo.Value.ToString("###,###,###,##0.00") : "";
-                            cor_sld = "text-bold";
+                            cor_sld = "";
                         }
                         if (extrato._dt_movto != null && extrato._dt_movto > DateTime.Today)
                         {
-                            if (color != "#A4A4A4")
+                            if (color != "#695A5A")
                             {
                                 <tr style="background-color: #D8D8D8">
                                     <td>&nbsp;</td>
@@ -61,11 +61,11 @@
                                     <td>&nbsp;</td>
                                 </tr>
                             }
-                            color = "#A4A4A4";
+                            color = "#695A5A";
                         }
                         else if (extrato._dt_movto > Convert.ToDateTime("1980-01-01"))
                         {
-                            color = "";
+                            color = "#000000";
                         }
                         <tr>
                             <td style="color: @color">
@@ -92,29 +92,26 @@
                                 }
                             </td>
                             <td style="color: @color" class="text-right @cor_db">
-                                @*<span>@Html.DisplayTextFor(info => vr_db)</span>*@
                                 <span>@vr_db</span>
                             </td>
                             <td style="color: @color" class="text-right @cor_cr">
-                                @*<span>@Html.DisplayTextFor(info => vr_cr)</span>*@
                                 <span>@vr_cr</span>
                             </td>
                             <td style="color: @color" class="text-right @cor_sld">
                                 <span>@Html.DisplayTextFor(info => vr_sld)</span>
                             </td>
                             <td style="color: @color" class="text-center">
-                                @if (extrato.movtoBancarioId > 0 && extrato.vr_credito.HasValue && extrato.vr_credito > 0)
+                                @if (extrato.operacaoId > 0 && extrato.vr_credito.HasValue && extrato.vr_credito > 0)
                                 {
                                     <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='../Cobranca/Edit?OperacaoId=@extrato.operacaoId.ToString()&parcelaId=@extrato.parcelaId.ToString()'"></button>
                                 }
-                                else if (extrato.movtoBancarioId > 0 && extrato.vr_debito.HasValue && extrato.vr_debito > 0)
+                                else if (extrato.operacaoId > 0 && extrato.vr_debito.HasValue && extrato.vr_debito > 0)
                                 {
                                     <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='../ContaPagar/Edit?OperacaoId=@extrato.operacaoId.ToString()&parcelaId=@extrato.parcelaId.ToString()'"></button>
                                 }
                                 else
                                 {
                                     <a href="#panel-top" class="btn btn-default btn-sm glyphicon glyphicon-edit" title="Não é possível editar" onclick="ShowMessageAjaxAlert('Este registro não pode ser editado.', 'warning');"></a>
-                                    @*<button type="button" class="btn btn-default btn-sm glyphicon glyphicon-edit" title="Editar" onclick="document.getElementById('panel-top').click();ShowMessageAjaxAlert('Este registro não pode ser editado porque já foi liquidado ou amortizado', 'warning');"></button>*@
                                 }
                             </td>
                         </tr>

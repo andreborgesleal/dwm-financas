@@ -191,11 +191,6 @@
                                         <input type="text" name="OperacaoParcela_vr_principal" id="OperacaoParcela_vr_principal" class="form-control text-right" value="@Model.OperacaoParcela.vr_principal.ToString("###,###,##0.00")" onfocus="this.select();" onblur="return fnValorPrincipal(this);" />
                                     </div>
                                 </div>
-                                @*@Html.EditorFor(m => m.OperacaoParcela.vr_principal, "DECIMAL", new
-                                    {
-                                        form = "horizontal",
-                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "return fnValorPrincipal(this);" }
-                                    })*@
                             </div>
                         </div>
                         <div class="row">
@@ -206,12 +201,6 @@
                                         <input type="text" name="OperacaoParcela_OperacaoParcelaEvento_valor" id="OperacaoParcela_OperacaoParcelaEvento_valor" class="form-control text-right" value="@Model.OperacaoParcela.OperacaoParcelaEvento.valor.ToString("###,###,##0.00")" onblur="return fnValorPrincipal(this);" />
                                     </div>
                                 </div>
-                                @*@Html.EditorFor(m => m.OperacaoParcela.OperacaoParcelaEvento.valor, "DECIMAL", new
-                                    {
-                                        form = "horizontal",
-                                        label = "Amortização Inicial",
-                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return fnValorPrincipal(this);" }
-                                    })*@
                             </div>
                         </div>
                         <div class="row">
@@ -222,11 +211,6 @@
                                         <input type="text" name="vr_jurosMora" id="vr_jurosMora" class="form-control text-right" value="@Model.vr_jurosMora" />
                                     </div>
                                 </div>
-                                @*@Html.EditorFor(m => m.vr_jurosMora, "DECIMAL", new
-                                    {
-                                        form = "horizontal",
-                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return Converte(this, 'vr_jurosMora')" }
-                                    })*@
                             </div>
                         </div>
                         <div class="row">
@@ -237,11 +221,6 @@
                                         <input type="text" name="vr_multa" id="vr_multa" class="form-control text-right" value="@Model.vr_multa" onblur="return Converte(this, 'vr_multa')" />
                                     </div>
                                 </div>
-                                @*@Html.EditorFor(m => m.vr_multa, "DECIMAL", new
-                                    {
-                                        form = "horizontal",
-                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return Converte(this, 'vr_multa')" }
-                                    })*@
                             </div>
                         </div>
                         <div class="row">
@@ -573,15 +552,15 @@
         //    return false;
         //}
 
-        var _vr_amortizacao = parseFloat($('#OperacaoParcela_OperacaoParcelaEvento_valor').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
+        var _vr_amortizacao = parseFloat($('#OperacaoParcela_OperacaoParcelaEvento_valor').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '')).toFixed(2);
 
         if (_vr_amortizacao > 0) {
 
-            var _valorJuros = parseFloat($('#vr_juros').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '')) / 100;
-            var _valorMora = parseFloat($('#vr_mora').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '')) / 100;
-            var _valorDesconto = parseFloat($('#vr_desconto').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '')) / 100;
+            var _valorJuros = parseFloat($('#vr_juros').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '')).toFixed(2);
+            var _valorMora = parseFloat($('#vr_mora').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '')).toFixed(2);
+            var _valorDesconto = parseFloat($('#vr_desconto').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '')).toFixed(2);
 
-            var _valorTotal = (_vr_amortizacao/100 + _valorJuros + _valorMora - _valorDesconto) * 100;
+            var _valorTotal = (parseFloat(_vr_amortizacao) + parseFloat(_valorJuros) + parseFloat(_valorMora) - parseFloat(_valorDesconto));
 
             if (_valorTotal <= 0) {
                 ShowMessageAlert('Valor da amortização deve ser um valor maior que zero.', 'warning');
@@ -668,6 +647,9 @@
         if ($('#OperacaoParcela_OperacaoParcelaEvento_valor').val() == '')
             $('#OperacaoParcela_OperacaoParcelaEvento_valor').val('0,00');
 
+        if ($('#OperacaoParcela_vr_principal').val() == '')
+            $('#OperacaoParcela_vr_principal').val('0,00');
+
         if ($('#vr_juros').val() == '')
             $('#vr_juros').val('0,00');
 
@@ -677,15 +659,19 @@
         if ($('#vr_desconto').val() == '')
             $('#vr_desconto').val('0,00');
 
-        var _valorAmortizado = $('#OperacaoParcela_OperacaoParcelaEvento_valor').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        var _valorPrincipal = $('#OperacaoParcela_vr_principal').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
+        var _valorAmortizado = $('#OperacaoParcela_OperacaoParcelaEvento_valor').val().replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        var _valorPrincipal = $('#OperacaoParcela_vr_principal').val().replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
 
-        _valorAmortizado = parseInt(_valorAmortizado);
-        _valorPrincipal = parseInt(_valorPrincipal);
+        _valorAmortizado = parseFloat(_valorAmortizado).toFixed(2);
+        _valorPrincipal = parseFloat(_valorPrincipal).toFixed(2);
 
-        var _valorJuros = parseInt($('#vr_juros').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
-        var _valorMora = parseInt($('#vr_mora').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
-        var _valorDesconto = parseInt($('#vr_desconto').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
+        var _valorJuros = $('#vr_juros').val().replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        var _valorMora = $('#vr_mora').val().replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        var _valorDesconto = $('#vr_desconto').val().replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+
+        _valorJuros = parseFloat(_valorJuros).toFixed(2);
+        _valorMora = parseFloat(_valorMora).toFixed(2);
+        _valorDesconto = parseFloat(_valorDesconto).toFixed(2);
 
         if (_valorAmortizado > _valorPrincipal) {
             _valorAmortizado = _valorPrincipal;
@@ -694,8 +680,9 @@
             FormataNumero($("#OperacaoParcela_OperacaoParcelaEvento_valor")[0]);
         }
 
-        var _saldoDevedor = (_valorPrincipal - _valorAmortizado);
-        var _valorTotal = (_valorAmortizado + _valorJuros + _valorMora - _valorDesconto);
+        var _saldoDevedor = (parseFloat(_valorPrincipal) - parseFloat(_valorAmortizado));
+        var _valorTotal = 0.00;
+        _valorTotal = parseFloat(_valorAmortizado) + parseFloat(_valorJuros) + parseFloat(_valorMora) - parseFloat(_valorDesconto);
 
         $('#vr_saldoDevedor').val(_saldoDevedor.toString());
         $('#vr_amortizacao').val((_valorAmortizado).toString());
@@ -729,14 +716,14 @@
         if ($('#vr_desconto').val() == '')
             $('#vr_desconto').val('0,00');
 
-        var _valorAmortizado = $('#OperacaoParcela_OperacaoParcelaEvento_valor').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _valorAmortizado = parseInt(_valorAmortizado);
+        var _valorAmortizado = $('#OperacaoParcela_OperacaoParcelaEvento_valor').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _valorAmortizado = parseFloat(_valorAmortizado).toFixed(2);
 
-        var _valorJuros = parseInt($('#vr_juros').val().replace('.', '').replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
-        var _valorMora = parseInt($('#vr_mora').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
-        var _valorDesconto = parseInt($('#vr_desconto').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
+        var _valorJuros = parseFloat($('#vr_juros').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '')).toFixed(2);
+        var _valorMora = parseInt($('#vr_mora').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '')).toFixed(2);
+        var _valorDesconto = parseInt($('#vr_desconto').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '')).toFixed(2);
 
-        var _valorTotal = (_valorAmortizado + _valorJuros + _valorMora - _valorDesconto);
+        var _valorTotal = (parseFloat(_valorAmortizado) + parseFloat(_valorJuros) + parseFloat(_valorMora) - parseFloat(_valorDesconto));
 
         if (_valorTotal <= 0)
         {
@@ -755,8 +742,8 @@
     }
 
     function fnGerarParcelas() {
-        var _vr_saldoDevedor = parseInt($('#vr_saldoDevedor').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', ''));
-        if (_vr_saldoDevedor == 0) {
+        var _vr_saldoDevedor = parseFloat($('#vr_saldoDevedor').val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '')).toFixed(2);
+        if (_vr_saldoDevedor == 0.00) {
             ShowMessageAjaxAlert('Saldo devedor deve ser maior que zero para gerar as parcelas', 'warning');
             $('#OperacaoParcela_OperacaoParcelaEvento_valor').focus();
             $('#div-item').html('');

@@ -224,8 +224,8 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr class="headings">
-                                    <th class="column-title"><strong>Atraso</strong></th>
                                     <th class="column-title text-center"><strong>Última amortização</strong></th>
+                                    <th class="column-title"><strong>Atraso</strong></th>
                                     <th class="column-title"><strong>Cheque</strong></th>
                                     <th class="column-title text-right"><strong>Valor principal</strong></th>
                                     <th class="column-title text-right"><strong>Amortização</strong></th>
@@ -237,8 +237,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>@(Model.atraso.HasValue && Model.atraso.Value > 0 ? Model.atraso.ToString() + " dias" : "")</td>
                                     <td class="text-center">@(Model.dt_ultima_amortizacao.HasValue ? Model.dt_ultima_amortizacao.Value.ToString("dd/MM/yyyy") : "")</td>
+                                    <td>@(Model.atraso.HasValue && Model.atraso.Value > 0 ? Model.atraso.ToString() + " dias" : "")</td>
                                     <td>@(Model.cheque_numero != null && Model.cheque_numero != "" ? "Banco: " + Model.cheque_banco + " Agência: " + Model.cheque_agencia + " Ch. " + Model.cheque_numero : "")</td>
                                     <td class="text-right">@Model.vr_principal.ToString("###,###,###,##0.00")</td>
                                     <td class="text-right">@(Model.vr_amortizacao.HasValue && Model.vr_amortizacao.Value > 0 ? Model.vr_amortizacao.Value.ToString("###,###,###,##0.00") : "")</td>

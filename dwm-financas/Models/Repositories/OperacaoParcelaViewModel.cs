@@ -115,7 +115,7 @@ namespace DWM.Models.Repositories
                 switch (ind_baixa)
                 {
                     case "4":
-                        return "Baixa por liquidação";
+                        return "Liquidado";
                     case "5":
                         return "Baixa por cancelamento";
                     case "6":

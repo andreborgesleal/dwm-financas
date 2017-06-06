@@ -32,7 +32,7 @@
                                         <th class="column-title">ID</th>
                                         <th class="column-title">Vencimento</th>
                                         <th class="column-title">Perm</th>
-                                        <th class="column-title">Cliente</th>
+                                        <th class="column-title">Pagador</th>
                                         <th class="column-title">Situação</th>
                                         <th class="column-title">Dt.Baixa</th>
                                         <th class="column-title">Últ. Pagto</th>
@@ -107,7 +107,8 @@
                                             </td>
                                             <td class="text-center">
                                                 <div class="btn-group">
-                                                    <a class="btn btn-primary" href="#" title="Editar" onclick="window.location='../Cobranca/Edit?operacaoId=@(rec.operacaoId)&parcelaId=@(rec.OperacaoParcela.parcelaId)'"><i class="fa fa-edit"></i></a>
+                                                    @*<a class="btn btn-primary" href="#" title="Editar" onclick="window.location='../Cobranca/Edit?operacaoId=@(rec.operacaoId)&parcelaId=@(rec.OperacaoParcela.parcelaId)'"><i class="fa fa-edit"></i></a>*@
+                                                    <button type="button" class="btn btn-default btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='../Cobranca/Edit?operacaoId=@(rec.operacaoId)&parcelaId=@(rec.OperacaoParcela.parcelaId)'"></button>
                                                 </div>
                                             </td>
                                         </tr>

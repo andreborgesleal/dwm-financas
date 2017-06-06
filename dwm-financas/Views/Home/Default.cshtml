@@ -46,7 +46,16 @@
     #endregion
 }
 
-<!-- top tiles -->
+<div id="div-list-static">
+    @Html.Partial("ListPanorama", Model.Cobranca)
+</div>
+
+<div id="div-list-static">
+    @Html.Partial("ListPanoramaPagamentoEmAberto", Model.Pagamentos)
+</div>
+
+
+@*<!-- top tiles -->
 <div class="row tile_count">
     <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-user"></i> Títulos em aberto</span>
@@ -402,7 +411,5 @@
             </div>
         </div>
     </div>
-</div>
-<div id="div-list-static">
-    @Html.Partial("ListPanorama", Model.Cobranca)
-</div>
+</div>*@
+

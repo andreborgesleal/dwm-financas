@@ -11,11 +11,9 @@
 <!-- Datatables -->
 <link href="../Content/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
 
-<div class="container-cadastro">
-    <div id="div-list">
-        @Html.Partial("List", Model)
-    </div>
-    <div class="altura-35">
-        @Html.Partial("_defaultListButtons", new List<ButtonRepository> { new ButtonRepository() { linkText = "Incluir", actionName = "Create", controllerName = "ContaPagar", buttonType = "link" } })
-    </div>
+<div id="div-list">
+    @Html.Partial("List", Model)
+</div>
+<div class="altura-35">
+    @Html.Partial("_defaultListButtons", new List<ButtonRepository> { new ButtonRepository() { linkText = "Incluir", actionName = "Create", controllerName = "ContaPagar", buttonType = "link" } })
 </div>
