@@ -215,17 +215,20 @@ namespace DWM.Models.BI
                         #endregion
 
                         #region Gerar Movimentação Bancária
-                        MovtoBancarioViewModel movto2ViewModel = new MovtoBancarioViewModel()
+                        if (r.OperacaoParcelaEvento.MovtoBancario.bancoId > 0)
                         {
-                            empresaId = sessaoCorrente.empresaId,
-                            bancoId = r.OperacaoParcelaEvento.MovtoBancario.bancoId,
-                            historicoId = r.OperacaoParcelaEvento.MovtoBancario.historicoId,
-                            complementoHist = r.OperacaoParcelaEvento.MovtoBancario.complementoHist,
-                            dt_movto = dt_movto_proximo_diaUtil.Value,
-                            valor = r.OperacaoParcelaEvento.MovtoBancario.valor,
-                            tipoMovto = getTipoMovto()
-                        };
-                        operacaoParcelaEventoPagtoEncargos.MovtoBancario = movto2ViewModel;
+                            MovtoBancarioViewModel movto2ViewModel = new MovtoBancarioViewModel()
+                            {
+                                empresaId = sessaoCorrente.empresaId,
+                                bancoId = r.OperacaoParcelaEvento.MovtoBancario.bancoId,
+                                historicoId = r.OperacaoParcelaEvento.MovtoBancario.historicoId,
+                                complementoHist = r.OperacaoParcelaEvento.MovtoBancario.complementoHist,
+                                dt_movto = dt_movto_proximo_diaUtil.Value,
+                                valor = r.OperacaoParcelaEvento.MovtoBancario.valor,
+                                tipoMovto = getTipoMovto()
+                            };
+                            operacaoParcelaEventoPagtoEncargos.MovtoBancario = movto2ViewModel;
+                        }
                         #endregion
                     }
 
@@ -319,17 +322,20 @@ namespace DWM.Models.BI
                     #endregion
 
                     #region Gerar Movimentação Bancária
-                    MovtoBancarioViewModel movtoViewModel = new MovtoBancarioViewModel()
+                    if (r.OperacaoParcelaEvento.MovtoBancario != null && r.OperacaoParcelaEvento.MovtoBancario.bancoId > 0)
                     {
-                        empresaId = sessaoCorrente.empresaId,
-                        bancoId = r.OperacaoParcelaEvento.MovtoBancario.bancoId,
-                        historicoId = r.OperacaoParcelaEvento.MovtoBancario.historicoId,
-                        complementoHist = r.OperacaoParcelaEvento.MovtoBancario.complementoHist,
-                        dt_movto = dt_movto_proximo_diaUtil.Value,
-                        valor = r.OperacaoParcelaEvento.MovtoBancario.valor,
-                        tipoMovto = getTipoMovto()
-                    };
-                    operacaoParcelaEventoAmortizacao.MovtoBancario = movtoViewModel;
+                        MovtoBancarioViewModel movtoViewModel = new MovtoBancarioViewModel()
+                        {
+                            empresaId = sessaoCorrente.empresaId,
+                            bancoId = r.OperacaoParcelaEvento.MovtoBancario.bancoId,
+                            historicoId = r.OperacaoParcelaEvento.MovtoBancario.historicoId,
+                            complementoHist = r.OperacaoParcelaEvento.MovtoBancario.complementoHist,
+                            dt_movto = dt_movto_proximo_diaUtil.Value,
+                            valor = r.OperacaoParcelaEvento.MovtoBancario.valor,
+                            tipoMovto = getTipoMovto()
+                        };
+                        operacaoParcelaEventoAmortizacao.MovtoBancario = movtoViewModel;
+                    }
                     #endregion
 
                     operacaoParcela.OperacaoParcelaEvento = operacaoParcelaEventoAmortizacao;
@@ -414,14 +420,14 @@ namespace DWM.Models.BI
             }
 
             // Validar banco
-            if (!value.bancoId.HasValue || value.bancoId == 0)
-            {
-                value.mensagem.Code = 5;
-                value.mensagem.Message = MensagemPadrao.Message(5, "Banco").ToString();
-                value.mensagem.MessageBase = "Campo obrigatório: Banco";
-                value.mensagem.MessageType = MsgType.WARNING;
-                return value.mensagem;
-            }
+            //if (!value.bancoId.HasValue || value.bancoId == 0)
+            //{
+            //    value.mensagem.Code = 5;
+            //    value.mensagem.Message = MensagemPadrao.Message(5, "Banco").ToString();
+            //    value.mensagem.MessageBase = "Campo obrigatório: Banco";
+            //    value.mensagem.MessageType = MsgType.WARNING;
+            //    return value.mensagem;
+            //}
 
             // Validar dt_pagamento
             if (!value.dt_pagamento.HasValue)

@@ -12,78 +12,77 @@
 <!-- Datatables -->
 <link href="../Content/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
 
-<div class="container-cadastro">
-    @Html.Partial("_alerts")
-    <div class="x_panel">
-        <div class="x_title">
-            <div class="row">
-                <div class="col-md-11">
-                    <h2>
-                        Lançamentos Contábeis
-                        <a href="../Contabilidade/Create"><small><i class="fa fa-file-o"></i> Incluir</small></a>
-                    </h2>
-                    <div class="form-group">
-                        <div class="input-group col-md-2 pull-right">
-                            @Html.TextBox("contabilidadeId1", "", new { @class = "form-control", @placeholder = "Buscar" })
-                            <div class="input-group-btn">
-                                <button class="btn btn-default" type="button" onclick="callEdit();"><i class="fa fa-search"></i></button>
-                            </div>
+@Html.Partial("_alerts")
+<div class="x_panel">
+    <div class="x_title">
+        <div class="row">
+            <div class="col-md-11">
+                <h2>
+                    Lançamentos Contábeis
+                    <a href="../Contabilidade/Create"><small><i class="fa fa-file-o"></i> Incluir</small></a>
+                </h2>
+                <div class="form-group">
+                    <div class="input-group col-md-2 pull-right">
+                        @Html.TextBox("contabilidadeId1", "", new { @class = "form-control", @placeholder = "Buscar" })
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="callEdit();"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-1">
-                    <ul class="nav navbar-right panel_toolbox pull-right">
-                        <li>
-                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                                @{
-                                    for (int i = 0; i <= t.Length - 2; i++)
+            </div>
+            <div class="col-md-1">
+                <ul class="nav navbar-right panel_toolbox pull-right">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            @{
+                                for (int i = 0; i <= t.Length - 2; i++)
+                                {
+                                    if (t[i].url != null && t[i].url.Trim() != "")
                                     {
-                                        if (t[i].url != null && t[i].url.Trim() != "")
-                                        {
-                                            <li>
-                                                <a href="@t[i].url" onclick="@t[i].referencia">@t[i].nomeCurto</a>
-                                            </li>
-                                        }
-                                        else if (t[i].uri != null && t[i].uri.Trim() != "")
-                                        {
-                                            <li>
-                                                <a href="#@t[i].uri" onclick="@t[i].referencia">@t[i].nomeCurto</a>
-                                            </li>
-                                        }
+                                        <li>
+                                            <a href="@t[i].url" onclick="@t[i].referencia">@t[i].nomeCurto</a>
+                                        </li>
+                                    }
+                                    else if (t[i].uri != null && t[i].uri.Trim() != "")
+                                    {
+                                        <li>
+                                            <a href="#@t[i].uri" onclick="@t[i].referencia">@t[i].nomeCurto</a>
+                                        </li>
                                     }
                                 }
-                                @if (ViewData.Model is System.Web.Mvc.IPagedList)
-                                {
-                                    @Html.Partial("PaginacaoRegistros", (System.Web.Mvc.IPagedList)ViewData.Model)
-                                }
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="@t[t.Length-1].url" class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
+                            }
+                            @if (ViewData.Model is System.Web.Mvc.IPagedList)
+                            {
+                                @Html.Partial("PaginacaoRegistros", (System.Web.Mvc.IPagedList)ViewData.Model)
+                            }
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="@t[t.Length-1].url" class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
             </div>
         </div>
-        <div class="x_content">
-            @using (Ajax.BeginForm("ListParam", "Contabilidade", new AjaxOptions { HttpMethod = "get", UpdateTargetId = "div-list" }, new { @role = "search", @id = "form000" }))
+    </div>
+    <div class="x_content">
+        @using (Ajax.BeginForm("ListParam", "Contabilidade", new AjaxOptions { HttpMethod = "get", UpdateTargetId = "div-list" }, new { @role = "search", @id = "form000" }))
             {
                 DateTime? d1 = Request["data1"] == null || Request["data1"].Contains("%") ? (DateTime)ViewData["dt_lancamento_inicio"] : Convert.ToDateTime(Request["data1"]);
                 DateTime? d2 = Request["data2"] == null || Request["data2"].Contains("%") ? (DateTime)ViewData["dt_lancamento_fim"] : Convert.ToDateTime(Request["data2"]);
 
-                <div class="row clearfix">
-                    <div class="col-md-6">
-                        @Html.Editor("descricao_conta1", "PlanoContasAutoComplete", new { nextField = "descricao_centroCusto" })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.Editor("descricao_centroCusto1", "CentroCustoAutoComplete", new { nextField = "descricao_historico", prevField = "descricao_conta" })
-                    </div>
+            <div class="row clearfix">
+                <div class="col-md-6">
+                    @Html.Editor("descricao_conta1", "PlanoContasAutoComplete", new { nextField = "descricao_centroCusto" })
                 </div>
+                <div class="col-md-6">
+                    @Html.Editor("descricao_centroCusto1", "CentroCustoAutoComplete", new { nextField = "descricao_historico", prevField = "descricao_conta" })
+                </div>
+            </div>
                 <div class="row clearfix">
                     <div class="col-md-6">
                         @Html.Editor("descricao_historico1", "HistoricoAutoComplete", new { nextField = "data1", prevField = "descricao_centroCusto" })
@@ -114,14 +113,14 @@
                         </div>
                     </div>
                 </div>
-            }
-            <div id="div-list">
-                @Html.Partial("ListParam", Model)
-            </div>
-
+        }
+        <div id="div-list">
+            @Html.Partial("ListParam", Model)
         </div>
+
     </div>
 </div>
+
 
 <script>
     $(function () {

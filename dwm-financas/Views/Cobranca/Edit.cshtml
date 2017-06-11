@@ -96,9 +96,9 @@
     //});
 
     function visualizar(arquivo, extensao) {
-        if (extensao == '.jpeg' || extensao == '.jpg' || extensao == '.bmp' || extensao == '.png')
+        if (extensao.toLowerCase() == '.jpeg' || extensao.toLowerCase() == '.jpg' || extensao.toLowerCase() == '.bmp' || extensao.toLowerCase() == '.png')
             $('#myModal1-body').html('<img src="@path' + arquivo + '" class="img-responsive" alt="Responsive image" style="height: 600px">');
-        else if (extensao == '.pdf')
+        else if (extensao.toLowerCase() == '.pdf')
             $('#myModal1-body').html('<iframe style="height: 600px; width: 100%" src="@path' + arquivo + '"></iframe>');
     }
 

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="50804554" Data="10/06/2017 23:04:06">
+    <Sessao>4eb2biitewhfbk0xrjhwt4ia</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Models.BI.ContaReceberModifyBI =&gt; cobranca/modify</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="116211310" Data="10/06/2017 23:10:25">
+    <Sessao>4eb2biitewhfbk0xrjhwt4ia</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>An error occurred while updating the entries. See the inner exception for details. *** An error occurred while updating the entries. See the inner exception for details.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaController =&gt; cobranca/modify</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Internal.InternalContext.SaveChanges()
+   em System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   em System.Data.Entity.DbContext.SaveChanges()
+   em App_Dominio.Pattern.Factory`2.Execute(IProcess`2 proc, Repository value, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Factory.cs:linha 76
+   em DWM.Controllers.OperacaoController`19.Modify(Int32 operacaoId, Int32 parcelaId, Int32 banco3Id, String dt_vencimento, String ind_forma_pagamento, String vr_principal, String num_titulo, String cheque_banco, String cheque_agencia, String cheque_numero, Int32 historicoId, String complementoHist) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 441</StackTrace>
+  </LOG>
+  <LOG ID="613110895" Data="10/06/2017 23:25:52">
+    <Sessao>4eb2biitewhfbk0xrjhwt4ia</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Models.BI.ContaReceberBaixarBI =&gt; cobranca/_baixar</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+</LOG>

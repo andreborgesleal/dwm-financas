@@ -95,7 +95,7 @@ namespace DWM.Models.Persistence
             x.operacaoId = entity.operacaoId;
             x.parcelaId = entity.parcelaId;
             x.bancoId = entity.bancoId;
-            x.nome_banco = entity.bancoId != null ? db.Bancos.Find(entity.bancoId).nome : "";
+            x.nome_banco = entity.bancoId != null && entity.bancoId > 0 ? db.Bancos.Find(entity.bancoId).nome : "";
             x.num_titulo = entity.num_titulo;
             x.dt_vencimento = entity.dt_vencimento;
             x.vr_principal = entity.vr_principal;
@@ -180,14 +180,14 @@ namespace DWM.Models.Persistence
                     return value.mensagem;
                 }
 
-                if (!value.bancoId.HasValue && value.vr_amortizacao > 0)
-                {
-                    value.mensagem.Code = 5;
-                    value.mensagem.Message = MensagemPadrao.Message(5, "Banco").ToString();
-                    value.mensagem.MessageBase = "Campo obrigatório: Banco";
-                    value.mensagem.MessageType = MsgType.WARNING;
-                    return value.mensagem;
-                }
+                //if (!value.bancoId.HasValue && value.vr_amortizacao > 0)
+                //{
+                //    value.mensagem.Code = 5;
+                //    value.mensagem.Message = MensagemPadrao.Message(5, "Banco").ToString();
+                //    value.mensagem.MessageBase = "Campo obrigatório: Banco";
+                //    value.mensagem.MessageType = MsgType.WARNING;
+                //    return value.mensagem;
+                //}
 
 
                 if (value.OperacaoParcelaEventos.Count() == 0)

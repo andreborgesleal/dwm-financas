@@ -316,7 +316,7 @@
                                         <td class="text-right @tachado">@ev.valor.ToString("###,###,###,##0.00")</td>
                                         @if (ev.arquivo != null && ev.arquivo != "")
                                         {
-                                            <td class="text-center"><a class="label label-primary" data-toggle="modal" data-target="#myModal1" onclick="visualizar('@ev.arquivo', '@ev.arquivo_extensao')" href="#" title="Visualizar arquivo">Visualizar</a></td>
+                                            <td class="text-center"><a class="label label-primary" data-toggle="modal" data-target="#myModal1" onclick="visualizar('@ev.arquivo', '@ev.arquivo_extensao.ToLower()')" href="#" title="Visualizar arquivo">Visualizar</a></td>
                                         }
                                         else
                                         {

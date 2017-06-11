@@ -162,7 +162,7 @@ namespace DWM.Controllers
 
         #region Baixar
         [AuthorizeFilter(Order = 1020)]
-        public ActionResult _Baixar(int operacaoId, int parcelaId, int bancoId, string dt_pagamento, string dt_movto,
+        public ActionResult _Baixar(int operacaoId, int parcelaId, int? bancoId, string dt_pagamento, string dt_movto,
                                         string ind_forma_pagamento, string vr_juros_mora, string vr_multa_atraso,
                                         string vr_desconto, string vr_saldo_devedor, string vr_liquidacao, string vr_baixa, string arquivo,
                                         string cheque_banco, string cheque_agencia, string cheque_numero, int historicoId,
@@ -198,15 +198,18 @@ namespace DWM.Controllers
                     value.OperacaoParcelaEvento.dt_evento = Funcoes.Brasilia();
                     value.OperacaoParcelaEvento.enquadramentoId = enquadramentoId;
 
-                    value.OperacaoParcelaEvento.MovtoBancario = new MovtoBancarioViewModel()
-                    {
-                        bancoId = bancoId,
-                        historicoId = historicoId,
-                        complementoHist = complementoHist,
-                        dt_movto = Funcoes.StringToDate(dt_movto).Value,
-                        valor = vr_baixa != null && vr_baixa != "" ? decimal.Parse(vr_baixa) : 0,
-                        tipoMovto = getTipoMovto()
-                    };
+                    if (bancoId.HasValue && bancoId > 0)
+                        value.OperacaoParcelaEvento.MovtoBancario = new MovtoBancarioViewModel()
+                        {
+                            bancoId = bancoId.Value,
+                            historicoId = historicoId,
+                            complementoHist = complementoHist,
+                            dt_movto = Funcoes.StringToDate(dt_movto).Value,
+                            valor = vr_baixa != null && vr_baixa != "" ? decimal.Parse(vr_baixa) : 0,
+                            tipoMovto = getTipoMovto()
+                        };
+                    else
+                        value.OperacaoParcelaEvento.MovtoBancario = null;
 
                     value.OperacaoParcelaEvento.dt_ocorrencia = Funcoes.StringToDate(dt_pagamento).Value;
                     value.OperacaoParcelaEvento.dt_movto = Funcoes.StringToDate(dt_movto).Value;
@@ -249,7 +252,7 @@ namespace DWM.Controllers
             }
         }
 
-        private void OnBaixaError(ref EORepo value, int bancoId, string dt_pagamento, string dt_movto,
+        private void OnBaixaError(ref EORepo value, int? bancoId, string dt_pagamento, string dt_movto,
                                   string ind_forma_pagamento, string vr_juros_mora, string vr_multa_atraso,
                                   string vr_desconto, string vr_liquidacao, string vr_baixa, string fileupload,
                                   string cheque_banco, string cheque_agencia, string cheque_numero, int historicoId,
@@ -411,7 +414,7 @@ namespace DWM.Controllers
 
         #region Modify
         [AuthorizeFilter(Order = 1020)]
-        public ActionResult Modify(int operacaoId, int parcelaId, int banco3Id, string dt_vencimento,
+        public ActionResult Modify(int operacaoId, int parcelaId, int? banco3Id, string dt_vencimento,
                                         string ind_forma_pagamento, string vr_principal, string num_titulo,
                                         string cheque_banco, string cheque_agencia, string cheque_numero, int historicoId,
                                         string complementoHist)
@@ -469,7 +472,7 @@ namespace DWM.Controllers
             }
         }
 
-        private void OnModifyError(ref EORepo value, int bancoId, string dt_vencimento, string num_titulo,
+        private void OnModifyError(ref EORepo value, int? bancoId, string dt_vencimento, string num_titulo,
                                   string ind_forma_pagamento, string vr_principal,
                                   string cheque_banco, string cheque_agencia, string cheque_numero, int historicoId,
                                   string complementoHist)

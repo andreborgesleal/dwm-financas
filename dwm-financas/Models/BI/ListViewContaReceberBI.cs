@@ -173,6 +173,7 @@ namespace DWM.Models.BI
                      join par in db.ContaReceberParcelas on rec.operacaoId equals par.operacaoId
                      //join pge in db.ContaReceberParcelaEventos on new { par.operacaoId, par.parcelaId } equals new { pge.operacaoId, pge.parcelaId }
                      join cli in db.Clientes on rec.clienteId equals cli.clienteId
+                     join his in db.Historicos on rec.historicoId equals his.historicoId
                      join gru in db.GrupoClientes on cli.grupoClienteId equals gru.grupoClienteId into GRU
                      from gru in GRU.DefaultIfEmpty()
                      where rec.empresaId.Equals(sessaoCorrente.empresaId)
@@ -197,6 +198,8 @@ namespace DWM.Models.BI
                          operacaoId = rec.operacaoId,
                          empresaId = rec.empresaId,
                          nome_cliente = cli.nome,
+                         descricao_historico = his.descricao,
+                         complementoHist = rec.complementoHist,
                          dt_emissao = rec.dt_emissao,
                          documento = rec.documento,
                          recorrencia = rec.recorrencia,
