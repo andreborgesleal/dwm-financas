@@ -15,7 +15,7 @@
     <div class="x_panel">
         @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Movimento bancário", Descricao = "", Transacao = t })
         <div class="x_content">
-            @using (Ajax.BeginForm("ListParam", "MovimentoBancario", new AjaxOptions { HttpMethod = "get", UpdateTargetId = "div-list" }, new { @style = "margin-left: 20px", @role = "search", @id = "form000" }))
+            @using (Ajax.BeginForm("ListParam", "MovimentoBancario", new AjaxOptions { HttpMethod = "get", UpdateTargetId = "div-list" }, new { @style = "margin-left: 20px", @role = "search", @id = "form0" }))
             {
                 <div class="row clearfix">
                     <div class="col-md-6">
@@ -26,14 +26,12 @@
                             <label class="control-label" for="dt_emissao1">Emissão</label>
                             <div class="row clearfix">
                                 <div class="col-md-5">
-                                    @*@Html.Editor("data1", "DATE", new { identificador = "data1", readOnly = "false", value = Convert.ToDateTime(DateTime.Today.AddMonths(-1).ToString("yyyy-MM-01")) })*@
                                     <input type="date" class="form-control" name="data1" id="data1" value="@DateTime.Today.ToString("yyyy-MM-01")" />
                                 </div>
                                 <div class="col-md-1">
                                     à
                                 </div>
                                 <div class="col-md-5">
-                                    @*@Html.Editor("data2", "DATE", new { identificador = "data2", readOnly = "false", value = DateTime.Today })*@
                                     <input type="date" class="form-control" name="data2" id="data2" value="@Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-01")).AddDays(-1).ToString("yyyy-MM-dd")" />
                                 </div>
                                 <div class="col-md-1"></div>
@@ -44,7 +42,6 @@
                 <div class="row clearfix">
                     <div class="col-md-12">
                         <div class="form-group">
-                            @*<input type="submit" class="btn btn-primary" value="Buscar" />*@
                             <a href="#panel-detail" class="btn btn-primary" onclick="busca()">Buscar</a>
                             <input type="button" class="btn btn-default" onclick="window.location = '../MovimentoBancario/Create'" value="Incluir" />
                         </div>

@@ -67,7 +67,6 @@
                 </div>
                 <div class="row clearfix">
                     <div class="col-md-2">
-                        <label class="control-label" for="valor">Valor</label>
                         @*<input type="text" name="valor" id="valor" class="form-control text-right" value="@Model.valor.ToString("###,###,##0.00")" onblur="FormataNumero(this);" />*@
                         @Html.EditorFor(m => m.valor, "DECIMAL", new
                         {

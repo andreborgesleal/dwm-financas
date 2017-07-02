@@ -32,7 +32,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label class="control-label" for="dt_movto">Data</label>
-                            <input type="date" class="form-control" name="dt_movto" id="dt_movto" value="@Model.dt_movto.ToString("yyyy-MM-01")" />
+                            <input type="date" class="form-control" name="dt_movto" id="dt_movto" value="@Model.dt_movto.ToString("yyyy-MM-dd")" />
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -69,8 +69,6 @@
                 </div>
                 <div class="row clearfix">
                     <div class="col-md-2">
-                        <label class="control-label" for="valor">Valor</label>
-                        @*<input type="text" name="valor" id="valor" class="form-control text-right" value="@Model.valor.ToString("###,###,##0.00")" onblur="FormataNumero(this);" />*@
                         @Html.EditorFor(m => m.valor, "DECIMAL", new
                            {
                                htmlAttributes = (object)new { @class = "form-control text-right", @onblur = "return Converte(this, 'valor')" }

@@ -45,7 +45,7 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label class="control-label">Saldo Devedor</label>
-                <input class="form-control text-right" readonly id="vr_saldo_devedor" name="vr_saldo_devedor" type="text" value="@Model.vr_saldo_devedor.Value.ToString("###,###,###,##0.00")" onblur="return Converte(this, 'vr_saldo_devedor')">
+                <input class="form-control text-right" readonly id="vr_saldo_devedor" name="vr_saldo_devedor" type="text" value="@Model.vr_saldo_devedor.Value.ToString("###,###,###,##0.00")" onblur="_FormataNumero(this)">
             </div>
         </div>
         <div class="col-md-2">
@@ -82,7 +82,7 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label class="control-label">Valor pago</label>
-                <input class="form-control text-right" id="vr_baixa" name="vr_baixa" type="text" value="@Model.vr_baixa.Value.ToString("###,###,##0.00")" onblur="return Converte(this, 'vr_baixa')">
+                <input class="form-control text-right" id="vr_baixa" name="vr_baixa" type="text" value="@Model.vr_baixa.Value.ToString("###,###,##0.00")" onblur="_FormataNumero(this)">
             </div>
         </div>
     </div>
@@ -200,36 +200,36 @@
         if ($("#vr_baixa").val() == '')
             $("#vr_baixa").val('0,00');
 
-        var _vr_saldo_devedor = $("#vr_saldo_devedor").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _vr_saldo_devedor = parseInt(_vr_saldo_devedor);
+        var _vr_saldo_devedor = $("#vr_saldo_devedor").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _vr_saldo_devedor = parseFloat(_vr_saldo_devedor).toFixed(2);
 
-        var _vr_juros_mora = $("#vr_juros_mora").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _vr_juros_mora = parseInt(_vr_juros_mora);
+        var _vr_juros_mora = $("#vr_juros_mora").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _vr_juros_mora = parseFloat(_vr_juros_mora).toFixed(2);
 
         // juros de mora calculado pelo sistema
-        var _vr_juros_mora_baixa1 = $("#vr_juros_mora_baixa1").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _vr_juros_mora_baixa1 = parseInt(_vr_juros_mora_baixa1);
+        var _vr_juros_mora_baixa1 = $("#vr_juros_mora_baixa1").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _vr_juros_mora_baixa1 = parseFloat(_vr_juros_mora_baixa1).toFixed(2);
 
         // multa por atraso calculado pelo sistema
-        var _vr_multa_atraso_baixa1 = $("#vr_multa_atraso_baixa1").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _vr_multa_atraso_baixa1 = parseInt(_vr_multa_atraso_baixa1);
+        var _vr_multa_atraso_baixa1 = $("#vr_multa_atraso_baixa1").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _vr_multa_atraso_baixa1 = parseFloat(_vr_multa_atraso_baixa1).toFixed(2);
 
-        var _vr_multa_atraso = $("#vr_multa_atraso").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _vr_multa_atraso = parseInt(_vr_multa_atraso);
+        var _vr_multa_atraso = $("#vr_multa_atraso").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _vr_multa_atraso = parseFloat(_vr_multa_atraso).toFixed(2);
 
-        var _vr_desconto = $("#vr_desconto").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _vr_desconto = parseInt(_vr_desconto);
+        var _vr_desconto = $("#vr_desconto").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _vr_desconto = parseFloat(_vr_desconto).toFixed(2);
 
-        var _vr_baixa = $("#vr_baixa").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _vr_baixa = parseInt(_vr_baixa);
+        var _vr_baixa = $("#vr_baixa").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _vr_baixa = parseFloat(_vr_baixa).toFixed(2);
 
-        if (_vr_desconto > _vr_saldo_devedor) {
+        if (parseFloat(_vr_desconto) > parseFloat(_vr_saldo_devedor)) {
             _vr_desconto = 0;
             $("#vr_desconto").val("0,00");
         }
 
         //var _vr_liquidacao = (_vr_saldo_devedor - _vr_multa_atraso_baixa1 - _vr_juros_mora_baixa1) + _vr_juros_mora + _vr_multa_atraso - _vr_desconto;
-        var _vr_liquidacao = _vr_saldo_devedor + _vr_juros_mora + _vr_multa_atraso - _vr_desconto;
+        var _vr_liquidacao = parseFloat(_vr_saldo_devedor) + parseFloat(_vr_juros_mora) + parseFloat(_vr_multa_atraso) - parseFloat(_vr_desconto);
         _vr_baixa = _vr_liquidacao;
 
         $("#vr_liquidacao").val(_vr_baixa);
@@ -274,31 +274,31 @@
             $('#dt_vencimento').focus();
             return false;
         }
-        var _vr_liquidacao = $("#vr_liquidacao").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _vr_liquidacao = parseFloat(_vr_liquidacao);
+        var _vr_liquidacao = $("#vr_liquidacao").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _vr_liquidacao = parseFloat(_vr_liquidacao).toFixed(2);
 
-        var _vr_baixa = $("#vr_baixa").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _vr_baixa = parseFloat(_vr_baixa);
+        var _vr_baixa = $("#vr_baixa").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _vr_baixa = parseFloat(_vr_baixa).toFixed(2);
 
-        if (_vr_liquidacao < _vr_baixa) {
+        if (parseFloat(_vr_liquidacao) < parseFloat(_vr_baixa)) {
             ShowMessageAjaxAlert('Valor pago deve ser menor ou igual que o valor para liquidação', 'warning');
             $('#vr_baixa').focus();
             return false;
         }
 
-        if (_vr_baixa <= 0) {
+        if (parseFloat(_vr_baixa) <= 0) {
             ShowMessageAjaxAlert('Valor pago deve ser maior que zero', 'warning');
             $('#vr_baixa').focus();
             return false;
         }
 
-        var _vr_saldo_devedor = $("#vr_saldo_devedor").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _vr_saldo_devedor = parseFloat(_vr_saldo_devedor / 100);
+        var _vr_saldo_devedor = $("#vr_saldo_devedor").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _vr_saldo_devedor = parseFloat(_vr_saldo_devedor).toFixed(2);
 
-        var _vr_desconto = $("#vr_desconto").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _vr_desconto = parseFloat(_vr_desconto / 100);
+        var _vr_desconto = $("#vr_desconto").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _vr_desconto = parseFloat(_vr_desconto).toFixed(2);
 
-        if (_vr_desconto > _vr_saldo_devedor) {
+        if (parseFloat(_vr_desconto) > parseFloat(_vr_saldo_devedor)) {
             ShowMessageAjaxAlert('Desconto não pode ser maior que o valor para liquidação', 'warning');
             $('#vr_desconto').focus();
             return false;
