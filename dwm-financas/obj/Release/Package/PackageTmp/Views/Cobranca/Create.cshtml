@@ -695,8 +695,7 @@
         _valorMora = parseFloat(_valorMora).toFixed(2);
         _valorDesconto = parseFloat(_valorDesconto).toFixed(2);
 
-        if (_valorAmortizado > _valorPrincipal) {
-            _valorAmortizado = _valorPrincipal;
+        if (parseFloat(_valorAmortizado) > parseFloat(_valorPrincipal)) {
             $('#OperacaoParcela_OperacaoParcelaEvento_valor').val((_valorAmortizado).toString());
             $('#OperacaoParcela_vr_amortizacao').val((_valorAmortizado).toString());
             FormataNumero($("#OperacaoParcela_OperacaoParcelaEvento_valor")[0]);

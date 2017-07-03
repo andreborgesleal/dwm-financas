@@ -159,19 +159,19 @@ namespace DWM.Controllers
 
 
         [AuthorizeFilter]
-        public ActionResult ListOperacaoParam(int? index, int? pageSize = 50, string clienteId = null, string dt_emissao1 = null, string dt_emissao2 = null)
+        public ActionResult ListOperacaoParam(int? index, int? pageSize = 50, string credorId = null, string dt_emissao1 = null, string dt_emissao2 = null)
         {
             ViewBag.ValidateRequest = true;
             if (ViewBag.ValidateRequest)
             {
                 int? _null = null;
-                int? _clienteId = clienteId != null && clienteId != "" ? int.Parse(clienteId) : _null;
+                int? _credorId = credorId != null && credorId != "" ? int.Parse(credorId) : _null;
                 DateTime? _dt_emissao1 = Funcoes.StringToDate(dt_emissao1);
                 DateTime? _dt_emissao2 = Funcoes.StringToDate(dt_emissao2);
                 ListViewContaPagarBI list = new ListViewContaPagarBI();
 
                 Factory<EditarContaPagarViewModel, ApplicationContext> factory = new Factory<EditarContaPagarViewModel, ApplicationContext>();
-                IPagedList pagedList = factory.PagedList(list, index, pageSize.Value, _clienteId, _dt_emissao1, _dt_emissao2);
+                IPagedList pagedList = factory.PagedList(list, index, pageSize.Value, _credorId, _dt_emissao1, _dt_emissao2);
                 return View(pagedList);
             }
             else

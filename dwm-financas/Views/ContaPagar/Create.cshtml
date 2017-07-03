@@ -673,7 +673,7 @@
         _valorMora = parseFloat(_valorMora).toFixed(2);
         _valorDesconto = parseFloat(_valorDesconto).toFixed(2);
 
-        if (_valorAmortizado > _valorPrincipal) {
+        if (parseFloat(_valorAmortizado) > parseFloat(_valorPrincipal)) {
             _valorAmortizado = _valorPrincipal;
             $('#OperacaoParcela_OperacaoParcelaEvento_valor').val((_valorAmortizado).toString());
             $('#OperacaoParcela_vr_amortizacao').val((_valorAmortizado).toString());
@@ -727,7 +727,6 @@
 
         if (_valorTotal <= 0)
         {
-            _valorAmortizado = _valorAmortizado;
             $('#vr_juros').val('0,00');
             $('#vr_mora').val('0,00');
             $('#vr_desconto').val('0,00');

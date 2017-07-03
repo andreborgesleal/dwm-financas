@@ -10,12 +10,19 @@
     t[0].nomeCurto = "Incluir";
     t[0].referencia = "";
 
-    t[1].url = "../Contabilidade/Edit?contabilidadeId=" + Model.Contabilidade.contabilidadeId.ToString();
-    t[1].nomeCurto = "Alterar";
-    t[1].referencia = "";
-    t[1].exibir = "S";
+    if (Model.Contabilidade != null)
+    {
+        t[1].url = "../Contabilidade/Edit?contabilidadeId=" + Model.Contabilidade.contabilidadeId.ToString();
+        t[1].nomeCurto = "Alterar";
+        t[1].referencia = "";
+        t[1].exibir = "S";
 
-    t[2].url = "../Home/Default";
+        t[2].url = "../Home/Default";
+    }
+    else
+    {
+        t[1].url = "../Home/Default";
+    }
 }
 <div id="div-lov"></div>
 <div class="container-cadastro">

@@ -1,5 +1,5 @@
 ﻿@using DWM.Models.Repositories
-@model ContaReceberViewModel
+@model ContaPagarViewModel
 @{
     Layout = null;
 }
@@ -41,7 +41,7 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label class="control-label">Saldo Devedor</label>
-                <input class="form-control text-right" readonly id="vr_saldo_devedor" name="vr_saldo_devedor" type="text" value="@Model.OperacaoParcela.vr_saldo_devedor.Value.ToString("###,###,###,##0.00")" onblur="return Converte(this, 'vr_saldo_devedor')">
+                <input class="form-control text-right" readonly id="vr_saldo_devedor" name="vr_saldo_devedor" type="text" value="@Model.OperacaoParcela.vr_saldo_devedor.Value.ToString("###,###,###,##0.00")" onblur="_FormataNumero(this)">
             </div>
         </div>
         <div class="col-md-2">
@@ -179,28 +179,28 @@
         if ($("#vr_liquidacao").val() == '')
             $("#vr_liquidacao").val('0,00');
 
-        var _vr_saldo_devedor = $("#vr_saldo_devedor").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _vr_saldo_devedor = parseInt(_vr_saldo_devedor);
+        var _vr_saldo_devedor = $("#vr_saldo_devedor").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _vr_saldo_devedor = parseFloat(_vr_saldo_devedor).toFixed(2);
 
-        var _vr_juros_mora = $("#vr_juros_mora").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _vr_juros_mora = parseInt(_vr_juros_mora);
+        var _vr_juros_mora = $("#vr_juros_mora").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _vr_juros_mora = parseFloat(_vr_juros_mora).toFixed(2);
 
-        var _vr_multa_atraso = $("#vr_multa_atraso").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _vr_multa_atraso = parseInt(_vr_multa_atraso);
+        var _vr_multa_atraso = $("#vr_multa_atraso").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _vr_multa_atraso = parseFloat(_vr_multa_atraso).toFixed(2);
 
-        var _vr_desconto = $("#vr_desconto").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _vr_desconto = parseInt(_vr_desconto);
+        var _vr_desconto = $("#vr_desconto").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _vr_desconto = parseFloat(_vr_desconto).toFixed(2);
 
-        if (_vr_desconto > _vr_saldo_devedor) {
+        if (parseFloat(_vr_desconto) > parseFloat(_vr_saldo_devedor)) {
             _vr_desconto = 0;
             $("#vr_desconto").val("0,00");
         }
 
-        var _vr_liquidacao = _vr_saldo_devedor + _vr_juros_mora + _vr_multa_atraso - _vr_desconto;
+        var _vr_liquidacao = parseFloat(_vr_saldo_devedor) + parseFloat(_vr_juros_mora) + parseFloat(_vr_multa_atraso) - parseFloat(_vr_desconto);
 
         $("#vr_liquidacao").val(_vr_liquidacao);
 
-        FormataNumero($("#vr_liquidacao")[0]);
+        _FormataNumero($("#vr_liquidacao")[0]);
 
         return true;
     }
@@ -239,22 +239,22 @@
             return false;
         }
 
-        var _vr_liquidacao = $("#vr_liquidacao").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _vr_liquidacao = parseInt(_vr_liquidacao);
+        var _vr_liquidacao = $("#vr_liquidacao").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _vr_liquidacao = parseFloat(_vr_liquidacao).toFixed(2);
 
-        if (_vr_liquidacao <= 0) {
+        if (parseFloat(_vr_liquidacao) <= 0) {
             ShowMessageAjaxAlert('Valor pago deve ser maior que zero', 'warning');
             $('#vr_liquidacao').focus();
             return false;
         }
 
-        var _vr_saldo_devedor = $("#vr_saldo_devedor").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _vr_saldo_devedor = parseInt(_vr_saldo_devedor);
+        var _vr_saldo_devedor = $("#vr_saldo_devedor").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _vr_saldo_devedor = parseFloat(_vr_saldo_devedor).toFixed(2);
 
-        var _vr_desconto = $("#vr_desconto").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
-        _vr_desconto = parseInt(_vr_desconto);
+        var _vr_desconto = $("#vr_desconto").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '.').replace(' ', '');
+        _vr_desconto = parseFloat(_vr_desconto).toFixed(2);
 
-        if (_vr_desconto > _vr_saldo_devedor) {
+        if (parseFloat(_vr_desconto) > parseFloat(_vr_saldo_devedor)) {
             ShowMessageAjaxAlert('Desconto não pode ser maior que o valor para liquidação', 'warning');
             $('#vr_desconto').focus();
             return false;
