@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="497749386" Data="03/07/2017 20:39:20">
+    <Sessao>jwz5yaerne02qner55ygybat</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O thread estava sendo anulado.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.SecurityContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; contapagar/create</NameSpace>
+    <Context />
+    <StackTrace>   em System.Array.Copy(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length, Boolean reliable)
+   em System.Collections.Generic.List`1.set_Capacity(Int32 value)
+   em System.Collections.Generic.List`1.EnsureCapacity(Int32 min)
+   em System.Collections.Generic.List`1.Add(T item)
+   em System.Data.Entity.Core.Objects.EntityEntry.TakeSnapshot(Boolean onlySnapshotComplexProperties)
+   em System.Data.Entity.Core.Objects.Internal.SnapshotChangeTrackingStrategy.TakeSnapshot(EntityEntry entry)
+   em System.Data.Entity.Core.Objects.Internal.EntityWrapper`1.TakeSnapshot(EntityEntry entry)
+   em System.Data.Entity.Core.Objects.ObjectStateManager.AddEntry(IEntityWrapper wrappedObject, EntityKey passedKey, EntitySet entitySet, String argumentName, Boolean isAdded)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   em lambda_method(Closure , Shaper )
+   em System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 225</StackTrace>
+  </LOG>
+  <LOG ID="932606685" Data="03/07/2017 20:45:15">
+    <Sessao>jwz5yaerne02qner55ygybat</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O thread estava sendo anulado.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.SecurityContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; contapagar/create</NameSpace>
+    <Context />
+    <StackTrace>   em System.Collections.Generic.Dictionary`2.FindEntry(TKey key)
+   em System.Collections.Generic.Dictionary`2.TryGetValue(TKey key, TValue&amp; value)
+   em System.Data.Entity.Core.Mapping.ObjectTypeMapping.GetMemberMap(String propertyName, Boolean ignoreCase)
+   em System.Data.Entity.Core.Mapping.ObjectTypeMapping.GetPropertyMap(String propertyName)
+   em System.Data.Entity.Core.Objects.StateManagerTypeMetadata..ctor(EdmType edmType, ObjectTypeMapping mapping)
+   em System.Data.Entity.Core.Objects.ObjectStateManager.AddStateManagerTypeMetadata(EntitySet entitySet, ObjectTypeMapping mapping)
+   em System.Data.Entity.Core.Objects.ObjectStateManager.GetOrAddStateManagerTypeMetadata(Type entityType, EntitySet entitySet)
+   em System.Data.Entity.Core.Objects.ObjectStateManager.AddEntry(IEntityWrapper wrappedObject, EntityKey passedKey, EntitySet entitySet, String argumentName, Boolean isAdded)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   em lambda_method(Closure , Shaper )
+   em System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 225</StackTrace>
+  </LOG>
+  <LOG ID="1479860659" Data="03/07/2017 20:51:11">
+    <Sessao>jwz5yaerne02qner55ygybat</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O thread estava sendo anulado.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.SecurityContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; contapagar/create</NameSpace>
+    <Context />
+    <StackTrace>   em System.Collections.Generic.Dictionary`2.Initialize(Int32 capacity)
+   em System.Collections.Generic.Dictionary`2..ctor(Int32 capacity, IEqualityComparer`1 comparer)
+   em System.Data.Entity.Core.Objects.StateManagerTypeMetadata..ctor(EdmType edmType, ObjectTypeMapping mapping)
+   em System.Data.Entity.Core.Objects.ObjectStateManager.AddStateManagerTypeMetadata(EntitySet entitySet, ObjectTypeMapping mapping)
+   em System.Data.Entity.Core.Objects.ObjectStateManager.GetOrAddStateManagerTypeMetadata(Type entityType, EntitySet entitySet)
+   em System.Data.Entity.Core.Objects.ObjectStateManager.AddEntry(IEntityWrapper wrappedObject, EntityKey passedKey, EntitySet entitySet, String argumentName, Boolean isAdded)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   em lambda_method(Closure , Shaper )
+   em System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 225</StackTrace>
+  </LOG>
+  <LOG ID="1801036753" Data="03/07/2017 20:55:14">
+    <Sessao>jwz5yaerne02qner55ygybat</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O thread estava sendo anulado.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.SecurityContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; contapagar/create</NameSpace>
+    <Context />
+    <StackTrace>   em System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   em System.Data.Entity.Core.Objects.StateManagerTypeMetadata..ctor(EdmType edmType, ObjectTypeMapping mapping)
+   em System.Data.Entity.Core.Objects.ObjectStateManager.AddStateManagerTypeMetadata(EntitySet entitySet, ObjectTypeMapping mapping)
+   em System.Data.Entity.Core.Objects.ObjectStateManager.GetOrAddStateManagerTypeMetadata(Type entityType, EntitySet entitySet)
+   em System.Data.Entity.Core.Objects.ObjectStateManager.AddEntry(IEntityWrapper wrappedObject, EntityKey passedKey, EntitySet entitySet, String argumentName, Boolean isAdded)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   em lambda_method(Closure , Shaper )
+   em System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 225</StackTrace>
+  </LOG>
+  <LOG ID="1988967448" Data="03/07/2017 21:33:38">
+    <Sessao>jwz5yaerne02qner55ygybat</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O thread estava sendo anulado.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.SecurityContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; contapagar/create</NameSpace>
+    <Context />
+    <StackTrace>   em lambda_method(Closure , Object )
+   em System.Data.Entity.Core.Objects.DelegateFactory.GetValue(EdmProperty property, Object target)
+   em System.Data.Entity.Core.Objects.StateManagerMemberMetadata.GetValue(Object userObject)
+   em System.Data.Entity.Core.Objects.EntityEntry.TakeSnapshot(Boolean onlySnapshotComplexProperties)
+   em System.Data.Entity.Core.Objects.Internal.SnapshotChangeTrackingStrategy.TakeSnapshot(EntityEntry entry)
+   em System.Data.Entity.Core.Objects.Internal.EntityWrapper`1.TakeSnapshot(EntityEntry entry)
+   em System.Data.Entity.Core.Objects.ObjectStateManager.AddEntry(IEntityWrapper wrappedObject, EntityKey passedKey, EntitySet entitySet, String argumentName, Boolean isAdded)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   em lambda_method(Closure , Shaper )
+   em System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 225</StackTrace>
+  </LOG>
+  <LOG ID="1386307106" Data="03/07/2017 21:34:31">
+    <Sessao>jwz5yaerne02qner55ygybat</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O thread estava sendo anulado.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.SecurityContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; contapagar/create</NameSpace>
+    <Context />
+    <StackTrace>   em System.Array.Copy(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length, Boolean reliable)
+   em System.Collections.Generic.List`1.set_Capacity(Int32 value)
+   em System.Collections.Generic.List`1.EnsureCapacity(Int32 min)
+   em System.Collections.Generic.List`1.Add(T item)
+   em System.Data.Entity.Core.Objects.EntityEntry.TakeSnapshot(Boolean onlySnapshotComplexProperties)
+   em System.Data.Entity.Core.Objects.Internal.SnapshotChangeTrackingStrategy.TakeSnapshot(EntityEntry entry)
+   em System.Data.Entity.Core.Objects.Internal.EntityWrapper`1.TakeSnapshot(EntityEntry entry)
+   em System.Data.Entity.Core.Objects.ObjectStateManager.AddEntry(IEntityWrapper wrappedObject, EntityKey passedKey, EntitySet entitySet, String argumentName, Boolean isAdded)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   em lambda_method(Closure , Shaper )
+   em System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 225</StackTrace>
+  </LOG>
+</LOG>

@@ -2,6 +2,8 @@
 @model System.Web.Mvc.PagedList<EnquadramentoViewModel>
 @{
     Layout = null;
+    int idx = 0;
+    string colapseName = "colapseEnq";
 }
 
 @if (Model != null)
@@ -16,12 +18,36 @@
         <tbody>
             @foreach (EnquadramentoViewModel enq in Model)
             {
+                idx++;
+                colapseName = "collapseExample" + idx.ToString();
                 <tr class="even pointer" >
                     <td class="col-md-2 text-center">
                         <button type="button" class="fa fa-check" title="Selecionar" onclick="Move('@enq.enquadramentoId', '@enq.descricao')"></button>
+                        <button type="button" class="fa fa-info" title="Informações do modelo contábil" data-toggle="collapse" data-target="#@colapseName" aria-expanded="false" aria-controls="collapseExample"></button>
                     </td>
                     <td>
                         <small>@enq.descricao</small>
+                        <div class="collapse" id="@colapseName">
+                            <table class="table">
+                                <tr>
+                                    <td class="text-dark"><small><strong>Conta</strong></small></td>
+                                    <td class="text-dark"><small><strong>Descrição</strong></small></td>
+                                    <td class="text-dark"><small><strong>C.Custo</strong></small></td>
+                                    <td class="text-dark text-center"><small><strong>Tipo</strong></small></td>
+                                    <td class="text-dark"><small><strong>Valor</strong></small></td>
+                                </tr>
+                                @foreach (EnquadramentoItemViewModel i in enq.EnquadramentoItems)
+                                {
+                                    <tr>
+                                        <td><small>@i.codigoPleno</small></td>
+                                        <td><small>@i.descricao_planoConta</small></td>
+                                        <td><small>@i.descricao_centroCusto</small></td>
+                                        <td class="text-center"><small>@i.tipoLancamento</small></td>
+                                        <td><small>@(i.valor.HasValue ? i.valor.Value.ToString("###,###,##0.00") : "")</small></td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
                     </td>
                 </tr>
             }

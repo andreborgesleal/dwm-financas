@@ -74,8 +74,8 @@ namespace DWM.Models.Persistence
         {
             ContaReceberViewModel r = base.CreateRepository(Request);
 
-            r.nome_cliente = "";
-            r.descricao_grupoCliente = "";
+            r.nome_cliente = r.nome_cliente == null ? "" : r.nome_cliente;
+            r.descricao_grupoCliente = r.descricao_grupoCliente == null ? "" : r.descricao_grupoCliente;
 
             return r;
         }

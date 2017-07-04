@@ -470,12 +470,14 @@ namespace DWM.Models.Persistence
             r.centroCustoId = entity.centroCustoId;
             r.descricao_centroCusto = entity.centroCustoId != null ? db.CentroCustos.Find(entity.centroCustoId).descricao : "";
             r.dt_emissao = entity.dt_emissao;
-            r.vr_jurosMora = entity.vr_jurosMora;
-            r.vr_multa = entity.vr_multa;
+            r.vr_jurosMora = entity.vr_jurosMora == 0 ? null : entity.vr_jurosMora;
+            r.vr_multa = entity.vr_multa == 0 ? null : entity.vr_multa;
             r.documento = entity.documento;
             r.recorrencia = entity.recorrencia;
             r.recorrencia_mensal = entity.recorrencia == "S" ? true : false;
             r.dt_movto = Funcoes.Brasilia().Date;
+            r.fileBoleto = "";
+            r.num_parcelas = 1;
             r.OperacaoParcelas = new List<OPRepo>();
 
             #endregion
@@ -505,10 +507,14 @@ namespace DWM.Models.Persistence
             r.OperacaoParcela.bancoId = r.OperacaoParcelas.FirstOrDefault().bancoId;
             r.OperacaoParcela.nome_banco = r.OperacaoParcelas.FirstOrDefault().nome_banco;
             r.OperacaoParcela.ind_forma_pagamento = r.OperacaoParcelas.FirstOrDefault().ind_forma_pagamento ?? "";
-            r.OperacaoParcela.dt_vencimento = Funcoes.Brasilia().Date;
-            r.OperacaoParcela.vr_principal = r.OperacaoParcelas.Sum(info => info.vr_saldo_devedor).GetValueOrDefault(0);
+            r.OperacaoParcela.dt_vencimento = r.OperacaoParcelas.FirstOrDefault().dt_vencimento;
+            r.OperacaoParcela.vr_principal = r.OperacaoParcelas.Sum(info => info.vr_principal);
+            //r.OperacaoParcela.vr_principal = r.OperacaoParcelas.Sum(info => info.vr_saldo_devedor).GetValueOrDefault(0);
             r.OperacaoParcela.vr_saldo_devedor = r.OperacaoParcelas.Sum(info => info.vr_saldo_devedor).GetValueOrDefault(0);
             r.OperacaoParcela.dt_baixa = Funcoes.Brasilia().Date;
+            r.OperacaoParcela.cheque_agencia = r.OperacaoParcelas.FirstOrDefault().cheque_agencia;
+            r.OperacaoParcela.cheque_banco = r.OperacaoParcelas.FirstOrDefault().cheque_banco;
+            r.OperacaoParcela.cheque_numero = r.OperacaoParcelas.FirstOrDefault().cheque_numero;
             #endregion
 
             return r;
@@ -586,24 +592,32 @@ namespace DWM.Models.Persistence
 
             ORepo r = base.CreateRepository(Request);
 
-            r.operacaoId = 0;
-            r.empresaId = sessaoCorrente.empresaId;
-            r.dt_emissao = d;
-            r.recorrencia = "N";
-            r.recorrencia_mensal = false;
-            r.num_parcelas = 1;
-            r.dt_movto = Funcoes.Brasilia().Date;
-            r.documento = "";
-            r.descricao_historico = "";
-            r.complementoHist = "";
-            r.descricao_centroCusto = "";
-
-            r.OperacaoParcela = getOperacaoParcelaRepositoryInstance();
-
+            if (Request != null && Request["operacaoId"] != null && Request["operacaoId"] != "")
+            {
+                r.operacaoId = int.Parse(Request["operacaoId"]);
+                O entity = Find(r);
+                r = MapToRepository(entity);
+            }
+            else
+            {
+                r.operacaoId = 0;
+                r.empresaId = sessaoCorrente.empresaId;
+                r.dt_emissao = d;
+                r.recorrencia = "N";
+                r.recorrencia_mensal = false;
+                r.num_parcelas = 1;
+                r.dt_movto = Funcoes.Brasilia().Date;
+                r.documento = "";
+                r.descricao_historico = "";
+                r.complementoHist = "";
+                r.descricao_centroCusto = "";
+                    
+                r.OperacaoParcela = getOperacaoParcelaRepositoryInstance();
+                r.OperacaoParcela.ind_forma_pagamento = "4";
+                r.OperacaoParcela.dt_vencimento = Funcoes.Brasilia().Date;
+                r.OperacaoParcela.dt_baixa = Funcoes.Brasilia().Date;
+            }
             r.OperacaoParcela.parcelaId = 1;
-            r.OperacaoParcela.dt_vencimento = Funcoes.Brasilia().Date;
-            r.OperacaoParcela.dt_baixa = Funcoes.Brasilia().Date;
-            r.OperacaoParcela.ind_forma_pagamento = "4";
 
             r.OperacaoParcela.OperacaoParcelaEvento = getOperacaoParcelaEventoRepositoryInstance();
 
@@ -612,6 +626,7 @@ namespace DWM.Models.Persistence
             r.OperacaoParcela.OperacaoParcelaEvento.dt_movto = Funcoes.Brasilia().Date;
 
             r.OperacaoParcelas = new List<OPRepo>();
+
             r.mensagem = new Validate() { Code = 0, Message = "Registro processado com sucesso !" };
 
             return r;

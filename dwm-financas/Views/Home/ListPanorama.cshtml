@@ -149,12 +149,12 @@
                                             @if (!String.IsNullOrEmpty(ope.descricao_grupoCliente))
                                             {
                                                 @ope.nome_cliente <small>(@ope.descricao_grupoCliente)</small>
-                                                <small class="text-mama-africa">@(ope.descricao_historico + " " + ope.complementoHist)</small> 
+                                                <small>@(ope.descricao_historico + " " + ope.complementoHist)</small> 
                                             }
                                             else
                                             {
                                                 @(ope.nome_cliente)
-                                                <small class="text-mama-africa">(@(ope.descricao_historico + " " + ope.complementoHist))</small>
+                                                <small>(@(ope.descricao_historico + " " + ope.complementoHist))</small>
                                             }
                                         </span>
                                     </td>

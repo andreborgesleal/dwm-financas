@@ -74,8 +74,8 @@ namespace DWM.Models.Persistence
         {
             ContaPagarViewModel r = base.CreateRepository(Request);
 
-            r.nome_credor = "";
-            r.descricao_grupoCredor = "";
+            r.nome_credor = r.nome_credor == null ? "" : r.nome_credor;
+            r.descricao_grupoCredor = r.descricao_grupoCredor == null ? "" : r.descricao_grupoCredor;
 
             return r;
         }

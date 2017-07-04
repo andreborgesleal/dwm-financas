@@ -58,7 +58,7 @@
         <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
             <div class="x_panel">
                 @{
-                    TransacaoRepository[] tTitulo = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
+                    TransacaoRepository[] tTitulo = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
                     tTitulo[0].uri = "myTab";
                     tTitulo[0].nomeCurto = "Baixar";
                     tTitulo[0].referencia = "$(\"#home-tab\").click();";
@@ -77,7 +77,13 @@
                     tTitulo[2].exibir = "S";
                     tTitulo[2].glyph = "fa fa-edit";
 
-                    tTitulo[3].url = "../Home/Default";
+                    tTitulo[3].uri = "myTab";
+                    tTitulo[3].nomeCurto = "Salvar como";
+                    tTitulo[3].url = "../Cobranca/Create?operacaoId=" + Model.operacaoId.ToString();
+                    tTitulo[3].exibir = "S";
+                    tTitulo[3].glyph = "fa fa-save";
+
+                    tTitulo[4].url = "../Home/Default";
                 }
                 @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = Model.nome_cliente, Descricao = "", Transacao = tTitulo })
                 <div class="x_content">

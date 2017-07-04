@@ -194,7 +194,7 @@ namespace DWM.Models.Persistence
             string _descricao = param != null && param.Count() > 0 && param[0] != null ? param[0].ToString() : null;
             //int _exercicio = int.Parse(sessaoCorrente.value1);
             int _exercicio = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EXERCICIO_CONTABIL, sessaoCorrente.empresaId).valor);
-            var q = (from c in db.Enquadramentos
+            var q = (from c in db.Enquadramentos 
                      where c.empresaId.Equals(sessaoCorrente.empresaId)
                             && c.exercicio == _exercicio
                             && (_descricao == null || String.IsNullOrEmpty(_descricao) || c.descricao.StartsWith(_descricao.Trim()))
@@ -206,6 +206,8 @@ namespace DWM.Models.Persistence
                          exercicio = c.exercicio,
                          descricao = c.descricao,
                          EnquadramentoItems = from i in db.EnquadramentoItems join pc in db.PlanoContas on i.planoContaId equals pc.planoContaId
+                                              join ccu in db.CentroCustos on i.centroCustoId equals ccu.centroCustoId into CCU
+                                              from ccu in CCU.DefaultIfEmpty()
                                               where i.enquadramentoId == c.enquadramentoId
                                               select new EnquadramentoItemViewModel()
                                               {
@@ -215,6 +217,8 @@ namespace DWM.Models.Persistence
                                                   planoContaId = i.planoContaId,
                                                   codigoPleno = pc.codigoPleno,
                                                   historicoId = i.historicoId,
+                                                  descricao_planoConta = pc.descricao,
+                                                  descricao_centroCusto = ccu.descricao,
                                                   complementoHist = i.complementoHist,
                                                   tipoLancamento = i.tipoLancamento,
                                                   valor = i.valor
