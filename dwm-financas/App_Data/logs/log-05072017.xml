@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="154140353" Data="05/07/2017 23:08:47">
+    <Sessao>uxlt4ayxyvwnjll24mcd0qq1</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>An error occurred while updating the entries. See the inner exception for details. *** An error occurred while updating the entries. See the inner exception for details.</Mensagem>
+    <NameSpace>DWM.Controllers.ContaPagarController =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Internal.InternalContext.SaveChanges()
+   em System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   em System.Data.Entity.DbContext.SaveChanges()
+   em App_Dominio.Pattern.Factory`2.Execute(IProcess`2 proc, Repository value, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Factory.cs:linha 76
+   em DWM.Controllers.OperacaoController`19._Baixar(Int32 operacaoId, Int32 parcelaId, Nullable`1 bancoId, String dt_pagamento, String dt_movto, String ind_forma_pagamento, String vr_juros_mora, String vr_multa_atraso, String vr_desconto, String vr_saldo_devedor, String vr_liquidacao, String vr_baixa, String arquivo, String cheque_banco, String cheque_agencia, String cheque_numero, Int32 historicoId, String complementoHist, Nullable`1 enquadramentoId, String vr_juros_mora_baixa1, String vr_multa_atraso_baixa1) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 221</StackTrace>
+  </LOG>
+  <LOG ID="574699458" Data="05/07/2017 23:10:52">
+    <Sessao>uxlt4ayxyvwnjll24mcd0qq1</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>An error occurred while updating the entries. See the inner exception for details. *** An error occurred while updating the entries. See the inner exception for details.</Mensagem>
+    <NameSpace>DWM.Controllers.ContaPagarController =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Internal.InternalContext.SaveChanges()
+   em System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   em System.Data.Entity.DbContext.SaveChanges()
+   em App_Dominio.Pattern.Factory`2.Execute(IProcess`2 proc, Repository value, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Factory.cs:linha 76
+   em DWM.Controllers.OperacaoController`19._Baixar(Int32 operacaoId, Int32 parcelaId, Nullable`1 bancoId, String dt_pagamento, String dt_movto, String ind_forma_pagamento, String vr_juros_mora, String vr_multa_atraso, String vr_desconto, String vr_saldo_devedor, String vr_liquidacao, String vr_baixa, String arquivo, String cheque_banco, String cheque_agencia, String cheque_numero, Int32 historicoId, String complementoHist, Nullable`1 enquadramentoId, String vr_juros_mora_baixa1, String vr_multa_atraso_baixa1) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 221</StackTrace>
+  </LOG>
+  <LOG ID="2111235651" Data="05/07/2017 23:10:58">
+    <Sessao>uxlt4ayxyvwnjll24mcd0qq1</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>An error occurred while updating the entries. See the inner exception for details. *** An error occurred while updating the entries. See the inner exception for details.</Mensagem>
+    <NameSpace>DWM.Controllers.ContaPagarController =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Internal.InternalContext.SaveChanges()
+   em System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   em System.Data.Entity.DbContext.SaveChanges()
+   em App_Dominio.Pattern.Factory`2.Execute(IProcess`2 proc, Repository value, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Factory.cs:linha 76
+   em DWM.Controllers.OperacaoController`19._Baixar(Int32 operacaoId, Int32 parcelaId, Nullable`1 bancoId, String dt_pagamento, String dt_movto, String ind_forma_pagamento, String vr_juros_mora, String vr_multa_atraso, String vr_desconto, String vr_saldo_devedor, String vr_liquidacao, String vr_baixa, String arquivo, String cheque_banco, String cheque_agencia, String cheque_numero, Int32 historicoId, String complementoHist, Nullable`1 enquadramentoId, String vr_juros_mora_baixa1, String vr_multa_atraso_baixa1) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 221</StackTrace>
+  </LOG>
+  <LOG ID="1537641680" Data="05/07/2017 23:11:03">
+    <Sessao>uxlt4ayxyvwnjll24mcd0qq1</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>An error occurred while updating the entries. See the inner exception for details. *** An error occurred while updating the entries. See the inner exception for details.</Mensagem>
+    <NameSpace>DWM.Controllers.ContaPagarController =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Internal.InternalContext.SaveChanges()
+   em System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   em System.Data.Entity.DbContext.SaveChanges()
+   em App_Dominio.Pattern.Factory`2.Execute(IProcess`2 proc, Repository value, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Factory.cs:linha 76
+   em DWM.Controllers.OperacaoController`19._Baixar(Int32 operacaoId, Int32 parcelaId, Nullable`1 bancoId, String dt_pagamento, String dt_movto, String ind_forma_pagamento, String vr_juros_mora, String vr_multa_atraso, String vr_desconto, String vr_saldo_devedor, String vr_liquidacao, String vr_baixa, String arquivo, String cheque_banco, String cheque_agencia, String cheque_numero, Int32 historicoId, String complementoHist, Nullable`1 enquadramentoId, String vr_juros_mora_baixa1, String vr_multa_atraso_baixa1) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 221</StackTrace>
+  </LOG>
+  <LOG ID="785231180" Data="05/07/2017 23:11:56">
+    <Sessao>uxlt4ayxyvwnjll24mcd0qq1</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>An error occurred while updating the entries. See the inner exception for details. *** An error occurred while updating the entries. See the inner exception for details.</Mensagem>
+    <NameSpace>DWM.Controllers.ContaPagarController =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Internal.InternalContext.SaveChanges()
+   em System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   em System.Data.Entity.DbContext.SaveChanges()
+   em App_Dominio.Pattern.Factory`2.Execute(IProcess`2 proc, Repository value, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Factory.cs:linha 76
+   em DWM.Controllers.OperacaoController`19._Baixar(Int32 operacaoId, Int32 parcelaId, Nullable`1 bancoId, String dt_pagamento, String dt_movto, String ind_forma_pagamento, String vr_juros_mora, String vr_multa_atraso, String vr_desconto, String vr_saldo_devedor, String vr_liquidacao, String vr_baixa, String arquivo, String cheque_banco, String cheque_agencia, String cheque_numero, Int32 historicoId, String complementoHist, Nullable`1 enquadramentoId, String vr_juros_mora_baixa1, String vr_multa_atraso_baixa1) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 221</StackTrace>
+  </LOG>
+  <LOG ID="1199451566" Data="05/07/2017 23:13:03">
+    <Sessao>uxlt4ayxyvwnjll24mcd0qq1</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>An error occurred while updating the entries. See the inner exception for details. *** An error occurred while updating the entries. See the inner exception for details.</Mensagem>
+    <NameSpace>DWM.Controllers.ContaPagarController =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Internal.InternalContext.SaveChanges()
+   em System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   em System.Data.Entity.DbContext.SaveChanges()
+   em App_Dominio.Pattern.Factory`2.Execute(IProcess`2 proc, Repository value, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Factory.cs:linha 76
+   em DWM.Controllers.OperacaoController`19._Baixar(Int32 operacaoId, Int32 parcelaId, Nullable`1 bancoId, String dt_pagamento, String dt_movto, String ind_forma_pagamento, String vr_juros_mora, String vr_multa_atraso, String vr_desconto, String vr_saldo_devedor, String vr_liquidacao, String vr_baixa, String arquivo, String cheque_banco, String cheque_agencia, String cheque_numero, Int32 historicoId, String complementoHist, Nullable`1 enquadramentoId, String vr_juros_mora_baixa1, String vr_multa_atraso_baixa1) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 221</StackTrace>
+  </LOG>
+  <LOG ID="885185283" Data="05/07/2017 23:14:04">
+    <Sessao>uxlt4ayxyvwnjll24mcd0qq1</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>An error occurred while updating the entries. See the inner exception for details. *** An error occurred while updating the entries. See the inner exception for details.</Mensagem>
+    <NameSpace>DWM.Controllers.ContaPagarController =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Internal.InternalContext.SaveChanges()
+   em System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   em System.Data.Entity.DbContext.SaveChanges()
+   em App_Dominio.Pattern.Factory`2.Execute(IProcess`2 proc, Repository value, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Factory.cs:linha 76
+   em DWM.Controllers.OperacaoController`19._Baixar(Int32 operacaoId, Int32 parcelaId, Nullable`1 bancoId, String dt_pagamento, String dt_movto, String ind_forma_pagamento, String vr_juros_mora, String vr_multa_atraso, String vr_desconto, String vr_saldo_devedor, String vr_liquidacao, String vr_baixa, String arquivo, String cheque_banco, String cheque_agencia, String cheque_numero, Int32 historicoId, String complementoHist, Nullable`1 enquadramentoId, String vr_juros_mora_baixa1, String vr_multa_atraso_baixa1) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 221</StackTrace>
+  </LOG>
+  <LOG ID="1179866276" Data="05/07/2017 23:19:01">
+    <Sessao>uxlt4ayxyvwnjll24mcd0qq1</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>An error occurred while updating the entries. See the inner exception for details. *** An error occurred while updating the entries. See the inner exception for details.</Mensagem>
+    <NameSpace>DWM.Controllers.ContaPagarController =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Internal.InternalContext.SaveChanges()
+   em System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   em System.Data.Entity.DbContext.SaveChanges()
+   em App_Dominio.Pattern.Factory`2.Execute(IProcess`2 proc, Repository value, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Factory.cs:linha 76
+   em DWM.Controllers.OperacaoController`19._Baixar(Int32 operacaoId, Int32 parcelaId, Nullable`1 bancoId, String dt_pagamento, String dt_movto, String ind_forma_pagamento, String vr_juros_mora, String vr_multa_atraso, String vr_desconto, String vr_saldo_devedor, String vr_liquidacao, String vr_baixa, String arquivo, String cheque_banco, String cheque_agencia, String cheque_numero, Int32 historicoId, String complementoHist, Nullable`1 enquadramentoId, String vr_juros_mora_baixa1, String vr_multa_atraso_baixa1) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 222</StackTrace>
+  </LOG>
+  <LOG ID="1785994407" Data="05/07/2017 23:23:52">
+    <Sessao>uxlt4ayxyvwnjll24mcd0qq1</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>An error occurred while updating the entries. See the inner exception for details. *** An error occurred while updating the entries. See the inner exception for details.</Mensagem>
+    <NameSpace>DWM.Controllers.ContaPagarController =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Internal.InternalContext.SaveChanges()
+   em System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   em System.Data.Entity.DbContext.SaveChanges()
+   em App_Dominio.Pattern.Factory`2.Execute(IProcess`2 proc, Repository value, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Factory.cs:linha 76
+   em DWM.Controllers.OperacaoController`19._Baixar(Int32 operacaoId, Int32 parcelaId, Nullable`1 bancoId, String dt_pagamento, String dt_movto, String ind_forma_pagamento, String vr_juros_mora, String vr_multa_atraso, String vr_desconto, String vr_saldo_devedor, String vr_liquidacao, String vr_baixa, String arquivo, String cheque_banco, String cheque_agencia, String cheque_numero, Int32 historicoId, String complementoHist, Nullable`1 enquadramentoId, String vr_juros_mora_baixa1, String vr_multa_atraso_baixa1) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 222</StackTrace>
+  </LOG>
+  <LOG ID="874833199" Data="05/07/2017 23:26:15">
+    <Sessao>uxlt4ayxyvwnjll24mcd0qq1</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>An error occurred while updating the entries. See the inner exception for details. *** An error occurred while updating the entries. See the inner exception for details.</Mensagem>
+    <NameSpace>DWM.Controllers.ContaPagarController =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Internal.InternalContext.SaveChanges()
+   em System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   em System.Data.Entity.DbContext.SaveChanges()
+   em App_Dominio.Pattern.Factory`2.Execute(IProcess`2 proc, Repository value, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Factory.cs:linha 76
+   em DWM.Controllers.OperacaoController`19._Baixar(Int32 operacaoId, Int32 parcelaId, Nullable`1 bancoId, String dt_pagamento, String dt_movto, String ind_forma_pagamento, String vr_juros_mora, String vr_multa_atraso, String vr_desconto, String vr_saldo_devedor, String vr_liquidacao, String vr_baixa, String arquivo, String cheque_banco, String cheque_agencia, String cheque_numero, Int32 historicoId, String complementoHist, Nullable`1 enquadramentoId, String vr_juros_mora_baixa1, String vr_multa_atraso_baixa1) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 222</StackTrace>
+  </LOG>
+  <LOG ID="1156591089" Data="05/07/2017 23:26:40">
+    <Sessao>uxlt4ayxyvwnjll24mcd0qq1</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O thread estava sendo anulado.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.SecurityContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace>   em System.Buffer.BlockCopy(Array src, Int32 srcOffset, Array dst, Int32 dstOffset, Int32 count)
+   em System.Data.SqlClient.TdsParserStateObject.TryReadByteArray(Byte[] buff, Int32 offset, Int32 len, Int32&amp; totalRead)
+   em System.Data.SqlClient.TdsParserStateObject.NullBitmap.TryInitialize(TdsParserStateObject stateObj, Int32 columnsCount)
+   em System.Data.SqlClient.TdsParserStateObject.TryStartNewRow(Boolean isNullCompressed, Int32 nullBitmapColumnsCount)
+   em System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean&amp; dataReady)
+   em System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean&amp; more)
+   em System.Data.SqlClient.SqlDataReader.Read()
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.StoreRead()
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 225</StackTrace>
+  </LOG>
+  <LOG ID="2024463074" Data="05/07/2017 23:27:26">
+    <Sessao>uxlt4ayxyvwnjll24mcd0qq1</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O thread estava sendo anulado.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.SecurityContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace>   em System.Buffer.BlockCopy(Array src, Int32 srcOffset, Array dst, Int32 dstOffset, Int32 count)
+   em System.Data.SqlClient.TdsParserStateObject.TryReadByteArray(Byte[] buff, Int32 offset, Int32 len, Int32&amp; totalRead)
+   em System.Data.SqlClient.TdsParserStateObject.NullBitmap.TryInitialize(TdsParserStateObject stateObj, Int32 columnsCount)
+   em System.Data.SqlClient.TdsParserStateObject.TryStartNewRow(Boolean isNullCompressed, Int32 nullBitmapColumnsCount)
+   em System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean&amp; dataReady)
+   em System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean&amp; more)
+   em System.Data.SqlClient.SqlDataReader.Read()
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.StoreRead()
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 225</StackTrace>
+  </LOG>
+  <LOG ID="904796089" Data="05/07/2017 23:31:06">
+    <Sessao>uxlt4ayxyvwnjll24mcd0qq1</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>An error occurred while updating the entries. See the inner exception for details. *** An error occurred while updating the entries. See the inner exception for details.</Mensagem>
+    <NameSpace>DWM.Controllers.ContaPagarController =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Internal.InternalContext.SaveChanges()
+   em System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   em System.Data.Entity.DbContext.SaveChanges()
+   em App_Dominio.Pattern.Factory`2.Execute(IProcess`2 proc, Repository value, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Factory.cs:linha 76
+   em DWM.Controllers.OperacaoController`19._Baixar(Int32 operacaoId, Int32 parcelaId, Nullable`1 bancoId, String dt_pagamento, String dt_movto, String ind_forma_pagamento, String vr_juros_mora, String vr_multa_atraso, String vr_desconto, String vr_saldo_devedor, String vr_liquidacao, String vr_baixa, String arquivo, String cheque_banco, String cheque_agencia, String cheque_numero, Int32 historicoId, String complementoHist, Nullable`1 enquadramentoId, String vr_juros_mora_baixa1, String vr_multa_atraso_baixa1) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\OperacaoController.cs:linha 222</StackTrace>
+  </LOG>
+</LOG>

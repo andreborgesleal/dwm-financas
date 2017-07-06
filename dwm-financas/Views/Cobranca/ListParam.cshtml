@@ -104,7 +104,6 @@
                         <thead>
                             <tr class="headings">
                                 <th class="column-title text-center nobr">Ação</th>
-                                <th class="column-title">ID</th>
                                 <th class="column-title">Documento</th>
                                 <th class="column-title">Vencimento</th>
                                 <th class="column-title">Perm</th>
@@ -128,11 +127,6 @@
                                     </td>
                                     <td class="text-left">
                                         <span>
-                                            @(ope.operacaoId.ToString() + "-" + ope.OperacaoParcela.parcelaId.ToString())
-                                        </span>
-                                    </td>
-                                    <td class="text-left">
-                                        <span>
                                             @ope.documento
                                         </span>
                                     </td>
@@ -150,11 +144,13 @@
                                         <span>
                                             @if (!String.IsNullOrEmpty(ope.descricao_grupoCliente))
                                             {
-                                                @ope.nome_cliente <small>(@ope.descricao_grupoCliente)</small> 
+                                                @ope.nome_cliente <small>(@ope.descricao_grupoCliente)</small>
+                                                <small>@(ope.descricao_historico + " " + ope.complementoHist)</small>
                                             }
                                             else
                                             {
-                                                @ope.nome_cliente 
+                                                @(ope.nome_cliente)
+                                                <small>(@(ope.descricao_historico + " " + ope.complementoHist))</small>
                                             }
                                         </span>
                                     </td>

@@ -104,7 +104,6 @@
                         <thead>
                             <tr class="headings">
                                 <th class="column-title text-center nobr">Ação</th>
-                                <th class="column-title">ID</th>
                                 <th class="column-title">Vencimento</th>
                                 <th class="column-title">Perm</th>
                                 <th class="column-title">Fornecedor</th>
@@ -127,11 +126,6 @@
                                     </td>
                                     <td class="text-left">
                                         <span>
-                                            @(ope.operacaoId.ToString() + "-" + ope.OperacaoParcela.parcelaId.ToString())
-                                        </span>
-                                    </td>
-                                    <td class="text-left">
-                                        <span>
                                             @ope.OperacaoParcela.dt_vencimento.ToString("dd/MM/yyyy")
                                         </span>
                                     </td>
@@ -145,10 +139,12 @@
                                             @if (!String.IsNullOrEmpty(ope.descricao_grupoCredor))
                                             {
                                                 @ope.nome_credor <small>(@ope.descricao_grupoCredor)</small>
+                                                <small>@(ope.descricao_historico + " " + ope.complementoHist)</small>
                                             }
                                             else
                                             {
-                                                @ope.nome_credor
+                                                @(ope.nome_credor)
+                                                <small>(@(ope.descricao_historico + " " + ope.complementoHist))</small>
                                             }
                                         </span>
                                     </td>

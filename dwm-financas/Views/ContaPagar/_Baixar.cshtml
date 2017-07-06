@@ -10,6 +10,7 @@
     @Html.HiddenFor(info => info.complementoHist)
     @Html.Hidden("vr_juros_mora_baixa1",Model.vr_juros_mora_baixa)
     @Html.Hidden("vr_multa_atraso_baixa1", Model.vr_multa_atraso_baixa)
+    @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="row clearfix">
         <div class="col-md-6">
             @Html.Editor("nome_banco1", "BancosAutoComplete", new
@@ -248,7 +249,7 @@
         //    $('#nome_banco').focus();
         //    return false;
         //}
-
+    
         if ($("#dt_pagamento").val() == '') {
             ShowMessageAjaxAlert('Data do pagamento deve ser informada', 'warning');
             $('#dt_pagamento').focus();

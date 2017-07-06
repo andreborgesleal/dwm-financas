@@ -171,8 +171,11 @@ namespace DWM.Models.BI
             #region LINQ
             var q = (from pag in db.ContaPagars
                      join par in db.ContaPagarParcelas on pag.operacaoId equals par.operacaoId
-                     //join pge in db.ContaPagarParcelaEventos on new { par.operacaoId, par.parcelaId } equals new { pge.operacaoId, pge.parcelaId }
+                     join his in db.Historicos on pag.historicoId equals his.historicoId
                      join cre in db.Credores on pag.credorId equals cre.credorId
+                     join gru in db.GrupoCredores on cre.grupoCredorId equals gru.grupoCredorId into GRU
+                     from gru in GRU.DefaultIfEmpty()
+                     //join pge in db.ContaPagarParcelaEventos on new { par.operacaoId, par.parcelaId } equals new { pge.operacaoId, pge.parcelaId }
                      where pag.empresaId.Equals(sessaoCorrente.empresaId)
                             && ((((titulos_vencidos_atraso && par.vr_saldo_devedor > 0
                                 && ((dt_vencidos_atraso1.HasValue && par.dt_vencimento >= dt_vencidos_atraso1 && par.dt_vencimento <= dt_vencidos_atraso2) ||
@@ -197,6 +200,9 @@ namespace DWM.Models.BI
                          nome_credor = cre.nome,
                          dt_emissao = pag.dt_emissao,
                          documento = pag.documento,
+                         descricao_historico = his.descricao,
+                         complementoHist = pag.complementoHist,
+                         descricao_grupoCredor = gru.nome,
                          recorrencia = pag.recorrencia,
                          OperacaoParcela = new ContaPagarParcelaViewModel()
                          {
