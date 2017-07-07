@@ -107,6 +107,33 @@ namespace DWM.Models.Persistence
                 ((List<ContabilidadeItemViewModel>)r.ContabilidadeItems).Add(x);
             }
 
+            #region Verifica se o registro contábil está vinculado a um movimento financeiro
+            if (db.ContaRecebers.Where(info => info.empresaId == sessaoCorrente.empresaId && info.contabilidadeId == entity.contabilidadeId).Count() > 0)
+            {
+                r.operacaoId = db.ContaRecebers.Where(info => info.empresaId == sessaoCorrente.empresaId && info.contabilidadeId == entity.contabilidadeId).Select(info => info.operacaoId).FirstOrDefault();
+                r.parcelaId = 1;
+                r.natureza = "R"; // contas a receber
+            }
+            else if (db.ContaReceberParcelaEventos.Where(info => info.contabilidadeId == entity.contabilidadeId).Count() > 0)
+            {
+                r.operacaoId = db.ContaReceberParcelaEventos.Where(info => info.contabilidadeId == entity.contabilidadeId).Select(info => info.operacaoId).FirstOrDefault();
+                r.parcelaId = db.ContaReceberParcelaEventos.Where(info => info.contabilidadeId == entity.contabilidadeId).Select(info => info.parcelaId).FirstOrDefault();
+                r.natureza = "R"; // contas a receber
+            }
+            else if (db.ContaPagars.Where(info => info.empresaId == sessaoCorrente.empresaId && info.contabilidadeId == entity.contabilidadeId).Count() > 0)
+            {
+                r.operacaoId = db.ContaPagars.Where(info => info.empresaId == sessaoCorrente.empresaId && info.contabilidadeId == entity.contabilidadeId).Select(info => info.operacaoId).FirstOrDefault();
+                r.parcelaId = 1;
+                r.natureza = "P";
+            }
+            else if (db.ContaPagarParcelaEventos.Where(info => info.contabilidadeId == entity.contabilidadeId).Count() > 0)
+            {
+                r.operacaoId = db.ContaPagarParcelaEventos.Where(info => info.contabilidadeId == entity.contabilidadeId).Select(info => info.operacaoId).FirstOrDefault();
+                r.parcelaId = db.ContaPagarParcelaEventos.Where(info => info.contabilidadeId == entity.contabilidadeId).Select(info => info.parcelaId).FirstOrDefault();
+                r.natureza = "P";
+            }
+            #endregion
+
             return r;
         }
 

@@ -3,12 +3,27 @@
 @using App_Dominio.Enumeracoes
 @model DWM.Models.Repositories.ContabilidadeViewModel
 @{
-    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
     t[0].url = "../Contabilidade/Create";
     t[0].nomeCurto = "Incluir";
     t[0].referencia = "";
 
-    t[1].url = "../Home/Default";
+    if (Model.operacaoId.HasValue)
+    {
+        if (Model.natureza == "R")
+        {
+            t[1].url = "../Cobranca/Edit?operacaoId=" + Model.operacaoId.ToString() + "&parcelaId=" + Model.parcelaId.ToString();
+        }
+        else
+        {
+            t[1].url = "../ContaPagar/Edit?operacaoId=" + Model.operacaoId.ToString() + "&parcelaId=" + Model.parcelaId.ToString();
+        }
+        t[1].nomeCurto = "Financeiro: #" + Model.operacaoId.ToString();
+        t[1].referencia = "";
+        t[1].exibir = "S";
+    }
+
+    t[2].url = "../Home/Default";
 }
 <div class="container-cadastro">
     @Html.Partial("_alerts")
@@ -20,7 +35,7 @@
         @Html.HiddenFor(info => info.contabilidadeId)
         <div id="div-lov"></div>
         <div class="x_panel" id="panel-top">
-            @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Lançamento contábil", Descricao = "Editar #" + Model.contabilidadeId.ToString(), Transacao = t })
+            @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Lançamento contábil Nº " + Model.contabilidadeId.ToString(), Descricao = "", Transacao = t })
             <div class="x_content">
                 <div class="row clearfix">
                     <div class="col-md-2">

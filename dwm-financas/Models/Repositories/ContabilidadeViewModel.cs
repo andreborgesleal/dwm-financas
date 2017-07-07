@@ -30,6 +30,10 @@ namespace DWM.Models.Repositories
 
         public IEnumerable<ContabilidadeItemViewModel> ContabilidadeItems { get; set; }
 
+        public int? operacaoId { get; set; }
+        public int? parcelaId { get; set; }
+        public string natureza { get; set; }
+
         #region métodos da interface IMasterRepository
         public void CreateItem()
         {
