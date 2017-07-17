@@ -174,5 +174,15 @@ namespace DWM.Models.Enumeracoes
             OUTROS = 9,
 
         }
+
+        public enum TipoBalanceteMensal
+        {
+            [StringDescription("Saldo Mensal")]
+            [StringValue("S")]
+            SALDO_MENSAL,
+            [StringDescription("Totais Débito e Crédito")]
+            [StringValue("T")]
+            TOTAIS_DEB_CRED,
+        }
     }
 }

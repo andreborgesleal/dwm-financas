@@ -1,0 +1,163 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@using DWM.Models.Repositories;
+
+@model PagedList<BalanceteMensalViewModel>
+@{
+    Layout = null;
+    string font = "normal";
+
+    string _TipoBalanceteMensal = Model.Filtros.ElementAt(0).valor;
+    string _exercicio = Model.Filtros.ElementAt(2).valor;
+    string _data1 = "01/01/" + _exercicio;
+    string _data2 = "31/12/" + _exercicio;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Balancete</title>
+    @Styles.Render("~/Content-z/css")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body style="background-color: #fff">
+    <h2 style="text-align: center">Balancete Mensal</h2>
+    <h2 style="text-align: center">Empresa: @Model.Filtros.ElementAt(4).valor</h2>
+    <h2 style="text-align: center">Exercício: @Model.Filtros.ElementAt(2).valor</h2>
+    <h2 style="text-align: center">Centro de custo: @Model.Filtros.ElementAt(5).valor</h2>
+    <hr />
+    <table class="table" style="orphans: 3;">
+        <thead>
+            <tr class="headings">
+                <th style="font-family: Tahoma; font-size: 9px; text-align: left" class="column-title text-center">Código Pleno</th>
+                <th style="font-family: Tahoma; font-size: 9px; text-align: left" class="column-title">Descrição</th>
+                <th style="font-family: Tahoma; font-size: 9px; text-align: right">Saldo Anterior</th>
+                <th style="font-family: Tahoma; font-size: 9px; text-align: right">Jan</th>
+                <th style="font-family: Tahoma; font-size: 9px; text-align: right">Fev</th>
+                <th style="font-family: Tahoma; font-size: 9px; text-align: right">Mar</th>
+                <th style="font-family: Tahoma; font-size: 9px; text-align: right">Abr</th>
+                <th style="font-family: Tahoma; font-size: 9px; text-align: right">Mai</th>
+                <th style="font-family: Tahoma; font-size: 9px; text-align: right">Jun</th>
+                <th style="font-family: Tahoma; font-size: 9px; text-align: right">Jul</th>
+                <th style="font-family: Tahoma; font-size: 9px; text-align: right">Ago</th>
+                <th style="font-family: Tahoma; font-size: 9px; text-align: right">Set</th>
+                <th style="font-family: Tahoma; font-size: 9px; text-align: right">Out</th>
+                <th style="font-family: Tahoma; font-size: 9px; text-align: right">Nov</th>
+                <th style="font-family: Tahoma; font-size: 9px; text-align: right">Dez</th>
+                @if (_TipoBalanceteMensal == "T")
+                {
+                    <th style="text-align: right">Saldo Atual</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (BalanceteMensalViewModel balancete in Model)
+            {
+                if (balancete.planoContaId_pai.HasValue)
+                {
+                    font = "normal";
+                }
+                else
+                {
+                    font = "bold";
+                }
+                <tr class="even pointer" style="font-weight: @font">
+                    <td class="text-center">
+                        <span style="font-family: Tahoma; font-size: 9px">@balancete.codigoPleno</span>
+                    </td>
+                    <td>
+                        <span style="font-family: Tahoma; font-size: 9px">@balancete.descricao</span>
+                    </td>
+                    <td class="text-right">
+                        <span style="font-family: Tahoma; font-size: 9px">@balancete.vr_saldo_ant.Value.ToString("###,###,##0.00")</span>
+                    </td>
+                    @if (_TipoBalanceteMensal == "T")
+                    {
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_debito_1.Value - balancete.vr_credito_1.Value != 0 ? (balancete.vr_debito_1.Value - balancete.vr_credito_1.Value).ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_debito_2.Value - balancete.vr_credito_2.Value != 0 ? (balancete.vr_debito_2.Value - balancete.vr_credito_2.Value).ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_debito_3.Value - balancete.vr_credito_3.Value != 0 ? (balancete.vr_debito_3.Value - balancete.vr_credito_3.Value).ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_debito_4.Value - balancete.vr_credito_4.Value != 0 ? (balancete.vr_debito_4.Value - balancete.vr_credito_4.Value).ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_debito_5.Value - balancete.vr_credito_5.Value != 0 ? (balancete.vr_debito_5.Value - balancete.vr_credito_5.Value).ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_debito_6.Value - balancete.vr_credito_6.Value != 0 ? (balancete.vr_debito_6.Value - balancete.vr_credito_6.Value).ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_debito_7.Value - balancete.vr_credito_7.Value != 0 ? (balancete.vr_debito_7.Value - balancete.vr_credito_7.Value).ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_debito_8.Value - balancete.vr_credito_8.Value != 0 ? (balancete.vr_debito_8.Value - balancete.vr_credito_8.Value).ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_debito_9.Value - balancete.vr_credito_9.Value != 0 ? (balancete.vr_debito_9.Value - balancete.vr_credito_9.Value).ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_debito_10.Value - balancete.vr_credito_10.Value != 0 ? (balancete.vr_debito_10.Value - balancete.vr_credito_10.Value).ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_debito_11.Value - balancete.vr_credito_11.Value != 0 ? (balancete.vr_debito_11.Value - balancete.vr_credito_11.Value).ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_debito_12.Value - balancete.vr_credito_12.Value != 0 ? (balancete.vr_debito_12.Value - balancete.vr_credito_12.Value).ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@balancete.vr_saldo_atual_12.Value.ToString("###,###,##0.00")</span>
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_saldo_atual_1.Value != 0 ? @balancete.vr_saldo_atual_1.Value.ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_saldo_atual_2.Value != 0 ? @balancete.vr_saldo_atual_2.Value.ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_saldo_atual_3.Value != 0 ? @balancete.vr_saldo_atual_3.Value.ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_saldo_atual_4.Value != 0 ? @balancete.vr_saldo_atual_4.Value.ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_saldo_atual_5.Value != 0 ? @balancete.vr_saldo_atual_5.Value.ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_saldo_atual_6.Value != 0 ? @balancete.vr_saldo_atual_6.Value.ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_saldo_atual_7.Value != 0 ? @balancete.vr_saldo_atual_7.Value.ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_saldo_atual_8.Value != 0 ? @balancete.vr_saldo_atual_8.Value.ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_saldo_atual_9.Value != 0 ? @balancete.vr_saldo_atual_9.Value.ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_saldo_atual_10.Value != 0 ? @balancete.vr_saldo_atual_10.Value.ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_saldo_atual_11.Value != 0 ? @balancete.vr_saldo_atual_11.Value.ToString("###,###,##0.00") : "")</span>
+                        </td>
+                        <td class="text-right">
+                            <span style="font-family: Tahoma; font-size: 9px">@(balancete.vr_saldo_atual_12.Value != 0 ? @balancete.vr_saldo_atual_12.Value.ToString("###,###,##0.00") : "")</span>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
+

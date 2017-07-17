@@ -1,13 +1,4 @@
-﻿using App_Dominio.Component;
-using App_Dominio.Contratos;
-using DWM.Models.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace DWM.Models.Repositories
+﻿namespace DWM.Models.Repositories
 {
     public class BalanceteViewModel : PlanoContaViewModel
     {

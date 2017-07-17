@@ -1,0 +1,67 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@using DWM.Models.Repositories;
+
+@model PagedList<BalanceteMensalViewModel>
+@{
+    Layout = null;
+    string font = "normal";
+
+    string _TipoBalanceteMensal = Model.Filtros.ElementAt(0).valor;
+    string _exercicio = Model.Filtros.ElementAt(2).valor;
+    string _data1 = "01/01/" + _exercicio;
+    string _data2 = "31/12/" + _exercicio;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Balancete</title>
+    @Styles.Render("~/Content-z/css")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body style="background-color: #fff">
+    <h2 style="text-align: center">Balanço</h2>
+    <h2 style="text-align: center">Empresa: @Model.Filtros.ElementAt(4).valor</h2>
+    <h2 style="text-align: center">Exercício: @Model.Filtros.ElementAt(2).valor</h2>
+    <h2 style="text-align: center">Centro de custo: @Model.Filtros.ElementAt(5).valor</h2>
+    <hr />
+    <table class="table" style="orphans: 3;">
+        <thead>
+            <tr class="headings">
+                <th class="column-title text-center">Código Pleno</th>
+                <th class="column-title">Descrição</th>
+                <th class="text-right">Saldo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (BalanceteMensalViewModel balancete in Model)
+            {
+                if (balancete.planoContaId_pai.HasValue)
+                {
+                    font = "normal";
+                }
+                else
+                {
+                    font = "bold";
+                }
+                <tr class="even pointer" style="font-weight: @font">
+                    <td class="text-center">
+                        <span>@balancete.codigoPleno</span>
+                    </td>
+                    <td style="text-indent: @((balancete.grauPc - 1) * 20)px">
+                        <span>@balancete.descricao</span>
+                    </td>
+                    <td class="text-right">
+                        <span>@balancete.vr_saldo_atual_12.Value.ToString("###,###,##0.00")</span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
+
+

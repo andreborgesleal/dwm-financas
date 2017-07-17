@@ -275,5 +275,17 @@ namespace DWM.Models.Enumeracoes
         }
         #endregion
 
+        #region DropDownList Tipo Balancete Mensal
+        public IEnumerable<SelectListItem> TipoBalanceteMensal(string selectedValue = "", string header = "")
+        {
+            List<SelectListItem> drp = new List<SelectListItem>() {
+                new SelectListItem() { Value = Enumeradores.TipoBalanceteMensal.SALDO_MENSAL.GetStringValue(), Text = Enumeradores.TipoBalanceteMensal.SALDO_MENSAL.GetStringDescription() },
+                new SelectListItem() { Value = Enumeradores.TipoBalanceteMensal.TOTAIS_DEB_CRED.GetStringValue(), Text = Enumeradores.TipoBalanceteMensal.TOTAIS_DEB_CRED.GetStringDescription()  }
+            };
+
+            return Funcoes.SelectListEnum(drp, selectedValue, header);
+        }
+        #endregion
+
     }
 }

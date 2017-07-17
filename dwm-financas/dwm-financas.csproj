@@ -206,6 +206,8 @@
     <Compile Include="Controllers\AlterarSenhaController.cs" />
     <Compile Include="Controllers\AutorizarController.cs" />
     <Compile Include="Controllers\BalanceteController.cs" />
+    <Compile Include="Controllers\BalanceteMensalController.cs" />
+    <Compile Include="Controllers\BalancoController.cs" />
     <Compile Include="Controllers\BancosController.cs" />
     <Compile Include="Controllers\CentroCustosController.cs" />
     <Compile Include="Controllers\CidadesController.cs" />
@@ -260,6 +262,7 @@
     <Compile Include="Models\BI\ExercicioBI.cs" />
     <Compile Include="Models\BI\HomeBI.cs" />
     <Compile Include="Models\BI\ListViewBalanceteBI.cs" />
+    <Compile Include="Models\BI\ListViewBalanceteMensalBI.cs" />
     <Compile Include="Models\BI\ListViewContaPagarAutorizarBI.cs" />
     <Compile Include="Models\BI\ListViewContaPagarBI.cs" />
     <Compile Include="Models\BI\ListViewContaReceberBI.cs" />
@@ -348,6 +351,7 @@
     <Compile Include="Models\Report\DiarioReport.cs" />
     <Compile Include="Models\Report\ExtratoReport.cs" />
     <Compile Include="Models\Report\RazaoReport.cs" />
+    <Compile Include="Models\Repositories\BalanceteMensalViewModel.cs" />
     <Compile Include="Models\Repositories\BalanceteViewModel.cs" />
     <Compile Include="Models\Repositories\BancoViewModel.cs" />
     <Compile Include="Models\Repositories\CentroCustoViewModel.cs" />
@@ -4434,6 +4438,12 @@
     <Content Include="Views\Autorizar\Browse.cshtml" />
     <Content Include="Views\MovimentoBancario\Transferencia.cshtml" />
     <Content Include="Views\Extrato\Imprimir.cshtml" />
+    <Content Include="Views\BalanceteMensal\Browse.cshtml" />
+    <Content Include="Views\BalanceteMensal\ListParam.cshtml" />
+    <Content Include="Views\BalanceteMensal\Imprimir.cshtml" />
+    <Content Include="Views\Balanco\Browse.cshtml" />
+    <Content Include="Views\Balanco\ListParam.cshtml" />
+    <Content Include="Views\Balanco\Imprimir.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />

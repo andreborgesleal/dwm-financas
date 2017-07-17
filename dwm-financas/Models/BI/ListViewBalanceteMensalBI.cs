@@ -12,23 +12,23 @@ using System.Web.Mvc;
 
 namespace DWM.Models.BI
 {
-    public class ListViewBalanceteBI : DWMContext<ApplicationContext>, IProcess<BalanceteViewModel, ApplicationContext>
+    public class ListViewBalanceteMensalBI : DWMContext<ApplicationContext>, IProcess<BalanceteMensalViewModel, ApplicationContext>
     {
         #region Constructor
-        public ListViewBalanceteBI() { }
+        public ListViewBalanceteMensalBI() { }
 
-        public ListViewBalanceteBI(ApplicationContext _db, SecurityContext _seguranca_db)
+        public ListViewBalanceteMensalBI(ApplicationContext _db, SecurityContext _seguranca_db)
         {
             base.Create(_db, _seguranca_db);
         }
         #endregion
 
-        public virtual BalanceteViewModel Run(Repository value)
+        public virtual BalanceteMensalViewModel Run(Repository value)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<BalanceteViewModel> List(params object[] param)
+        public IEnumerable<BalanceteMensalViewModel> List(params object[] param)
         {
             throw new NotImplementedException();
         }
@@ -38,19 +38,16 @@ namespace DWM.Models.BI
             int pageIndex = index ?? 0;
 
             #region Parâmetros
-            int centroCustoId = (int)param[0];
-            int exercicio = (int)param[1];
-            int grauPC = (int)param[2];
-            DateTime dt1 = Convert.ToDateTime(param[3].ToString());
-            DateTime dt2 = Convert.ToDateTime(param[4].ToString());
-            string RecDesp = (string)param[6];
+            int centroCustoId = (int)param[1];
+            int exercicio = (int)param[2];
+            int grauPC = (int)param[3];
+            string RecDesp = (string)param[5];
 
             SqlParameter empresaIdParam = new SqlParameter("@pEmpresaId", SqlDbType.Int);
             SqlParameter centroCustoIdParam = new SqlParameter("@pCentroCustoID", SqlDbType.Int);
             SqlParameter exercicioIdParam = new SqlParameter("@pExercicio", SqlDbType.Int);
             SqlParameter grauPCParam = new SqlParameter("@pGrauPC", SqlDbType.Int);
             SqlParameter RecDespParam = new SqlParameter("@pRecDesp", SqlDbType.NChar, 1);
-            SqlParameter pageSizeParam = new SqlParameter("@pageSize", SqlDbType.Int);
             SqlParameter totalCountParam = new SqlParameter("@totalCount", SqlDbType.Int);
             SqlParameter Cod_erroParam = new SqlParameter("@pCod_erro", SqlDbType.Int);
             SqlParameter Desc_erroParam = new SqlParameter("@pDesc_erro", SqlDbType.NVarChar, 400);
@@ -60,7 +57,6 @@ namespace DWM.Models.BI
             exercicioIdParam.Value = exercicio;
             grauPCParam.Value = grauPC;
             RecDespParam.Value = RecDesp;
-            pageSizeParam.Value = 10000;
 
             totalCountParam.Direction = ParameterDirection.Output;
             totalCountParam.Value = 0;
@@ -72,24 +68,18 @@ namespace DWM.Models.BI
             Desc_erroParam.Value = "";
             #endregion
 
-
-            IEnumerable<BalanceteViewModel> bal = db.Database.SqlQuery<BalanceteViewModel>("spr_balancete @pEmpresaId, @pCentroCustoID, @pExercicio, @pGrauPC, @pData1, @pData2, @pRecDesp, @pageSize, @pageNumber, @totalCount out, @pCod_erro out, @pDesc_erro out",
+            db.Database.CommandTimeout = 3600;
+            IEnumerable<BalanceteMensalViewModel> bal = db.Database.SqlQuery<BalanceteMensalViewModel>("spr_balancete_mensal @pEmpresaId, @pCentroCustoID, @pExercicio, @pGrauPC, @pRecDesp, @totalCount out, @pCod_erro out, @pDesc_erro out",
                                                                                             empresaIdParam,
                                                                                             centroCustoIdParam,
                                                                                             exercicioIdParam,
                                                                                             grauPCParam,
-                                                                                            new SqlParameter("@pData1", dt1),
-                                                                                            new SqlParameter("@pData2", dt2),
                                                                                             RecDespParam,
-                                                                                            pageSizeParam,
-                                                                                            //new SqlParameter("@pageNumber", ++index),
-                                                                                            new SqlParameter("@pageNumber", 1),
                                                                                             totalCountParam,
                                                                                             Cod_erroParam,
                                                                                             Desc_erroParam);
 
-            return new PagedList<BalanceteViewModel>(bal.ToList(), 0, 1000, (int)totalCountParam.Value, "ListParam", null, "div-list-static");
+            return new PagedList<BalanceteMensalViewModel>(bal.ToList(), 0, 1000, (int)totalCountParam.Value, "ListParam", null, "div-list-static");
         }
-
     }
 }

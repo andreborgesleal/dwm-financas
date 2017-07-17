@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="1046774764" Data="16/07/2017 15:49:09">
+    <Sessao>v5113zatakjahqoxglajrove</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Tempo Limite de Execução Expirado.  O período de tempo limite terminou antes da conclusão da operação ou o servidor não está respondendo. *** An error occurred while executing the command definition. See the inner exception for details.</Mensagem>
+    <NameSpace>DWM.Models.Report.RazaoReport =&gt; razao/listparammodal</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   em System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.&lt;&gt;c__DisplayClass7.&lt;GetResults&gt;b__6()
+   em System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.&lt;&gt;c__DisplayClass7.&lt;GetResults&gt;b__5()
+   em System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.&lt;System.Collections.Generic.IEnumerable&lt;T&gt;.GetEnumerator&gt;b__0()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Entidades.Context`1.Create() na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Entidades\Context.cs:linha 42
+   em DWM.Models.Repositories.ReportViewModel`1.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Repositories\ReportViewModel.cs:linha 20
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+  <LOG ID="858034095" Data="16/07/2017 19:28:16">
+    <Sessao>v5113zatakjahqoxglajrove</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Invalid column name 'empresaId'.
+Invalid column name 'empresaId'. *** An error occurred while executing the command definition. See the inner exception for details.</Mensagem>
+    <NameSpace>DWM.Models.Persistence.ListViewPlanoConta =&gt; planocontas/browse</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   em System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.&lt;&gt;c__DisplayClass7.&lt;GetResults&gt;b__6()
+   em System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.&lt;&gt;c__DisplayClass7.&lt;GetResults&gt;b__5()
+   em System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.&lt;System.Collections.Generic.IEnumerable&lt;T&gt;.GetEnumerator&gt;b__0()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em DWM.Models.Persistence.ListViewPlanoConta.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Persistence\PlanoContaModel.cs:linha 257
+   em App_Dominio.Component.ListViewRepository`2.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 62
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+</LOG>

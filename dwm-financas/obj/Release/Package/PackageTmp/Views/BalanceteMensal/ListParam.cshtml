@@ -1,0 +1,418 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@using DWM.Models.Repositories;
+@model PagedList<BalanceteMensalViewModel>
+@{
+    Layout = null;
+
+    string _TipoBalanceteMensal = Model.Filtros.ElementAt(0).valor;
+    string _exercicio = Model.Filtros.ElementAt(2).valor;
+    string _data1 = "01/01/" + _exercicio;
+    string _data2 = "31/12/" + _exercicio;
+
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(),
+                                new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "#";
+    t[0].nomeCurto = "Balancete Nível 1";
+    t[0].exibir = "N";
+    t[0].referencia = "validaBal(1)";
+
+    t[1].url = "#";
+    t[1].nomeCurto = "Balancete Nível 2";
+    t[1].exibir = "N";
+    t[1].referencia = "validaBal(2)";
+
+    t[2].url = "#";
+    t[2].nomeCurto = "Balancete Nível 3";
+    t[2].exibir = "N";
+    t[2].referencia = "validaBal(3)";
+
+    t[3].url = "#";
+    t[3].nomeCurto = "Balancete todos os níveis";
+    t[3].exibir = "N";
+    t[3].referencia = "validaBal(0)";
+    t[3].PageSize = 1; // inclui um linha horizontal após exibir o item
+
+    t[4].url = "#";
+    t[4].nomeCurto = "Balancete Receitas e Despesas";
+    t[4].exibir = "N";
+    t[4].referencia = "BalanceteRecDesp(0)";
+
+    t[5].url = "#";
+    t[5].nomeCurto = "Lucro/Prejuízo";
+    t[5].exibir = "S";
+    t[5].referencia = "Resumo()";
+    t[5].PageSize = 1; // inclui um linha horizontal após exibir o item
+
+    t[6].url = "../BalanceteMensal/Imprimir?TipoBalanceteMensal=" + Model.Filtros.ElementAt(3).valor + "&centroCustoId=" + Model.Filtros.ElementAt(0).valor + "&grauPC=" + Model.Filtros.ElementAt(2).valor + "&descricao_centroCusto=" + Model.Filtros.ElementAt(5).valor + "&RecDesp=" + Model.Filtros.ElementAt(6).valor;
+    t[6].nomeCurto = "Imprimir";
+    t[6].exibir = "S";
+    t[6].sessionId = "_blank";
+
+    t[7].url = "../Home/Default";
+}
+
+@if (Model != null)
+{
+    string font = "normal";
+    <div class="x_panel" id="panel-detail">
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Balancete", Descricao = "", Transacao = t })
+        <div class="x_content">
+            <div class="dashboard-widget-content">
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action" id="datatable">
+                        <thead>
+                            <tr class="headings">
+                                <th class="column-title text-center">Código Pleno</th>
+                                <th class="column-title">Descrição</th>
+                                <th style="text-align: right">Saldo Anterior</th>
+                                <th style="text-align: right">Jan</th>
+                                <th style="text-align: right">Fev</th>
+                                <th style="text-align: right">Mar</th>
+                                <th style="text-align: right">Abr</th>
+                                <th style="text-align: right">Mai</th>
+                                <th style="text-align: right">Jun</th>
+                                <th style="text-align: right">Jul</th>
+                                <th style="text-align: right">Ago</th>
+                                <th style="text-align: right">Set</th>
+                                <th style="text-align: right">Out</th>
+                                <th style="text-align: right">Nov</th>
+                                <th style="text-align: right">Dez</th>
+                                @if (_TipoBalanceteMensal == "T")
+                                {
+                                    <th style="text-align: right">Saldo Atual</th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (BalanceteMensalViewModel balancete in Model)
+                            {
+                                if (balancete.planoContaId_pai.HasValue)
+                                {
+                                    font = "normal";
+                                }
+                                else
+                                {
+                                    font = "bold";
+                                }
+                                <tr class="even pointer" style="font-weight: @font">
+                                    <td class="text-center">
+                                        <span>@balancete.codigoPleno</span>
+                                    </td>
+                                    <td style="text-indent: @((balancete.grauPc - 1) * 20)px">
+                                        <span>@balancete.descricao</span>
+                                    </td>
+                                    <td class="text-right">
+                                        <span>@balancete.vr_saldo_ant.Value.ToString("###,###,##0.00")</span>
+                                    </td>
+                                    @if (_TipoBalanceteMensal == "T")
+                                    {
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/01/@_exercicio', '31/01/@_exercicio')">
+                                                <span>@(balancete.vr_debito_1.Value - balancete.vr_credito_1.Value != 0 ? (balancete.vr_debito_1.Value - balancete.vr_credito_1.Value).ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            @{ 
+                                                _data2 = App_Dominio.Models.Funcoes.StringToDate(_exercicio + "-03-01").Value.AddDays(-1).ToString("dd/MM/yyyy");
+                                            }
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/02/@_exercicio', '@_data2')">
+                                                <span>@(balancete.vr_debito_2.Value - balancete.vr_credito_2.Value != 0 ? (balancete.vr_debito_2.Value - balancete.vr_credito_2.Value).ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/03/@_exercicio', '31/03/@_exercicio')">
+                                                <span>@(balancete.vr_debito_3.Value - balancete.vr_credito_3.Value != 0 ? (balancete.vr_debito_3.Value - balancete.vr_credito_3.Value).ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/04/@_exercicio', '30/04/@_exercicio')">
+                                                <span>@(balancete.vr_debito_4.Value - balancete.vr_credito_4.Value != 0 ? (balancete.vr_debito_4.Value - balancete.vr_credito_4.Value).ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/05/@_exercicio', '31/05/@_exercicio')">
+                                                <span>@(balancete.vr_debito_5.Value - balancete.vr_credito_5.Value != 0 ? (balancete.vr_debito_5.Value - balancete.vr_credito_5.Value).ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/06/@_exercicio', '30/06/@_exercicio')">
+                                                <span>@(balancete.vr_debito_6.Value - balancete.vr_credito_6.Value != 0 ? (balancete.vr_debito_6.Value - balancete.vr_credito_6.Value).ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/07/@_exercicio', '31/07/@_exercicio')">
+                                                <span>@(balancete.vr_debito_7.Value - balancete.vr_credito_7.Value != 0 ? (balancete.vr_debito_7.Value - balancete.vr_credito_7.Value).ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/08/@_exercicio', '31/08/@_exercicio')">
+                                                <span>@(balancete.vr_debito_8.Value - balancete.vr_credito_8.Value != 0 ? (balancete.vr_debito_8.Value - balancete.vr_credito_8.Value).ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/09/@_exercicio', '30/09/@_exercicio')">
+                                                <span>@(balancete.vr_debito_9.Value - balancete.vr_credito_9.Value != 0 ? (balancete.vr_debito_9.Value - balancete.vr_credito_9.Value).ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/10/@_exercicio', '31/10/@_exercicio')">
+                                                <span>@(balancete.vr_debito_10.Value - balancete.vr_credito_10.Value != 0 ? (balancete.vr_debito_10.Value - balancete.vr_credito_10.Value).ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/11/@_exercicio', '30/11/@_exercicio')">
+                                                <span>@(balancete.vr_debito_11.Value - balancete.vr_credito_11.Value != 0 ? (balancete.vr_debito_11.Value - balancete.vr_credito_11.Value).ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            @{ 
+                                                _data2 = "31/12/" + _exercicio;
+                                            }
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/12/@_exercicio', '31/12/@_exercicio')">
+                                                <span>@(balancete.vr_debito_12.Value - balancete.vr_credito_12.Value != 0 ? (balancete.vr_debito_12.Value - balancete.vr_credito_12.Value).ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <span>@balancete.vr_saldo_atual_12.Value.ToString("###,###,##0.00")</span>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/01/@_exercicio', '31/01/@_exercicio')">
+                                                <span>@(balancete.vr_saldo_atual_1.Value != 0 ? @balancete.vr_saldo_atual_1.Value.ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            @{
+                                                _data2 = App_Dominio.Models.Funcoes.StringToDate(_exercicio + "-03-01").Value.AddDays(-1).ToString("dd/MM/yyyy");
+                                            }
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/02/@_exercicio', '@_data2')">
+                                                <span>@(balancete.vr_saldo_atual_2.Value != 0 ? @balancete.vr_saldo_atual_2.Value.ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/03/@_exercicio', '31/03/@_exercicio')">
+                                                <span>@(balancete.vr_saldo_atual_3.Value != 0 ? @balancete.vr_saldo_atual_3.Value.ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/04/@_exercicio', '30/04/@_exercicio')">
+                                                <span>@(balancete.vr_saldo_atual_4.Value != 0 ? @balancete.vr_saldo_atual_4.Value.ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/05/@_exercicio', '31/05/@_exercicio')">
+                                                <span>@(balancete.vr_saldo_atual_5.Value != 0 ? @balancete.vr_saldo_atual_5.Value.ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/06/@_exercicio', '30/06/@_exercicio')">
+                                                <span>@(balancete.vr_saldo_atual_6.Value != 0 ? @balancete.vr_saldo_atual_6.Value.ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/07/@_exercicio', '31/07/@_exercicio')">
+                                                <span>@(balancete.vr_saldo_atual_7.Value != 0 ? @balancete.vr_saldo_atual_7.Value.ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/08/@_exercicio', '31/08/@_exercicio')">
+                                                <span>@(balancete.vr_saldo_atual_8.Value != 0 ? @balancete.vr_saldo_atual_8.Value.ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/09/@_exercicio', '30/09/@_exercicio')">
+                                                <span>@(balancete.vr_saldo_atual_9.Value != 0 ? @balancete.vr_saldo_atual_9.Value.ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/10/@_exercicio', '31/10/@_exercicio')">
+                                                <span>@(balancete.vr_saldo_atual_10.Value != 0 ? @balancete.vr_saldo_atual_10.Value.ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/11/@_exercicio', '30/11/@_exercicio')">
+                                                <span>@(balancete.vr_saldo_atual_11.Value != 0 ? @balancete.vr_saldo_atual_11.Value.ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            @{
+                                                _data2 = "31/12/" + _exercicio;
+                                            }
+                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno', '01/12/@_exercicio', '31/12/@_exercicio')">
+                                                <span>@(balancete.vr_saldo_atual_12.Value != 0 ? @balancete.vr_saldo_atual_12.Value.ToString("###,###,##0.00") : "")</span>
+                                            </a>
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <a href="#panel-detail" class="info pull-right" id="linkTopo"><i class="fa fa-toggle-up"></i> Topo</a>
+        </div>
+    </div>
+    <!-- Formulário Modal - Razão Contábil-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+        <div class="modal-dialog modal-lg" style="width: 70%; height: 300px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Razão Contábil</h4>
+                </div>
+                <div class="modal-body Scroll" id="myBody">
+                    <p>Aguarde...&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Formulário Modal - Lucro/Prejó-->
+    <a id="tttt" href="#myModal1" data-toggle="modal"></a>
+    <div class="modal fade" tabindex="-1" role="dialog" id="myModal1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="header-resumo">Apuração de Lucro/Prejuízo</h4>
+                </div>
+                <div class="modal-body" id="myBody1">
+                    <p>Aguarde...&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <script>
+        document.getElementById("linkTopo").click();
+    </script>
+}
+else if (TempData[App_Dominio.Controllers.Alerts.ATTENTION] != null)
+{
+    @Html.Partial("_alerts")
+}
+else
+{
+    @Html.Partial("_AcessoNegadoModal")
+}
+
+<!-- Datatables -->
+<script src="../Content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../Content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+<!-- Datatables -->
+<script>
+    $('#datatable').DataTable({
+        lengthMenu: [[15, 25, 50, 100, -1], [15, 25, 50, 100, "Todos"]],
+        iDisplayLength: 100,
+        bSort: false,
+        language: {
+            "url": "../Scripts/DataTablePtBr.txt"
+        }
+    });
+
+    var table = $("#datatable").DataTable();
+    $.fn.dataTable.ext.search.push(
+    function (settings, data, dataIndex) {
+        var term = $('#datatable_filter input')
+                .val()
+                .toLowerCase();
+
+        for (var i = 0; i < data.length; i++) {
+            value = data[i]
+                .toString()
+                .toLowerCase();
+
+            if (value.indexOf(term) == 0 && (i == 0 || i == 1)) {
+                return true;
+            }
+        };
+        return false;
+    });
+</script>
+<!-- /Datatables -->
+
+<script>
+
+    function Razao(planoContaId, descricao, codigoPleno, data1, data2) {
+        $('#carregando').css("visibility", "visible");
+        $('#carregando').css("width", "100%");
+        $('#carregando').css("height", "100%");
+        $('#carregando').css("position", "absolute");
+        $('#carregando').css("background-color", "black");
+        $('#carregando').css("filter", "alpha(opacity=60)");
+        $('#carregando').css("opacity", "0.6");
+        $('#carregando').css("left", "0%");
+        $('#carregando').css("top", "0%");
+
+        $('#planoContaId').val(planoContaId);
+        $('#descricao_conta').val(descricao);
+        $('#codigoPleno').val(codigoPleno);
+
+        $.ajax({
+            type: "GET",
+            url: "../Razao/ListParamModal",
+            data: {
+                index: 0,
+                pageSize: 1000,
+                data1: data1,
+                data2: data2,
+                centroCustoId: $('#centroCustoId').val(),
+                descricao_centroCusto: $('#descricao_centroCusto1').val(),
+                planoContaId: planoContaId,
+                descricao_conta: descricao,
+                codigoPleno: codigoPleno,
+                totalizaConta: 'S',
+                totalizaDia: 'N',
+                hoje: new Date()
+            },
+            success: function (data) {
+                $('#myBody').html(data);
+                $('#msgs').html("");
+                $('#carregando').css("visibility", "hidden");
+            }
+        });
+    }
+
+    function Resumo() {
+        $('#carregando').css("visibility", "visible");
+        $('#carregando').css("width", "100%");
+        $('#carregando').css("height", "100%");
+        $('#carregando').css("position", "absolute");
+        $('#carregando').css("background-color", "black");
+        $('#carregando').css("filter", "alpha(opacity=60)");
+        $('#carregando').css("opacity", "0.6");
+        $('#carregando').css("left", "0%");
+        $('#carregando').css("top", "0%");
+
+        $.ajax({
+            type: "GET",
+            url: "../Balancete/LucroPrejuizo",
+            data: {
+                index: 0,
+                pageSize: 1000,
+                data1: '@_data1',
+                data2: '@_data2',
+                centroCustoId: $('#centroCustoId').val(),
+                hoje: new Date()
+            },
+            success: function (data) {
+                $('#myBody1').html(data);
+                $('#msgs').html("");
+                $('#carregando').css("visibility", "hidden");
+                $('#header-resumo').html('Apuração de Lucro/Prejuízo ' + $('#data1').val() + ' à ' + $('#data2').val());
+                document.getElementById("tttt").click();
+            }
+        });
+    }
+</script>
+
+

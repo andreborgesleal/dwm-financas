@@ -1,0 +1,122 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@using DWM.Models.Enumeracoes
+@model PagedList<BalanceteMensalViewModel>
+@{
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../Contabilidade/Create";
+    t[0].nomeCurto = "Incluir";
+    t[0].exibir = "S";
+    t[0].referencia = "";
+
+    t[1].url = "../Home/Default";
+
+    string value = "";
+    string Text = "";
+
+    if (Request["centroCustoId"] != null && Request["centroCustoId"] != "")
+    {
+        value = Request["centroCustoId"];
+        Text = Request["descricao_centroCusto"];
+    }
+}
+<!-- Datatables -->
+<link href="../Content/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+
+@Html.Partial("_alerts")
+@Html.Partial("_AjaxAlert", "")
+<div class="x_panel">
+    @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Balancete Mensal", Descricao = "", Transacao = t })
+    <div class="x_content">
+        @using (Ajax.BeginForm("ListParam", "BalanceteMensal", new AjaxOptions { HttpMethod = "get", UpdateTargetId = "div-list-static" }, new { @role = "search", @id = "form0", @name = "form0" }))
+            {
+            @Html.Hidden("planoContaId")
+            @Html.Hidden("descricao_conta")
+            @Html.Hidden("codigoPleno")
+            @Html.Hidden("totalizaConta", "S")
+            @Html.Hidden("totalizaDia", "N")
+            @Html.Hidden("grauPC", "0")
+            @Html.Hidden("RecDesp", "N")
+            @Html.Hidden("Data1")
+            @Html.Hidden("Data2")
+            <div class="row clearfix">
+                <div class="col-md-4">
+                    @Html.Editor("descricao_centroCusto1", "CentroCustoAutoComplete", new { nextField = "data1", prevField = "descricao_conta", value = value, Text = Text })
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label" for="data1">Tipo</label>
+                        @if (Model != null && Model.Filtros != null && Model.Filtros.Count() > 0)
+                        {
+                            @Html.DropDownList("TipoBalanceteMensal", new BindDropDownList().TipoBalanceteMensal(Model.Filtros.ElementAt(0).valor), new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            @Html.DropDownList("TipoBalanceteMensal", new BindDropDownList().TipoBalanceteMensal("T"), new { @class = "form-control" })
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <a href="#panel-detail" class="btn btn-primary" onclick="validaBal(0);">Buscar</a>
+                        <input type="button" class="btn btn-default" onclick="window.location = '../Contabilidade/Create'" value="Incluir" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div id="div-list-static">
+    @if (Model != null)
+    {
+        @Html.Partial("ListParam", Model)
+    }
+</div>
+
+
+<script>
+    $(function () {
+        $('#form0').submit(function () {
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        $('#div-list-static').html(result);
+                    }
+                });
+            }
+            return false;
+        });
+    });
+
+    function validaBal(grauPC) {
+        $('#grauPC').val(grauPC);
+        $('#RecDesp').val("N");
+        Refresh(0, getPageSize(), 'ListParam', 'div-list-static');
+        $('#div-list-static').html('');
+    }
+
+    function BalanceteRecDesp(grauPC) {
+        $('#RecDesp').val("S");
+        $('#grauPC').val(grauPC);
+        Refresh(0, getPageSize(), 'ListParam', 'div-list-static');
+        $('#div-list-static').html('');
+    }
+
+    //function validaPDF()
+    //{
+    //    if ($('#planoContaId').val() == null || $('#planoContaId').val() == '') {
+    //        ShowMessageAlert('É preciso informar a conta para a emissão do Razão', 'warning');
+    //        return false;
+    //    }
+    //    else
+    //        return true;
+    //}
+
+</script>
+
+

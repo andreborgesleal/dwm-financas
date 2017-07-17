@@ -6,39 +6,28 @@ using App_Dominio.Security;
 using App_Dominio.Pattern;
 using DWM.Models.Entidades;
 using DWM.Models.BI;
-using App_Dominio.Repositories;
 using System.Collections.Generic;
+using App_Dominio.Repositories;
 using App_Dominio.Entidades;
 
 namespace DWM.Controllers
 {
-    public class BalanceteController : ReportController<BalanceteViewModel>
+    public class BalanceteMensalController : ReportController<BalanceteMensalViewModel>
     {
         #region Herança
         public override int _sistema_id() { return (int)DWM.Models.Enumeracoes.Sistema.DWMFINANCAS; }
 
         public override bool mustListOnLoad()
         {
-            Factory<ExercicioViewModel, ApplicationContext> facade = new Factory<ExercicioViewModel, ApplicationContext>();
-            ExercicioViewModel e = facade.Execute(new ExercicioBI(), new ExercicioViewModel());
-
-            if (e.mensagem.Code == 0 && e.dt_lancamento_inicio.HasValue)
-            {
-                ViewData["dt_lancamento_inicio"] = e.dt_lancamento_inicio.Value;
-                ViewData["dt_lancamento_fim"] = e.dt_lancamento_fim.Value;
-            }
+            if (Request["TipoBalanceteMensal"] != null && Request["TipoBalanceteMensal"] != "")
+                return true;
             else
-            {
-                ViewData["dt_lancamento_inicio"] = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-") + "01");
-                ViewData["dt_lancamento_fim"] = Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-") + "01").AddDays(-1);
-            }
-
-            return true; // Request ["data1"] != null && Request ["data1"] != "";
+                return false;
         }
 
         public override string getListName()
         {
-            return "Balancete";
+            return "Balancete Mensal";
         }
 
         //public override bool ClearBreadCrumbOnBrowse()
@@ -50,17 +39,17 @@ namespace DWM.Controllers
         #region List
         public override ActionResult List(int? index, int? PageSize, string descricao = null)
         {
-            if (Request["data1"] != null && Request["data1"] != "")
-                return ListParam(0, 1000, Request ["data1"], Request["data2"], 
-                                Request["centroCustoId"] != null && Request["centroCustoId"] != "" ? int.Parse(Request["centroCustoid"]) : 0, 
-                                Request["grauPC"] != null && Request["grauPC"] != "" ? int.Parse(Request["grauPC"]) : 0, 
+            if (Request["TipoBalanceteMensal"] != null && Request["TipoBalanceteMensal"] != "")
+                return ListParam(0, 1000, Request["TipoBalanceteMensal"], 
+                                Request["centroCustoId"] != null && Request["centroCustoId"] != "" ? int.Parse(Request["centroCustoid"]) : 0,
+                                Request["grauPC"] != null && Request["grauPC"] != "" ? int.Parse(Request["grauPC"]) : 0,
                                 Request["descricao_centroCusto"], Request["RecDesp"]);
             else
                 return ListParam(0, 1000);
         }
 
         [AuthorizeFilter]
-        public ActionResult ListParam(int? index, int? pageSize = 100, string data1 = "", string data2 = "",
+        public ActionResult ListParam(int? index, int? pageSize = 100, string TipoBalanceteMensal = "T", 
                                         int centroCustoId = 0, int grauPC = 0, string descricao_centroCusto = "", string RecDesp = "N")
         {
             if (ViewBag.ValidateRequest)
@@ -68,31 +57,15 @@ namespace DWM.Controllers
                 Factory<ExercicioViewModel, ApplicationContext> facade = new Factory<ExercicioViewModel, ApplicationContext>();
                 ExercicioViewModel e = facade.Execute(new ExercicioBI(), new ExercicioViewModel());
 
-                if (data1 == "" || data1.Contains("%"))
-                {
-
-                    if (e.mensagem.Code == 0 && e.dt_lancamento_inicio.HasValue)
-                    {
-                        data1 = e.dt_lancamento_inicio.Value.ToString("yyyy-MM-dd");
-                        data2 = e.dt_lancamento_fim.Value.ToString("yyyy-MM-dd");
-                    }
-                    else
-                    {
-                        data1 = DateTime.Today.ToString("yyyy-MM-") + "01";
-                        data2 = Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-") + "01").AddDays(-1).ToString("yyyy-MM-dd");
-                    }
-                }
-
-                ListViewBalanceteBI bal = new ListViewBalanceteBI();
-                return this._List(index, 
-                                    pageSize, 
-                                    "Browse", 
-                                    bal, 
-                                    centroCustoId, 
+                ListViewBalanceteMensalBI bal = new ListViewBalanceteMensalBI();
+                return this._List(index,
+                                    pageSize,
+                                    "Browse",
+                                    bal,
+                                    TipoBalanceteMensal,
+                                    centroCustoId,
                                     e.exercicio,
                                     grauPC,
-                                    data1, 
-                                    data2,
                                     descricao_centroCusto,
                                     RecDesp);
             }
@@ -100,22 +73,31 @@ namespace DWM.Controllers
                 return View();
         }
 
-        public ActionResult _List(int? index, int? pageSize, string action, ListViewBalanceteBI model, params object[] param)
+        public ActionResult _List(int? index, int? pageSize, string action, ListViewBalanceteMensalBI model, params object[] param)
         {
             if (ViewBag.ValidateRequest)
             {
-                Factory<BalanceteViewModel, ApplicationContext> facade = new Factory<BalanceteViewModel, ApplicationContext>();
+                Factory<BalanceteMensalViewModel, ApplicationContext> facade = new Factory<BalanceteMensalViewModel, ApplicationContext>();
                 IPagedList pagedList = facade.PagedList(model, index, pageSize.Value, param);
                 UpdateBreadCrumb(this.ControllerContext.RouteData.Values["controller"].ToString(), action);
 
                 #region Filtros
                 pagedList.Filtros = new List<FiltroRepository>();
 
+                #region Tipo de Balancete (S-Saldos ou T-Totais de Débito e Crédito)
+                FiltroRepository TipoBalanceteMensalFiltro = new FiltroRepository()
+                {
+                    atributo = "TipoBalanceteMensal",
+                    valor = param[0].ToString()
+                };
+                ((IList<FiltroRepository>)pagedList.Filtros).Add(TipoBalanceteMensalFiltro);
+                #endregion
+
                 #region Centro de Custo
                 FiltroRepository CentroCustoFiltro = new FiltroRepository()
                 {
                     atributo = "centroCustoId",
-                    valor = param[0].ToString()
+                    valor = param[1].ToString()
                 };
                 ((IList<FiltroRepository>)pagedList.Filtros).Add(CentroCustoFiltro);
                 #endregion
@@ -124,7 +106,7 @@ namespace DWM.Controllers
                 FiltroRepository ExercicioFiltro = new FiltroRepository()
                 {
                     atributo = "centroCustoId",
-                    valor = param[1].ToString()
+                    valor = param[2].ToString()
                 };
                 ((IList<FiltroRepository>)pagedList.Filtros).Add(ExercicioFiltro);
                 #endregion
@@ -133,27 +115,9 @@ namespace DWM.Controllers
                 FiltroRepository GrauPCFiltro = new FiltroRepository()
                 {
                     atributo = "centroCustoId",
-                    valor = param[2].ToString()
+                    valor = param[3].ToString()
                 };
                 ((IList<FiltroRepository>)pagedList.Filtros).Add(GrauPCFiltro);
-                #endregion
-
-                #region Data1
-                FiltroRepository Data1Filtro = new FiltroRepository()
-                {
-                    atributo = "centroCustoId",
-                    valor = (string)param[3]
-                };
-                ((IList<FiltroRepository>)pagedList.Filtros).Add(Data1Filtro);
-                #endregion
-
-                #region Data2
-                FiltroRepository Data2Filtro = new FiltroRepository()
-                {
-                    atributo = "centroCustoId",
-                    valor = (string)param[4]
-                };
-                ((IList<FiltroRepository>)pagedList.Filtros).Add(Data2Filtro);
                 #endregion
 
                 #region Empresa
@@ -167,7 +131,7 @@ namespace DWM.Controllers
                 #endregion
 
                 #region Descrição Centro de Custo
-                string descricao_centroCusto = (string)param[5];
+                string descricao_centroCusto = (string)param[4];
 
                 FiltroRepository DescricaoCentroCustoFiltro = new FiltroRepository()
                 {
@@ -181,7 +145,7 @@ namespace DWM.Controllers
                 FiltroRepository RecDespFiltro = new FiltroRepository()
                 {
                     atributo = "RecDesp",
-                    valor = (string)param[6]
+                    valor = (string)param[5]
                 };
                 ((IList<FiltroRepository>)pagedList.Filtros).Add(RecDespFiltro);
                 #endregion
@@ -196,18 +160,11 @@ namespace DWM.Controllers
 
         #region Imprimir
         [AuthorizeFilter]
-        public ActionResult Imprimir(string data1 = "", string data2 = "", int centroCustoId = 0, int grauPC = 0, string descricao_centroCusto = "", string RecDesp = "N")
+        public ActionResult Imprimir(string TipoBalanceteMensal = "", int centroCustoId = 0, int grauPC = 0, string descricao_centroCusto = "", string RecDesp = "N")
         {
-            return ListParam(0, 10000, data1, data2, centroCustoId, grauPC, descricao_centroCusto, RecDesp);
+            return ListParam(0, 10000, TipoBalanceteMensal, centroCustoId, grauPC, descricao_centroCusto, RecDesp);
         }
         #endregion
 
-        #region Lucro/Prejuízo
-        [AuthorizeFilter]
-        public ActionResult LucroPrejuizo(string data1 = "", string data2 = "", int centroCustoId = 0)
-        {
-            return ListParam(0, 10000, data1, data2, centroCustoId, 1, "", "S");
-        }
-        #endregion
     }
 }
