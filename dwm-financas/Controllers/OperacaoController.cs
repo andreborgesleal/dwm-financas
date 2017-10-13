@@ -16,7 +16,7 @@ using DWM.Models.BI;
 namespace DWM.Controllers
 {
     public abstract class OperacaoController<EORepo, EOPERepo, ORepo, OModel, OPModel, OPEModel, OPRepo, OPERepo, O, OP, OPE, EditarBI, BaixarBI,
-                                             EventoBI, EstornoBI, ModifyBI, CancelarBI, ExcluirBI, LiquidarBI> : DwmRootController<ORepo, OModel, ApplicationContext>
+                                             EventoBI, EstornoBI, ModifyBI, CancelarBI, ExcluirBI, LiquidarBI, AlterarBI> : DwmRootController<ORepo, OModel, ApplicationContext>
         where EORepo : EditarOperacaoViewModel<EOPERepo>
         where EOPERepo : EditarOperacaoParcelaEventoViewModel
         where ORepo : OperacaoViewModel<OPRepo,OPERepo>
@@ -36,6 +36,7 @@ namespace DWM.Controllers
         where CancelarBI : OperacaoCancelarBI<ORepo, OPRepo, OPERepo, OModel, OPModel, OPEModel, O, OP, OPE>
         where ExcluirBI : OperacaoExcluirBI<ORepo, OPRepo, OPERepo, OModel, OPModel, OPEModel, O, OP, OPE>
         where LiquidarBI : OperacaoLiquidarBI<ORepo, OPRepo, OPERepo, OModel, OPModel, OPEModel, O, OP, OPE>
+        where AlterarBI : OperacaoAlterarBI<ORepo, OPRepo, OPERepo, OModel, OPModel, OPEModel, O, OP, OPE>
     {
         #region Herança
         public override int _sistema_id() { return (int)Sistema.DWMFINANCAS; }
@@ -75,6 +76,11 @@ namespace DWM.Controllers
         {
             Type typeInstance = typeof(EditarBI);
             return (EditarBI)Activator.CreateInstance(typeInstance);
+        }
+        protected AlterarBI getOperacaoAlterarBIInstance()
+        {
+            Type typeInstance = typeof(AlterarBI);
+            return (AlterarBI)Activator.CreateInstance(typeInstance);
         }
         protected BaixarBI getOperacaoBaixarBIInstance()
         {
@@ -281,7 +287,7 @@ namespace DWM.Controllers
 
         #region Novo Evento
         [AuthorizeFilter(Order = 1020)]
-        public ActionResult _Evento(int operacaoId, int parcelaId, int? banco2Id, string dt_ocorrencia, string valor, string fileuploadComprovante,
+        public ActionResult _Evento(int operacaoId, int parcelaId, int? banco2Id, string dt_ocorrencia, string valor, string fileComprovante,
                                         int historicoId, string complementoHist, int? eventoId, int? enquadramento_amortizacaoId)
         {
             EORepo result = getEditarOperacaoRepositoryInstance();
@@ -296,7 +302,7 @@ namespace DWM.Controllers
                     value.bancoId = banco2Id;
                     value.historicoId = historicoId;
                     value.complementoHist = complementoHist;
-                    value.arquivo = fileuploadComprovante;
+                    value.arquivo = fileComprovante;
                     value.enquadramentoId = enquadramento_amortizacaoId;
                     value.dt_ocorrencia = Funcoes.StringToDate(dt_ocorrencia).Value;
                     value.valor = valor != null && valor != "" ? decimal.Parse(valor) : 0;
@@ -314,7 +320,7 @@ namespace DWM.Controllers
                 {
                     ModelState.AddModelError(ex.Result.Field, ex.Result.Message); // mensagem amigável ao usuário
                     Error(ex.Result.MessageBase); // Mensagem em inglês com a descrição detalhada do erro e fica no topo da tela
-                    OnEventoError(ref result, operacaoId, parcelaId, banco2Id, dt_ocorrencia, valor, fileuploadComprovante,
+                    OnEventoError(ref result, operacaoId, parcelaId, banco2Id, dt_ocorrencia, valor, fileComprovante,
                                     historicoId, complementoHist, eventoId, enquadramento_amortizacaoId);
                 }
                 catch (Exception ex)
@@ -322,7 +328,7 @@ namespace DWM.Controllers
                     App_DominioException.saveError(ex, GetType().FullName);
                     ModelState.AddModelError("", MensagemPadrao.Message(17).ToString()); // mensagem amigável ao usuário
                     Error(ex.Message); // Mensagem em inglês com a descrição detalhada do erro e fica no topo da tela
-                    OnEventoError(ref result, operacaoId, parcelaId, banco2Id, dt_ocorrencia, valor, fileuploadComprovante,
+                    OnEventoError(ref result, operacaoId, parcelaId, banco2Id, dt_ocorrencia, valor, fileComprovante,
                                     historicoId, complementoHist, eventoId, enquadramento_amortizacaoId);
                 }
                 return View("_Edit", result);
@@ -521,6 +527,7 @@ namespace DWM.Controllers
             IDictionary<string, string> text = new Dictionary<string, string>();
             text.Add("edit", "Editar");
             text.Add("_index", "Editar Operação");
+            text.Add("alterar", "Alterar Operação");
             BindBreadCrumb(getBreadCrumbText(null, text));
 
             if (ViewBag.ValidateRequest)
@@ -575,6 +582,121 @@ namespace DWM.Controllers
                 Error("Acesso para esta funcionalidade negado");
                 return View("_EditarOperacao");
             }
+        }
+
+        #region Alterar dados da Operação
+        [AuthorizeFilter]
+        public ActionResult Alterar(int operacaoId)
+        {
+            return _Index(operacaoId);
+        }
+
+        [AuthorizeFilter]
+        [HttpPost]
+        public virtual ActionResult Alterar(ORepo value, FormCollection collection)
+        {
+            if (ViewBag.ValidateRequest)
+            {
+                try
+                {
+                    BeforeEdit(ref value, collection);
+
+                    Factory<ORepo, ApplicationContext> factory = new Factory<ORepo, ApplicationContext>();
+                    value.uri = this.ControllerContext.Controller.GetType().Name.Replace("Controller", "") + "/" + this.ControllerContext.RouteData.Values["action"].ToString();
+                    value = factory.Execute(getOperacaoAlterarBIInstance(), value);
+                    if (value.mensagem.Code > 0)
+                        throw new App_DominioException(value.mensagem);
+
+                    Success(value.mensagem.Message);
+                }
+                catch (App_DominioException ex)
+                {
+                    ModelState.AddModelError(ex.Result.Field, ex.Result.Message); // mensagem amigável ao usuário
+                    Error(ex.Result.Message); // Mensagem em inglês com a descrição detalhada do erro e fica no topo da tela
+                }
+                catch (Exception ex)
+                {
+                    App_DominioException.saveError(ex, GetType().FullName);
+                    ModelState.AddModelError("", MensagemPadrao.Message(17).ToString()); // mensagem amigável ao usuário
+                    Error(ex.Message); // Mensagem em inglês com a descrição detalhada do erro e fica no topo da tela
+                }
+
+                return RedirectToAction("Edit", new { operacaoId = value.operacaoId, parcelaId = 1 });
+            }
+            else
+            {
+                Error("Acesso para esta funcionalidade negado");
+                return View("_EditarOperacao");
+            }
+        }
+
+        public override void BeforeEdit(ref ORepo value, FormCollection collection)
+        {
+            Modify(ref value, collection); // popula credorId/clienteId e nome_credor/nome_cliente
+
+            if (collection["dt_emissao"] != null && collection["dt_emissao"] != "")
+                value.dt_emissao = Funcoes.StringToDate(collection["dt_emissao"]).Value;
+
+            if (collection["documento"] != null && collection["documento"] != "")
+                value.documento = collection["documento"];
+
+            if (collection["enquadramentoId"] != null && collection["enquadramentoId"] != "")
+                value.enquadramentoId = int.Parse(collection["enquadramentoId"]);
+            else
+                value.enquadramentoId = null;
+
+            if (collection["centroCustoId"] != null && collection["centroCustoId"] != "")
+                value.centroCustoId = int.Parse(collection["centroCustoId"]);
+            else
+                value.centroCustoId = null;
+
+            if (collection["vr_jurosMora"] != null && collection["vr_jurosMora"] != "")
+                value.vr_jurosMora = Decimal.Parse(collection["vr_jurosMora"]);
+            else
+                value.vr_jurosMora = null;
+
+            if (collection["vr_multa"] != null && collection["vr_multa"] != "")
+                value.vr_multa = Decimal.Parse(collection["vr_multa"]);
+            else
+                value.vr_multa = null;
+
+            value.recorrencia = !value.recorrencia_mensal ? "N" : "S";
+            value.historicoId = int.Parse(collection["historicoId"]);
+            value.complementoHist = collection["complementoHist"];
+        }
+        #endregion
+
+        public override void OnEditError(ref ORepo value, FormCollection collection)
+        {
+            Modify(ref value, collection); // popula credorId/clienteId e nome_credor/nome_cliente
+
+            if (collection["historicoId"] != null && collection["historicoId"] != "")
+                value.historicoId = int.Parse(collection["historicoId"]);
+
+            value.descricao_historico = collection["descricao_historico"];
+
+            if (collection["centroCustoId"] != null && collection["centroCustoId"] != "")
+            {
+                value.centroCustoId = int.Parse(collection["centroCustoId"]);
+                value.descricao_centroCusto = collection["descricao_centroCusto"];
+            }
+
+            if (collection["enquadramentoId"] != null && collection["enquadramentoId"] != "")
+            {
+                value.enquadramentoId = int.Parse(collection["enquadramentoId"]);
+                value.descricao_enquadramento = collection["descricao_enquadramento"];
+            }
+
+            if (collection["enquadramento_amortizacaoId"] != null && collection["enquadramento_amortizacaoId"] != "")
+            {
+                value.enquadramento_amortizacaoId = int.Parse(collection["enquadramento_amortizacaoId"]);
+                value.descricao_enquadramentoAmortizacao = collection["descricao_enquadramento_amortizacao"];
+            }
+
+            if (collection["vr_jurosMora"] != null && collection["vr_jurosMora"] != "")
+                value.vr_jurosMora = decimal.Parse(collection["vr_jurosMora"]);
+            if (collection["vr_multa"] != null && collection["vr_multa"] != "")
+                value.vr_multa = decimal.Parse(collection["vr_multa"]);
         }
 
         #endregion

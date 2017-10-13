@@ -29,7 +29,8 @@ namespace DWM.Controllers
                                                          ContaPagarModifyBI,
                                                          ContaPagarCancelarOperacaoBI,
                                                          ContaPagarExcluirOperacaoBI,
-                                                         ContaPagarLiquidarOperacaoBI>
+                                                         ContaPagarLiquidarOperacaoBI,
+                                                         ContaPagarOperacaoAlterarBI>
     {
         public override string getListName()
         {

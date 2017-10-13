@@ -25,6 +25,7 @@ namespace DWM.Models.Repositories
         public decimal? vr_multa_atraso_baixa { get; set; }
         public decimal? vr_desconto_baixa { get; set; }
         public decimal? vr_baixa { get; set; }
+        public string recorrencia { get; set; }
         #endregion
 
         public OPE editarOperacaoParcelaEventoViewModel { get; set; }

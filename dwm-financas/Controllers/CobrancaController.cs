@@ -31,7 +31,8 @@ namespace DWM.Controllers
                                                          ContaReceberModifyBI,
                                                          ContaReceberCancelarOperacaoBI,
                                                          ContaReceberExcluirOperacaoBI,
-                                                         ContaReceberLiquidarOperacaoBI>
+                                                         ContaReceberLiquidarOperacaoBI,
+                                                         ContaReceberOperacaoAlterarBI>
     {
         public override string getListName()
         {

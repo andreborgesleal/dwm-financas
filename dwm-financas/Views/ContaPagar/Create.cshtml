@@ -37,10 +37,10 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <p>
-                            &nbsp;
-                        </p>
-                        @*@Html.CheckBoxFor(info => info.recorrencia_mensal, new { @onclick = "RecorrenciaMensal()" })<small>&nbsp;Recorrência mensal</small>*@
+                        <div class="form-group">
+                            <label class="control-label margem-interna">Recorrência</label><br />
+                            @Html.CheckBoxFor(info => info.recorrencia_mensal, new { @class = "icheckbox_flat-green" }) <span class="h4">&nbsp;Mensal</span>
+                        </div>
                     </div>
                     <div class="col-md-5">
                         @Html.Editor("nome_credor1", "FornecedoresAutoComplete", new

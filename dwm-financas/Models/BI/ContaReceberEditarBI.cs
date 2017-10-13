@@ -39,6 +39,7 @@ namespace DWM.Models.BI
                          operacaoId = r.operacaoId,
                          parcelaId = r.parcelaId,
                          dt_emissao = cr.dt_emissao,
+                         recorrencia = cr.recorrencia,
                          clienteId = cr.clienteId,
                          nome_cliente = cli.nome,
                          grupoClienteId = gcli.grupoClienteId,

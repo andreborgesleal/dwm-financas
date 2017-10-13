@@ -248,6 +248,7 @@
     <Compile Include="Models\BI\ContaPagarExcluirOperacaoBI.cs" />
     <Compile Include="Models\BI\ContaPagarLiquidarOperacaoBI.cs" />
     <Compile Include="Models\BI\ContaPagarModifyBI.cs" />
+    <Compile Include="Models\BI\ContaPagarOperacaoAlterarBI.cs" />
     <Compile Include="Models\BI\ContaPagarParcelaEventoBI.cs" />
     <Compile Include="Models\BI\ContaReceberBaixarBI.cs" />
     <Compile Include="Models\BI\ContaReceberCancelarOperacaoBI.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="Models\BI\ContaReceberExcluirOperacaoBI.cs" />
     <Compile Include="Models\BI\ContaReceberLiquidarOperacaoBI.cs" />
     <Compile Include="Models\BI\ContaReceberModifyBI.cs" />
+    <Compile Include="Models\BI\ContaReceberOperacaoAlterarBI.cs" />
     <Compile Include="Models\BI\ContaReceberParcelaEventoBI.cs" />
     <Compile Include="Models\BI\EnviarEmailBI.cs" />
     <Compile Include="Models\BI\EsqueciMinhaSenhaBI.cs" />
@@ -266,6 +268,7 @@
     <Compile Include="Models\BI\ListViewContaPagarAutorizarBI.cs" />
     <Compile Include="Models\BI\ListViewContaPagarBI.cs" />
     <Compile Include="Models\BI\ListViewContaReceberBI.cs" />
+    <Compile Include="Models\BI\OperacaoAlterarBI.cs" />
     <Compile Include="Models\BI\OperacaoBaixarBI.cs" />
     <Compile Include="Models\BI\OperacaoCancelarBI.cs" />
     <Compile Include="Models\BI\OperacaoEditarBI.cs" />
@@ -4165,6 +4168,8 @@
     <Content Include="Users_Data\Empresas\1\Avatar\1.png" />
     <Content Include="Users_Data\Empresas\3\arquivos\teste.txt" />
     <Content Include="Users_Data\Empresas\3\Avatar\1.png" />
+    <Content Include="Users_Data\Empresas\5\arquivos\teste.txt" />
+    <Content Include="Users_Data\Empresas\5\Avatar\10917.jpg" />
     <Content Include="Users_Data\Empresas\6\arquivos\teste.txt" />
     <Content Include="Users_Data\Empresas\6\Avatar\1.png" />
     <Content Include="Web.config" />
@@ -4444,6 +4449,8 @@
     <Content Include="Views\Balanco\Browse.cshtml" />
     <Content Include="Views\Balanco\ListParam.cshtml" />
     <Content Include="Views\Balanco\Imprimir.cshtml" />
+    <Content Include="Views\Cobranca\Alterar.cshtml" />
+    <Content Include="Views\ContaPagar\Alterar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />

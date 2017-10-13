@@ -22,6 +22,9 @@ namespace DWM.Models.Entidades
         [DisplayName("ContabilidadeID")]
         public System.Nullable<int> contabilidadeId { get; set; }
 
+        [DisplayName("EnquadramentoId")]
+        public System.Nullable<int> enquadramentoId { get; set; }
+
         [DisplayName("Contabilidade")]
         public virtual Contabilidade Contabilidade { get; set; }
 

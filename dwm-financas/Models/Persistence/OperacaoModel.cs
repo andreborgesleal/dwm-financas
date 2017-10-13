@@ -426,6 +426,7 @@ namespace DWM.Models.Persistence
             c.historicoId = value.historicoId;
             c.complementoHist = value.complementoHist;
             c.centroCustoId = value.centroCustoId;
+            c.enquadramentoId = value.enquadramentoId;
             c.dt_emissao = value.dt_emissao;
             c.vr_jurosMora = value.vr_jurosMora ?? 0;
             c.vr_multa = value.vr_multa ?? 0;
@@ -469,6 +470,8 @@ namespace DWM.Models.Persistence
             r.complementoHist = entity.complementoHist;
             r.centroCustoId = entity.centroCustoId;
             r.descricao_centroCusto = entity.centroCustoId != null ? db.CentroCustos.Find(entity.centroCustoId).descricao : "";
+            r.enquadramentoId = entity.enquadramentoId;
+            r.descricao_enquadramento = entity.enquadramentoId != null ? db.Enquadramentos.Find(entity.enquadramentoId).descricao : "";
             r.dt_emissao = entity.dt_emissao;
             r.vr_jurosMora = entity.vr_jurosMora == 0 ? null : entity.vr_jurosMora;
             r.vr_multa = entity.vr_multa == 0 ? null : entity.vr_multa;

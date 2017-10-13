@@ -53,8 +53,10 @@ namespace DWM.Models.Persistence
                 p = getEntityInstance();
                 p.OperacaoParcelaEventos = new List<OPE>();
             }
-            else
+            else if (p.OperacaoParcelaEventos != null)
                 p.OperacaoParcelaEventos.Clear();
+            else
+                p.OperacaoParcelaEventos = new List<OPE>();
 
             p.operacaoId = value.operacaoId;
             p.parcelaId = value.parcelaId;

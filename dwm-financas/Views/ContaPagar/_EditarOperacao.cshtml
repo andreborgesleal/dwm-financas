@@ -4,26 +4,15 @@
 @{
     Layout = null;
 
-    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
-    t[0].url = "../ContaPagar/Create";
-    t[0].nomeCurto = "Incluir";
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+
+    t[0].url = "../ContaPagar/Alterar?operacaoId=" + Model.operacaoId.ToString();
+    t[0].nomeCurto = "Alterar";
     t[0].referencia = "";
+    t[0].exibir = "S";
+    t[0].glyph = "fa fa-check-edit";
 
-    if (Model.Contabilidade != null)
-    {
-        t[1].url = "../Contabilidade/Edit?contabilidadeId=" + Model.Contabilidade.contabilidadeId.ToString();
-        t[1].nomeCurto = "Alterar";
-        t[1].referencia = "";
-        t[1].exibir = "S";
-
-        t[2].url = "../Home/Default";
-    }
-    else
-    {
-        t[1].url = "../Home/Default";
-    }
-
-
+    t[1].url = "../Home/Default";
 }
 <div id="div-lov"></div>
 <div class="container-cadastro">
@@ -175,7 +164,23 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
                     <div class="x_panel">
-                        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Contabilidade", Descricao = "", Transacao = t })
+                        @{
+                            TransacaoRepository[] tContabilidade = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
+
+                            tContabilidade[0].url = "../Contabilidade/Edit?contabilidadeId=" + Model.Contabilidade.contabilidadeId.ToString();
+                            tContabilidade[0].nomeCurto = "Editar";
+                            tContabilidade[0].referencia = "";
+                            tContabilidade[0].exibir = "S";
+                            tContabilidade[0].glyph = "fa fa-check-edit";
+
+                            tContabilidade[1].url = "../Contabilidade/Create";
+                            tContabilidade[1].nomeCurto = "Incluir";
+                            tContabilidade[1].referencia = "";
+                            tContabilidade[1].exibir = "N";
+
+                            tContabilidade[2].url = "../Home/Default";
+                        }
+                        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Contabilidade", Descricao = "", Transacao = tContabilidade })
                         <div class="x_content">
                             @if (Model.Contabilidade != null && Model.Contabilidade.ContabilidadeItems.Count() > 0)
                             {
