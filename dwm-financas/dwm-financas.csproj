@@ -51,6 +51,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\app_dominio\App_Dominio\App_Dominio\bin\Debug\App_Dominio.dll</HintPath>
     </Reference>
+    <Reference Include="Boleto.Net">
+      <HintPath>..\Boleto.Net\bin\Debug\Boleto.Net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -278,6 +281,7 @@
     <Compile Include="Models\BI\OperacaoModifyBI.cs" />
     <Compile Include="Models\BI\OperacaoParcelaEventoBI.cs" />
     <Compile Include="Models\BI\TransferenciaBancariaBI.cs" />
+    <Compile Include="Models\Boleto\Boleto.cs" />
     <Compile Include="Models\Contratos\ICrudModelLocal.cs" />
     <Compile Include="Models\Entidades\ApplicationContext.cs" />
     <Compile Include="Models\Entidades\Banco.cs" />
@@ -4451,6 +4455,7 @@
     <Content Include="Views\Balanco\Imprimir.cshtml" />
     <Content Include="Views\Cobranca\Alterar.cshtml" />
     <Content Include="Views\ContaPagar\Alterar.cshtml" />
+    <Content Include="Views\Cobranca\VisualizarBoleto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />

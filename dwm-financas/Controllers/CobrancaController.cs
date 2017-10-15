@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using App_Dominio.Security;
 using App_Dominio.Models;
 using App_Dominio.Pattern;
+using DWM.Models.Boleto;
 
 namespace DWM.Controllers
 {
@@ -182,5 +183,64 @@ namespace DWM.Controllers
                 return View();
         }
         #endregion
+
+
+        public ActionResult VisualizarBoleto(int bancoId, int operacaoId, int parcelaId)
+        {
+            BoletoDraw boletos = new BoletoDraw(bancoId, operacaoId, parcelaId);
+
+            switch ((Bancos)bancoId)
+            {
+                case Bancos.BancodoBrasil:
+                    ViewBag.Boleto = boletos.BancodoBrasil();
+                    break;
+                case Bancos.Banrisul:
+                    ViewBag.Boleto = boletos.Banrisul();
+                    break;
+                case Bancos.Basa:
+                    ViewBag.Boleto = boletos.Basa();
+                    break;
+                case Bancos.Bradesco:
+                    ViewBag.Boleto = boletos.Bradesco();
+                    break;
+                case Bancos.BRB:
+                    ViewBag.Boleto = boletos.BRB();
+                    break;
+                case Bancos.Caixa:
+                    ViewBag.Boleto = boletos.Caixa();
+                    break;
+                case Bancos.HSBC:
+                    ViewBag.Boleto = boletos.HSBC();
+                    break;
+                case Bancos.Itau:
+                    ViewBag.Boleto = boletos.Itau();
+                    break;
+                case Bancos.Real:
+                    ViewBag.Boleto = boletos.Real();
+                    break;
+                case Bancos.Safra:
+                    ViewBag.Boleto = boletos.Safra();
+                    break;
+                case Bancos.Santander:
+                    ViewBag.Boleto = boletos.Santander();
+                    break;
+                case Bancos.Sicoob:
+                    ViewBag.Boleto = boletos.Sicoob();
+                    break;
+                case Bancos.Sicred:
+                    ViewBag.Boleto = boletos.Sicred();
+                    break;
+                case Bancos.Sudameris:
+                    ViewBag.Boleto = boletos.Sudameris();
+                    break;
+                case Bancos.Unibanco:
+                    ViewBag.Boleto = boletos.Unibanco();
+                    break;
+                default:
+                    ViewBag.Boleto = "Banco não implementado";
+                    break;
+            }
+            return View();
+        }
     }
 }

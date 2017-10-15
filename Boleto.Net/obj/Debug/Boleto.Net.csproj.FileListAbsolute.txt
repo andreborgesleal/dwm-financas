@@ -1,0 +1,9 @@
+C:\Sistemas\BoletoNet\boletonet\src\Boleto.Net\bin\Debug\Boleto.Net.dll
+C:\Sistemas\BoletoNet\boletonet\src\Boleto.Net\bin\Debug\Boleto.Net.pdb
+C:\Sistemas\BoletoNet\boletonet\src\Boleto.Net\bin\Debug\NReco.PdfGenerator.dll
+C:\Sistemas\BoletoNet\boletonet\src\Boleto.Net\bin\Debug\NReco.PdfGenerator.xml
+C:\Sistemas\BoletoNet\boletonet\src\Boleto.Net\obj\Debug\BoletoNet.Html.resources
+C:\Sistemas\BoletoNet\boletonet\src\Boleto.Net\obj\Debug\Boleto.Net.csproj.GenerateResource.Cache
+C:\Sistemas\BoletoNet\boletonet\src\Boleto.Net\obj\Debug\Boleto.Net.dll
+C:\Sistemas\BoletoNet\boletonet\src\Boleto.Net\obj\Debug\Boleto.Net.pdb
+C:\Sistemas\BoletoNet\boletonet\src\Boleto.Net\obj\Debug\Boleto.Net.csprojResolveAssemblyReference.cache
