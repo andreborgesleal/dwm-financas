@@ -51,7 +51,7 @@ namespace DWM.Models.Repositories
                 int grau = 1;
                 if (codigoPleno != null)
                 {
-                    string[] id = codigoPleno.Split('.');
+                    string[] id = codigoPleno.Replace("-","").Split('.');
                     for (int i = 1; i <= id.Length - 1; i++)
                     {
                         if (int.Parse(id[i]) == 0)
