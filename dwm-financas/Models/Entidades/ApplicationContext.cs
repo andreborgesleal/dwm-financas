@@ -37,7 +37,6 @@ namespace DWM.Models.Entidades
         public DbSet<ContaReceberParcelaEvento> ContaReceberParcelaEventos { get; set; }
         public DbSet<Cobranca> Cobrancas { get; set; }
         public DbSet<CobrancaCliente> CobrancaClientes { get; set; }
-        public DbSet<Convenio> Convenios { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

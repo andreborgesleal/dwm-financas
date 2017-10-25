@@ -89,8 +89,3 @@ C:\sistemas\dwm-financas\dwm-financas\bin\Microsoft.Owin.Security.MicrosoftAccou
 C:\sistemas\dwm-financas\dwm-financas\bin\Microsoft.Threading.Tasks.xml
 C:\sistemas\dwm-financas\dwm-financas\obj\Release\dwm-financas.dll
 C:\sistemas\dwm-financas\dwm-financas\obj\Release\dwm-financas.pdb
-C:\Sistemas\dwm-financas\dwm-financas\bin\Boleto.Net.dll
-C:\Sistemas\dwm-financas\dwm-financas\bin\NReco.PdfGenerator.dll
-C:\Sistemas\dwm-financas\dwm-financas\bin\Boleto.Net.pdb
-C:\Sistemas\dwm-financas\dwm-financas\bin\NReco.PdfGenerator.xml
-C:\Sistemas\dwm-financas\dwm-financas\obj\Release\dwm-financas.csprojResolveAssemblyReference.cache

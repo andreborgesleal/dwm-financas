@@ -181,7 +181,3 @@ C:\sistemas\dwm-financas\dwm-financas\dwm-financas\obj\Debug\dwm-financas.csproj
 C:\sistemas\dwm-financas\dwm-financas\dwm-financas\obj\Debug\dwm-financas.dll
 C:\sistemas\dwm-financas\dwm-financas\dwm-financas\obj\Debug\dwm-financas.pdb
 C:\Sistemas\dwm-financas\dwm-financas\obj\Debug\dwm-financas.csprojResolveAssemblyReference.cache
-C:\Sistemas\dwm-financas\dwm-financas\bin\Boleto.Net.dll
-C:\Sistemas\dwm-financas\dwm-financas\bin\NReco.PdfGenerator.dll
-C:\Sistemas\dwm-financas\dwm-financas\bin\Boleto.Net.pdb
-C:\Sistemas\dwm-financas\dwm-financas\bin\NReco.PdfGenerator.xml

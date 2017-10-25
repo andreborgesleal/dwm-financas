@@ -99,7 +99,7 @@
     });
 
     $(document).ready(function () {
-        FileUpload('fileUploadComprovante', 'fileComprovante', 'progress2', 'file_name2', 'myModal1', 'arq2', 'trash2');
+        FileUpload('fileUploadComprovante', 'fileComprovante', 'progress2', 'file_name2', 'myModal2', 'arq2', 'trash2');
     });
 
     function validaEvento() {
@@ -112,7 +112,7 @@
         var _valor = $("#valor").val().replace('.', '').replace('.', '').replace('.', '').replace(',', '').replace('-', '');
         _valor = parseFloat(_valor);
 
-        if (_valor < 0) {
+        if (_valor <= 0) {
             ShowMessageAjaxAlert('Valor do evento deve ser maior que zero', 'warning');
             $('#valor').focus();
             return false;

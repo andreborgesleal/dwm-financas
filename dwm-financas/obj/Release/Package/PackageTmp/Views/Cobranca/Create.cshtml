@@ -37,10 +37,10 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="control-label margem-interna">Recorrência</label><br />
-                            @Html.CheckBoxFor(info => info.recorrencia_mensal, new { @class = "icheckbox_flat-green" }) <span class="h4">&nbsp;Mensal</span>
-                        </div>
+                        <p>
+                            &nbsp;
+                        </p>
+                        @*@Html.CheckBoxFor(info => info.recorrencia_mensal, new { @onclick = "RecorrenciaMensal()" })<small>&nbsp;Recorrência mensal</small>*@
                     </div>
                     <div class="col-md-5">
                         @Html.Editor("nome_cliente1", "ClientesAutoComplete", new
@@ -191,6 +191,11 @@
                                         <input type="text" name="OperacaoParcela_vr_principal" id="OperacaoParcela_vr_principal" class="form-control text-right" value="@Model.OperacaoParcela.vr_principal.ToString("###,###,##0.00")" onfocus="this.select();" onblur="return fnValorPrincipal(this);" />
                                     </div>
                                 </div>
+                                @*@Html.EditorFor(m => m.OperacaoParcela.vr_principal, "DECIMAL", new
+                                    {
+                                        form = "horizontal",
+                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onfocus = "this.select();", @onblur = "return fnValorPrincipal(this);" }
+                                    })*@
                             </div>
                         </div>
                         <div class="row">
@@ -201,6 +206,12 @@
                                         <input type="text" name="OperacaoParcela_OperacaoParcelaEvento_valor" id="OperacaoParcela_OperacaoParcelaEvento_valor" class="form-control text-right" value="@Model.OperacaoParcela.OperacaoParcelaEvento.valor.ToString("###,###,##0.00")" onblur="return fnValorPrincipal(this);" />
                                     </div>
                                 </div>
+                                @*@Html.EditorFor(m => m.OperacaoParcela.OperacaoParcelaEvento.valor, "DECIMAL", new
+                                    {
+                                        form = "horizontal",
+                                        label = "Amortização Inicial",
+                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return fnValorPrincipal(this);" }
+                                    })*@
                             </div>
                         </div>
                         <div class="row">
@@ -211,6 +222,11 @@
                                         <input type="text" name="vr_jurosMora" id="vr_jurosMora" class="form-control text-right" value="@Model.vr_jurosMora" />
                                     </div>
                                 </div>
+                                @*@Html.EditorFor(m => m.vr_jurosMora, "DECIMAL", new
+                                    {
+                                        form = "horizontal",
+                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return Converte(this, 'vr_jurosMora')" }
+                                    })*@
                             </div>
                         </div>
                         <div class="row">
@@ -221,6 +237,11 @@
                                         <input type="text" name="vr_multa" id="vr_multa" class="form-control text-right" value="@Model.vr_multa" onblur="return Converte(this, 'vr_multa')" />
                                     </div>
                                 </div>
+                                @*@Html.EditorFor(m => m.vr_multa, "DECIMAL", new
+                                    {
+                                        form = "horizontal",
+                                        htmlAttributes = (object)new { @class = "form-control input-sm text-right", @onblur = "return Converte(this, 'vr_multa')" }
+                                    })*@
                             </div>
                         </div>
                         <div class="row">
