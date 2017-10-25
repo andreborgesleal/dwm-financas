@@ -5,18 +5,26 @@
     Layout = null;
     var path = System.Configuration.ConfigurationManager.AppSettings["Users_Data"];
 
-    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
     t[0].url = "../Cobranca/Create";
     t[0].nomeCurto = "Incluir";
     t[0].referencia = "";
 
-    t[1].url = "../Home/Default";
+    t[0].url = "../Cobranca/Alterar?operacaoId=" + Model.operacaoId.ToString();
+    t[0].nomeCurto = "Alterar";
+    t[0].referencia = "";
+    t[0].exibir = "S";
+    t[0].glyph = "fa fa-check-edit";
+
+    t[2].url = "../Home/Default";
 }
 <div id="div-lov"></div>
 <div class="container-cadastro">
     @Html.Partial("_alerts")
+    @Html.HiddenFor(info => info.operacaoId)
     <!-- Contas a receber -->
     <div class="row" id="panel-top">
+        <!-- Dados ContaReceber -->
         <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
             <div class="x_panel">
                 @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Editar título", Descricao = "", Transacao = t })
@@ -46,6 +54,13 @@
                                 @Model.descricao_centroCusto
                             </li>
                         }
+                        @if (Model.recorrencia == "S")
+                        {
+                            <li class="list-group-item">
+                                <h4><strong>Recorrência</strong></h4>
+                                MENSAL
+                            </li>
+                        }
                         <li class="list-group-item">
                             <h4><strong>Total</strong></h4>
                             @Model.vr_total.ToString("R$ ###,###,##0.00") -
@@ -55,6 +70,7 @@
                 </div>
             </div>
         </div>
+        <!-- Contabilidade (ContaReceber)-->
         <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
             <div class="x_panel">
                 @{
@@ -212,7 +228,7 @@
             }
         </div>
     </div>
-    <!-- Posição financeira do título -->
+    <!-- Posição financeira do título (ContaReceberParcela) -->
     <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
             <div class="x_panel">
@@ -252,7 +268,7 @@
             </div>
         </div>
     </div>
-    <!-- Eventos -->
+    <!-- Eventos (ContaReceberParcelaEvento)-->
     <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
             <div class="x_panel">
@@ -337,7 +353,7 @@
             </div>
         </div>
     </div>
-    <!-- Tab (Baixa/Eventos/Alterar)-->
+    <!-- Tab (Baixa/Eventos/Alterar/Boleto)-->
     @Html.Partial("_AjaxAlert", "panel-tab")
     <div class="row" id="panel-tab">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
@@ -352,8 +368,12 @@
                     <li role="presentation" class="">
                         <a href="#alterar" role="tab" id="profile-alterar" data-toggle="tab" aria-expanded="false">Alterar</a>
                     </li>
+                    <li role="presentation" class="">
+                        <a href="#boleto" role="tab" id="profile-boleto" data-toggle="tab" aria-expanded="false">Boleto</a>
+                    </li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
+                    <!-- Baixar -->
                     <div role="tabpanel" class="tab-pane fade active in" id="baixar" aria-labelledby="home-tab">
                         @if (Model.ind_baixa == null || Model.ind_baixa == "")
                         {
@@ -366,6 +386,7 @@
                             <div class="well text-center margem-topo-10">Título Baixado</div>
                         }
                     </div>
+                    <!-- Novo Evento -->
                     <div role="tabpanel" class="tab-pane fade" id="evento" aria-labelledby="profile-evento">
                         @if (Model.ind_baixa == null || Model.ind_baixa == "")
                         {
@@ -378,6 +399,7 @@
                             <div class="well text-center margem-topo-10">Título Baixado</div>
                         }
                     </div>
+                    <!-- Alterar título -->
                     <div role="tabpanel" class="tab-pane fade" id="alterar" aria-labelledby="profile-alterar">
                         @if (Model.ind_baixa == null || Model.ind_baixa == "")
                         {
@@ -389,6 +411,30 @@
                             {
                                 <div id="novo-evento">
                                     @Html.Partial("_Modify", Model)
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="well text-center margem-topo-10">Título Baixado</div>
+                        }
+                    </div>
+                    <!-- Boleto -->
+                    <div role="tabpanel" class="tab-pane fade" id="boleto" aria-labelledby="profile-boleto">
+                        @if (Model.ind_baixa == null || Model.ind_baixa == "")
+                        {
+                            if (Model.OperacaoParcelaEventos.Where(info => info.ind_estorno == "N").Count() > 1)
+                            {
+                                <div class="well text-center margem-topo-10">Título não pode imprimir boleto porque possui movimentação</div>
+                            }
+                            else
+                            {
+                                <div id="boleto-emissao">
+                                    @*@Html.Partial("_Boleto", Model)*@
+                                    @*<input type="button" class="btn-default" value="Imprimir" onclick="VisualizaBoleto()" />*@
+                                    <button type="button" class="btn btn-primary" onclick="VisualizaBoletoPopUp()">
+                                        Imprimir
+                                    </button>
                                 </div>
                             }
                         }
@@ -417,7 +463,7 @@
         CarregandoIn();
 
         $('#EditarContaReceber').load(link);
-        
+
         $( document ).ajaxSuccess(function (event, xhr, settings) {
             $('#carregando').css("visibility", "hidden");
             $('#carregando').css("height", "0px");
@@ -430,4 +476,17 @@
             $('#carregando').css("margin-left", "0%");
         })
     }
+
+    function VisualizaBoleto() {
+        var link = "/Cobranca/VisualizarBoleto?bancoID=104&operacaoId=" + '@Model.operacaoId' + "&parcelaId=" + '@Model.parcelaId';
+        $('#myBoletoEmissao').load(encodeURI(link));
+    }
+
+    function VisualizaBoletoPopUp() {
+        var url = "/Cobranca/VisualizarBoleto?bancoID=104&operacaoId=" + '@Model.operacaoId' + "&parcelaId=" + '@Model.parcelaId'; //$('#operacaoId').val(); // + strSelected;
+        window.open(url, "WindowPopup", 'width=668,height=820');
+    }
 </script>
+
+
+

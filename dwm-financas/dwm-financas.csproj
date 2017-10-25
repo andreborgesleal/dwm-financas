@@ -298,6 +298,7 @@
     <Compile Include="Models\Entidades\ContaReceber.cs" />
     <Compile Include="Models\Entidades\ContaReceberParcela.cs" />
     <Compile Include="Models\Entidades\ContaReceberParcelaEvento.cs" />
+    <Compile Include="Models\Entidades\Convenio.cs" />
     <Compile Include="Models\Entidades\Credor.cs" />
     <Compile Include="Models\Entidades\DWMContextLocal.cs" />
     <Compile Include="Models\Entidades\DWMSessaoLocal.cs" />
@@ -340,6 +341,7 @@
     <Compile Include="Models\Persistence\ContaReceberModel.cs" />
     <Compile Include="Models\Persistence\ContaReceberParcelaCrudModel.cs" />
     <Compile Include="Models\Persistence\ContaReceberParcelaEventoModel.cs" />
+    <Compile Include="Models\Persistence\ConvenioModel.cs" />
     <Compile Include="Models\Persistence\CredorModel.cs" />
     <Compile Include="Models\Persistence\EnquadramentoItemModel.cs" />
     <Compile Include="Models\Persistence\EnquadramentoModel.cs" />
@@ -375,6 +377,7 @@
     <Compile Include="Models\Repositories\ContaReceberParcelaEventoViewModel.cs" />
     <Compile Include="Models\Repositories\ContaReceberParcelaViewModel.cs" />
     <Compile Include="Models\Repositories\ContaReceberViewModel.cs" />
+    <Compile Include="Models\Repositories\ConvenioViewModel.cs" />
     <Compile Include="Models\Repositories\CredorViewModel.cs" />
     <Compile Include="Models\Repositories\ContaReceberDemonstrativoViewModel.cs" />
     <Compile Include="Models\Repositories\DiarioViewModel.cs" />
@@ -4176,7 +4179,9 @@
     <Content Include="Users_Data\Empresas\5\Avatar\10917.jpg" />
     <Content Include="Users_Data\Empresas\6\arquivos\teste.txt" />
     <Content Include="Users_Data\Empresas\6\Avatar\1.png" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

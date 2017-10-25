@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="1736377402" Data="17/10/2017 21:46:41">
+    <Sessao>reviks54c4rb31wztsx2rchj</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; account/login</NameSpace>
+    <Context>__RequestVerificationToken="SdsVHvSavcghPdasSKhc6eBe0CDGVI82GzhKXdKPUPkTOaVbEnNXFcLCPZpnQ5a5mj5Y377_gBdV2Emk_6Tp98cKCr4Z4BWNlcju1L_lWoE1",UserName="andreborgesleal@live.com",Password="EvergladesSind"</Context>
+    <StackTrace />
+  </LOG>
+  <LOG ID="778577720" Data="17/10/2017 21:46:41">
+    <Sessao>reviks54c4rb31wztsx2rchj</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; account/login</NameSpace>
+    <Context>__RequestVerificationToken="SdsVHvSavcghPdasSKhc6eBe0CDGVI82GzhKXdKPUPkTOaVbEnNXFcLCPZpnQ5a5mj5Y377_gBdV2Emk_6Tp98cKCr4Z4BWNlcju1L_lWoE1",UserName="andreborgesleal@live.com",Password="EvergladesSind"</Context>
+    <StackTrace />
+  </LOG>
+  <LOG ID="947938935" Data="17/10/2017 21:47:06">
+    <Sessao>reviks54c4rb31wztsx2rchj</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; account/login</NameSpace>
+    <Context>__RequestVerificationToken="DO__af4Ig0ZqHZMINeP7tRNIV3DNSpEVLwLw09wbthdWi03FnvcoGgTKg7bXlN0ncQ1nkOaWoKQ6xbkfT_v31759URGlNUAB0B-pvbSZ8Po1",UserName="andreborgesleal@live.com",Password="EvergladesSind"</Context>
+    <StackTrace />
+  </LOG>
+  <LOG ID="1367094972" Data="17/10/2017 21:47:06">
+    <Sessao>reviks54c4rb31wztsx2rchj</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; account/login</NameSpace>
+    <Context>__RequestVerificationToken="DO__af4Ig0ZqHZMINeP7tRNIV3DNSpEVLwLw09wbthdWi03FnvcoGgTKg7bXlN0ncQ1nkOaWoKQ6xbkfT_v31759URGlNUAB0B-pvbSZ8Po1",UserName="andreborgesleal@live.com",Password="EvergladesSind"</Context>
+    <StackTrace />
+  </LOG>
+  <LOG ID="1592511199" Data="17/10/2017 21:47:24">
+    <Sessao>reviks54c4rb31wztsx2rchj</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; account/login</NameSpace>
+    <Context>__RequestVerificationToken="vB1KI-v37u4Cg8B4mHTZqRanw65xdksG7IEUYespjt88SOAO0bbx-7i5ruJyhxgYh977mfGPNl_ScUzrwTBg0dhyISTj3aN4B_jPdJM4bFw1",UserName="andreborgesleal@live.com",Password="EvergladesSind"</Context>
+    <StackTrace />
+  </LOG>
+  <LOG ID="2011667236" Data="17/10/2017 21:47:24">
+    <Sessao>reviks54c4rb31wztsx2rchj</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; account/login</NameSpace>
+    <Context>__RequestVerificationToken="vB1KI-v37u4Cg8B4mHTZqRanw65xdksG7IEUYespjt88SOAO0bbx-7i5ruJyhxgYh977mfGPNl_ScUzrwTBg0dhyISTj3aN4B_jPdJM4bFw1",UserName="andreborgesleal@live.com",Password="EvergladesSind"</Context>
+    <StackTrace />
+  </LOG>
+</LOG>
