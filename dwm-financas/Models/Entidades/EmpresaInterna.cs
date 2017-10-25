@@ -21,5 +21,20 @@ namespace DWM.Models.Entidades
 
         [DisplayName("email")]
         public string email { get; set; }
+
+        [DisplayName("IndFiscal")]
+        public string IndFiscal { get; set; }
+
+        [DisplayName("Endereco")]
+        public string Endereco { get; set; }
+
+        [DisplayName("Complemento")]
+        public string Complemento { get; set; }
+
+        [DisplayName("CEP")]
+        public string CEP { get; set; }
+
+        [DisplayName("Bairro")]
+        public string Bairro { get; set; }
     }
 }
