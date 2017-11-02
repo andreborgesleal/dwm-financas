@@ -287,5 +287,16 @@ namespace DWM.Models.Enumeracoes
         }
         #endregion
 
+        #region DropDownList Layout CNAB
+        public IEnumerable<SelectListItem> LayoutCNAB(string selectedValue = "", string header = "")
+        {
+            List<SelectListItem> drp = new List<SelectListItem>() {
+                new SelectListItem() { Value = Enumeradores.LayoutCNAB.CNAB240.GetStringValue(), Text = Enumeradores.LayoutCNAB.CNAB240.GetStringDescription() },
+                new SelectListItem() { Value = Enumeradores.LayoutCNAB.CNAB400.GetStringValue(), Text = Enumeradores.LayoutCNAB.CNAB400.GetStringDescription()  }
+            };
+
+            return Funcoes.SelectListEnum(drp, selectedValue, header);
+        }
+        #endregion
     }
 }

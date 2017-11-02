@@ -184,5 +184,15 @@ namespace DWM.Models.Enumeracoes
             [StringValue("T")]
             TOTAIS_DEB_CRED,
         }
+
+        public enum LayoutCNAB
+        {
+            [StringDescription("CNAB240")]
+            [StringValue("040")]
+            CNAB240,
+            [StringDescription("CNAB400")]
+            [StringValue("000")]
+            CNAB400,
+        }
     }
 }

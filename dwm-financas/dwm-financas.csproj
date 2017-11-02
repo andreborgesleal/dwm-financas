@@ -219,6 +219,7 @@
     <Compile Include="Controllers\CobrancaController.cs" />
     <Compile Include="Controllers\ContabilidadeController.cs" />
     <Compile Include="Controllers\ContaPagarController.cs" />
+    <Compile Include="Controllers\ConvenioController.cs" />
     <Compile Include="Controllers\DiarioController.cs" />
     <Compile Include="Controllers\EnquadramentosController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
@@ -433,6 +434,7 @@
     <Content Include="Content\assets\ico\apple-touch-icon-57-precomposed.png" />
     <Content Include="Content\assets\ico\apple-touch-icon-72-precomposed.png" />
     <Content Include="Content\assets\ico\favicon.png" />
+    <Content Include="Content\assets\ico\favicon64.png" />
     <Content Include="Content\assets\img\backgrounds\1%402x.jpg" />
     <Content Include="Content\assets\img\backgrounds\1.jpg" />
     <Content Include="Content\assets\js\jquery-1.11.1.js" />
@@ -4459,6 +4461,11 @@
     <Content Include="Views\Cobranca\Alterar.cshtml" />
     <Content Include="Views\ContaPagar\Alterar.cshtml" />
     <Content Include="Views\Cobranca\VisualizarBoleto.cshtml" />
+    <Content Include="Views\Convenio\Browse.cshtml" />
+    <Content Include="Views\Convenio\List.cshtml" />
+    <Content Include="Views\Convenio\Create.cshtml" />
+    <Content Include="Views\Convenio\Edit.cshtml" />
+    <Content Include="Views\Convenio\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />

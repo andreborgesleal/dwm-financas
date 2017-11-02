@@ -6,60 +6,60 @@ namespace DWM.Models.Repositories
 {
     public class ConvenioViewModel : Repository
     {
-        [DisplayName("BancoID")]
+        [DisplayName("Banco")]
         [RegularExpression(@"^\d+$", ErrorMessage = "Campo deve ser preenchido somente com números")]
         public string BancoID { get; set; }
 
-        [DisplayName("ConvenioID")]
+        [DisplayName("Convênio")]
         [RegularExpression(@"^\d+$", ErrorMessage = "Campo deve ser preenchido somente com números")]
         public string ConvenioID { get; set; }
 
-        [DisplayName("NomeBanco")]
+        [DisplayName("Nome Banco")]
         [Required(ErrorMessage = "Nome do Banco deve ser informado")]
         public string NomeBanco { get; set; }
 
-        [DisplayName("AgenciaID")]
+        [DisplayName("Agência")]
         [Required(ErrorMessage = "Agência deve ser informada")]
         [RegularExpression(@"^\d+$", ErrorMessage = "Campo deve ser preenchido somente com números")]
         public string AgenciaID { get; set; }
 
-        [DisplayName("AgenciaDV")]
+        [DisplayName("Agência DV")]
         public string AgenciaDV { get; set; }
 
-        [DisplayName("ContaID")]
+        [DisplayName("Conta")]
         [Required(ErrorMessage = "Conta deve ser informada")]
         public string ContaID { get; set; }
 
-        [DisplayName("ContaDV")]
+        [DisplayName("Conta DV")]
         public string ContaDV { get; set; }
 
-        [DisplayName("CarteiraID")]
+        [DisplayName("Carteira")]
         [Required(ErrorMessage = "Carteira deve ser informada")]
         public string CarteiraID { get; set; }
 
-        [DisplayName("Instrucao1")]
+        [DisplayName("Instrução 1")]
         [StringLength(40, ErrorMessage = "Campo Instrução deve possuir no máximo 40 caracteres")]
         public string Instrucao1 { get; set; }
 
-        [DisplayName("Instrucao2")]
+        [DisplayName("Instrução 2")]
         [StringLength(40, ErrorMessage = "Campo Instrução deve possuir no máximo 40 caracteres")]
         public string Instrucao2 { get; set; }
 
-        [DisplayName("LayoutArquivo")]
+        [DisplayName("Layout CNAB")]
         public string LayoutArquivo { get; set; }
 
-        [DisplayName("NossoNumeroInicio")]
-        [StringLength(40, ErrorMessage = "Campo [Nosso Número] deve possuir no máximo 8 caracteres")]
+        [DisplayName("Nosso Número Início")]
+        [StringLength(8, ErrorMessage = "Campo [Nosso Número] deve possuir no máximo 8 caracteres")]
         [RegularExpression(@"^\d+$", ErrorMessage = "Campo deve ser preenchido somente com números")]
         public string NossoNumeroInicio { get; set; }
 
-        [DisplayName("NossoNumeroFim")]
-        [StringLength(40, ErrorMessage = "Campo [Nosso Número] deve possuir no máximo 8 caracteres")]
+        [DisplayName("Nosso Número Fim")]
+        [StringLength(8, ErrorMessage = "Campo [Nosso Número] deve possuir no máximo 8 caracteres")]
         [RegularExpression(@"^\d+$", ErrorMessage = "Campo deve ser preenchido somente com números")]
         public string NossoNumeroFim { get; set; }
 
-        [DisplayName("NossoNumeroUltimo")]
-        [StringLength(40, ErrorMessage = "Campo [Nosso Número] deve possuir no máximo 8 caracteres")]
+        [DisplayName("Nosso Número")]
+        [StringLength(8, ErrorMessage = "Campo [Nosso Número] deve possuir no máximo 8 caracteres")]
         [RegularExpression(@"^\d+$", ErrorMessage = "Campo deve ser preenchido somente com números")]
         public string NossoNumeroUltimo { get; set; }
     }
