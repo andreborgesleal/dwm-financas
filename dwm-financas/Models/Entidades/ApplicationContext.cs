@@ -38,6 +38,8 @@ namespace DWM.Models.Entidades
         public DbSet<Cobranca> Cobrancas { get; set; }
         public DbSet<CobrancaCliente> CobrancaClientes { get; set; }
         public DbSet<Convenio> Convenios { get; set; }
+        public DbSet<Remessa> Remessas { get; set; }
+        public DbSet<Titulo> Titulos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

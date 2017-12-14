@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using DWM.Models.Enumeracoes;
 using DWM.Models.Report;
 using App_Dominio.Security;
+using App_Dominio.Pattern;
+using DWM.Models.Entidades;
+using DWM.Models.BI;
 
 namespace DWM.Controllers
 {
@@ -16,6 +19,20 @@ namespace DWM.Controllers
 
         public override bool mustListOnLoad()
         {
+            Factory<ExercicioViewModel, ApplicationContext> facade = new Factory<ExercicioViewModel, ApplicationContext>();
+            ExercicioViewModel e = facade.Execute(new ExercicioBI(), new ExercicioViewModel());
+
+            if (e.mensagem.Code == 0 && e.dt_lancamento_inicio.HasValue)
+            {
+                ViewData["dt_lancamento_inicio"] = e.dt_lancamento_inicio.Value;
+                ViewData["dt_lancamento_fim"] = e.dt_lancamento_fim.Value;
+            }
+            else
+            {
+                ViewData["dt_lancamento_inicio"] = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-") + "01");
+                ViewData["dt_lancamento_fim"] = Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-") + "01").AddDays(-1);
+            }
+
             if (Request["bancoId"] != null)
                 return true;
             else
@@ -49,10 +66,24 @@ namespace DWM.Controllers
                     return View();
                 }
 
-                if (data1 == "")
+                if (data1 == "" || data1.Contains("%"))
                 {
-                    data1 = DateTime.Today.ToString("yyyy-MM-") + "01";
-                    data2 = Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-") + "01").AddDays(-1).ToString("yyyy-MM-dd");
+                    Factory<ExercicioViewModel, ApplicationContext> facade = new Factory<ExercicioViewModel, ApplicationContext>();
+                    ExercicioViewModel e = facade.Execute(new ExercicioBI(), new ExercicioViewModel());
+
+                    if (e.mensagem.Code == 0 && e.dt_lancamento_inicio.HasValue)
+                    {
+                        data1 = e.dt_lancamento_inicio.Value.ToString("yyyy-MM-dd");
+                        data2 = e.dt_lancamento_fim.Value.ToString("yyyy-MM-dd");
+                    }
+                    else
+                    {
+                        data1 = DateTime.Today.ToString("yyyy-MM-") + "01";
+                        data2 = Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-") + "01").AddDays(-1).ToString("yyyy-MM-dd");
+                    }
+
+                    //data1 = DateTime.Today.ToString("yyyy-MM-") + "01";
+                    //data2 = Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-") + "01").AddDays(-1).ToString("yyyy-MM-dd");
                 }
 
                 ExtratoReport ext = new ExtratoReport();
