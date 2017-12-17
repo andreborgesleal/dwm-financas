@@ -188,5 +188,81 @@ namespace DWM.Controllers
             }
         }
         #endregion
+
+        #region Lançamentos recorrentes
+        [AuthorizeFilter]
+        [HttpGet]
+        public ActionResult Recorrencia()
+        {
+            if (ViewBag.ValidateRequest)
+            {
+                BindBreadCrumb("Inclusão");
+
+                Factory<ExercicioViewModel, ApplicationContext> facade = new Factory<ExercicioViewModel, ApplicationContext>();
+                ExercicioViewModel value = facade.Execute(new ExercicioBI(), new ExercicioViewModel());
+
+                return View(value);
+            }
+            else
+                return null;
+        }
+
+        [AuthorizeFilter]
+        [HttpPost]
+        public ActionResult Recorrencia(FormCollection collection)
+        {
+            if (ViewBag.ValidateRequest)
+            {
+                ExercicioViewModel result = new ExercicioViewModel();
+                if (ModelState.IsValid)
+                    try
+                    {
+                        Factory<ExercicioViewModel, ApplicationContext> facade = new Factory<ExercicioViewModel, ApplicationContext>();
+                        ExercicioViewModel value = facade.Execute(new ExercicioBI(), new ExercicioViewModel());
+
+                        if (value.mensagem.Code == 0 && value.dt_lancamento_inicio.HasValue)
+                        {
+                            value.uri = this.ControllerContext.Controller.GetType().Name.Replace("Controller", "") + "/" + this.ControllerContext.RouteData.Values["action"].ToString();
+                            value = facade.Execute(new GerarLancamentosRecorrentesBI(), value);
+                            result = value;
+                            if (value.mensagem.Code > 0)
+                                throw new Exception(value.mensagem.MessageBase);
+                            Success("Registro incluído com sucesso!!!");
+                        }
+                        else
+                            throw new Exception("Data de Lançamento Contábil inválida para geração da recorrência");
+                    }
+                    catch (App_DominioException ex)
+                    {
+                        ModelState.AddModelError(ex.Result.Field, ex.Result.Message); // mensagem amigável ao usuário
+                        Error(ex.Result.MessageBase); // Mensagem em inglês com a descrição detalhada do erro e fica no topo da tela
+                    }
+                    catch (Exception ex)
+                    {
+                        App_DominioException.saveError(ex, GetType().FullName);
+                        ModelState.AddModelError("", MensagemPadrao.Message(17).ToString()); // mensagem amigável ao usuário
+                        Error(ex.Message); // Mensagem em inglês com a descrição detalhada do erro e fica no topo da tela
+                    }
+                else
+                {
+                    result.mensagem = new Validate()
+                    {
+                        Code = 999,
+                        Message = MensagemPadrao.Message(999).ToString(),
+                        MessageBase = ModelState.Values.Where(erro => erro.Errors.Count > 0).First().Errors[0].ErrorMessage
+                    };
+                    ModelState.AddModelError("", result.mensagem.Message); // mensagem amigável ao usuário
+                    Attention(result.mensagem.MessageBase);
+                }
+
+                return View(result);
+            }
+            else
+            {
+                Error("Acesso para esta funcionalidade negado");
+                return View();
+            }
+        }
+        #endregion
     }
 }

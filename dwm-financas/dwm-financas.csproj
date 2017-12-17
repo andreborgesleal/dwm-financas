@@ -27,7 +27,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <ApplicationInsightsResourceId>/subscriptions/23c6bf42-adef-4743-8982-960cb7426522/resourcegroups/DWM-Free/providers/microsoft.insights/components/dwm-financas</ApplicationInsightsResourceId>
-    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -266,6 +266,7 @@
     <Compile Include="Models\BI\EnviarEmailBI.cs" />
     <Compile Include="Models\BI\EsqueciMinhaSenhaBI.cs" />
     <Compile Include="Models\BI\ExercicioBI.cs" />
+    <Compile Include="Models\BI\GerarLancamentosRecorrentesBI.cs" />
     <Compile Include="Models\BI\HomeBI.cs" />
     <Compile Include="Models\BI\ListViewBalanceteBI.cs" />
     <Compile Include="Models\BI\ListViewBalanceteMensalBI.cs" />
@@ -319,7 +320,9 @@
     <Compile Include="Models\Entidades\OperacaoParcelaEvento.cs" />
     <Compile Include="Models\Entidades\Parametro.cs" />
     <Compile Include="Models\Entidades\PlanoConta.cs" />
+    <Compile Include="Models\Entidades\Remessa.cs" />
     <Compile Include="Models\Entidades\SessaoLocal.cs" />
+    <Compile Include="Models\Entidades\Titulo.cs" />
     <Compile Include="Models\Enumeracoes\BindDropDownList.cs" />
     <Compile Include="Models\Enumeracoes\DwmFinancasEnum.cs" />
     <Compile Include="Models\Enumeracoes\Enumeradores.cs" />
@@ -358,6 +361,8 @@
     <Compile Include="Models\Persistence\OperacaoParcelaCrudModel.cs" />
     <Compile Include="Models\Persistence\OperacaoParcelaEventoModel.cs" />
     <Compile Include="Models\Persistence\PlanoContaModel.cs" />
+    <Compile Include="Models\Persistence\RemessaModel.cs" />
+    <Compile Include="Models\Persistence\TituloModel.cs" />
     <Compile Include="Models\Report\DiarioReport.cs" />
     <Compile Include="Models\Report\ExtratoReport.cs" />
     <Compile Include="Models\Report\RazaoReport.cs" />
@@ -404,8 +409,10 @@
     <Compile Include="Models\Repositories\OperacaoViewModel.cs" />
     <Compile Include="Models\Repositories\PlanoContaViewModel.cs" />
     <Compile Include="Models\Repositories\RazaoViewModel.cs" />
+    <Compile Include="Models\Repositories\RemessaViewModel.cs" />
     <Compile Include="Models\Repositories\ReportViewModel.cs" />
     <Compile Include="Models\Repositories\SelectItemsTypeahead.cs" />
+    <Compile Include="Models\Repositories\TituloViewModel.cs" />
     <Compile Include="Models\Repositories\TransferenciaBancariaViewModel.cs" />
     <Compile Include="Models\Repositories\UsuarioViewModel.cs" />
     <Compile Include="Models\UploadFilesResult.cs" />
@@ -429,10 +436,6 @@
     <Content Include="Content\assets\font-awesome\css\font-awesome.css" />
     <Content Include="Content\assets\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\assets\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\assets\ico\apple-touch-icon-114-precomposed.png" />
-    <Content Include="Content\assets\ico\apple-touch-icon-144-precomposed.png" />
-    <Content Include="Content\assets\ico\apple-touch-icon-57-precomposed.png" />
-    <Content Include="Content\assets\ico\apple-touch-icon-72-precomposed.png" />
     <Content Include="Content\assets\ico\favicon.png" />
     <Content Include="Content\assets\ico\favicon64.png" />
     <Content Include="Content\assets\img\backgrounds\1%402x.jpg" />
@@ -4146,6 +4149,8 @@
     <Content Include="Content\assets\font-awesome\scss\_variables.scss" />
     <Content Include="Content\assets\ico\Thumbs.db" />
     <Content Include="Content\assets\img\backgrounds\Thumbs.db" />
+    <None Include="Properties\PublishProfiles\caixaforte - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\caixaforte - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\dwm-financas - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\datepicker.css" />
@@ -4178,7 +4183,7 @@
     <Content Include="Users_Data\Empresas\3\arquivos\teste.txt" />
     <Content Include="Users_Data\Empresas\3\Avatar\1.png" />
     <Content Include="Users_Data\Empresas\5\arquivos\teste.txt" />
-    <Content Include="Users_Data\Empresas\5\Avatar\10917.jpg" />
+    <Content Include="Users_Data\Empresas\5\Avatar\teste.txt" />
     <Content Include="Users_Data\Empresas\6\arquivos\teste.txt" />
     <Content Include="Users_Data\Empresas\6\Avatar\1.png" />
     <Content Include="Web.config" />
@@ -4466,6 +4471,7 @@
     <Content Include="Views\Convenio\Create.cshtml" />
     <Content Include="Views\Convenio\Edit.cshtml" />
     <Content Include="Views\Convenio\Delete.cshtml" />
+    <Content Include="Views\MovimentoBancario\Recorrencia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />

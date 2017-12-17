@@ -1,0 +1,44 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@model ExercicioViewModel
+@{
+    ViewBag.Title = "DWM Finanças";
+
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
+
+    t[0].url = "../Exercicios/Browse";
+    t[0].nomeCurto = "Editar Exercício Contábil";
+    t[0].referencia = "";
+    t[0].exibir = "S";
+    t[0].glyph = "fa fa-check-edit";
+
+    t[2].url = "../Home/Default";
+}
+
+<div class="container-cadastro">
+    <div class="x_panel">
+        @Html.Partial("_alerts")
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Recorrência mensal", Descricao = "", Transacao = t })
+        <div class="x_content">
+            <div>
+                @using (Html.BeginForm("Recorrencia", "MovimentoBancario", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    <div class="well margem-topo-10">
+                        <p>
+                            Esta rotina tem como objetivo gerar os registros recorrentes de contas a receber e conta a pagar
+                            referentes ao mês/ano <span class="badge badge-info"><strong>@Model.dt_lancamento_inicio.Value.ToString("MM/yyyy").</strong></span> 
+                        </p>
+                        <p>
+                            Serão gerados as contas que estão com a marcação "Recorrência Mensal" e desde que não
+                            tenham registros parcelados.
+                        </p>
+                        <p>
+                            Observação: A cada geração o sistema irá excluir todos os lançamentos do mês/ano existentes com a referida marcação para incluir novamente.
+                        </p>
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Processar">
+                }
+            </div>
+        </div>
+    </div>
+</div>
