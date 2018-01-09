@@ -265,6 +265,7 @@
     <Compile Include="Models\BI\ContaReceberParcelaEventoBI.cs" />
     <Compile Include="Models\BI\EnviarEmailBI.cs" />
     <Compile Include="Models\BI\EsqueciMinhaSenhaBI.cs" />
+    <Compile Include="Models\BI\ExercicioAbrirBI.cs" />
     <Compile Include="Models\BI\ExercicioBI.cs" />
     <Compile Include="Models\BI\GerarLancamentosRecorrentesBI.cs" />
     <Compile Include="Models\BI\HomeBI.cs" />
@@ -4186,7 +4187,9 @@
     <Content Include="Users_Data\Empresas\5\Avatar\teste.txt" />
     <Content Include="Users_Data\Empresas\6\arquivos\teste.txt" />
     <Content Include="Users_Data\Empresas\6\Avatar\1.png" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

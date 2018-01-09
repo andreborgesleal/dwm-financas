@@ -44,6 +44,7 @@
                                     <button type="button" class="btn btn-default btn-sm glyphicon glyphicon-edit" title="Editar" onclick="ShowMessageAjaxAlert('Este exercício já está encerrado e não pode ser editado', 'warning');"></button>
                                     <button type="button" class="btn btn-default btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="ShowMessageAjaxAlert('Este exercício já está encerrado e não pode ser excluído', 'warning');"></button>
                                 }
+                                <button type="button" class="btn btn-warning btn-sm glyphicon glyphicon-calendar" title="Abrir exercício" onclick="window.location='Open?empresaId=@(exe.empresaId)&exercicio=@(exe.exercicio)'"></button>
                             </td>
                             <td class="text-center">
                                 <h3>@exe.exercicio</h3>

@@ -1,9 +1,7 @@
 ﻿using App_Dominio.Component;
 using App_Dominio.Contratos;
 using App_Dominio.Entidades;
-using App_Dominio.Models;
 using DWM.Models.Entidades;
-using DWM.Models.Persistence;
 using DWM.Models.Repositories;
 using System;
 using System.Collections.Generic;
