@@ -318,6 +318,9 @@ namespace DWM.Models.Persistence
                         OPEModel eveModel = getModelInstance();
                         eveModel.Create(this.db, this.seguranca_db);
 
+                        operacaoParcelaEventoAmortizacao.Contabilidade = new ContabilidadeViewModel();
+                        operacaoParcelaEventoAmortizacao.Contabilidade.ContabilidadeItem = new ContabilidadeItemViewModel() { complementoHist = value.complementoHist };
+
                         operacaoParcelaEventoAmortizacao.enquadramentoId = value.enquadramento_amortizacaoId.Value;
                         operacaoParcelaEventoAmortizacao = eveModel.BeforeInsert(operacaoParcelaEventoAmortizacao);
                         operacaoParcelaEventoAmortizacao.Contabilidade.dt_lancamento = dt_movto_proximo_diaUtil.Value;

@@ -25,18 +25,34 @@ namespace DWM.Models.Persistence
         #region Métodos da classe CrudModel
         public override MovtoBancario MapToEntity(MovtoBancarioViewModel value)
         {
-            return new MovtoBancario()
+            MovtoBancario m = Find(value);
+            if (m != null)
             {
-                movtoBancarioId = value.movtoBancarioId,
-                historicoId = value.historicoId,
-                bancoId = value.bancoId,
-                empresaId = value.empresaId,
-                complementoHist = value.complementoHist,
-                dt_movto = value.dt_movto,
-                valor = value.valor,
-                documento = value.documento,
-                tipoMovto = value.tipoMovto
-            };
+                m.movtoBancarioId = value.movtoBancarioId;
+                m.historicoId = value.historicoId;
+                m.bancoId = value.bancoId;
+                m.empresaId = value.empresaId;
+                m.complementoHist = value.complementoHist;
+                m.dt_movto = value.dt_movto;
+                m.valor = value.valor;
+                m.documento = value.documento;
+                m.tipoMovto = value.tipoMovto;
+            }
+            else
+                m = new MovtoBancario()
+                {
+                    movtoBancarioId = value.movtoBancarioId,
+                    historicoId = value.historicoId,
+                    bancoId = value.bancoId,
+                    empresaId = value.empresaId,
+                    complementoHist = value.complementoHist,
+                    dt_movto = value.dt_movto,
+                    valor = value.valor,
+                    documento = value.documento,
+                    tipoMovto = value.tipoMovto
+                };
+
+            return m; 
         }
 
         public override MovtoBancarioViewModel MapToRepository(MovtoBancario entity)

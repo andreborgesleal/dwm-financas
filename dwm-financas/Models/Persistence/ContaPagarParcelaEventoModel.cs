@@ -9,5 +9,13 @@ namespace DWM.Models.Persistence
         {
             return db.ContaPagarParcelaEventos.Find(key.operacaoId, key.parcelaId, key.dt_evento);
         }
+
+        public override string getComplementoHist(int operacaoId)
+        {
+            if (operacaoId != 0)
+                return db.ContaPagars.Find(operacaoId).complementoHist;
+            else
+                return "";
+        }
     }
 }

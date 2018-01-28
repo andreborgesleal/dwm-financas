@@ -23,12 +23,25 @@ namespace DWM.Models.Persistence
         }
         #endregion
 
+        #region Abstract Methods
+        public abstract string getComplementoHist(int operacaoId);
+        #endregion
+
         #region Métodos da classe CrudModel
         public override OPERepo BeforeInsert(OPERepo value)
         {
             #region Imports ContabilidadeViewModel From Enquadramento
             if (value.enquadramentoId != null && value.enquadramentoId > 0)
             {
+                string complementoHist = "";
+                if (value.operacaoId == 0 &&
+                    value.Contabilidade != null &&
+                    value.Contabilidade.ContabilidadeItem != null &&
+                    !String.IsNullOrEmpty(value.Contabilidade.ContabilidadeItem.complementoHist))
+                    complementoHist = value.Contabilidade.ContabilidadeItem.complementoHist;
+                else if (value.operacaoId > 0)
+                    complementoHist = getComplementoHist(value.operacaoId);
+
                 ContabilidadeModel contabilidadeModel = new ContabilidadeModel(this.db, this.seguranca_db);
                 EnquadramentoViewModel enq = new EnquadramentoViewModel() { enquadramentoId = value.enquadramentoId.Value };
                 value.Contabilidade = contabilidadeModel.CreateRepositoryFromEnquadramento(enq);
@@ -37,6 +50,9 @@ namespace DWM.Models.Persistence
                 int contador = 0;
                 while (contador <= value.Contabilidade.ContabilidadeItems.Count() - 1)
                 {
+                    if (complementoHist != null && complementoHist != "" && value.Contabilidade.ContabilidadeItems.ElementAt(contador).complementoHist.Trim() == "")
+                        value.Contabilidade.ContabilidadeItems.ElementAt(contador).complementoHist = complementoHist;
+
                     if (value.Contabilidade.ContabilidadeItems.ElementAt(contador).valor == 0)
                         value.Contabilidade.ContabilidadeItems.ElementAt(contador).valor = value.valor;
                     contador++;
@@ -155,6 +171,7 @@ namespace DWM.Models.Persistence
             if (value.MovtoBancario != null) // Amortização ou Baixa por motivo de liquidação (gera MOVIMENTO BANCÁRIO)
             {
                 MovtoBancarioModel movtoBancarioModel = new MovtoBancarioModel();
+                movtoBancarioModel.Create(this.db, this.seguranca_db);
                 operacaoParcelaEvento.MovtoBancario = movtoBancarioModel.MapToEntity(value.MovtoBancario);
             }
             #endregion
