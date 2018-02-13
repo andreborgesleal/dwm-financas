@@ -74,7 +74,7 @@ namespace DWM.Models.Repositories
         public System.DateTime DataVencimento { get; set; }
 
         [DisplayName("Valor Nominal")]
-        public System.Nullable<decimal> ValorPrincipal { get; set; }
+        public decimal ValorPrincipal { get; set; }
 
         [DisplayName("Espécie")]
         [RegularExpression(@"^\d+$", ErrorMessage = "Campo deve ser preenchido somente com números")]
@@ -90,6 +90,9 @@ namespace DWM.Models.Repositories
 
         [DisplayName("Data Juros")]
         public System.Nullable<System.DateTime> DataJuros { get; set; }
+
+        [DisplayName("Valor Juros")]
+        public System.Nullable<decimal> ValorJuros { get; set; }
 
         [DisplayName("Data Desconto 1")]
         public System.Nullable<System.DateTime> DataDesconto1 { get; set; }
@@ -133,5 +136,20 @@ namespace DWM.Models.Repositories
 
         [DisplayName("Instrução Rodapé")]
         public string InstrucaoRodape { get; set; }
+
+        [DisplayName("Instrução Pagamento 1")]
+        public string InstrucaoPagamento1 { get; set; }
+
+        [DisplayName("Instrução Pagamento 2")]
+        public string InstrucaoPagamento2 { get; set; }
+
+        [DisplayName("Instrução Pagamento 3")]
+        public string InstrucaoPagamento3 { get; set; }
+
+        [DisplayName("Instrução Pagamento 4")]
+        public string InstrucaoPagamento4 { get; set; }
+
+        [DisplayName("Ativo")]
+        public int IndAtivo { get; set; }
     }
 }

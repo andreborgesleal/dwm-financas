@@ -19,7 +19,10 @@ namespace DWM.Models.Repositories
         public string RemessaID { get; set; }
 
         [DisplayName("DataGeracao")]
-        public System.Nullable<System.DateTime> DataGeracao { get; set; }
+        public System.DateTime DataGeracao { get; set; }
+
+        [DisplayName("DataEntrada")]
+        public System.Nullable<System.DateTime> DataEntrada { get; set; }
 
         [DisplayName("LayoutArquivo")] 
         public string LayoutArquivo { get; set; }

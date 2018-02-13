@@ -283,6 +283,7 @@
     <Compile Include="Models\BI\OperacaoLiquidarBI.cs" />
     <Compile Include="Models\BI\OperacaoModifyBI.cs" />
     <Compile Include="Models\BI\OperacaoParcelaEventoBI.cs" />
+    <Compile Include="Models\BI\TituloIncluirBI.cs" />
     <Compile Include="Models\BI\TransferenciaBancariaBI.cs" />
     <Compile Include="Models\Boleto\Boleto.cs" />
     <Compile Include="Models\Contratos\ICrudModelLocal.cs" />

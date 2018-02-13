@@ -50,10 +50,10 @@ namespace DWM.Models.Entidades
         public string SeuNumero { get; set; }
 
         [DisplayName("DataVencimento")]
-        public System.Nullable<System.DateTime> DataVencimento { get; set; }
+        public System.DateTime DataVencimento { get; set; }
 
         [DisplayName("ValorPrincipal")]
-        public System.Nullable<decimal> ValorPrincipal { get; set; }
+        public decimal ValorPrincipal { get; set; }
 
         [DisplayName("Especie")]
         public string Especie { get; set; }
@@ -66,6 +66,9 @@ namespace DWM.Models.Entidades
 
         [DisplayName("DataJuros")]
         public System.Nullable<System.DateTime> DataJuros { get; set; }
+
+        [DisplayName("ValorJuros")]
+        public System.Nullable<decimal> ValorJuros { get; set; }
 
         [DisplayName("DataDesconto1")]
         public System.Nullable<System.DateTime> DataDesconto1 { get; set; }
@@ -105,5 +108,21 @@ namespace DWM.Models.Entidades
 
         [DisplayName("InstrucaoRodape")]
         public string InstrucaoRodape { get; set; }
+
+        [DisplayName("InstrucaoPagamento1")]
+        public string InstrucaoPagamento1 { get; set; }
+
+        [DisplayName("InstrucaoPagamento2")]
+        public string InstrucaoPagamento2 { get; set; }
+
+        [DisplayName("InstrucaoPagamento3")]
+        public string InstrucaoPagamento3 { get; set; }
+
+        [DisplayName("InstrucaoPagamento4")]
+        public string InstrucaoPagamento4 { get; set; }
+
+        [DisplayName("IndAtivo")]
+        public int IndAtivo { get; set; }
+
     }
 }
