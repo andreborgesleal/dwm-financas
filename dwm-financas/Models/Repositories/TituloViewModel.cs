@@ -12,8 +12,8 @@ namespace DWM.Models.Repositories
         [DisplayName("Parcela")]
         public int parcelaId { get; set; }
 
-        [DisplayName("Sequencial")]
-        public int SequencialID { get; set; }
+        [DisplayName("Sequencia")]
+        public int SequenciaID { get; set; }
 
         [DisplayName("Banco")]
         [RegularExpression(@"^\d+$", ErrorMessage = "Campo deve ser preenchido somente com números")]
@@ -49,7 +49,7 @@ namespace DWM.Models.Repositories
             {
                 return operacaoId.ToString().PadLeft(8, '0') +
                        parcelaId.ToString().PadLeft(2, '0') +
-                       SequencialID.ToString().PadLeft(2, '0') +
+                       SequenciaID.ToString().PadLeft(2, '0') +
                        clienteId.ToString().PadLeft(5, '0') +
                        DataVencimento.ToString("yyyyMMdd");
             }

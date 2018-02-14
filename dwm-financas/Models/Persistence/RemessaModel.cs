@@ -14,7 +14,7 @@ namespace DWM.Models.Persistence
         public override RemessaViewModel BeforeInsert(RemessaViewModel value)
         {
             value.empresaId = value.empresaId == 0 ? sessaoCorrente.empresaId : value.empresaId;
-            value.DataGeracao = null;
+            value.DataGeracao = Funcoes.Brasilia();
             return base.BeforeInsert(value);
         }
 

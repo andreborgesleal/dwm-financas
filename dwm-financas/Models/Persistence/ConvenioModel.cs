@@ -7,6 +7,7 @@ using App_Dominio.Component;
 using DWM.Models.Repositories;
 using DWM.Models.Entidades;
 using App_Dominio.Enumeracoes;
+using App_Dominio.Models;
 
 namespace DWM.Models.Persistence
 {
@@ -16,7 +17,14 @@ namespace DWM.Models.Persistence
         public override ConvenioViewModel BeforeInsert(ConvenioViewModel value)
         {
             value.empresaId = value.empresaId == 0 ? sessaoCorrente.empresaId : value.empresaId;
+            value.AgenciaDV = !String.IsNullOrEmpty(value.AgenciaID) && (value.AgenciaDV == null || value.AgenciaDV == "") ? Funcoes.DigitoM11(int.Parse(value.AgenciaID)).ToString() : value.AgenciaDV;
+            value.ContaDV = !String.IsNullOrEmpty(value.ContaID) && (value.ContaDV == null || value.ContaDV == "") ? Funcoes.DigitoM11(int.Parse(value.ContaID)).ToString() : value.ContaDV;
             return base.BeforeInsert(value);
+        }
+
+        public override ConvenioViewModel BeforeUpdate(ConvenioViewModel value)
+        {
+            return BeforeInsert(value);
         }
 
         public override Convenio MapToEntity(ConvenioViewModel value)

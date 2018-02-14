@@ -18,16 +18,16 @@ namespace DWM.Models.Persistence
             value.DataEmissao = Funcoes.Brasilia();
             value.IndAtivo = 1; // sim
 
-            #region SequencialID
+            #region SequenciaID
             int sequencial = 0;
             if (db.Titulos.Where(info => info.operacaoId == value.operacaoId && info.parcelaId == value.parcelaId).Count() > 0)
             {
-                sequencial = db.Titulos.Where(info => info.operacaoId == value.operacaoId && info.parcelaId == value.parcelaId).Select(m => m.SequencialID).Max() + 1;
+                sequencial = db.Titulos.Where(info => info.operacaoId == value.operacaoId && info.parcelaId == value.parcelaId).Select(m => m.SequenciaID).Max() + 1;
             }
             else
                 value.OcorrenciaID = "01";
 
-            value.SequencialID = sequencial;
+            value.SequenciaID = sequencial;
             #endregion
 
             #region NossoNumero
@@ -53,7 +53,7 @@ namespace DWM.Models.Persistence
 
             titulo.operacaoId = value.operacaoId;
             titulo.parcelaId = value.parcelaId;
-            titulo.SequencialID = value.SequencialID;
+            titulo.SequenciaID = value.SequenciaID;
             titulo.BancoID = value.BancoID;
             titulo.ConvenioID = value.ConvenioID;
             titulo.TituloID = value.TituloID;
@@ -95,7 +95,7 @@ namespace DWM.Models.Persistence
             {
                 operacaoId = entity.operacaoId,
                 parcelaId = entity.parcelaId,
-                SequencialID = entity.SequencialID,
+                SequenciaID = entity.SequenciaID,
                 BancoID = entity.BancoID,
                 ConvenioID = entity.ConvenioID,
                 OcorrenciaID = entity.OcorrenciaID,
@@ -132,7 +132,7 @@ namespace DWM.Models.Persistence
 
         public override Titulo Find(TituloViewModel key)
         {
-            return db.Titulos.Find(key.operacaoId, key.parcelaId, key.SequencialID);
+            return db.Titulos.Find(key.operacaoId, key.parcelaId, key.SequenciaID);
         }
 
         public override Validate Validate(TituloViewModel value, Crud operation)
@@ -156,7 +156,7 @@ namespace DWM.Models.Persistence
                 return value.mensagem;
             }
 
-            if (value.SequencialID < 0)
+            if (value.SequenciaID < 0)
             {
                 value.mensagem.Code = 5;
                 value.mensagem.Message = MensagemPadrao.Message(5, "Sequencial").ToString();

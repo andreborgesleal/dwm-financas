@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Linq;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace DWM.Models.BI
 {
@@ -27,9 +28,55 @@ namespace DWM.Models.BI
         public virtual TituloViewModel Run(Repository value)
         {
             TituloViewModel r = (TituloViewModel)value;
-
             try
             {
+                TituloModel model = new TituloModel();
+                model.Create(this.db, this.seguranca_db);
+                r = model.BeforeInsert(r);
+                Validate v = model.Validate(r, App_Dominio.Enumeracoes.Crud.INCLUIR);
+                if (v.Code > 0)
+                {
+                    r.mensagem = v;
+                    return r;
+                }
+
+                #region Parâmetros
+                SqlParameter operacaoIdParam = new SqlParameter("@pOperacaoId", SqlDbType.Int);
+                SqlParameter parcelaIdParam = new SqlParameter("@pParcelaId", SqlDbType.Int);
+                SqlParameter SequenciaIDParam = new SqlParameter("@pSequenciaID", SqlDbType.Int);
+                SqlParameter BancoIDParam = new SqlParameter("@pBancoID", SqlDbType.NChar, 3);
+                SqlParameter ConvenioIDParam = new SqlParameter("@pConvenioID", SqlDbType.NVarChar, 15);
+                SqlParameter empresaIdParam = new SqlParameter("@pEmpresaId", SqlDbType.Int);
+                SqlParameter TituloIDParam = new SqlParameter("@pTituloID", SqlDbType.NVarChar, 25);
+                SqlParameter OcorrenciaIDParam = new SqlParameter("@pOcorrenciaID", SqlDbType.NChar, 2);
+                SqlParameter NossoNumeroParam = new SqlParameter("@pNossoNumero", SqlDbType.NChar, 8);
+                SqlParameter NossoNumeroDVParam = new SqlParameter("@pNossoNumeroDV", SqlDbType.NChar, 1);
+                SqlParameter SeuNumeroParam = new SqlParameter("@pSeuNumero", SqlDbType.NVarChar, 10);
+                SqlParameter DataVencimentoParam = new SqlParameter("@pDataVencimento", SqlDbType.SmallDateTime);
+                SqlParameter ValorPrincipalParam = new SqlParameter("@pValorPrincipal", SqlDbType.Decimal);
+
+
+                SqlParameter AnoMesParam = new SqlParameter("@pAnoMes", SqlDbType.NVarChar, 6);
+                SqlParameter Cod_erroParam = new SqlParameter("@pCod_erro", SqlDbType.Int);
+                SqlParameter Desc_erroParam = new SqlParameter("@pDesc_erro", SqlDbType.NVarChar, 400);
+
+                empresaIdParam.Value = sessaoCorrente.empresaId;
+                AnoMesParam.Value = e.dt_lancamento_inicio.Value.ToString("yyyyMM");
+                Cod_erroParam.Direction = ParameterDirection.Output;
+                Cod_erroParam.Value = 0;
+                Desc_erroParam.Direction = ParameterDirection.Output;
+                Desc_erroParam.Value = "";
+                #endregion
+
+                int result = db.Database.ExecuteSqlCommand("spr_titulo_incluir @pEmpresaId, @pAnoMes, @pCod_erro out, @pDesc_erro out",
+                                                               empresaIdParam,
+                                                               AnoMesParam,
+                                                               Cod_erroParam,
+                                                               Desc_erroParam);
+
+                r.mensagem = new Validate() { Code = (int)Cod_erroParam.Value, Message = Desc_erroParam.Value.ToString() };
+
+
                 #region SQLCommand => "Update"
                 string command = "update " + Operacao_Table() + " " +
                                  "set " + Cliente_Credor_Atributo() + " = @cliente_credor_ID, " +

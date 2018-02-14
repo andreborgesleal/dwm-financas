@@ -16,8 +16,8 @@ namespace DWM.Models.Entidades
         public int parcelaId { get; set; }
 
         [Key, Column(Order = 2)]
-        [DisplayName("SequencialID")]
-        public int SequencialID { get; set; }
+        [DisplayName("SequenciaID")]
+        public int SequenciaID { get; set; }
 
         [DisplayName("BancoID")]
         public string BancoID { get; set; }
