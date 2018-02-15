@@ -298,5 +298,35 @@ namespace DWM.Models.Enumeracoes
             return Funcoes.SelectListEnum(drp, selectedValue, header);
         }
         #endregion
+
+        #region DropDownList Convenios
+        public IEnumerable<SelectListItem> Convenios(params object[] param)
+        {
+            // params[] -> SelectedValue
+            string _BancoID = param[0].ToString();
+            string _ConvenioID = param[1].ToString();
+
+            EmpresaSecurity<SecurityContext> security = new EmpresaSecurity<SecurityContext>();
+
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Sessao sessao = security.getSessaoCorrente();
+
+                IList<SelectListItem> q = new List<SelectListItem>();
+
+                q = (from conv in db.Convenios.AsEnumerable()
+                     where conv.empresaId == sessao.empresaId
+                     orderby conv.NomeBanco
+                     select new SelectListItem()
+                     {
+                         Value = conv.BancoID + "|" + conv.ConvenioID,
+                         Text = conv.BancoID + "-" + conv.NomeBanco + " Convênio: " + conv.ConvenioID,
+                         Selected = (!String.IsNullOrEmpty(_BancoID) ? conv.BancoID.Equals(_BancoID) && conv.ConvenioID.Equals(_ConvenioID) : false)
+                     }).ToList();
+
+                return q;
+            }
+        }
+        #endregion
     }
 }
