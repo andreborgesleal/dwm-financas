@@ -194,7 +194,7 @@ namespace DWM.Models.BI
                                                                                  Cod_erroParam,
                                                                                  Desc_erroParam);
 
-                r.mensagem = new Validate() { Code = (int)Cod_erroParam.Value, Message = Desc_erroParam.Value.ToString() };
+                r.mensagem = new Validate() { Code = (int)Cod_erroParam.Value, Message = Desc_erroParam.Value.ToString(), MessageBase = Desc_erroParam.Value.ToString() };
             }
             catch (App_DominioException ex)
             {

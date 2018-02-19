@@ -47,7 +47,37 @@
 }
 <!-- Datatables -->
 <link href="../Content/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<script>
+    var _Meses_Line = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+    var _Data_Line = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var _Header_Line = 'Contas a Pagar - ';
+    var _ToolTips_line = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
 
+    var labels = ['Contas a Pagar', 'Contas a Receber'];
+    var cr = 0; 
+    var cp = 0;
+    var data = [cp, cr];
+</script>
+
+<script src="~/Content/RGraph/libraries/RGraph.common.core.js"></script>
+<script src="~/Content/RGraph/libraries/RGraph.common.dynamic.js"></script>
+<script src="~/Content/RGraph/libraries/RGraph.common.tooltips.js"></script>
+<script src="~/Content/RGraph/libraries/RGraph.pie.js"></script>
+<script src="~/Content/RGraph/libraries/RGraph.drawing.background.js"></script>
+<script src="~/Content/RGraph/libraries/RGraph.line.js"></script>
+
+<div class="row" id="div-graph">
+    <div class="col-md-8">
+        <canvas id="cvs_line" width="800" height="250">
+            [No canvas support]
+        </canvas>
+    </div>
+    <div class="col-md-4">
+        <canvas id="cvs_pie" width="350" height="250">
+            [No canvas support]
+        </canvas>
+    </div>
+</div>
 <div id="div-list-static">
     @Html.Partial("ListPanorama", Model.Cobranca)
 </div>
@@ -55,6 +85,58 @@
 <div id="div-list-static">
     @Html.Partial("ListPanoramaPagamentoEmAberto", Model.Pagamentos)
 </div>
+
+<script>
+    new RGraph.Drawing.Background({
+        id: 'cvs_line',
+        options: {
+            gutterLeft: 55,
+            gutterRight: 35,
+            gutterTop: 35,
+            gutterBottom: 35,
+            backgroundGridAutofitNumvlines:48,
+            backgroundGridAutofitNumhlines: 20,
+            backgroundGridColor: '#eee'
+        }
+    }).draw();
+
+    new RGraph.Line({
+        id: 'cvs_line',
+        //data: [5,4,1,6,8,5,3],
+        data: _Data_Line,
+        options: {
+            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'],
+            tooltips: _ToolTips_line,
+            gutterLeft: 55,
+            gutterRight: 35,
+            gutterBottom: 35,
+            gutterTop: 35,
+            title: _Header_Line,
+            backgroundGridColor: '#aaa',
+            backgroundGridDashed: true,
+            textAccessible: true,
+            scaleZerostart: true,
+            labelsOffsety: 5
+        }
+    }).draw();
+</script>
+
+<script>
+    new RGraph.Pie({
+        id: 'cvs_pie',
+        data: data,
+        options: {
+            tooltips: labels,
+            labels: labels,
+            labelsSticksList: true,
+            colors: ['rgb(255,0,0)', 'blue', 'rgb(0,255,0)', 'rgb(0,0,255)', 'rgb(255,255,0)', 'rgb(0,255,255)', 'red', 'pink', 'black', 'white'],
+            shadow: false,
+            strokestyle: 'rgba(0,0,0,0)',
+            exploded: 0,
+            textAccessible: true
+        }
+    }).roundRobin();
+</script>
 
 
 @*<!-- top tiles -->

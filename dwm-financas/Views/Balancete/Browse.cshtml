@@ -21,6 +21,25 @@
 }
 <!-- Datatables -->
 <link href="../Content/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<script>
+    var _Labels = new Array();
+    var _ToolTips = new Array();
+    var _Data = new Array();
+</script>
+
+<script src="~/Content/RGraph/libraries/RGraph.common.core.js"></script>
+<script src="~/Content/RGraph/libraries/RGraph.common.dynamic.js"></script>
+<script src="~/Content/RGraph/libraries/RGraph.common.tooltips.js"></script>
+<script src="~/Content/RGraph/libraries/RGraph.pie.js"></script>
+
+<style>
+    .RGraph_tooltip {
+        font-size: 16pt !important;
+        font-weight: bold;
+        text-align: center;
+        padding: 15px;
+    }
+</style>
 
 <div class="container-cadastro">
     @Html.Partial("_alerts")
@@ -124,3 +143,25 @@
 
 </script>
 
+<script>
+    //var pie = new RGraph.Pie({
+    //    id: 'cvs_pie2',
+    //    data: _Data,
+    //    options: {
+    //        tooltips: _ToolTips,
+    //        labels: _Labels,
+    //        labelsSticksList: true,
+    //        shadow: true,
+    //        strokestyle: 'rgba(0,0,0,0)',
+    //        exploded: 0,
+    //        textAccessible: true
+    //    }
+    //});
+
+    //pie.roundRobin();
+
+    //$('#cvs_pie2').show();
+
+    //window.onload = function () {
+    //}
+</script>

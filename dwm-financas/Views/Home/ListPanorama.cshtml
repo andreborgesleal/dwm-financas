@@ -18,10 +18,18 @@
 
 }
 
+
 @if (Model != null)
 {
+    if (Model.Count > 0)
+    {
+        <script>
+        labels[1] = labels[1] + " - " + '@Model[0].TotalEmitido.Value.ToString("R$ ###,###,##0.00")';
+        data[1] = '@Model[0].TotalEmitido.Value';
+        </script>
+    }
     <div class="x_panel" id="panel-detail">
-        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Cobrança", Descricao = "Listagem de títulos em cobrança", Transacao = t })
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Contas a Receber", Descricao = "Listagem de títulos em cobrança", Transacao = t })
         <div class="x_content">
             <!-- top tiles -->
             <div class="row top_tiles">
@@ -37,6 +45,11 @@
                         else
                         {
                             <div class="count"><span class="h2"><strong>R$ 0,00</strong></span></div>
+                            <script>
+                                label [1] = label[1] + " - R$ 0,00";
+                                data [1] = 0;
+                                alert(data [1]);
+                            </script>
                         }
                         <h3>Total emitido</h3>
                         <p>títulos emitidos no período.</p>
@@ -226,13 +239,13 @@
                         </tbody>
                     </table>
                 </div>
-                <a href="#panel-detail" class="info pull-right" id="linkTopo"><i class="fa fa-toggle-up"></i> Topo</a>
+                @*<a href="#panel-detail" class="info pull-right" id="linkTopo"><i class="fa fa-toggle-up"></i> Topo</a>*@
             </div>
         </div>
     </div>
-    <script>
-        document.getElementById("linkTopo").click();
-    </script>
+    @*<script>
+        document.getElementById("div-graph").click();
+    </script>*@
 }
 else
 {

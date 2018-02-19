@@ -45,13 +45,13 @@ namespace DWM.Models.BI
                 Desc_erroParam.Value = "";
                 #endregion
 
-                int result = db.Database.ExecuteSqlCommand("spr_incluir_lancamentos_recorrentes @pEmpresaId, @pAnoMes, @pCod_erro out, @pDesc_erro out",
+                int result = db.Database.ExecuteSqlCommand("spr_incluir_lancamentos_recorrentes @pEmpresaId, @pAnoMes, @pCod_erro OUT, @pDesc_erro OUT",
                                                                empresaIdParam,
                                                                AnoMesParam,
                                                                Cod_erroParam,
                                                                Desc_erroParam);
 
-                e.mensagem = new Validate() { Code = (int)Cod_erroParam.Value, Message = Desc_erroParam.Value.ToString() };
+                e.mensagem = new Validate() { Code = (int)Cod_erroParam.Value, Message = Desc_erroParam.Value.ToString(), MessageBase = Desc_erroParam.Value.ToString() };
             }
             catch (App_DominioException ex)
             {

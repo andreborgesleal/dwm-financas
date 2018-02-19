@@ -45,15 +45,29 @@
     t[6].sessionId = "_blank";
 
     t[7].url = "../Home/Default";
+
+    var total = Model.Where(info => info.ShowGraph == 1).Sum(info => Math.Abs(info.vr_saldo_atual));
 }
 
 @if (Model != null)
 {
+    <script>
+        var _Labels = new Array();
+        var _ToolTips = new Array();
+        var _Data = new Array();
+    </script>
     string font = "normal";
     <div class="x_panel" id="panel-detail">
         @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Balancete", Descricao = "", Transacao = t })
         <div class="x_content">
             <div class="dashboard-widget-content">
+                <div class="row clearfix">
+                    <div class="col-md-12" id="div-graph">
+                        @*<canvas id="cvs_pie2" width="350" height="250">
+                            [No canvas support]
+                        </canvas>*@
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-striped jambo_table bulk_action" id="datatable">
                         <thead>
@@ -86,6 +100,15 @@
                                     </td>
                                     <td style="text-indent: @((balancete.grauPc - 1) * 20)px">
                                         <span>@balancete.descricao</span>
+                                        @if (balancete.ShowGraph == 1)
+                                        {
+                                            var percent = (Math.Abs(balancete.vr_saldo_atual) / total) * 100;
+                                            <script>
+                                                _Labels.push('@Html.Raw((balancete.descricao.Length > 30 ? balancete.descricao.Substring(0,30) : balancete.descricao) + " " + percent.ToString("##0.00") + "%")');
+                                                _ToolTips.push('@Html.Raw(balancete.descricao + " " + Math.Abs(balancete.vr_saldo_atual).ToString("R$ ###,###,##0.00") + " (" + percent.ToString("##0.00") + "%)")');
+                                                _Data.push('@Math.Abs(balancete.vr_saldo_atual)');
+                                            </script>
+                                        }
                                     </td>
                                     <td class="text-right">
                                         <span>@balancete.vr_saldo_ant.ToString("###,###,##0.00")</span>
@@ -274,3 +297,65 @@ else
     }
 </script>
 
+<script>
+    //new RGraph.Pie({
+    //    id: 'cvs_pie2',
+    //    data: _Data,
+    //    options: {
+    //        tooltips: _ToolTips,
+    //        labels: _Labels,
+    //        labelsSticksList: true,
+    //        shadow: true,
+    //        strokestyle: 'rgba(0,0,0,0)',
+    //        exploded: 0,
+    //        textAccessible: true
+    //    }
+    //}).roundRobin();
+
+    //$('#div-graph').html('<canvas id="cvs_pie2" width="350" height="250">[No canvas support]</canvas>');
+    if (_Data.length > 0)
+    {
+        $('#div-graph').html('<canvas id="cvs_pie2" width="1024" height="350">[No canvas support]</canvas>');
+        var pie = new RGraph.Pie({
+            id: 'cvs_pie2',
+            data: _Data,
+            options: {
+                //title: 'Disponível',
+                //titleSize: 16,
+                gutterLeft: 50,
+                gutterRight: 50,
+                linewidth: 0,
+                colors: ['rgb(255,0,0)', 'blue', 'rgb(0,255,0)', 'rgb(0,0,55)', 'rgb(255,255,0)', 'rgb(0,255,255)', 'red', 'pink', 'black', 'white'],
+                strokestyle: 'rgba(0,0,0,0)',
+                tooltips: _ToolTips,
+                labels: _Labels,
+                textSize: 8,
+                variant: 'pie3d',
+                radius: 100,
+                labelsSticksList: true,
+                radius: 80,
+                shadowOffsety: 5,
+                shadowColor: '#aaa',
+                exploded: [, , 20],
+                textAccessible: false
+            }
+        }).draw();
+    }
+
+    //var pie = new RGraph.Pie({
+    //    id: 'cvs_pie2',
+    //    data: _Data,
+    //    options: {
+    //        tooltips: _ToolTips,
+    //        labels: _Labels,
+    //        labelsSticksList: true,
+    //        shadow: true,
+    //        strokestyle: 'rgba(0,0,0,0)',
+    //        exploded: 0,
+    //        textAccessible: true
+    //    }
+    //});
+
+    //pie.roundRobin();
+
+</script>
