@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="129202793" Data="26/11/2017 16:29:11">
+    <Sessao>v4vd0ugjez4srernzw5n0zva</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Nome de objeto 'dbo.Convenio' inválido. *** An error occurred while executing the command definition. See the inner exception for details.</Mensagem>
+    <NameSpace>DWM.Models.Persistence.ListViewModelConvenio =&gt; convenio/browse</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   em System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.&lt;&gt;c__DisplayClass7.&lt;GetResults&gt;b__6()
+   em System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.&lt;&gt;c__DisplayClass7.&lt;GetResults&gt;b__5()
+   em System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.&lt;System.Collections.Generic.IEnumerable&lt;T&gt;.GetEnumerator&gt;b__0()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   em System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   em DWM.Models.Persistence.ListViewModelConvenio.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\dwm-financas\dwm-financas\Models\Persistence\ConvenioModel.cs:linha 147
+   em App_Dominio.Component.ListViewModel`2.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 277
+   em App_Dominio.Component.ListViewModel`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 260</StackTrace>
+  </LOG>
+</LOG>

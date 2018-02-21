@@ -51,6 +51,9 @@
             @Html.Partial("_AjaxAlert", "panel-top")
             @using (Ajax.BeginForm("ListParam", "Extrato", new AjaxOptions { HttpMethod = "get", UpdateTargetId = "div-list-extrato" }, new { @role = "search", @id = "form0" }))
             {
+                DateTime? d1 = Request["data1"] == null || Request["data1"].Contains("%") ? (DateTime)ViewData["dt_lancamento_inicio"] : Convert.ToDateTime(Request["data1"]);
+                DateTime? d2 = Request["data2"] == null || Request["data2"].Contains("%") ? (DateTime)ViewData["dt_lancamento_fim"] : Convert.ToDateTime(Request["data2"]);
+
                 <div class="row clearfix">
                     <div class="col-md-6">
                         @Html.Editor("nome_banco1", "BancosAutoComplete", new { nextField = "data1", value = BancoValue, Text = BancoText })
@@ -60,13 +63,13 @@
                             <label class="control-label" for="dt_emissao1">Emissão</label>
                             <div class="row clearfix">
                                 <div class="col-md-5">
-                                    <input type="date" class="form-control" name="data1" id="data1" value="@DateTime.Today.ToString("yyyy-MM-01")" />
+                                    <input type="date" class="form-control" name="data1" id="data1" value="@d1.Value.ToString("yyyy-MM-dd")" />
                                 </div>
                                 <div class="col-md-1">
                                     à
                                 </div>
                                 <div class="col-md-5">
-                                    <input type="date" class="form-control" name="data2" id="data2" value="@Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-01")).AddDays(-1).ToString("yyyy-MM-dd")" />
+                                    <input type="date" class="form-control" name="data2" id="data2" value="@d2.Value.ToString("yyyy-MM-dd")" />
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>

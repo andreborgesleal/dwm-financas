@@ -5,12 +5,18 @@
     Layout = null;
     var path = System.Configuration.ConfigurationManager.AppSettings["Users_Data"];
 
-    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
     t[0].url = "../ContaPagar/Create";
     t[0].nomeCurto = "Incluir";
     t[0].referencia = "";
 
-    t[1].url = "../Home/Default";
+    t[0].url = "../ContaPagar/Alterar?operacaoId=" + Model.operacaoId.ToString();
+    t[0].nomeCurto = "Alterar";
+    t[0].referencia = "";
+    t[0].exibir = "S";
+    t[0].glyph = "fa fa-check-edit";
+
+    t[2].url = "../Home/Default";
 }
 <div id="div-lov"></div>
 <div class="container-cadastro">
@@ -44,6 +50,13 @@
                             <li class="list-group-item">
                                 <h4><strong>Centro de Custo</strong></h4>
                                 @Model.descricao_centroCusto
+                            </li>
+                        }
+                        @if (Model.recorrencia == "S")
+                        {
+                            <li class="list-group-item">
+                                <h4><strong>Recorrência</strong></h4>
+                                MENSAL
                             </li>
                         }
                         <li class="list-group-item">
@@ -413,6 +426,11 @@
 
                     </div>
                 </div>*@
+        </div>
+    </div>
+    <div class="row clearfix margem-topo-20">
+        <div class="col-md-12">
+            <p>&nbsp;</p>
         </div>
     </div>
 </div>

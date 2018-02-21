@@ -1,0 +1,127 @@
+﻿@using DWM.Models.Enumeracoes
+@using App_Dominio.Repositories
+@model DWM.Models.Repositories.ConvenioViewModel
+@{
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../Convenio/Create";
+    t[0].nomeCurto = "Incluir";
+    t[0].referencia = "";
+
+    t[1].url = "../Home/Default";
+}
+<div class="container-cadastro">
+    @Html.Partial("_alerts")
+    <div class="x_panel">
+        @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Convênios", Descricao = "Incluir Convênio", Transacao = t })
+        <div class="x_content">
+            @using (Html.BeginForm("Create", "Convenio", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="row clearfix">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Banco</label>
+                            @Html.TextBoxFor(info => info.BancoID, new { @class = "form-control", @maxlength = "3", @onblur = "javascript:this.value = ('000' + this.value).slice(-3)", @onkeypress = "return numeros();" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Nome</label>
+                            @Html.TextBoxFor(info => info.NomeBanco, new { @class = "form-control", @maxlength = "30" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Convênio</label>
+                            @Html.TextBoxFor(info => info.ConvenioID, new { @class = "form-control", @maxlength = "15", @onblur = "javascript:this.value = ('000000000000000' + this.value).slice(-15)", @onkeypress = "return numeros();" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Carteira</label>
+                            @Html.TextBoxFor(info => info.CarteiraID, new { @class = "form-control", @maxlength = "3", @onblur = "javascript:this.value = ('000' + this.value).slice(-3)", @onkeypress = "return numeros();" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Agência</label>
+                            @Html.TextBoxFor(info => info.AgenciaID, new { @class = "form-control", @maxlength = "5", @onblur = "javascript:this.value = ('00000' + this.value).slice(-5)", @onkeypress = "return numeros();" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">DV Agência</label>
+                            @Html.TextBoxFor(info => info.AgenciaDV, new { @class = "form-control", @maxlength = "1" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Conta</label>
+                            @Html.TextBoxFor(info => info.ContaID, new { @class = "form-control", @maxlength = "10", @onblur = "javascript:this.value = ('0000000000' + this.value).slice(-10)", @onkeypress = "return numeros();" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">DV Conta</label>
+                            @Html.TextBoxFor(info => info.ContaDV, new { @class = "form-control", @maxlength = "1" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Instrução 1</label>
+                            @Html.TextBoxFor(info => info.Instrucao1, new { @class = "form-control", @maxlength = "40" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Instrução 2</label>
+                            @Html.TextBoxFor(info => info.Instrucao2, new { @class = "form-control", @maxlength = "40" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Layou CNAB</label>
+                            <div class="input-group col-md-12">
+                                @Html.DropDownListFor(m => m.LayoutArquivo, new BindDropDownList().LayoutCNAB(), new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Nosso Número</label>
+                            @Html.TextBoxFor(info => info.NossoNumeroUltimo, new { @class = "form-control", @maxlength = "8", @onblur = "javascript:this.value = ('00000000' + this.value).slice(-8)", @onkeypress = "return numeros();" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Faixa Nosso Número</label>
+                            @Html.TextBoxFor(info => info.NossoNumeroInicio, new { @class = "form-control", @maxlength = "8", @onblur = "javascript:this.value = ('00000000' + this.value).slice(-8)", @onkeypress = "return numeros();" } )
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">&nbsp;</label>
+                            @Html.TextBoxFor(info => info.NossoNumeroFim, new { @class = "form-control", @maxlength = "8", @onblur = "javascript:this.value = ('00000000' + this.value).slice(-8)", @onkeypress = "return numeros();" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-success" value="Salvar" name="btn-salvar" id="btn-salvar" />
+                            <input type="button" onclick="window.location = '../Convenio/Browse'" class="btn btn-default" value="Cancelar" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+

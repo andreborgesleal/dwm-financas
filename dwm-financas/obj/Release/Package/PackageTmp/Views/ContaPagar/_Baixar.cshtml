@@ -161,6 +161,12 @@
 }
 
 <script type="text/javascript">
+    //$(document).ready(function () {
+    //    calcularValor($('#vr_juros_mora'), 'N');
+    //});
+
+    calcularValor($('#vr_juros_mora'), 'N');
+
     $(function () {
         $('#form0').submit(function () {
             if ($(this).valid()) {
@@ -177,9 +183,10 @@
         });
     });
 
-    function calcularValor(obj) {
-        if (!fnValidaValor(obj))
-            return false;
+    function calcularValor(obj, v) {
+        if (v != 'N')
+            if (!fnValidaValor(obj))
+                return false;
 
         if ($("#vr_juros_mora").val() == '')
             $("#vr_juros_mora").val('0,00');

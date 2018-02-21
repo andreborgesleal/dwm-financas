@@ -33,13 +33,15 @@
                     <div class="com-md-3 col-lg-3 col-xs-12 col-sm-12">
                         <div class="form-group">
                             <label class="control-label" for="data1">Início</label>
-                            @Html.Editor("dt_inicio1", "DATE", new { identificador = "dt_inicio", readOnly = "false", value = Model.dt_inicio })
+                            @*@Html.Editor("dt_inicio1", "DATE", new { identificador = "dt_inicio", readOnly = "false", value = Model.dt_inicio })*@
+                            <input type="date" class="form-control" name="dt_inicio" id="dt_inicio" value="@Model.dt_inicio.ToString("yyyy-MM-dd")" />
                         </div>
                     </div>
                     <div class="com-md-3 col-lg-3 col-xs-12 col-sm-12">
                         <div class="form-group">
                             <label class="control-label" for="data1">Fim</label>
-                            @Html.Editor("dt_fim1", "DATE", new { identificador = "dt_fim", readOnly = "false", value = Model.dt_fim })
+                            @*@Html.Editor("dt_fim1", "DATE", new { identificador = "dt_fim", readOnly = "false", value = Model.dt_fim })*@
+                            <input type="date" class="form-control" name="dt_fim" id="dt_fim" value="@Model.dt_fim.ToString("yyyy-MM-dd")" />
                         </div>
                     </div>
                 </div>
@@ -47,13 +49,15 @@
                     <div class="com-md-3 col-lg-3 col-xs-12 col-sm-12">
                         <div class="form-group">
                             <label class="control-label" for="data1">Dt. lançamento inicial</label>
-                            @Html.Editor("dt_inicio1", "DATE", new { identificador = "dt_lancamento_inicio", readOnly = "false", value = Model.dt_lancamento_inicio })
+                            @*@Html.Editor("dt_inicio1", "DATE", new { identificador = "dt_lancamento_inicio", readOnly = "false", value = Model.dt_lancamento_inicio })*@
+                            <input type="date" class="form-control" name="dt_lancamento_inicio" id="dt_lancamento_inicio" value="@Model.dt_lancamento_inicio.Value.ToString("yyyy-MM-dd")" />
                         </div>
                     </div>
                     <div class="com-md-3 col-lg-3 col-xs-12 col-sm-12">
                         <div class="form-group">
                             <label class="control-label" for="data1">Dt. lançamento final</label>
-                            @Html.Editor("dt_lancamento_fim1", "DATE", new { identificador = "dt_lancamento_fim", readOnly = "false", value = Model.dt_lancamento_fim })
+                            @*@Html.Editor("dt_lancamento_fim1", "DATE", new { identificador = "dt_lancamento_fim", readOnly = "false", value = Model.dt_lancamento_fim })*@
+                            <input type="date" class="form-control" name="dt_lancamento_fim" id="dt_lancamento_fim" value="@Model.dt_lancamento_fim.Value.ToString("yyyy-MM-dd")" />
                         </div>
                     </div>
                     <div class="col-md-2 col-xs-12 col-sm-12 col-lg-2">

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="1412075184" Data="04/01/2018 22:37:40">
+    <Sessao>i1cmbwgn1h2a4hq1hj1lkjdz</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>An error occurred while starting a transaction on the provider connection. See the inner exception for details.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; planocontas/edit</NameSpace>
+    <Context>exercicio="2017",planoContaId="845",codigoPleno="2.3.02.02.00",codigoReduzido="133",tipoConta="A",vr_saldo_inicial.1="0,00",vr_saldo_inicial="0,00",descricao="(+) Lucros acumulados",descricao_pai="Lucros ou Prejuízos acumulados",planoContaId_pai="843",btn-salvar="Salvar"</Context>
+    <StackTrace />
+  </LOG>
+  <LOG ID="873431539" Data="04/01/2018 22:37:40">
+    <Sessao>i1cmbwgn1h2a4hq1hj1lkjdz</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>An error occurred while starting a transaction on the provider connection. See the inner exception for details.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; planocontas/edit</NameSpace>
+    <Context>exercicio="2017",planoContaId="845",codigoPleno="2.3.02.02.00",codigoReduzido="133",tipoConta="A",vr_saldo_inicial.1="0,00",vr_saldo_inicial="0,00",descricao="(+) Lucros acumulados",descricao_pai="Lucros ou Prejuízos acumulados",planoContaId_pai="843",btn-salvar="Salvar"</Context>
+    <StackTrace />
+  </LOG>
+</LOG>

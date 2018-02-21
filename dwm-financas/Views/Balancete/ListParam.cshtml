@@ -46,6 +46,7 @@
 
     t[7].url = "../Home/Default";
 
+    var total2 = Model.Where(info => info.ShowGraph == 2).Sum(info => Math.Abs(info.vr_debito - info.vr_credito));
     var total = Model.Where(info => info.ShowGraph == 1).Sum(info => Math.Abs(info.vr_saldo_atual));
 }
 
@@ -107,6 +108,15 @@
                                                 _Labels.push('@Html.Raw((balancete.descricao.Length > 30 ? balancete.descricao.Substring(0,30) : balancete.descricao) + " " + percent.ToString("##0.00") + "%")');
                                                 _ToolTips.push('@Html.Raw(balancete.descricao + " " + Math.Abs(balancete.vr_saldo_atual).ToString("R$ ###,###,##0.00") + " (" + percent.ToString("##0.00") + "%)")');
                                                 _Data.push('@Math.Abs(balancete.vr_saldo_atual)');
+                                            </script>
+                                        }
+                                        else if (balancete.ShowGraph == 2)
+                                        {
+                                            var percent = (Math.Abs(balancete.vr_debito - balancete.vr_credito) / total2) * 100;
+                                            <script>
+                                                _Labels.push('@Html.Raw((balancete.descricao.Length > 30 ? balancete.descricao.Substring(0,30) : balancete.descricao) + " " + percent.ToString("##0.00") + "%")');
+                                                _ToolTips.push('@Html.Raw(balancete.descricao + " " + Math.Abs(balancete.vr_debito - balancete.vr_credito).ToString("R$ ###,###,##0.00") + " (" + percent.ToString("##0.00") + "%)")');
+                                                _Data.push('@Math.Abs(balancete.vr_debito - balancete.vr_credito)');
                                             </script>
                                         }
                                     </td>
@@ -316,6 +326,10 @@ else
     if (_Data.length > 0)
     {
         $('#div-graph').html('<canvas id="cvs_pie2" width="1024" height="350">[No canvas support]</canvas>');
+
+        if (pie != null)
+            RGraph.Reset(pie);
+
         var pie = new RGraph.Pie({
             id: 'cvs_pie2',
             data: _Data,

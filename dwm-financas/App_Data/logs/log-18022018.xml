@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="943786938" Data="18/02/2018 15:18:25">
+    <Sessao>3jnrigizrenywbgbfasg3qgv</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Erro de rede ou específico à instância ao estabelecer conexão com o SQL Server. O servidor não foi encontrado ou não estava acessível. Verifique se o nome da instância está correto e se o SQL Server está configurado para permitir conexões remotas. (provider: SQL Network Interfaces, error: 26 - Erro ao Localizar Servidor/Instância Especificada) *** The underlying provider failed on Open.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; home/default</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   em System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   em System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.&lt;&gt;c__DisplayClass7.&lt;GetResults&gt;b__5()
+   em System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.&lt;System.Collections.Generic.IEnumerable&lt;T&gt;.GetEnumerator&gt;b__0()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 225</StackTrace>
+  </LOG>
+  <LOG ID="974863282" Data="18/02/2018 16:18:33">
+    <Sessao>3jnrigizrenywbgbfasg3qgv</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Tempo Limite de Execução Expirado.  O período de tempo limite terminou antes da conclusão da operação ou o servidor não está respondendo. *** An error occurred while executing the command definition. See the inner exception for details.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; home/default</NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   em System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.&lt;&gt;c__DisplayClass7.&lt;GetResults&gt;b__6()
+   em System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.&lt;&gt;c__DisplayClass7.&lt;GetResults&gt;b__5()
+   em System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   em System.Data.Entity.Core.Objects.ObjectQuery`1.&lt;System.Collections.Generic.IEnumerable&lt;T&gt;.GetEnumerator&gt;b__0()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 225</StackTrace>
+  </LOG>
+  <LOG ID="1634808167" Data="18/02/2018 17:33:17">
+    <Sessao>3jnrigizrenywbgbfasg3qgv</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Models.BI.GerarLancamentosRecorrentesBI =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="2053964204" Data="18/02/2018 17:33:17">
+    <Sessao>3jnrigizrenywbgbfasg3qgv</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="1605596989" Data="18/02/2018 18:00:40">
+    <Sessao>zhqog0ywktrpwdsvmtnayocd</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Models.BI.GerarLancamentosRecorrentesBI =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="1298837627" Data="18/02/2018 18:00:40">
+    <Sessao>zhqog0ywktrpwdsvmtnayocd</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="1947929554" Data="18/02/2018 18:00:51">
+    <Sessao>zhqog0ywktrpwdsvmtnayocd</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Models.BI.GerarLancamentosRecorrentesBI =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="219601944" Data="18/02/2018 18:00:52">
+    <Sessao>zhqog0ywktrpwdsvmtnayocd</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="1081005873" Data="18/02/2018 18:01:55">
+    <Sessao>zhqog0ywktrpwdsvmtnayocd</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Models.BI.GerarLancamentosRecorrentesBI =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="961518265" Data="18/02/2018 18:01:55">
+    <Sessao>zhqog0ywktrpwdsvmtnayocd</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="562882813" Data="18/02/2018 18:02:52">
+    <Sessao>zhqog0ywktrpwdsvmtnayocd</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Models.BI.GerarLancamentosRecorrentesBI =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="982038850" Data="18/02/2018 18:02:52">
+    <Sessao>zhqog0ywktrpwdsvmtnayocd</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="798767201" Data="18/02/2018 18:11:27">
+    <Sessao>n2qucuxdjmzarnghfekb02yg</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 2.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 2.</Mensagem>
+    <NameSpace>DWM.Models.BI.GerarLancamentosRecorrentesBI =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="72851802" Data="18/02/2018 18:11:27">
+    <Sessao>n2qucuxdjmzarnghfekb02yg</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 2.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 2.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="544114280" Data="18/02/2018 18:15:32">
+    <Sessao>h0c13g20wlemfdyaswjfedt0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O procedimento ou a função 'spr_incluir_lancamentos_recorrentes' espera o parâmetro '@pEmpresaId', que não foi fornecido.</Mensagem>
+    <NameSpace>DWM.Models.BI.GerarLancamentosRecorrentesBI =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="424626672" Data="18/02/2018 18:15:32">
+    <Sessao>h0c13g20wlemfdyaswjfedt0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O procedimento ou a função 'spr_incluir_lancamentos_recorrentes' espera o parâmetro '@pEmpresaId', que não foi fornecido.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="1875573709" Data="18/02/2018 18:21:23">
+    <Sessao>h0c13g20wlemfdyaswjfedt0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Models.BI.GerarLancamentosRecorrentesBI =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="498617990" Data="18/02/2018 18:21:23">
+    <Sessao>h0c13g20wlemfdyaswjfedt0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="1920225014" Data="18/02/2018 18:22:40">
+    <Sessao>h0c13g20wlemfdyaswjfedt0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Models.BI.GerarLancamentosRecorrentesBI =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="1568853123" Data="18/02/2018 18:22:40">
+    <Sessao>h0c13g20wlemfdyaswjfedt0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="1459027718" Data="18/02/2018 18:22:46">
+    <Sessao>h0c13g20wlemfdyaswjfedt0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Models.BI.GerarLancamentosRecorrentesBI =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="1107655827" Data="18/02/2018 18:22:46">
+    <Sessao>h0c13g20wlemfdyaswjfedt0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="2037012015" Data="18/02/2018 18:23:50">
+    <Sessao>h0c13g20wlemfdyaswjfedt0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Exceção do tipo 'System.Exception' foi acionada.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="1629960114" Data="18/02/2018 18:25:17">
+    <Sessao>h0c13g20wlemfdyaswjfedt0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Exceção do tipo 'System.Exception' foi acionada.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="321866182" Data="18/02/2018 18:25:50">
+    <Sessao>h0c13g20wlemfdyaswjfedt0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Models.BI.GerarLancamentosRecorrentesBI =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="2117977938" Data="18/02/2018 18:25:50">
+    <Sessao>h0c13g20wlemfdyaswjfedt0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="1444546192" Data="18/02/2018 18:27:38">
+    <Sessao>h0c13g20wlemfdyaswjfedt0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Models.BI.GerarLancamentosRecorrentesBI =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="1863702229" Data="18/02/2018 18:27:38">
+    <Sessao>h0c13g20wlemfdyaswjfedt0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="1099303921" Data="18/02/2018 18:30:55">
+    <Sessao>h0c13g20wlemfdyaswjfedt0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Models.BI.GerarLancamentosRecorrentesBI =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="1869831849" Data="18/02/2018 18:30:55">
+    <Sessao>h0c13g20wlemfdyaswjfedt0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="461316041" Data="18/02/2018 18:34:11">
+    <Sessao>h0c13g20wlemfdyaswjfedt0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Exceção do tipo 'System.Exception' foi acionada.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="1161852756" Data="18/02/2018 18:36:54">
+    <Sessao>h0c13g20wlemfdyaswjfedt0</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Exceção do tipo 'System.Exception' foi acionada.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="511799516" Data="18/02/2018 18:40:00">
+    <Sessao>ygpflrges0inftwppcakhdsk</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Data do lançamento contábil fora da faixa de datas permitida ou exercício contábil já foi encerrado.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="171634991" Data="18/02/2018 18:52:24">
+    <Sessao>ygpflrges0inftwppcakhdsk</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Models.BI.GerarLancamentosRecorrentesBI =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="942162919" Data="18/02/2018 18:52:24">
+    <Sessao>ygpflrges0inftwppcakhdsk</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+  <LOG ID="748787312" Data="18/02/2018 18:55:30">
+    <Sessao>ygpflrges0inftwppcakhdsk</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Models.BI.GerarLancamentosRecorrentesBI =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="1519315240" Data="18/02/2018 18:55:31">
+    <Sessao>ygpflrges0inftwppcakhdsk</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.
+O número de transações após EXECUTE indica um número incompatível das instruções BEGIN e COMMIT. Número anterior = 1, número atual = 0.</Mensagem>
+    <NameSpace>DWM.Controllers.MovimentoBancarioController =&gt; movimentobancario/recorrencia</NameSpace>
+    <Context />
+    <StackTrace>   em DWM.Controllers.MovimentoBancarioController.Recorrencia(FormCollection collection) na C:\Sistemas\dwm-financas\dwm-financas\Controllers\MovimentoBancarioController.cs:linha 229</StackTrace>
+  </LOG>
+</LOG>

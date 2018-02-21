@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="962860423" Data="28/01/2018 14:41:34">
+    <Sessao>a2xk0xx0psqwai0uh51jwj0m</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaController =&gt; cobranca/create</NameSpace>
+    <Context>empresaId="6",OperacaoParcela.OperacaoParcelaEvento.dt_movto="28/01/2018 00:00:00",OperacaoParcela.OperacaoParcelaEvento.dt_ocorrencia="28/01/2018 00:00:00",dt_emissao="2018-01-25",documento="019",recorrencia_mensal="true",datatableENQ_length="15",nome_cliente="NM CONSULTORIA IMOBILIARIA LTDA - EPP",clienteId="472",descricao_historico="Comissão",historicoId="124",complementoHist="referente hospedagem do projeto DWM-Imóvel",descricao_centroCusto="Administração",centroCustoId="2",descricao_enquadramento="Intermediação de Serviços e Negócios em Geral",enquadramentoId="266",OperacaoParcela.num_titulo="",dt_vencimento="2018-01-31",OperacaoParcela.ind_forma_pagamento="4",nome_banco="Banco Itaú 0936 14965-7",bancoId="1",fileBoleto="",OperacaoParcela.cheque_banco="",OperacaoParcela.cheque_agencia="",OperacaoParcela.cheque_numero="",OperacaoParcela_vr_principal="100,00",OperacaoParcela_OperacaoParcelaEvento_valor="100,00",vr_jurosMora="",vr_multa="0,00",num_parcelas="1",vr_juros="0,00",vr_mora="0,00",vr_desconto="0,00",fileComprovante="",descricao_enquadramento_amortizacao="Comissão - Itaú",enquadramento_amortizacaoId="265",dt_ocorrencia="2018-01-31",dt_movto="2018-01-31",btn-salvar="Salvar"</Context>
+    <StackTrace>   em App_Dominio.Pattern.Facade`3.Save(R value, Crud operation) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Facade.cs:linha 153
+   em App_Dominio.Controllers.DwmRootController`3.Insert(R value) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Controllers\DwmRootController.cs:linha 140
+   em App_Dominio.Controllers.DwmRootController`3.SetCreate(R value, FormCollection collection, String breadCrumbText) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Controllers\DwmRootController.cs:linha 93</StackTrace>
+  </LOG>
+  <LOG ID="1781313565" Data="28/01/2018 14:42:11">
+    <Sessao>a2xk0xx0psqwai0uh51jwj0m</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaController =&gt; cobranca/create</NameSpace>
+    <Context>empresaId="6",OperacaoParcela.OperacaoParcelaEvento.dt_movto="28/01/2018 00:00:00",OperacaoParcela.OperacaoParcelaEvento.dt_ocorrencia="28/01/2018 00:00:00",dt_emissao="2018-01-25",documento="019",recorrencia_mensal="true",nome_cliente="NM CONSULTORIA IMOBILIARIA LTDA - EPP",clienteId="472",descricao_historico="Comissão",historicoId="124",complementoHist="referente hospedagem do projeto DWM-Imóvel",descricao_centroCusto="Administração",centroCustoId="2",descricao_enquadramento="Intermediação de Serviços e Negócios em Geral",enquadramentoId="266",OperacaoParcela.num_titulo="",dt_vencimento="2018-01-31",OperacaoParcela.ind_forma_pagamento="4",nome_banco="Banco Itaú 0936 14965-7",bancoId="1",fileBoleto="",OperacaoParcela.cheque_banco="",OperacaoParcela.cheque_agencia="",OperacaoParcela.cheque_numero="",OperacaoParcela_vr_principal="100,00",OperacaoParcela_OperacaoParcelaEvento_valor="100,00",vr_jurosMora="",vr_multa="0,00",num_parcelas="1",vr_juros="",vr_mora="",vr_desconto="",fileComprovante="",descricao_enquadramento_amortizacao="Comissão - Itaú",enquadramento_amortizacaoId="265",dt_ocorrencia="2018-01-31",dt_movto="2018-01-31",btn-salvar="Salvar"</Context>
+    <StackTrace>   em App_Dominio.Pattern.Facade`3.Save(R value, Crud operation) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Facade.cs:linha 153
+   em App_Dominio.Controllers.DwmRootController`3.Insert(R value) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Controllers\DwmRootController.cs:linha 140
+   em App_Dominio.Controllers.DwmRootController`3.SetCreate(R value, FormCollection collection, String breadCrumbText) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Controllers\DwmRootController.cs:linha 93</StackTrace>
+  </LOG>
+  <LOG ID="111586219" Data="28/01/2018 14:52:22">
+    <Sessao>a2xk0xx0psqwai0uh51jwj0m</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Controllers.CobrancaController =&gt; cobranca/create</NameSpace>
+    <Context>empresaId="6",OperacaoParcela.OperacaoParcelaEvento.dt_movto="28/01/2018 00:00:00",OperacaoParcela.OperacaoParcelaEvento.dt_ocorrencia="28/01/2018 00:00:00",dt_emissao="2018-01-25",documento="019",recorrencia_mensal="true",nome_cliente="NM CONSULTORIA IMOBILIARIA LTDA - EPP",clienteId="472",descricao_historico="Comissão",historicoId="124",complementoHist="referente hospedagem do projeto DWM-Imóvel",descricao_centroCusto="Administração",centroCustoId="2",descricao_enquadramento="Intermediação de Serviços e Negócios em Geral",enquadramentoId="266",OperacaoParcela.num_titulo="",dt_vencimento="2018-01-31",OperacaoParcela.ind_forma_pagamento="4",nome_banco="Banco Itaú 0936 14965-7",bancoId="1",fileBoleto="",OperacaoParcela.cheque_banco="",OperacaoParcela.cheque_agencia="",OperacaoParcela.cheque_numero="",OperacaoParcela_vr_principal="100,00",OperacaoParcela_OperacaoParcelaEvento_valor="100,00",vr_jurosMora="",vr_multa="0,00",num_parcelas="1",vr_juros="",vr_mora="",vr_desconto="",fileComprovante="",descricao_enquadramento_amortizacao="Comissão - Itaú",enquadramento_amortizacaoId="265",dt_ocorrencia="2018-01-31",dt_movto="2018-01-31",btn-salvar="Salvar"</Context>
+    <StackTrace>   em App_Dominio.Pattern.Facade`3.Save(R value, Crud operation) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Pattern\Facade.cs:linha 153
+   em App_Dominio.Controllers.DwmRootController`3.Insert(R value) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Controllers\DwmRootController.cs:linha 140
+   em App_Dominio.Controllers.DwmRootController`3.SetCreate(R value, FormCollection collection, String breadCrumbText) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Controllers\DwmRootController.cs:linha 93</StackTrace>
+  </LOG>
+  <LOG ID="1949956169" Data="28/01/2018 15:41:55">
+    <Sessao>a2xk0xx0psqwai0uh51jwj0m</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O Campo Dt.Pagamento deve ser uma data menor que a data atual.</Mensagem>
+    <NameSpace>DWM.Models.BI.ContaReceberBaixarBI =&gt; cobranca/_baixar</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="1461496088" Data="28/01/2018 16:09:12">
+    <Sessao>a2xk0xx0psqwai0uh51jwj0m</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>A unidade informada está ocupada por outro condômino.</Mensagem>
+    <NameSpace>DWM.Models.BI.ContaPagarBaixarBI =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="1936823465" Data="28/01/2018 16:12:55">
+    <Sessao>a2xk0xx0psqwai0uh51jwj0m</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>A data do pagamento informada é menor que a data da última amortização 29/01/2018.</Mensagem>
+    <NameSpace>DWM.Models.BI.ContaPagarBaixarBI =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="776774000" Data="28/01/2018 17:09:41">
+    <Sessao>a2xk0xx0psqwai0uh51jwj0m</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O thread estava sendo anulado.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.SecurityContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace>   em lambda_method(Closure , Object )
+   em System.Data.Entity.Core.Objects.DelegateFactory.GetValue(EdmProperty property, Object target)
+   em System.Data.Entity.Core.Objects.StateManagerMemberMetadata.GetValue(Object userObject)
+   em System.Data.Entity.Core.Objects.EntityEntry.TakeSnapshot(Boolean onlySnapshotComplexProperties)
+   em System.Data.Entity.Core.Objects.Internal.SnapshotChangeTrackingStrategy.TakeSnapshot(EntityEntry entry)
+   em System.Data.Entity.Core.Objects.Internal.EntityWrapper`1.TakeSnapshot(EntityEntry entry)
+   em System.Data.Entity.Core.Objects.ObjectStateManager.AddEntry(IEntityWrapper wrappedObject, EntityKey passedKey, EntitySet entitySet, String argumentName, Boolean isAdded)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   em lambda_method(Closure , Shaper )
+   em System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 225</StackTrace>
+  </LOG>
+  <LOG ID="855129877" Data="28/01/2018 17:10:18">
+    <Sessao>a2xk0xx0psqwai0uh51jwj0m</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O thread estava sendo anulado.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.SecurityContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace>   em System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Infrastructure.Interception.DbInterceptionContext..ctor(IEnumerable`1 copyFrom)
+   em System.Data.Entity.Core.EntityClient.EntityConnection.get_InterceptionContext()
+   em System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   em System.Data.Entity.Core.EntityClient.EntityConnection.Close()
+   em System.Data.Entity.Core.Objects.ObjectContext.ReleaseConnection()
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.Finally()
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.Dispose()
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 225</StackTrace>
+  </LOG>
+  <LOG ID="222206985" Data="28/01/2018 17:11:11">
+    <Sessao>a2xk0xx0psqwai0uh51jwj0m</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O thread estava sendo anulado.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.SecurityContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace>   em System.Collections.Generic.List`1.set_Capacity(Int32 value)
+   em System.Collections.Generic.List`1.EnsureCapacity(Int32 min)
+   em System.Collections.Generic.List`1.Add(T item)
+   em System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   em System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Infrastructure.Interception.DbInterceptionContext..ctor(DbInterceptionContext copyFrom)
+   em System.Data.Entity.Infrastructure.Interception.MutableInterceptionContext`1..ctor(DbInterceptionContext copyFrom)
+   em System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.GetState(DbConnection connection, DbInterceptionContext interceptionContext)
+   em System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   em System.Data.Entity.Core.EntityClient.EntityConnection.Close()
+   em System.Data.Entity.Core.Objects.ObjectContext.ReleaseConnection()
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.Finally()
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.Dispose()
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 225</StackTrace>
+  </LOG>
+  <LOG ID="1672251828" Data="28/01/2018 18:41:40">
+    <Sessao>a2xk0xx0psqwai0uh51jwj0m</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Models.BI.ContaPagarBaixarBI =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="1750152941" Data="28/01/2018 18:42:01">
+    <Sessao>a2xk0xx0psqwai0uh51jwj0m</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Models.BI.ContaPagarBaixarBI =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="357521727" Data="28/01/2018 18:42:30">
+    <Sessao>a2xk0xx0psqwai0uh51jwj0m</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Models.BI.ContaPagarBaixarBI =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="173808323" Data="28/01/2018 18:45:41">
+    <Sessao>jpldvgyglei2du0jlobbsnmf</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Models.BI.ContaPagarBaixarBI =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="702828541" Data="28/01/2018 18:46:53">
+    <Sessao>jpldvgyglei2du0jlobbsnmf</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Models.BI.ContaPagarBaixarBI =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="1643250000" Data="28/01/2018 18:50:08">
+    <Sessao>jpldvgyglei2du0jlobbsnmf</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>DWM.Models.BI.ContaPagarBaixarBI =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace />
+  </LOG>
+  <LOG ID="644031936" Data="28/01/2018 18:50:30">
+    <Sessao>jpldvgyglei2du0jlobbsnmf</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>O thread estava sendo anulado.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.SecurityContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; contapagar/_baixar</NameSpace>
+    <Context />
+    <StackTrace>   em System.Collections.Generic.Dictionary`2.FindEntry(TKey key)
+   em System.Collections.Generic.Dictionary`2.TryGetValue(TKey key, TValue&amp; value)
+   em System.Data.Entity.Core.Mapping.ObjectTypeMapping.GetMemberMap(String propertyName, Boolean ignoreCase)
+   em System.Data.Entity.Core.Mapping.ObjectTypeMapping.GetPropertyMap(String propertyName)
+   em System.Data.Entity.Core.Objects.StateManagerTypeMetadata..ctor(EdmType edmType, ObjectTypeMapping mapping)
+   em System.Data.Entity.Core.Objects.ObjectStateManager.AddStateManagerTypeMetadata(EntitySet entitySet, ObjectTypeMapping mapping)
+   em System.Data.Entity.Core.Objects.ObjectStateManager.GetOrAddStateManagerTypeMetadata(Type entityType, EntitySet entitySet)
+   em System.Data.Entity.Core.Objects.ObjectStateManager.AddEntry(IEntityWrapper wrappedObject, EntityKey passedKey, EntitySet entitySet, String argumentName, Boolean isAdded)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   em lambda_method(Closure , Shaper )
+   em System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   em System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   em System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   em System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.&lt;GetElementFunction&gt;b__2[TResult](IEnumerable`1 sequence)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   em System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   em System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1._ValidarSessao(String sessionId) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 225</StackTrace>
+  </LOG>
+</LOG>
