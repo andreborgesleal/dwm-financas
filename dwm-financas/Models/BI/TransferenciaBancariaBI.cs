@@ -27,23 +27,27 @@ namespace DWM.Models.BI
         public TransferenciaBancariaViewModel Run(Repository value)
         {
             TransferenciaBancariaViewModel t = (TransferenciaBancariaViewModel)value;
-            MovtoBancarioModel model = new MovtoBancarioModel(this.db, this.seguranca_db);
+            MovtoBancarioModel modelOrigem = new MovtoBancarioModel(this.db, this.seguranca_db);
+            MovtoBancarioModel modelDestino = new MovtoBancarioModel(this.db, this.seguranca_db);
 
             try
             {
                 #region Origem da transferência
                 t.movtoBancarioOrigemViewModel.empresaId = sessaoCorrente.empresaId;
-                t.movtoBancarioOrigemViewModel = model.Insert(t.movtoBancarioOrigemViewModel);
+                t.movtoBancarioOrigemViewModel.uri = t.uri;
+                t.movtoBancarioOrigemViewModel = modelOrigem.Insert(t.movtoBancarioOrigemViewModel);
                 if (t.movtoBancarioOrigemViewModel.mensagem.Code > 0)
                 {
                     t.mensagem = t.movtoBancarioOrigemViewModel.mensagem;
                     return t;
                 }
                 #endregion
+                this.db.SaveChanges();
 
                 #region destino da transferência
                 t.movtoBancarioDestinoViewModel.empresaId = sessaoCorrente.empresaId;
-                t.movtoBancarioDestinoViewModel = model.Insert(t.movtoBancarioDestinoViewModel);
+                t.movtoBancarioDestinoViewModel.uri = t.uri;
+                t.movtoBancarioDestinoViewModel = modelDestino.Insert(t.movtoBancarioDestinoViewModel);
                 if (t.movtoBancarioDestinoViewModel.mensagem.Code > 0)
                 {
                     t.mensagem = t.movtoBancarioDestinoViewModel.mensagem;
@@ -68,6 +72,7 @@ namespace DWM.Models.BI
                     }
 
                     contabilidadeViewModel.empresaId = sessaoCorrente.empresaId;
+                    contabilidadeViewModel.uri = t.uri;
                     contabilidadeViewModel = contabilidadeModel.Insert(contabilidadeViewModel);
 
                     if (contabilidadeViewModel.mensagem.Code > 0)
@@ -80,6 +85,7 @@ namespace DWM.Models.BI
                 };
                 #endregion
                 this.db.SaveChanges();
+                this.seguranca_db.SaveChanges();
                 t.mensagem = new Validate() { Code = 0, Message = "Transferência realizada com sucesso" };
             }
             catch (App_DominioException ex)
