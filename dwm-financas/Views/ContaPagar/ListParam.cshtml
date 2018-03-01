@@ -138,13 +138,15 @@
                                         <span>
                                             @if (!String.IsNullOrEmpty(ope.descricao_grupoCredor))
                                             {
-                                                @ope.nome_credor <small>(@ope.descricao_grupoCredor)</small>
+                                                @ope.nome_credor <small>(@ope.descricao_grupoCredor)</small> <br />
                                                 <small>@(ope.descricao_historico + " " + ope.complementoHist)</small>
+                                                <small class="text-muted">@(ope.recorrencia == "S" ? "- mensal" : "")</small>
                                             }
                                             else
                                             {
-                                                @(ope.nome_credor)
+                                                @(ope.nome_credor) <br />
                                                 <small>(@(ope.descricao_historico + " " + ope.complementoHist))</small>
+                                                <small class="text-muted">@(ope.recorrencia == "S" ? "- mensal" : "")</small>
                                             }
                                         </span>
                                     </td>

@@ -136,6 +136,7 @@ namespace DWM.Models.Persistence
             var q = (from rec in db.ContaPagars
                      join par in db.ContaPagarParcelas on rec.operacaoId equals par.operacaoId
                      join cre in db.Credores on rec.credorId equals cre.credorId
+                     join his in db.Historicos on rec.historicoId equals his.historicoId
                      where rec.empresaId.Equals(sessaoCorrente.empresaId)
                             && ((((titulos_vencidos_atraso && par.vr_saldo_devedor > 0
                                 && ((dt_vencidos_atraso1.HasValue && par.dt_vencimento >= dt_vencidos_atraso1 && par.dt_vencimento <= dt_vencidos_atraso2) ||
@@ -160,6 +161,8 @@ namespace DWM.Models.Persistence
                          nome_credor = cre.nome,
                          dt_emissao = rec.dt_emissao,
                          documento = rec.documento,
+                         descricao_historico = his.descricao,
+                         complementoHist = rec.complementoHist,
                          recorrencia = rec.recorrencia,
                          OperacaoParcela = new ContaPagarParcelaViewModel()
                          {

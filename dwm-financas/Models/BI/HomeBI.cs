@@ -29,23 +29,40 @@ namespace DWM.Models.BI
             HomeViewModel r = (HomeViewModel)value;
             try
             {
+                Factory<ExercicioViewModel, ApplicationContext> facade = new Factory<ExercicioViewModel, ApplicationContext>();
+                ExercicioViewModel e = facade.Execute(new ExercicioBI(), new ExercicioViewModel());
+
+                DateTime data1;
+                DateTime data2;
+
+                if (e.mensagem.Code == 0 && e.dt_lancamento_inicio.HasValue)
+                {
+                    data1 = e.dt_lancamento_inicio.Value;
+                    data2 = e.dt_lancamento_fim.Value;
+                }
+                else
+                {
+                    data1 = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-") + "01");
+                    data2 = Convert.ToDateTime(DateTime.Today.AddMonths(1).ToString("yyyy-MM-") + "01").AddDays(-1);
+                }
+
                 ListViewContaReceberDemonstrativoBI listCob = new ListViewContaReceberDemonstrativoBI();
                 //Facade<ContaReceberDemonstrativoViewModel, ContaReceberModel, ApplicationContext> facadeCob = new Facade<ContaReceberDemonstrativoViewModel, ContaReceberModel, ApplicationContext>();
 
                 Factory<ContaReceberDemonstrativoViewModel, ApplicationContext> facadeCob = new Factory<ContaReceberDemonstrativoViewModel, ApplicationContext>();
 
                 r.Cobranca = facadeCob.PagedList(listCob, 0, 15, true,
-                                                new DateTime(Funcoes.Brasilia().AddMonths(-2).Year, Funcoes.Brasilia().AddMonths(-2).Month, 1),
-                                                Funcoes.Brasilia().Date.AddDays(-1),
+                                                new DateTime(data1.AddMonths(-2).Year, data1.AddMonths(-2).Month, 1),
+                                                data1.Date.AddDays(-1),
                                                 true,
-                                                Funcoes.Brasilia().Date,
-                                                new DateTime(Funcoes.Brasilia().AddMonths(1).Year, Funcoes.Brasilia().AddMonths(1).Month, 1).AddDays(-1),
+                                                data1,
+                                                data2,
                                                 true,
                                                 true,
                                                 true,
                                                 false,
-                                                new DateTime(Funcoes.Brasilia().Year, Funcoes.Brasilia().Month, 1),
-                                                new DateTime(Funcoes.Brasilia().AddMonths(1).Year, Funcoes.Brasilia().AddMonths(1).Month, 1).AddDays(-1),
+                                                data1,
+                                                data2,
                                                 null,
                                                 null,
                                                 null,
@@ -58,17 +75,17 @@ namespace DWM.Models.BI
                 Facade<ContaPagarViewModel, ContaPagarModel, ApplicationContext> facadePag = new Facade<ContaPagarViewModel, ContaPagarModel, ApplicationContext>();
                 r.Pagamentos = facadePag.getPagedList(listPag, 0, 15,
                                                 true,
-                                                new DateTime(Funcoes.Brasilia().AddMonths(-2).Year, Funcoes.Brasilia().AddMonths(-2).Month, 1),
-                                                Funcoes.Brasilia().Date.AddDays(-1),
+                                                new DateTime(data1.AddMonths(-2).Year, data1.AddMonths(-2).Month, 1),
+                                                data1.Date.AddDays(-1),
                                                 true,
-                                                Funcoes.Brasilia().Date,
-                                                new DateTime(Funcoes.Brasilia().AddMonths(1).Year, Funcoes.Brasilia().AddMonths(1).Month, 1).AddDays(-1),
+                                                data1,
+                                                data2,
                                                 true,
                                                 true,
                                                 true,
                                                 false,
-                                                new DateTime(Funcoes.Brasilia().Year, Funcoes.Brasilia().Month, 1),
-                                                new DateTime(Funcoes.Brasilia().AddMonths(1).Year, Funcoes.Brasilia().AddMonths(1).Month, 1).AddDays(-1),
+                                                data1,
+                                                data2,
                                                 null,
                                                 null,
                                                 null,

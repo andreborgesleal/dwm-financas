@@ -84,7 +84,9 @@
                                             }
                                         </td>
                                         <td class="text-left">
-                                            @rec.nome_credor
+                                            @rec.nome_credor <br />
+                                            <small>(@(rec.descricao_historico + " " + rec.complementoHist))</small>
+                                            <small class="text-muted">@(rec.recorrencia=="S" ? "- mensal" : "")</small>
                                         </td>
                                         <td class="text-left">
                                             @if (rec.OperacaoParcela.dt_ultima_amortizacao.HasValue)
