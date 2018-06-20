@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using System.Linq;
 using System.Data.SqlClient;
 using System.Data;
+using System.Text;
 
 namespace DWM.Models.BI
 {
@@ -30,12 +31,10 @@ namespace DWM.Models.BI
             TituloIncluirViewModel r = (TituloIncluirViewModel)value;
             try
             {
-
                 TituloModel model = new TituloModel();
                 model.Create(this.db, this.seguranca_db);
                 TituloViewModel t = model.BeforeInsert(r);
 
-                r.empresaId = t.empresaId;
                 r.SequenciaID = t.SequenciaID;
                 r.IndAtivo = t.IndAtivo;
                 r.DataEmissao = t.DataEmissao;
@@ -50,151 +49,82 @@ namespace DWM.Models.BI
                     return r;
                 }
 
-                #region Parâmetros
-                SqlParameter operacaoIdParam = new SqlParameter("@pOperacaoId", SqlDbType.Int);
-                SqlParameter parcelaIdParam = new SqlParameter("@pParcelaId", SqlDbType.Int);
-                SqlParameter SequenciaIDParam = new SqlParameter("@pSequenciaID", SqlDbType.Int);
-                SqlParameter BancoIDParam = new SqlParameter("@pBancoID", SqlDbType.NChar, 3);
-                SqlParameter ConvenioIDParam = new SqlParameter("@pConvenioID", SqlDbType.NVarChar, 15);
-                SqlParameter empresaIdParam = new SqlParameter("@pEmpresaId", SqlDbType.Int);
-                SqlParameter clienteIdParam = new SqlParameter("@pClienteId", SqlDbType.Int);
-                SqlParameter TituloIDParam = new SqlParameter("@pTituloID", SqlDbType.NVarChar, 25);
-                SqlParameter OcorrenciaIDParam = new SqlParameter("@pOcorrenciaID", SqlDbType.NChar, 2);
-                SqlParameter NossoNumeroParam = new SqlParameter("@pNossoNumero", SqlDbType.NChar, 8);
-                SqlParameter NossoNumeroDVParam = new SqlParameter("@pNossoNumeroDV", SqlDbType.NChar, 1);
-                SqlParameter SeuNumeroParam = new SqlParameter("@pSeuNumero", SqlDbType.NVarChar, 10);
-                SqlParameter DataVencimentoParam = new SqlParameter("@pDataVencimento", SqlDbType.SmallDateTime);
-                SqlParameter ValorPrincipalParam = new SqlParameter("@pValorPrincipal", SqlDbType.Decimal);
-                SqlParameter EspecieParam = new SqlParameter("@pEspecie", SqlDbType.NChar, 2);
-                SqlParameter AceiteParam = new SqlParameter("@pAceite", SqlDbType.NChar, 1);
-                SqlParameter DataEmissaoParam = new SqlParameter("@pDataEmissao", SqlDbType.SmallDateTime);
-                SqlParameter DataJurosParam = new SqlParameter("@pDataJuros", SqlDbType.SmallDateTime);
-                SqlParameter ValorJurosParam = new SqlParameter("@pValorJuros", SqlDbType.Decimal);
-                SqlParameter DataDesconto1Param = new SqlParameter("@pDataDesconto1", SqlDbType.SmallDateTime);
-                SqlParameter ValorDesconto1Param = new SqlParameter("@pValorDesconto1", SqlDbType.Decimal);
-                SqlParameter DataDesconto2Param = new SqlParameter("@pDataDesconto2", SqlDbType.SmallDateTime);
-                SqlParameter ValorDesconto2Param = new SqlParameter("@pValorDesconto2", SqlDbType.Decimal);
-                SqlParameter DataDesconto3Param = new SqlParameter("@pDataDesconto3", SqlDbType.SmallDateTime);
-                SqlParameter ValorDesconto3Param = new SqlParameter("@pValorDesconto3", SqlDbType.Decimal);
-                SqlParameter ValorIOFParam = new SqlParameter("@pValorIOF", SqlDbType.Decimal);
-                SqlParameter ValorAbatimentoParam = new SqlParameter("@pValorAbatimento", SqlDbType.Decimal);
-                SqlParameter NumDiasDevolucaoParam = new SqlParameter("@pNumDiasDevolucao", SqlDbType.NChar, 2);
-                SqlParameter MultaIDParam = new SqlParameter("@pMultaID", SqlDbType.NChar, 1);
-                SqlParameter DataMultaParam = new SqlParameter("@pDataMulta", SqlDbType.SmallDateTime);
-                SqlParameter ValorMultaParam = new SqlParameter("@pValorMulta", SqlDbType.Decimal);
-                SqlParameter InstrucaoRodapeParam = new SqlParameter("@pInstrucaoRodape", SqlDbType.NVarChar, 40);
-                SqlParameter InstrucaoPagamento1Param = new SqlParameter("@pInstrucaoPagamento1", SqlDbType.NVarChar, 40);
-                SqlParameter InstrucaoPagamento2Param = new SqlParameter("@pInstrucaoPagamento2", SqlDbType.NVarChar, 40);
-                SqlParameter InstrucaoPagamento3Param = new SqlParameter("@pInstrucaoPagamento3", SqlDbType.NVarChar, 40);
-                SqlParameter InstrucaoPagamento4Param = new SqlParameter("@pInstrucaoPagamento4", SqlDbType.NVarChar, 40);
-                SqlParameter IndAtivoParam = new SqlParameter("@pIndAtivo", SqlDbType.Bit);
-                SqlParameter historicoIdParam = new SqlParameter("@pHistoricoId", SqlDbType.Int);
-                SqlParameter complementoHistParam = new SqlParameter("@pComplementoHist", SqlDbType.NVarChar, 300);
-                SqlParameter centroCustoIdParam = new SqlParameter("@pCentroCustoId", SqlDbType.Int);
-                SqlParameter enquadramentoIdParam = new SqlParameter("@pEnquadramentoId", SqlDbType.Int);
-                SqlParameter documentoParam = new SqlParameter("@pDocumento", SqlDbType.NVarChar, 12);
-                SqlParameter Cod_erroParam = new SqlParameter("@pCod_erro", SqlDbType.Int);
-                SqlParameter Desc_erroParam = new SqlParameter("@pDesc_erro", SqlDbType.NVarChar, 400);
+                string dj = !r.DataJuros.HasValue ? "null" : "'" + r.DataJuros.Value.ToString("yyyyMMdd") + "'";
+                string vj = !r.ValorJuros.HasValue ? "null" : r.ValorJuros.Value.ToString("########0.00").Replace(",",".");
+                string d1 = !r.DataDesconto1.HasValue ? "null" : "'" + r.DataDesconto1.Value.ToString("yyyyMMdd") + "'";
+                string vd1 = !r.ValorDesconto1.HasValue ? "null" : r.ValorDesconto1.Value.ToString("########0.00").Replace(",", ".");
+                string d2 = !r.DataDesconto2.HasValue ? "null" : "'" + r.DataDesconto2.Value.ToString("yyyyMMdd") + "'";
+                string vd2 = !r.ValorDesconto2.HasValue ? "null" : r.ValorDesconto2.Value.ToString("########0.00").Replace(",", ".");
+                string d3 = !r.DataDesconto3.HasValue ? "null" : "'" + r.DataDesconto3.Value.ToString("yyyyMMdd") + "'";
+                string vd3 = !r.ValorDesconto3.HasValue ? "null" : r.ValorDesconto3.Value.ToString("########0.00").Replace(",", ".");
+                string iof = !r.ValorIOF.HasValue ? "null" : r.ValorIOF.Value.ToString("########0.00").Replace(",", ".");
+                string aba = !r.ValorAbatimento.HasValue ? "null" : r.ValorAbatimento.Value.ToString("########0.00").Replace(",", ".");
+                string dde = r.NumDiasDevolucao == null ? "null" : "'" + r.NumDiasDevolucao + "'";
+                string mul = !r.ValorMulta.HasValue ? "null" : r.ValorMulta.Value.ToString("########0.00").Replace(",", ".");
+                string dmu = !r.DataMulta.HasValue ? "null" : "'" + r.DataMulta.Value.ToString("yyyyMMdd") + "'";
+                string ccu = !r.centroCustoId.HasValue ? "null" : r.centroCustoId.ToString();
+                string enq = !r.enquadramentoId.HasValue ? "null" : r.enquadramentoId.ToString();
+                string rod = r.InstrucaoRodape == null ? "null" : "'" + r.InstrucaoRodape + "'";
+                string in1 = r.InstrucaoPagamento1 == null ? "null" : "'" + r.InstrucaoPagamento1 + "'";
+                string in2 = r.InstrucaoPagamento1 == null ? "null" : "'" + r.InstrucaoPagamento2 + "'";
+                string in3 = r.InstrucaoPagamento1 == null ? "null" : "'" + r.InstrucaoPagamento3 + "'";
+                string in4 = r.InstrucaoPagamento1 == null ? "null" : "'" + r.InstrucaoPagamento4 + "'";
 
-                // Parâmetros do título
-                operacaoIdParam.Direction = ParameterDirection.Output;
-                operacaoIdParam.Value = r.operacaoId;
-                parcelaIdParam.Value = r.parcelaId;
-                SequenciaIDParam.Value = r.SequenciaID;
-                BancoIDParam.Value = r.BancoID;
-                ConvenioIDParam.Value = r.ConvenioID;
-                empresaIdParam.Value = sessaoCorrente.empresaId;
-                clienteIdParam.Value = r.clienteId;
-                TituloIDParam.Direction = ParameterDirection.Output;
-                TituloIDParam.Value = r.TituloID;
-                OcorrenciaIDParam.Value = r.OcorrenciaID;
-                NossoNumeroParam.Value = r.NossoNumero;
-                NossoNumeroDVParam.Value = r.NossoNumeroDV;
-                SeuNumeroParam.Value = r.SeuNumero;
-                DataVencimentoParam.Value = r.DataVencimento;
-                ValorPrincipalParam.Value = r.ValorPrincipal;
-                EspecieParam.Value = r.Especie;
-                AceiteParam.Value = r.Aceite;
-                DataEmissaoParam.Value = r.DataEmissao;
-                DataJurosParam.Value = r.DataJuros;
-                ValorJurosParam.Value = r.ValorJuros;
-                DataDesconto1Param.Value = r.DataDesconto1;
-                ValorDesconto1Param.Value = r.ValorDesconto1;
-                DataDesconto2Param.Value = r.DataDesconto2;
-                ValorDesconto2Param.Value = r.ValorDesconto2;
-                DataDesconto3Param.Value = r.DataDesconto3;
-                ValorDesconto3Param.Value = r.ValorDesconto3;
-                ValorIOFParam.Value = r.ValorIOF;
-                ValorAbatimentoParam.Value = r.ValorAbatimento;
-                NumDiasDevolucaoParam.Value = r.NumDiasDevolucao;
-                MultaIDParam.Value = r.MultaID;
-                DataMultaParam.Value = r.DataMulta;
-                ValorMultaParam.Value = r.ValorMulta;
-                InstrucaoRodapeParam.Value = r.InstrucaoRodape;
-                InstrucaoPagamento1Param.Value = r.InstrucaoPagamento1;
-                InstrucaoPagamento2Param.Value = r.InstrucaoPagamento2;
-                InstrucaoPagamento3Param.Value = r.InstrucaoPagamento3;
-                InstrucaoPagamento4Param.Value = r.InstrucaoPagamento4;
-                IndAtivoParam.Value = r.IndAtivo;
-                // Parâmetros do Contas a Receber
-                historicoIdParam.Value = r.historicoId;
-                complementoHistParam.Value = r.complementoHist;
-                centroCustoIdParam.Value = r.centroCustoId;
-                enquadramentoIdParam.Value = r.enquadramentoId;
-                documentoParam.Value = r.Documento;
+                StringBuilder sp = new StringBuilder();
+                sp.Append("exec spr_titulo_incluir ");
+                sp.Append("@pOperacaoId = " + r.operacaoId.ToString() + ", ");
+                sp.Append("@pParcelaId  = " + r.parcelaId + ", ");
+                sp.Append("@pSequenciaID = " + r.SequenciaID + ", ");
+                sp.Append("@pBancoID = '" + r.BancoID + "', ");
+                sp.Append("@pConvenioID = '" + r.ConvenioID + "', ");
+                sp.Append("@pEmpresaId = " + r.empresaId + ", ");
+                sp.Append("@pClienteId = " + r.clienteId + ", ");
+                sp.Append("@pTituloID = '" + r.TituloID + "', ");
+                sp.Append("@pOcorrenciaID = '" + r.OcorrenciaID + "', ");
+                sp.Append("@pNossoNumero = '" + r.NossoNumero + "', ");
+                sp.Append("@pNossoNumeroDV = '" + r.NossoNumeroDV + "', ");
+                sp.Append("@pSeuNumero = '" + r.SeuNumero + "', ");
+                sp.Append("@pDataVencimento = '" + r.DataVencimento.ToString("yyyyMMdd") + "', ");
+                sp.Append("@pValorPrincipal = " + r.ValorPrincipal.ToString("######0.00").Replace(",", ".") + ", ");
+                sp.Append("@pEspecie = '" + r.Especie + "', ");
+                sp.Append("@pAceite = '" + r.Aceite + "', ");
+                sp.Append("@pDataEmissao = '" + r.DataEmissao.ToString("yyyyMMdd") + "', ");
+                sp.Append("@pDataJuros = " + dj + ", ");
+                sp.Append("@pValorJuros = " + vj + ", ");
+                sp.Append("@pDataDesconto1 = " + d1 + ", ");
+                sp.Append("@pValorDesconto1 = " + vd1 + ", ");
+                sp.Append("@pDataDesconto2 = " + d2 + ", ");
+                sp.Append("@pValorDesconto2 = " + vd2 + ", ");
+                sp.Append("@pDataDesconto3 = " + d3 + ", ");
+                sp.Append("@pValorDesconto3 = " + vd3 + ", ");
+                sp.Append("@pValorIOF = " + iof + ", ");
+                sp.Append("@pValorAbatimento = " + aba + ", ");
+                sp.Append("@pNumDiasDevolucao = " + dde + ", ");
+                sp.Append("@pMultaID = '" + r.MultaID + "', ");
+                sp.Append("@pDataMulta = " + dmu + ", ");
+                sp.Append("@pValorMulta = " + mul + ", ");
+                sp.Append("@pInstrucaoRodape = " + rod + ", ");
+                sp.Append("@pInstrucaoPagamento1 = " + in1 + ", ");
+                sp.Append("@pInstrucaoPagamento2 = " + in2 + ", ");
+                sp.Append("@pInstrucaoPagamento3 = " + in3 + ", ");
+                sp.Append("@pInstrucaoPagamento4 = " + in4 + ", ");
+                sp.Append("@pIndAtivo = " + r.IndAtivo + ", ");
+                sp.Append("@pHistoricoId = " + r.historicoId + ", ");
+                sp.Append("@pComplementoHist = '" + r.complementoHist + "', ");
+                sp.Append("@pCentroCustoId = " + ccu + ", ");
+                sp.Append("@pEnquadramentoId = " + enq + ", ");
+                sp.Append("@pDocumento = '" + r.documento + "', ");
+                sp.Append("@pERROR_CODE = 0, ");
+                sp.Append("@pERROR_DESC = ''");
 
-                Cod_erroParam.Direction = ParameterDirection.Output;
-                Cod_erroParam.Value = 0;
-                Desc_erroParam.Direction = ParameterDirection.Output;
-                Desc_erroParam.Value = "";
-                #endregion
+                IEnumerable<TituloViewModel> result = db.Database.SqlQuery<TituloViewModel>(sp.ToString());
 
-                int result = db.Database.ExecuteSqlCommand("spr_titulo_incluir", operacaoIdParam,
-                                                                                 parcelaIdParam,
-                                                                                 SequenciaIDParam,
-                                                                                 BancoIDParam,
-                                                                                 ConvenioIDParam,
-                                                                                 empresaIdParam,
-                                                                                 clienteIdParam,
-                                                                                 TituloIDParam,
-                                                                                 OcorrenciaIDParam,
-                                                                                 NossoNumeroParam,
-                                                                                 NossoNumeroDVParam,
-                                                                                 SeuNumeroParam,
-                                                                                 DataVencimentoParam,
-                                                                                 ValorPrincipalParam,
-                                                                                 EspecieParam,
-                                                                                 AceiteParam,
-                                                                                 DataEmissaoParam,
-                                                                                 DataJurosParam,
-                                                                                 ValorJurosParam,
-                                                                                 DataDesconto1Param,
-                                                                                 ValorDesconto1Param,
-                                                                                 DataDesconto2Param,
-                                                                                 ValorDesconto2Param,
-                                                                                 DataDesconto3Param,
-                                                                                 ValorDesconto3Param,
-                                                                                 ValorIOFParam,
-                                                                                 ValorAbatimentoParam,
-                                                                                 NumDiasDevolucaoParam,
-                                                                                 MultaIDParam,
-                                                                                 DataMultaParam,
-                                                                                 ValorMultaParam,
-                                                                                 InstrucaoRodapeParam,
-                                                                                 InstrucaoPagamento1Param,
-                                                                                 InstrucaoPagamento2Param,
-                                                                                 InstrucaoPagamento3Param,
-                                                                                 InstrucaoPagamento4Param,
-                                                                                 IndAtivoParam,
-                                                                                 historicoIdParam,
-                                                                                 complementoHistParam,
-                                                                                 centroCustoIdParam,
-                                                                                 enquadramentoIdParam,
-                                                                                 documentoParam,
-                                                                                 Cod_erroParam,
-                                                                                 Desc_erroParam);
+                r.mensagem = new Validate() { Code = 0, Message = "Registro incluído com sucesso !!!", MessageBase = "Registro incluído com sucesso !!!" };
 
-                r.mensagem = new Validate() { Code = (int)Cod_erroParam.Value, Message = Desc_erroParam.Value.ToString(), MessageBase = Desc_erroParam.Value.ToString() };
+                if (result.FirstOrDefault().CodErro > 0)
+                    throw new App_DominioException(new Validate() { Code = result.FirstOrDefault().CodErro, Message = result.FirstOrDefault().DescErro, MessageBase = result.FirstOrDefault().DescErro });
+
+                r.operacaoId = result.FirstOrDefault().operacaoId;
             }
             catch (App_DominioException ex)
             {

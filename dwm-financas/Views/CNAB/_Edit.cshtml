@@ -1,16 +1,16 @@
 ﻿@using DWM.Models.Repositories
 @using App_Dominio.Repositories
-@model EditarContaPagarViewModel
+@model EditarContaReceberViewModel
 @{
     Layout = null;
     var path = System.Configuration.ConfigurationManager.AppSettings["Users_Data"];
 
     TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
-    t[0].url = "../ContaPagar/Create";
+    t[0].url = "../cnab/Create";
     t[0].nomeCurto = "Incluir";
     t[0].referencia = "";
 
-    t[0].url = "../ContaPagar/Alterar?operacaoId=" + Model.operacaoId.ToString();
+    t[0].url = "../CNAB/Alterar?operacaoId=" + Model.operacaoId.ToString();
     t[0].nomeCurto = "Alterar";
     t[0].referencia = "";
     t[0].exibir = "S";
@@ -21,11 +21,13 @@
 <div id="div-lov"></div>
 <div class="container-cadastro">
     @Html.Partial("_alerts")
-    <!-- Contas a pagar -->
+    @Html.HiddenFor(info => info.operacaoId)
+    <!-- Contas a receber -->
     <div class="row" id="panel-top">
+        <!-- Dados ContaReceber -->
         <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
             <div class="x_panel">
-                @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Editar conta a pagar", Descricao = "", Transacao = t })
+                @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Editar título", Descricao = "", Transacao = t })
                 <div class="x_content">
                     <ul class="list-group">
                         <li class="list-group-item">
@@ -37,9 +39,9 @@
                             @Model.dt_emissao.ToString("dd/MM/yyyy")
                         </li>
                         <li class="list-group-item">
-                            <h4><strong>Fornecedor</strong></h4>
-                            @Model.nome_credor <br />
-                            <small>@Model.descricao_grupoCredor</small>
+                            <h4><strong>Cliente</strong></h4>
+                            @Model.nome_cliente <br />
+                            <small>@Model.descricao_grupoCliente</small>
                         </li>
                         <li class="list-group-item">
                             <h4><strong>Histórico</strong></h4>
@@ -55,7 +57,7 @@
                         @if (Model.recorrencia == "S")
                         {
                             <li class="list-group-item">
-                                <h4><strong>Recorrência</strong></h4>
+                                <h4><strong>Nosso Número</strong></h4>
                                 MENSAL
                             </li>
                         }
@@ -68,6 +70,7 @@
                 </div>
             </div>
         </div>
+        <!-- Contabilidade (ContaReceber)-->
         <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
             <div class="x_panel">
                 @{
@@ -92,13 +95,13 @@
 
                     tTitulo[3].uri = "myTab";
                     tTitulo[3].nomeCurto = "Salvar como";
-                    tTitulo[3].url = "../ContaPagar/Create?operacaoId=" + Model.operacaoId.ToString();
+                    tTitulo[3].url = "../Cobranca/Create?operacaoId=" + Model.operacaoId.ToString();
                     tTitulo[3].exibir = "S";
                     tTitulo[3].glyph = "fa fa-save";
 
                     tTitulo[4].url = "../Home/Default";
                 }
-                @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = Model.nome_credor, Descricao = "", Transacao = tTitulo })
+                @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = Model.nome_cliente, Descricao = "", Transacao = tTitulo })
                 <div class="x_content">
                     <!-- top tiles -->
                     <div class="row tile_count">
@@ -155,16 +158,8 @@
                             else
                             {
                                 <div class="count"><h3>Pendente</h3></div>
-                                if (Model.ind_autorizacao == "S")
-                                {
-                                    <span class="count_bottom green">Pagamento autorizado</span>
-                                }
-                                else
-                                {
-                                    <span class="count_bottom red">Aguardando autorização</span>
-                                }
-
                             }
+
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4 tile_stats_count">
                             <span class="count_top"><i class="fa fa-spinner"></i> Forma Pagamento</span>
@@ -208,17 +203,12 @@
                                     <tbody>
                                         @foreach (ContabilidadeItemViewModel item in Model.Contabilidades)
                                         {
-                                        <tr class="even pointer">
-                                            <td><span>@item.codigoPleno</span></td>
-                                            <td>
-                                                <span>
-                                                    @item.descricao_planoConta
-                                                </span><br />
-                                                <span class="text-mama-africa">*** @item.GetDescricaoContaMaster() ***</span>
-                                            </td>
-                                            <td class="text-right"><span>@(item.tipoLancamento == "D" ? item.valor.ToString("###,###,###,##0.00") : "")</span></td>
-                                            <td class="text-right"><span>@(item.tipoLancamento == "C" ? item.valor.ToString("###,###,###,##0.00") : "")</span></td>
-                                        </tr>
+                                            <tr class="even pointer">
+                                                <td><span>@item.codigoReduzido</span></td>
+                                                <td><span>@item.descricao_planoConta</span></td>
+                                                <td class="text-right"><span>@(item.tipoLancamento == "D" ? item.valor.ToString("###,###,###,##0.00") : "")</span></td>
+                                                <td class="text-right"><span>@(item.tipoLancamento == "C" ? item.valor.ToString("###,###,###,##0.00") : "")</span></td>
+                                            </tr>
                                         }
                                         <tr class="warning">
                                             <td colspan="2"><span><strong>Total</strong></span></td>
@@ -238,11 +228,11 @@
             }
         </div>
     </div>
-    <!-- Posição financeira do título -->
+    <!-- Posição financeira do título (ContaReceberParcela) -->
     <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
             <div class="x_panel">
-                @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Posição financeira da conta a pagar", Descricao = "", Transacao = t })
+                @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Posição financeira do título", Descricao = "", Transacao = t })
                 <div class="x_content">
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -278,7 +268,7 @@
             </div>
         </div>
     </div>
-    <!-- Eventos -->
+    <!-- Eventos (ContaReceberParcelaEvento)-->
     <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
             <div class="x_panel">
@@ -300,7 +290,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (ContaPagarParcelaEventoViewModel ev in Model.OperacaoParcelaEventos)
+                                @foreach (ContaReceberParcelaEventoViewModel ev in Model.OperacaoParcelaEventos)
                                 {
                                     string estornar = "Estornar";
                                     string classe = "";
@@ -363,7 +353,7 @@
             </div>
         </div>
     </div>
-    <!-- Tab (Baixa/Eventos/Alterar)-->
+    <!-- Tab (Baixa/Eventos/Alterar/Boleto)-->
     @Html.Partial("_AjaxAlert", "panel-tab")
     <div class="row" id="panel-tab">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
@@ -378,8 +368,12 @@
                     <li role="presentation" class="">
                         <a href="#alterar" role="tab" id="profile-alterar" data-toggle="tab" aria-expanded="false">Alterar</a>
                     </li>
+                    <li role="presentation" class="">
+                        <a href="#boleto" role="tab" id="profile-boleto" data-toggle="tab" aria-expanded="false">Boleto</a>
+                    </li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
+                    <!-- Baixar -->
                     <div role="tabpanel" class="tab-pane fade active in" id="baixar" aria-labelledby="home-tab">
                         @if (Model.ind_baixa == null || Model.ind_baixa == "")
                         {
@@ -389,9 +383,10 @@
                         }
                         else
                         {
-                            <div class="well text-center margem-topo-10">Conta a pagar já baixada</div>
+                            <div class="well text-center margem-topo-10">Título Baixado</div>
                         }
                     </div>
+                    <!-- Novo Evento -->
                     <div role="tabpanel" class="tab-pane fade" id="evento" aria-labelledby="profile-evento">
                         @if (Model.ind_baixa == null || Model.ind_baixa == "")
                         {
@@ -401,15 +396,16 @@
                         }
                         else
                         {
-                            <div class="well text-center margem-topo-10">Conta a pagar já baixada</div>
+                            <div class="well text-center margem-topo-10">Título Baixado</div>
                         }
                     </div>
+                    <!-- Alterar título -->
                     <div role="tabpanel" class="tab-pane fade" id="alterar" aria-labelledby="profile-alterar">
                         @if (Model.ind_baixa == null || Model.ind_baixa == "")
                         {
                             if (Model.OperacaoParcelaEventos.Where(info => info.ind_estorno == "N").Count() > 1)
                             {
-                                <div class="well text-center margem-topo-10">Conta a pagar não pode ser editada porque possui movimentação</div>
+                                <div class="well text-center margem-topo-10">Título não pode ser editado porque possui movimentação</div>
                             }
                             else
                             {
@@ -420,7 +416,31 @@
                         }
                         else
                         {
-                            <div class="well text-center margem-topo-10">Conta a pagar já baixada</div>
+                            <div class="well text-center margem-topo-10">Título Baixado</div>
+                        }
+                    </div>
+                    <!-- Boleto -->
+                    <div role="tabpanel" class="tab-pane fade" id="boleto" aria-labelledby="profile-boleto">
+                        @if (Model.ind_baixa == null || Model.ind_baixa == "")
+                        {
+                            if (Model.OperacaoParcelaEventos.Where(info => info.ind_estorno == "N").Count() > 1)
+                            {
+                                <div class="well text-center margem-topo-10">Título não pode imprimir boleto porque possui movimentação</div>
+                            }
+                            else
+                            {
+                                <div id="boleto-emissao">
+                                    @*@Html.Partial("_Boleto", Model)*@
+                                    @*<input type="button" class="btn-default" value="Imprimir" onclick="VisualizaBoleto()" />*@
+                                    <button type="button" class="btn btn-primary" onclick="VisualizaBoletoPopUp()">
+                                        Imprimir
+                                    </button>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="well text-center margem-topo-10">Título Baixado</div>
                         }
                     </div>
                 </div>
@@ -433,6 +453,7 @@
                 </div>*@
         </div>
     </div>
+
     <div class="row clearfix margem-topo-20">
         <div class="col-md-12">
             <p>&nbsp;</p>
@@ -443,12 +464,12 @@
 <script>
     function fnEstorno(_operacaoId, _parcelaId, _dt_evento)
     {
-        var link = '../ContaPagar/Estornar?operacaoId=' + _operacaoId + '&parcelaId=' + _parcelaId + '&dt_evento=' + _dt_evento;
+        var link = '../Cobranca/Estornar?operacaoId=' + _operacaoId + '&parcelaId=' + _parcelaId + '&dt_evento=' + _dt_evento;
         link = encodeURI(link + '&noCahce=' + new Date());
         CarregandoIn();
 
-        $('#EditarContaPagar').load(link);
-        
+        $('#EditarContaReceber').load(link);
+
         $( document ).ajaxSuccess(function (event, xhr, settings) {
             $('#carregando').css("visibility", "hidden");
             $('#carregando').css("height", "0px");
@@ -461,4 +482,17 @@
             $('#carregando').css("margin-left", "0%");
         })
     }
+
+    function VisualizaBoleto() {
+        var link = "/Cobranca/VisualizarBoleto?bancoID=104&operacaoId=" + '@Model.operacaoId' + "&parcelaId=" + '@Model.parcelaId';
+        $('#myBoletoEmissao').load(encodeURI(link));
+    }
+
+    function VisualizaBoletoPopUp() {
+        var url = "/Cobranca/VisualizarBoleto?bancoID=104&operacaoId=" + '@Model.operacaoId' + "&parcelaId=" + '@Model.parcelaId'; //$('#operacaoId').val(); // + strSelected;
+        window.open(url, "WindowPopup", 'width=668,height=820');
+    }
 </script>
+
+
+

@@ -64,8 +64,10 @@ namespace DWM.Models.BI
                                            where cr.contabilidadeId != null && con.contabilidadeId == cr.contabilidadeId
                                            select new ContabilidadeItemViewModel
                                            {
+                                               empresaId = sessaoCorrente.empresaId,
                                                contabilidadeId = con.contabilidadeId,
                                                codigoReduzido = pc.codigoReduzido,
+                                               codigoPleno = pc.codigoPleno,
                                                descricao_planoConta = pc.descricao,
                                                tipoLancamento = con.tipoLancamento,
                                                valor = con.valor

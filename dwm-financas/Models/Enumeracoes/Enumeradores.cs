@@ -194,5 +194,54 @@ namespace DWM.Models.Enumeracoes
             [StringValue("000")]
             CNAB400,
         }
+
+        public enum Especie
+        {
+            [StringDescription("DUPLICATA MERCANTIL")]
+            [StringValue("01")]
+            DUPLICATA_MERCANTIL,
+            [StringDescription("NOTA PROMISSÓRIA")]
+            [StringValue("02")]
+            NOTA_PROMISSORIA,
+            [StringDescription("NOTA DE SEGURO")]
+            [StringValue("03")]
+            NOTA_SEGURO,
+            [StringDescription("MENSALIDADE ESCOLAR")]
+            [StringValue("04")]
+            MENSALIDADE_ESCOLAR,
+            [StringDescription("RECIBO")]
+            [StringValue("05")]
+            RECIBO,
+            [StringDescription("CONTRATO")]
+            [StringValue("06")]
+            CONTRATO,
+            [StringDescription("COSSEGUROS")]
+            [StringValue("07")]
+            COSSEGUROS,
+            [StringDescription("DUPLICATA DE SERVIÇO")]
+            [StringValue("08")]
+            DUPLICATA_SERVIÇO,
+            [StringDescription("LETRA DE CÂMBIO")]
+            [StringValue("09")]
+            LETRA_CAMBIO,
+            [StringDescription("NOTA DE DÉBITOS")]
+            [StringValue("13")]
+            NOTA_DEBITOS,
+            [StringDescription("DOCUMENTO DE DÍVIDA")]
+            [StringValue("15")]
+            DOCUMENTO_DIVIDA,
+            [StringDescription("ENCARGOS CONDOMINIAIS")]
+            [StringValue("16")]
+            ENCARGOS_CONDOMINIAIS,
+            [StringDescription("CONTA DE PRESTAÇÃO DE SERVIÇOS")]
+            [StringValue("17")]
+            CONTA_PRESTACAO_SERVICOS,
+            [StringDescription("BOLETO DE PROPOSTA")]
+            [StringValue("18")]
+            BOLETO_PROPOSTA,
+            [StringDescription("DIVERSOS")]
+            [StringValue("99")]
+            DIVERSOS,
+        }
     }
 }

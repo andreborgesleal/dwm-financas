@@ -204,8 +204,13 @@
                                         @foreach (ContabilidadeItemViewModel item in Model.Contabilidades)
                                         {
                                             <tr class="even pointer">
-                                                <td><span>@item.codigoReduzido</span></td>
-                                                <td><span>@item.descricao_planoConta</span></td>
+                                                <td><span>@item.codigoPleno</span></td>
+                                                <td>
+                                                    <span>
+                                                        @item.descricao_planoConta 
+                                                    </span><br />
+                                                    <span class="text-mama-africa">*** @item.GetDescricaoContaMaster() ***</span>
+                                                </td>
                                                 <td class="text-right"><span>@(item.tipoLancamento == "D" ? item.valor.ToString("###,###,###,##0.00") : "")</span></td>
                                                 <td class="text-right"><span>@(item.tipoLancamento == "C" ? item.valor.ToString("###,###,###,##0.00") : "")</span></td>
                                             </tr>

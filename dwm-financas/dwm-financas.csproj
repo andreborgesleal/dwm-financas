@@ -264,6 +264,7 @@
     <Compile Include="Models\BI\ContaReceberModifyBI.cs" />
     <Compile Include="Models\BI\ContaReceberOperacaoAlterarBI.cs" />
     <Compile Include="Models\BI\ContaReceberParcelaEventoBI.cs" />
+    <Compile Include="Models\BI\EditarOperacaoViewModel.cs" />
     <Compile Include="Models\BI\EnviarEmailBI.cs" />
     <Compile Include="Models\BI\EsqueciMinhaSenhaBI.cs" />
     <Compile Include="Models\BI\ExercicioAbrirBI.cs" />
@@ -284,6 +285,7 @@
     <Compile Include="Models\BI\OperacaoLiquidarBI.cs" />
     <Compile Include="Models\BI\OperacaoModifyBI.cs" />
     <Compile Include="Models\BI\OperacaoParcelaEventoBI.cs" />
+    <Compile Include="Models\BI\TituloEditarBI.cs" />
     <Compile Include="Models\BI\TituloIncluirBI.cs" />
     <Compile Include="Models\BI\TransferenciaBancariaBI.cs" />
     <Compile Include="Models\Boleto\Boleto.cs" />
@@ -4574,6 +4576,10 @@
     <Content Include="Views\Convenio\Delete.cshtml" />
     <Content Include="Views\MovimentoBancario\Recorrencia.cshtml" />
     <Content Include="Views\CNAB\Create.cshtml" />
+    <Content Include="Views\CNAB\Browse.cshtml" />
+    <Content Include="Views\CNAB\ListParam.cshtml" />
+    <Content Include="Views\CNAB\Edit.cshtml" />
+    <Content Include="Views\CNAB\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />

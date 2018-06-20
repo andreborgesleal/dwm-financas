@@ -138,14 +138,16 @@ namespace DWM.Models.Persistence
         public override Validate Validate(TituloViewModel value, Crud operation)
         {
             value.mensagem = new Validate() { Code = 0, Message = MensagemPadrao.Message(0).ToString(), MessageType = MsgType.SUCCESS };
-            if (value.operacaoId == 0)
-            {
-                value.mensagem.Code = 5;
-                value.mensagem.Message = MensagemPadrao.Message(5, "Identificador da Operação (Contas a Receber)").ToString();
-                value.mensagem.MessageBase = "Campo Identificador da Operação (Contas a Receber) deve ser informado";
-                value.mensagem.MessageType = MsgType.WARNING;
-                return value.mensagem;
-            }
+
+            if (operation != Crud.INCLUIR || value.SequenciaID > 0)
+                if (value.operacaoId == 0)
+                {
+                    value.mensagem.Code = 5;
+                    value.mensagem.Message = MensagemPadrao.Message(5, "Identificador da Operação (Contas a Receber)").ToString();
+                    value.mensagem.MessageBase = "Campo Identificador da Operação (Contas a Receber) deve ser informado";
+                    value.mensagem.MessageType = MsgType.WARNING;
+                    return value.mensagem;
+                }
 
             if (value.parcelaId == 0)
             {
@@ -229,7 +231,7 @@ namespace DWM.Models.Persistence
                 value.mensagem.MessageType = MsgType.WARNING;
                 return value.mensagem;
             }
-            if (String.IsNullOrEmpty(value.Aceite) || !value.Aceite.Contains("A|N")) 
+            if (String.IsNullOrEmpty(value.Aceite) || !"S|N".Contains(value.Aceite)) 
             {
                 value.mensagem.Code = 5;
                 value.mensagem.Message = MensagemPadrao.Message(5, "Aceite").ToString();
@@ -237,7 +239,7 @@ namespace DWM.Models.Persistence
                 value.mensagem.MessageType = MsgType.WARNING;
                 return value.mensagem;
             }
-            if (String.IsNullOrEmpty(value.MultaID) || !value.MultaID.Contains("0|1|2"))
+            if (String.IsNullOrEmpty(value.MultaID) || !"0|1|2".Contains(value.MultaID))
             {
                 value.mensagem.Code = 5;
                 value.mensagem.Message = MensagemPadrao.Message(5, "Tipo de Multa").ToString();

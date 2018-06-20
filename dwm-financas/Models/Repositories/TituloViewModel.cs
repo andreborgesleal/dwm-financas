@@ -12,7 +12,7 @@ namespace DWM.Models.Repositories
         [DisplayName("Parcela")]
         public int parcelaId { get; set; }
 
-        [DisplayName("Sequencia")]
+        [DisplayName("Sequencia")]  
         public int SequenciaID { get; set; }
 
         [DisplayName("Banco")]
@@ -32,6 +32,8 @@ namespace DWM.Models.Repositories
         [DisplayName("Cliente")]
         [Required(ErrorMessage = "Cliente deve ser informado")]
         public int clienteId { get; set; }
+
+        public string nome_cliente { get; set; }
 
         /// <summary>
         /// Identificação do título na empresa(vai no arquivo remessa e volta no arquivo retorno)
@@ -151,5 +153,9 @@ namespace DWM.Models.Repositories
 
         [DisplayName("Ativo")]
         public int IndAtivo { get; set; }
+
+        public int CodErro { get; set; }
+
+        public string DescErro { get; set; }
     }
 }

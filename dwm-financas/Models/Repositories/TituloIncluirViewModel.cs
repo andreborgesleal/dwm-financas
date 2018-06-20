@@ -10,13 +10,19 @@ namespace DWM.Models.Repositories
         [DisplayName("Histórico Complemento")]
         public string complementoHist { get; set; }
 
+        public string descricao_historico { get; set; }
+
         [DisplayName("Enquadramento")]
         public int? enquadramentoId { get; set; }
+
+        public string descricao_enquadramento { get; set; }
 
         [DisplayName("C.Custo")]
         public int? centroCustoId { get; set; }
 
+        public string descricao_centroCusto { get; set; }
+
         [DisplayName("Documento")]
-        public string Documento { get; set; }
+        public string documento { get; set; }
     }
 }

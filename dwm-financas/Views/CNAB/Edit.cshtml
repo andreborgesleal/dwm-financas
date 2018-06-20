@@ -1,0 +1,79 @@
+﻿@using DWM.Models.Repositories
+@using App_Dominio.Repositories
+@model DWM.Models.Repositories.EditarContaReceberViewModel
+@{
+    ViewBag.Title = "DWM Finanças";
+    var path = Model.PathArquivos;
+}
+<div id="EditarContaReceber">
+    @Html.Partial("_Edit", Model)
+</div>
+
+<div class="modal fade" id="myModal3">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Contabilidade &nbsp;<span class="small" id="modal-contabilidade-editar"></span></h4>
+            </div>
+            <div class="modal-body text-center" id="myModal1-body">
+                <div id="myContabilidade"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+    function showContabilidade(contabilidadeId) {
+        var link = encodeURI("../Cobranca/getContabilidade?contabilidadeId=" + contabilidadeId);
+        var table = "";
+        var deb = 0;
+        var cred = 0;
+        $("#modal-contabilidade-editar").html('<a href="../Contabilidade/Edit?contabilidadeId=' + contabilidadeId + '">Editar</a>');
+        $.getJSON(link, function (data) {
+            table = "<table class=\"table table-striped\">" +
+                    "   <tr class=\"active\">" +
+                    "       <td><strong>Conta</strong></td>" +
+                    "       <td class=\"text-left\"><strong>Descrição</strong></td>" +
+                    "       <td class=\"text-left\"><strong>Histórico</strong></td>" +
+                    "       <td class=\"text-right\"><strong>Débito</strong></td>" +
+                    "       <td class=\"text-right\"><strong>Crédito</strong></td>" +
+                    "  </tr>";
+
+            $.each(data, function (i, item) {
+                table += "<tr>" +
+                         "<td>" + item.codigoReduzido + "</td>" +
+                         "<td class=\"text-left\">" + item.descricao_planoConta + "</td>" +
+                         "<td class=\"text-left\">" + item.descricao_historico + "</td>";
+
+                if (item.tipoLancamento == "D") {
+                    table += "<td class=\"text-right\">" + item.valor + "</td>" +
+                             "<td>&nbsp;</td>";
+                    deb += item.valor;
+                }
+                else {
+                    table += "<td>&nbsp;</td>" +
+                             "<td class=\"text-right\">" + item.valor + "</td>";
+                    cred += item.valor;
+                }
+                table += "</tr>";
+
+            });
+
+            table += "<tr class=\"warning\">" +
+                     "<td colspan=\"2\">&nbsp;</td>" +
+                     "<td class=\"text-left\"><strong>Total</strong></td>" +
+                     "<td class=\"text-right\">" + deb + "</td>" +
+                     "<td class=\"text-right\">" + cred + "</td>" +
+                     "</tr>";
+
+            table += "</table>";
+            $("#myContabilidade").html(table);
+        });
+
+    }
+
+</script>

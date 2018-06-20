@@ -4,6 +4,8 @@ using App_Dominio.Component;
 using System;
 using System.Collections.Generic;
 using App_Dominio.Contratos;
+using DWM.Models.Entidades;
+using System.Linq;
 
 namespace DWM.Models.Repositories
 {
@@ -30,6 +32,12 @@ namespace DWM.Models.Repositories
         public int codigoReduzido { get; set; }
 
         public string descricao_planoConta { get; set; }
+
+        public string GetDescricaoContaMaster()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+                return db.PlanoContas.Where(info => info.empresaId == empresaId && info.codigoPleno.Substring(0, 1) == codigoPleno.Substring(0, 1)).Select(info => info.descricao).FirstOrDefault();
+        }
 
         [DisplayName("Histórico")]
         public int historicoId { get; set; }

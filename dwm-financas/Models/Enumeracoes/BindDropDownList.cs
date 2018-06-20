@@ -299,6 +299,32 @@ namespace DWM.Models.Enumeracoes
         }
         #endregion
 
+        #region DropDownList Layout CNAB
+        public IEnumerable<SelectListItem> Especie(string selectedValue = "", string header = "")
+        {
+            List<SelectListItem> drp = new List<SelectListItem>() {
+                new SelectListItem() { Value = "", Text = "Selecione..." },
+                new SelectListItem() { Value = Enumeradores.Especie.DUPLICATA_MERCANTIL.GetStringValue(), Text = Enumeradores.Especie.DUPLICATA_MERCANTIL.GetStringDescription() },
+                new SelectListItem() { Value = Enumeradores.Especie.NOTA_PROMISSORIA.GetStringValue(), Text = Enumeradores.Especie.NOTA_PROMISSORIA.GetStringDescription() },
+                new SelectListItem() { Value = Enumeradores.Especie.NOTA_SEGURO.GetStringValue(), Text = Enumeradores.Especie.NOTA_SEGURO.GetStringDescription() },
+                new SelectListItem() { Value = Enumeradores.Especie.MENSALIDADE_ESCOLAR.GetStringValue(), Text = Enumeradores.Especie.MENSALIDADE_ESCOLAR.GetStringDescription() },
+                new SelectListItem() { Value = Enumeradores.Especie.RECIBO.GetStringValue(), Text = Enumeradores.Especie.RECIBO.GetStringDescription() },
+                new SelectListItem() { Value = Enumeradores.Especie.CONTRATO.GetStringValue(), Text = Enumeradores.Especie.CONTRATO.GetStringDescription() },
+                new SelectListItem() { Value = Enumeradores.Especie.COSSEGUROS.GetStringValue(), Text = Enumeradores.Especie.COSSEGUROS.GetStringDescription() },
+                new SelectListItem() { Value = Enumeradores.Especie.DUPLICATA_SERVIÇO.GetStringValue(), Text = Enumeradores.Especie.DUPLICATA_SERVIÇO.GetStringDescription() },
+                new SelectListItem() { Value = Enumeradores.Especie.LETRA_CAMBIO.GetStringValue(), Text = Enumeradores.Especie.LETRA_CAMBIO.GetStringDescription() },
+                new SelectListItem() { Value = Enumeradores.Especie.NOTA_DEBITOS.GetStringValue(), Text = Enumeradores.Especie.NOTA_DEBITOS.GetStringDescription() },
+                new SelectListItem() { Value = Enumeradores.Especie.DOCUMENTO_DIVIDA.GetStringValue(), Text = Enumeradores.Especie.DOCUMENTO_DIVIDA.GetStringDescription() },
+                new SelectListItem() { Value = Enumeradores.Especie.ENCARGOS_CONDOMINIAIS.GetStringValue(), Text = Enumeradores.Especie.ENCARGOS_CONDOMINIAIS.GetStringDescription() },
+                new SelectListItem() { Value = Enumeradores.Especie.CONTA_PRESTACAO_SERVICOS.GetStringValue(), Text = Enumeradores.Especie.CONTA_PRESTACAO_SERVICOS.GetStringDescription() },
+                new SelectListItem() { Value = Enumeradores.Especie.BOLETO_PROPOSTA.GetStringValue(), Text = Enumeradores.Especie.BOLETO_PROPOSTA.GetStringDescription() },
+                new SelectListItem() { Value = Enumeradores.Especie.DIVERSOS.GetStringValue(), Text = Enumeradores.Especie.DIVERSOS.GetStringDescription() }
+            };
+
+            return Funcoes.SelectListEnum(drp, selectedValue, header);
+        }
+        #endregion
+
         #region DropDownList Convenios
         public IEnumerable<SelectListItem> Convenios(params object[] param)
         {
