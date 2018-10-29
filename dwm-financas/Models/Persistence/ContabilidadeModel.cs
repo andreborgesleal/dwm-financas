@@ -8,6 +8,8 @@ using DWM.Models.Repositories;
 using DWM.Models.Entidades;
 using App_Dominio.Enumeracoes;
 using System.Web.Mvc;
+using App_Dominio.Models;
+using System.Data.Entity;
 
 namespace DWM.Models.Persistence
 {
@@ -21,7 +23,36 @@ namespace DWM.Models.Persistence
         }
         #endregion
 
+        private int? operacaoId { get; set; }
+        private int? parcelaId { get; set; }
+        private string dt_evento { get; set; }
+        private string natureza { get; set; }
+
         #region Métodos da classe CrudContext
+        public override ContabilidadeViewModel AfterInsert(ContabilidadeViewModel value)
+        {
+            if (operacaoId.HasValue && natureza=="P")
+            {
+                ContaPagarParcelaEvento entity = db.ContaPagarParcelaEventos.Find(operacaoId, parcelaId, Convert.ToDateTime(dt_evento));
+                if (entity != null)
+                {
+                    entity.contabilidadeId = value.contabilidadeId;
+                    db.Entry(entity).State = EntityState.Modified;
+                }
+            }
+            else if (operacaoId.HasValue && natureza == "R")
+            {
+                ContaReceberParcelaEvento entity = db.ContaReceberParcelaEventos.Find(operacaoId, parcelaId, Convert.ToDateTime(dt_evento));
+                if (entity != null)
+                {
+                    entity.contabilidadeId = value.contabilidadeId;
+                    db.Entry(entity).State = EntityState.Modified;
+                }
+            }
+
+            return base.AfterInsert(value);
+        }
+
         public override Contabilidade MapToEntity(ContabilidadeViewModel value)
         {
             Contabilidade c = Find(value);
@@ -62,6 +93,14 @@ namespace DWM.Models.Persistence
 
                 c.ContabilidadeItems.Add(x);
             }
+
+            if (value.operacaoId.HasValue)
+            {
+                operacaoId = value.operacaoId;
+                parcelaId = value.parcelaId;
+                dt_evento = value.dt_evento;
+                natureza = value.natureza;
+            };
 
             return c;
         }
@@ -223,6 +262,14 @@ namespace DWM.Models.Persistence
                 ContabilidadeItem = new ContabilidadeItemViewModel(),
                 ContabilidadeItems = new List<ContabilidadeItemViewModel>()
             };
+
+            if (Request != null && Request["operacaoId"] != null)
+            {
+                r.natureza = Request["natureza"];
+                r.operacaoId = int.Parse(Request["operacaoId"]);
+                r.parcelaId = int.Parse(Request["parcelaId"]);
+                r.dt_evento = Request["dt_evento"];
+            }
 
             return r;
         }

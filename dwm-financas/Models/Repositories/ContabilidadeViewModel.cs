@@ -32,6 +32,7 @@ namespace DWM.Models.Repositories
 
         public int? operacaoId { get; set; }
         public int? parcelaId { get; set; }
+        public string dt_evento { get; set; }
         public string natureza { get; set; }
 
         #region métodos da interface IMasterRepository

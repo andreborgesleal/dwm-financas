@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using App_Dominio.Contratos;
 using App_Dominio.Pattern;
 using DWM.Models.BI;
+using System.Data.Entity;
 
 namespace DWM.Controllers
 {

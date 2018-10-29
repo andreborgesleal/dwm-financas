@@ -307,49 +307,49 @@
                                         estornar = "Estornado";
                                     }
 
-                                    <tr class="@classe">
-                                        @if (!"0|8".Contains(ev.ind_tipoEvento.Trim()) && ev.ind_estorno == "N")
-                                        {
-                                            <td class="text-center"><a class="primary dedo-indicador" onclick="fnEstorno('@ev.operacaoId', '@ev.parcelaId', '@ev.dt_evento.ToString("yyyy-MM-dd HH:mm:ss.fff tt")')">@estornar</a></td>
-                                        }
-                                        else
-                                        {
-                                            <td class="text-center"><a class="primary">@estornar</a></td>
-                                        }
-                                        <td>@ev.dt_evento.ToString("dd/MM/yyyy HH:mm")</td>
-                                        <td class="@tachado">@ev.descricao_evento</td>
-                                        <td class="text-center">@ev.dt_ocorrencia.ToString("dd/MM/yyyy")</td>
-                                        @if (ev.contabilidadeId.HasValue)
-                                        {
-                                            <td class="text-center">
-                                                <a href="#" data-toggle="modal" data-target="#myModal3" onclick="showContabilidade('@ev.contabilidadeId')">#@ev.contabilidadeId</a>
-                                            </td>
-                                        }
-                                        else
-                                        {
-                                            <td>&nbsp;</td>
-                                        }
-                                        @if (ev.movtoBancarioId.HasValue)
-                                        {
-                                            <td class="text-center">
-                                                <a href="#" data-toggle="modal" data-target="#myModal2" onclick="showMovtoBancario('@ev.movtoBancarioId')">#@ev.movtoBancarioId</a>
-                                            </td>
-                                        }
-                                        else
-                                        {
-                                            <td>&nbsp;</td>
-                                        }
-                                        <td class="text-center">@ev.ind_operacao</td>
-                                        <td class="text-right @tachado">@ev.valor.ToString("###,###,###,##0.00")</td>
-                                        @if (ev.arquivo != null && ev.arquivo != "")
-                                        {
-                                            <td class="text-center"><a class="label label-primary" data-toggle="modal" data-target="#myModal1" onclick="visualizar('@ev.arquivo', '@ev.arquivo_extensao.ToLower()')" href="#" title="Visualizar arquivo">Visualizar</a></td>
-                                        }
-                                        else
-                                        {
-                                            <td>&nbsp;</td>
-                                        }
-                                    </tr>
+                                <tr class="@classe">
+                                    @if (!"0|8".Contains(ev.ind_tipoEvento.Trim()) && ev.ind_estorno == "N")
+                                    {
+                                        <td class="text-center"><a class="primary dedo-indicador" onclick="fnEstorno('@ev.operacaoId', '@ev.parcelaId', '@ev.dt_evento.ToString("yyyy-MM-dd HH:mm:ss.fff tt")')">@estornar</a></td>
+                                    }
+                                    else
+                                    {
+                                        <td class="text-center"><a class="primary">@estornar</a></td>
+                                    }
+                                    <td>@ev.dt_evento.ToString("dd/MM/yyyy HH:mm")</td>
+                                    <td class="@tachado">@ev.descricao_evento</td>
+                                    <td class="text-center">@ev.dt_ocorrencia.ToString("dd/MM/yyyy")</td>
+                                    @if (ev.contabilidadeId.HasValue)
+                                    {
+                                        <td class="text-center">
+                                            <a href="#" data-toggle="modal" data-target="#myModal3" onclick="showContabilidade('@ev.contabilidadeId')">#@ev.contabilidadeId</a>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="text-center"><a class="label label-primary dedo-indicador" href="../Contabilidade/Create?operacaoId=@(ev.operacaoId.ToString())&parcelaId=@(ev.parcelaId.ToString())&natureza=R&dt_evento=@(ev.dt_evento.ToString("yyyy-MM-dd HH:mm:ss.fff tt"))">Incluir</a></td>
+                                    }
+                                    @if (ev.movtoBancarioId.HasValue)
+                                    {
+                                        <td class="text-center">
+                                            <a href="#" data-toggle="modal" data-target="#myModal2" onclick="showMovtoBancario('@ev.movtoBancarioId')">#@ev.movtoBancarioId</a>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>&nbsp;</td>
+                                    }
+                                    <td class="text-center">@ev.ind_operacao</td>
+                                    <td class="text-right @tachado">@ev.valor.ToString("###,###,###,##0.00")</td>
+                                    @if (ev.arquivo != null && ev.arquivo != "")
+                                    {
+                                        <td class="text-center"><a class="label label-primary" data-toggle="modal" data-target="#myModal1" onclick="visualizar('@ev.arquivo', '@ev.arquivo_extensao.ToLower()')" href="#" title="Visualizar arquivo">Visualizar</a></td>
+                                    }
+                                    else
+                                    {
+                                        <td>&nbsp;</td>
+                                    }
+                                </tr>
                                 }
                             </tbody>
                         </table>

@@ -17,6 +17,10 @@
         @Html.ValidationSummary(false, "", new { @style = "margin-left: -20px" })
         @Html.HiddenFor(info => info.exercicio)
         @Html.HiddenFor(info => info.empresaId)
+        @Html.HiddenFor(info => info.operacaoId)
+        @Html.HiddenFor(info => info.parcelaId)
+        @Html.HiddenFor(info => info.dt_evento)
+        @Html.HiddenFor(info => info.natureza)
         <div id="div-lov"></div>
         <div class="x_panel" id="panel-top">
             @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Lançamento contábil", Descricao = "Inclusão", Transacao = t })

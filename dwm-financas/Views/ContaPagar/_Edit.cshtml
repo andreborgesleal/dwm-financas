@@ -332,7 +332,7 @@
                                         }
                                         else
                                         {
-                                            <td>&nbsp;</td>
+                                            <td class="text-center"><a class="label label-primary dedo-indicador" href="../Contabilidade/Create?operacaoId=@(ev.operacaoId.ToString())&parcelaId=@(ev.parcelaId.ToString())&natureza=P&dt_evento=@(ev.dt_evento.ToString("yyyy-MM-dd HH:mm:ss.fff tt"))">Incluir</a></td>
                                         }
                                         @if (ev.movtoBancarioId.HasValue)
                                         {
