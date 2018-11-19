@@ -103,13 +103,18 @@
 <script src="~/Content/RGraph/libraries/RGraph.svg.common.tooltips.js"></script>
 
 <div class="row" id="div-graph">
-    <div class="col-md-8">
+    <div class="col-lg-8 col-md-12 col-xs-12 col-sm-12">
         <div style="padding: 15px">
             <div style="width: 750px; height: 300px" id="chart-container"></div>
         </div>
     </div>
-    <div class="col-md-4">
-        <canvas id="cvs_pie" width="350" height="250">
+    <div class="col-md-12 col-xs-12 col-sm-12 hidden-lg" style="margin-left: 190px">
+        <canvas id="cvs_pie" width="350" height="250" class="pull-right">
+            [No canvas support]
+        </canvas>
+    </div>
+    <div class="col-lg-4 hidden-md hidden-sm hidden-xs">
+        <canvas id="cvs_pie2" width="350" height="250" class="pull-right">
             [No canvas support]
         </canvas>
     </div>
@@ -151,6 +156,21 @@
 <script>
     new RGraph.Pie({
         id: 'cvs_pie',
+        data: data,
+        options: {
+            tooltips: labels,
+            labels: labels,
+            labelsSticksList: true,
+            colors: ['rgb(255,0,0)', 'blue', 'rgb(0,255,0)', 'rgb(0,0,255)', 'rgb(255,255,0)', 'rgb(0,255,255)', 'red', 'pink', 'black', 'white'],
+            shadow: false,
+            strokestyle: 'rgba(0,0,0,0)',
+            exploded: 0,
+            textAccessible: true
+        }
+    }).roundRobin();
+
+    new RGraph.Pie({
+        id: 'cvs_pie2',
         data: data,
         options: {
             tooltips: labels,

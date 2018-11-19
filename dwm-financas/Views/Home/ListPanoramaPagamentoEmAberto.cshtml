@@ -22,10 +22,10 @@
     {
         <script>
             var hoje = new Date();
-            _Header_Line = _Header_Line + _Meses_Line [hoje.getMonth()] + '/' + hoje.getFullYear();
+            _Header_Line = _Header_Line + _Meses_Line[hoje.getMonth()] + '/' + hoje.getFullYear();
         </script>
     }
-    <div class="row clearfix">
+    <div class="row clearfix hidden-md hidden-sm hidden-xs">
         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
             <div class="x_panel">
                 <div class="x_title">
@@ -86,7 +86,7 @@
                                         <td class="text-left">
                                             @rec.nome_credor <br />
                                             <small>(@(rec.descricao_historico + " " + rec.complementoHist))</small>
-                                            <small class="text-muted">@(rec.recorrencia=="S" ? "- mensal" : "")</small>
+                                            <small class="text-muted">@(rec.recorrencia == "S" ? "- mensal" : "")</small>
                                         </td>
                                         <td class="text-left">
                                             @if (rec.OperacaoParcela.dt_ultima_amortizacao.HasValue)
@@ -149,9 +149,123 @@
             </div>
         </div>
     </div>
+    <div class="row clearfix hidden-lg hidden-xs">
+        <div class="col-md-12 col-sm-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Contas a Pagar <small></small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        @Html.Partial("PaginacaoRegistrosForm", Model)
+                        <li>
+                            <a class="close-link" onclick="window.location = '../Home/Default'"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="dashboard-widget-content">
+                        <p>Clique nos botões de <code>Ação</code> para executar a ação desejada</p>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-advance table-hover" style="cursor: pointer">
+                            <thead>
+                                <tr>
+                                    <th class="column-title text-center nobr">Ação</th>
+                                    <th>Vencimento</th>
+                                    <th>Fornecedor</th>
+                                    <th>Pagamento</th>
+                                    <th style="text-align: right">Principal</th>
+                                    <th style="text-align: right">Amortização</th>
+                                    <th style="text-align: right">Saldo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @*@foreach (ContaPagarViewModel rec in Model.Where(info => info.OperacaoParcela.situacao.Equals("Em aberto")))*@
+                                @foreach (ContaPagarViewModel rec in Model)
+                                {
+                                    <tr>
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default btn-sm glyphicon glyphicon-edit" title="Editar" onclick="window.location='../ContaPagar/Edit?operacaoId=@(rec.operacaoId)&parcelaId=@(rec.OperacaoParcela.parcelaId)'"></button>
+                                                @*<a class="btn btn-primary" href="#" title="Editar" onclick="window.location='../ContaPagar/Edit?operacaoId=@(rec.operacaoId)&parcelaId=@(rec.OperacaoParcela.parcelaId)'"><i class="fa fa-edit"></i></a>*@
+                                            </div>
+                                        </td>
+                                        <td class="text-left">
+                                            @rec.OperacaoParcela.dt_vencimento.ToString("dd/MM/yyyy")
+                                            @{
+                                                if (rec.OperacaoParcela.dt_vencimento.Month == Funcoes.Brasilia().Month)
+                                                {
+                                                    <script>
+                                                        var i = @rec.OperacaoParcela.dt_vencimento.Day;
+                                                        _Data_Line[i - 1] = @rec.OperacaoParcela.vr_principal;
+                                                        _ToolTips_line[i - 1] = _ToolTips_line[i - 1] + ' ' + '@rec.nome_credor';
+                                                    </script>
+                                                }
+                                            }
+                                        </td>
+                                        <td class="text-left">
+                                            @rec.nome_credor <br />
+                                            <small>(@(rec.descricao_historico + " " + rec.complementoHist))</small>
+                                            <small class="text-muted">@(rec.recorrencia == "S" ? "- mensal" : "")</small>
+                                        </td>
+                                        <td class="text-left">
+                                            @if (rec.OperacaoParcela.dt_ultima_amortizacao.HasValue)
+                                            {
+                                                @rec.OperacaoParcela.dt_ultima_amortizacao.Value.ToString("dd/MM/yyyy")
+                                            }
+                                        </td>
+                                        <td class="text-right">
+                                            @rec.OperacaoParcela.vr_principal.ToString("###,###,###,##0.00")
+                                        </td>
+                                        <td class="text-right">
+                                            @if (rec.OperacaoParcela.vr_total_pago.HasValue)
+                                            {
+                                                @rec.OperacaoParcela.vr_total_pago.Value.ToString("###,###,###,##0.00")
+                                            }
+                                        </td>
+                                        <td class="text-right">
+                                            @if (rec.OperacaoParcela.vr_saldo_devedor.HasValue)
+                                            {
+                                                @rec.OperacaoParcela.vr_saldo_devedor.Value.ToString("###,###,###,##0.00")
+                                            }
+                                        </td>
+                                    </tr>
+                                    Principal += rec.OperacaoParcela.vr_principal;
+                                    Encargos += rec.OperacaoParcela.vr_encargos ?? 0;
+                                    Amortizacao += rec.OperacaoParcela.vr_total_pago ?? 0;
+                                    Saldo_devedor += rec.OperacaoParcela.vr_saldo_devedor.Value;
+                                }
+                                <tr class="text-bold">
+                                    <td class="text-right" colspan="4">
+                                        Total:
+                                    </td>
+                                    <td class="text-right">
+                                        @Principal.ToString("###,###,###,##0.00")
+                                    </td>
+                                    <td class="text-right">
+                                        @Amortizacao.ToString("###,###,###,##0.00")
+                                    </td>
+                                    <td class="text-right">
+                                        @Saldo_devedor.ToString("###,###,###,##0.00")
+                                    </td>
+                                    <td class="text-center">
+                                        &nbsp;
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        @Html.Partial("Paginacao", Model)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         labels [0] = labels[0] + " - " + '@Principal.ToString("R$ ###,###,##0.00")';
-        data [0] = '@Principal'; 
+        data [0] = '@Principal';
     </script>
 
 }

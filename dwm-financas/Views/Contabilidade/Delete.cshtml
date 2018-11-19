@@ -6,7 +6,7 @@
     TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository() };
     t[0].url = "../Contabilidade/Create";
     t[0].nomeCurto = "Incluir";
-    t[0].referencia = "";
+    t[0].referencia = ""; 
 
     t[1].url = "../Home/Default";
 }
@@ -22,23 +22,23 @@
             @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Lançamento contábil", Descricao = "Excluir", Transacao = t })
             <div class="x_content">
                 <div class="row clearfix">
-                    <div class="col-md-2">
+                    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
                         <div class="form-group">
                             <label class="control-label margem-interna" for="dt_lancamento">Data</label>
                             <input type="date" class="form-control" name="dt_lancamento" id="dt_lancamento" value="@Model.dt_lancamento.ToString("yyyy-MM-dd")" />
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4">
                         <div class="form-group col-md-8">
                             <label class="control-label margem-interna" for="documento">Documento</label>
                             @Html.TextBoxFor(info => info.documento, new { @class = "form-control input-sm", @maxlength = "20", @onblur = "$('#descricao_conta').focus();" })
                         </div>
                     </div>
-                    <div class="col-md-7">
-                        <div class="col-md-offset-9">
+                    <div class="col-lg-7 col-md-4 col-sm-4 col-xs-4">
+                        <div class="col-lg-offset-9">
                             <div class="form-group">
-                                <label class="control-label col-md-2 margem-interna" for="contabilidadeId">ID</label>
-                                <div class="input-group col-md-10">
+                                <label class="control-label col-lg-2 col-md-4 col-sm-4 col-xs-4 margem-interna" for="contabilidadeId">ID</label>
+                                <div class="input-group col-lg-10">
                                     @Html.TextBox("contabilidadeId1", "", new { @class = "form-control input-sm" })
                                     <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true" onclick="callEdit()"></span></span>
                                 </div>
@@ -78,7 +78,7 @@
             @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Itens do lançamento", Descricao = "", Transacao = tItem })
             <div class="x_content">
                 <div class="row clearfix margem-topo margem-interna">
-                    <div class="col-md-12">
+                    <div class="col-lg-12">
                         <div id="div-item">
                             @Html.Partial("CreateItem", Model)
                         </div>
@@ -86,7 +86,7 @@
                 </div>
                 <p>&nbsp;</p>
                 <div class="row clearfix">
-                    <div class="col-md-12">
+                    <div class="col-lg-12">
                         <div class="form-group">
                             <input type="submit" class="btn btn-danger" value="Excluir" name="btn-excluir" id="btn-excluir" />
                             <input type="button" onclick="window.location = '../Contabilidade/Browse'" class="btn btn-default" value="Cancelar" />
@@ -96,7 +96,7 @@
                 </div>
             </div>
         </div>
-                }
+    }
 </div>
 
 <script>

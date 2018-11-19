@@ -57,17 +57,22 @@
             }
         }
     }
-    var cliArray = $.map(cli.countries, function (value, key) {
-        return {
-            value: value.nome,
-            data: key.clienteId
-        };
-    });
 
-    // initialize autocomplete with custom appendTo
-    $('#nome_cliente').autocomplete({
-        lookup: cliArray,
-        appendTo: '#nome_cliente-container'
+    $('#nome_cliente').typeahead({
+        source: dataCli.values
     });
+    
+    //var cliArray = $.map(cli.countries, function (value, key) {
+    //    return {
+    //        value: value.nome,
+    //        data: key.clienteId
+    //    };
+    //});
+
+    //// initialize autocomplete with custom appendTo
+    //$('#nome_cliente').autocomplete({
+    //    lookup: cliArray,
+    //    appendTo: '#nome_cliente-container'
+    //});
 
 </script>

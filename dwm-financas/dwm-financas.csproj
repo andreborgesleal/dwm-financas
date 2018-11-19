@@ -28,6 +28,7 @@
     </NuGetPackageImportStamp>
     <ApplicationInsightsResourceId>/subscriptions/23c6bf42-adef-4743-8982-960cb7426522/resourcegroups/DWM-Free/providers/microsoft.insights/components/dwm-financas</ApplicationInsightsResourceId>
     <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -471,6 +472,7 @@
     <Content Include="Content\css\animate.old.css" />
     <Content Include="Content\css\animations.css" />
     <Content Include="Content\css\animations.old.css" />
+    <Content Include="Content\css\bootstrap3-typeahead.css" />
     <Content Include="Content\css\custom.css" />
     <Content Include="Content\css\custom.old.css" />
     <Content Include="Content\css\footer.css" />
@@ -4273,6 +4275,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\bootstrap-datepicker.js" />
+    <Content Include="Scripts\js\bootstrap3-typeahead.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />

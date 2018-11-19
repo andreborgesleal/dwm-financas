@@ -58,18 +58,22 @@
         }
     }
 
-    var ban3Array = $.map(bco3.countries, function (value, key) {
-        return {
-            value: value.nome,
-            data: key.bancoId
-        };
+    $('#nome_banco3').typeahead({
+        source: dataBco3.values
     });
 
-    // initialize autocomplete with custom appendTo
-    $('#nome_banco3').autocomplete({
-        lookup: ban3Array,
-        appendTo: '#nome_banco3-container'
-    });
+    //var ban3Array = $.map(bco3.countries, function (value, key) {
+    //    return {
+    //        value: value.nome,
+    //        data: key.bancoId
+    //    };
+    //});
+
+    //// initialize autocomplete with custom appendTo
+    //$('#nome_banco3').autocomplete({
+    //    lookup: ban3Array,
+    //    appendTo: '#nome_banco3-container'
+    //});
 
 </script>
 

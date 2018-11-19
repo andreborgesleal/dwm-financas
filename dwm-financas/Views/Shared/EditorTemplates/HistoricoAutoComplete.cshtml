@@ -62,7 +62,7 @@
     // Fim-Next Field
 
     var link = encodeURI('../Historicos/getNames?noCahce=' + new Date());
-    var data = { values: [] };
+    var dataHis = { values: [] };
     var his = { countries: [] };
     $.ajax({
         type: "POST",
@@ -73,7 +73,7 @@
         dataType: "json",
         success: function (jsonObj) {
             for (i in jsonObj) {
-                data.values.push(jsonObj[i].descricao);
+                dataHis.values.push(jsonObj[i].descricao);
                 his.countries.push({ objId: jsonObj[i].historicoId, descricao: jsonObj[i].descricao })
             };
         }
@@ -87,18 +87,22 @@
         }
     }
 
-    var hisArray = $.map(his.countries, function (value, key) {
-        return {
-            value: value.descricao,
-            data: key.historicoId
-        };
+    $('#descricao_historico').typeahead({
+        source: dataHis.values
     });
 
-    // initialize autocomplete with custom appendTo
-    $('#descricao_historico').autocomplete({
-        lookup: hisArray,
-        appendTo: '#descricao_historico-container'
-    });
+    //var hisArray = $.map(his.countries, function (value, key) {
+    //    return {
+    //        value: value.descricao,
+    //        data: key.historicoId
+    //    };
+    //});
+
+    //// initialize autocomplete with custom appendTo
+    //$('#descricao_historico').autocomplete({
+    //    lookup: hisArray,
+    //    appendTo: '#descricao_historico-container'
+    //});
 
 </script>
 

@@ -58,16 +58,20 @@
         }
     }
 
-    var gcreArray = $.map(gcre.countries, function (value, key) {
-        return {
-            value: value.nome,
-            data: key.grupoCredorId
-        };
+    $('#nome_grupoFornecedor').typeahead({
+        source: dataGCre.values
     });
 
-    // initialize autocomplete with custom appendTo
-    $('#nome_grupoFornecedor').autocomplete({
-        lookup: gcreArray,
-        appendTo: '#nome_grupoFornecedor-container'
-    });
+    //var gcreArray = $.map(gcre.countries, function (value, key) {
+    //    return {
+    //        value: value.nome,
+    //        data: key.grupoCredorId
+    //    };
+    //});
+
+    //// initialize autocomplete with custom appendTo
+    //$('#nome_grupoFornecedor').autocomplete({
+    //    lookup: gcreArray,
+    //    appendTo: '#nome_grupoFornecedor-container'
+    //});
 </script>

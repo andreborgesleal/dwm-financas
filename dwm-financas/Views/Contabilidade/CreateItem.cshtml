@@ -52,6 +52,8 @@
             '&operacao=I' +
             '&noCahce=' + new Date());
 
+        console.log(link);
+
         $('#div-item').load(link);
 
         $(document).ajaxSuccess(function (event, xhr, settings) {

@@ -90,16 +90,20 @@
         }
     }
 
-    var ccuArray = $.map(ccu.countries, function (value, key) {
-        return {
-            value: value.descricao,
-            data: key.centroCustoId
-        };
+    $('#descricao_centroCusto').typeahead({
+        source: dataCcu.values
     });
 
-    // initialize autocomplete with custom appendTo
-    $('#descricao_centroCusto').autocomplete({
-        lookup: ccuArray,
-        appendTo: '#descricao_centroCusto-container'
-    });
+    //var ccuArray = $.map(ccu.countries, function (value, key) {
+    //    return {
+    //        value: value.descricao,
+    //        data: key.centroCustoId
+    //    };
+    //});
+
+    //// initialize autocomplete with custom appendTo
+    //$('#descricao_centroCusto').autocomplete({
+    //    lookup: ccuArray,
+    //    appendTo: '#descricao_centroCusto-container'
+    //});
 </script>

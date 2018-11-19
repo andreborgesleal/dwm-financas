@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     var next = ViewData["nextField"];
     var previous = ViewData["prevField"];
     var codigoPleno = ViewData["value"];
@@ -14,12 +14,13 @@
         <input type="hidden" id="planoContaId" name="planoContaId" value="@value" />
         <input type="hidden" id="codigoPleno" name="codigoPleno" value="@codigoPleno" />
         <div class="input-group-btn">
-            <button class="btn btn-primary" style="margin-left: -5px"  type="button" onclick="showLookup('LovPlanoContaModal');"><i class="glyphicon glyphicon-search"></i></button>
-            <button class="btn btn-instagram" style="margin-left: -5px"  type="button" onclick="clean('planoContaId','descricao_conta');"><i class="glyphicon glyphicon-remove"></i></button>
+            <button class="btn btn-primary" style="margin-left: -5px" type="button" onclick="showLookup('LovPlanoContaModal');"><i class="glyphicon glyphicon-search"></i></button>
+            <button class="btn btn-instagram" style="margin-left: -5px" type="button" onclick="clean('planoContaId','descricao_conta');"><i class="glyphicon glyphicon-remove"></i></button>
         </div>
     </div>
 </div>
 <div id="descricao_conta-container" class="panel panel-primary" style="position: relative; float: left; margin-top: -20px; border: none"></div>
+
 <script>
     // Next Field
     $('#PlanoContasParent').on('keydown', '#descricao_conta', function (e) {
@@ -54,12 +55,16 @@
 
     function fillPlacon() {
         for (i in plan.countries) {
-            if (plan.countries[i].codigoPleno + ' ' + plan.countries[i].descricao == $('#descricao_conta').val()) {
+            if (plan.countries[i].descricao == $('#descricao_conta').val()) {
                 $('#planoContaId').val(plan.countries[i].objId);
                 $('#codigoPleno').val(plan.countries[i].codigoPleno);
             }
         }
     }
+
+    $('#descricao_conta').typeahead({
+        source: dataPC.values
+    });
 
     var planArray = $.map(plan.countries, function (value, key) {
         return {
@@ -69,9 +74,50 @@
     });
 
     // initialize autocomplete with custom appendTo
-    $('#descricao_conta').autocomplete({
-        lookup: planArray,
-        appendTo: '#descricao_conta-container'
-    });
+    //$('#descricao_conta').autocomplete({
+    //    lookup: planArray,
+    //    appendTo: '#descricao_conta-container'
+    //});
 
 </script>
+
+@*<link href="~/Content/css/font-awesome/css/bootstrap3-typeahead.css" rel="stylesheet" />*@
+
+@*<script type="text/javascript" src="../Scripts/js/typeahead/typeahead.bundle.js"></script>*@
+@*<script type="text/javascript">
+    $(document).ready(function () {
+
+        //var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+        //    'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
+        //    'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+        //    'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+        //    'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+        //    'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+        //    'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+        //    'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+        //    'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+        //];
+
+        //var cities = ['Pontevedra', 'A Coruña', 'Lugo', 'Ourense'];
+
+        //$('#city').typeahead({
+        //    source: cities
+        //});
+
+        //$('#descricao_conta').typeahead({
+        //    source: dataPC.values
+        //});
+
+        //$('#states_search').typeahead({
+        //    source: states
+        //});
+    });
+</script>*@
+@*<script type="text/javascript" src="../Scripts/js/bootstrap3-typeahead.js" data-semver="3.1.1" data-require="bootstrap@3.1.1"></script>*@
+
+@*<style type="text/css">
+    .tab-pane {
+        margin-top: 10px;
+        height: 600px;
+    }
+</style>*@

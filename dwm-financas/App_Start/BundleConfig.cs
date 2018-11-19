@@ -103,6 +103,12 @@ namespace dwm_condominios
                         "~/Scripts/modernizr-2.6.2.js"
                         ));
 
+            //bundles.Add(new ScriptBundle("~/bundles/typeahead").Include(
+            //            "~/Scripts/js/typeahead/typeahead.bundle.js",
+            //            "~/Scripts/js/typeahead/bootstrap3-typeahead.js"
+            //            ));
+
+
             //bundles.Add(new StyleBundle("~/bundles/autocomplete.css").Include(
             //            "~/Content/autocomplete/autocomplete.css"
             //        ));

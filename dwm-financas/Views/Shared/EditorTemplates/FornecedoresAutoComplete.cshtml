@@ -58,17 +58,21 @@
         }
     }
 
-    var creArray = $.map(cre.countries, function (value, key) {
-        return {
-            value: value.nome,
-            data: key.credorId
-        };
+    $('#nome_credor').typeahead({
+        source: dataCre.values
     });
 
-    // initialize autocomplete with custom appendTo
-    $('#nome_credor').autocomplete({
-        lookup: creArray,
-        appendTo: '#nome_credor-container'
-    });
+    //var creArray = $.map(cre.countries, function (value, key) {
+    //    return {
+    //        value: value.nome,
+    //        data: key.credorId
+    //    };
+    //});
+
+    //// initialize autocomplete with custom appendTo
+    //$('#nome_credor').autocomplete({
+    //    lookup: creArray,
+    //    appendTo: '#nome_credor-container'
+    //});
 </script>
 

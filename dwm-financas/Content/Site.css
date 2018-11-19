@@ -74,7 +74,7 @@ fundoModal
 
    .Scroll {
         overflow-y: scroll;
-        height: 320px;
+        height: 530px;
     }
 
 }
@@ -88,7 +88,7 @@ fundoModal
 
     .Scroll {
         overflow-y: scroll;
-        height: 300px;
+        height: 600px;
     }
 
     .Listagem {
@@ -115,7 +115,7 @@ fundoModal
 
     .Scroll {
         overflow-y: scroll;
-        height: 150px;
+        height: 200px;
     }
 }
 

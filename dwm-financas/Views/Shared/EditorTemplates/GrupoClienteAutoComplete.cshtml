@@ -58,17 +58,21 @@
         }
     }
 
-    var gcliArray = $.map(gcli.countries, function (value, key) {
-        return {
-            value: value.nome,
-            data: key.grupoClienteId
-        };
+    $('#nome_grupoCliente').typeahead({
+        source: dataGCli.values
     });
 
-    // initialize autocomplete with custom appendTo
-    $('#nome_grupoCliente').autocomplete({
-        lookup: gcliArray,
-        appendTo: '#nome_grupoCliente-container'
-    });
+    //var gcliArray = $.map(gcli.countries, function (value, key) {
+    //    return {
+    //        value: value.nome,
+    //        data: key.grupoClienteId
+    //    };
+    //});
+
+    //// initialize autocomplete with custom appendTo
+    //$('#nome_grupoCliente').autocomplete({
+    //    lookup: gcliArray,
+    //    appendTo: '#nome_grupoCliente-container'
+    //});
 </script>
 

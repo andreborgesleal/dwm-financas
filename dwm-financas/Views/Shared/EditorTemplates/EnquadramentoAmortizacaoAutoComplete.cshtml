@@ -58,18 +58,22 @@
         }
     }
 
-    var enq2Array = $.map(enq2.countries, function (value, key) {
-        return {
-            value: value.descricao,
-            data: key.enquadramentoId
-        };
+    $('#descricao_enquadramento_amortizacao').typeahead({
+        source: dataEnq2.values
     });
 
-    // initialize autocomplete with custom appendTo
-    $('#descricao_enquadramento_amortizacao').autocomplete({
-        lookup: enq2Array,
-        appendTo: '#descricao_enquadramento_amortizacao-container'
-    });
+    //var enq2Array = $.map(enq2.countries, function (value, key) {
+    //    return {
+    //        value: value.descricao,
+    //        data: key.enquadramentoId
+    //    };
+    //});
+
+    //// initialize autocomplete with custom appendTo
+    //$('#descricao_enquadramento_amortizacao').autocomplete({
+    //    lookup: enq2Array,
+    //    appendTo: '#descricao_enquadramento_amortizacao-container'
+    //});
 
 </script>
 

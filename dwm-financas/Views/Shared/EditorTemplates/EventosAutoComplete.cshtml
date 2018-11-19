@@ -57,18 +57,23 @@
             }
         }
     }
-    var evtArray = $.map(evt.countries, function (value, key) {
-        return {
-            value: value.descricao,
-            data: key.eventoId
-        };
+
+    $('#descricao_evento').typeahead({
+        source: dataEvt.values
     });
 
-    // initialize autocomplete with custom appendTo
-    $('#descricao_evento').autocomplete({
-        lookup: evtArray,
-        appendTo: '#descricao_evento-container'
-    });
+    //var evtArray = $.map(evt.countries, function (value, key) {
+    //    return {
+    //        value: value.descricao,
+    //        data: key.eventoId
+    //    };
+    //});
+
+    //// initialize autocomplete with custom appendTo
+    //$('#descricao_evento').autocomplete({
+    //    lookup: evtArray,
+    //    appendTo: '#descricao_evento-container'
+    //});
 </script>
 
 

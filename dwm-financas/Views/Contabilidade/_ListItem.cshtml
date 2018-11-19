@@ -15,18 +15,18 @@
 }
 
 <!-- Top Tiles -->
-<div class="row tile_count">
-    <div class="col-md-3 col-sm-12 col-xs-12 col-lg-3 tile_stats_count">
+<div class="row tile_count hidden-xs hidden-sm">
+    <div class="col-lg-4 tile_stats_count">
         <span class="count_top"><i class="fa fa-minus-square"></i> Total de débitos</span>
         <div class="count red ">@deb.ToString("R$ ###,###,###,##0.00")</div>
         <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>@Countdeb</i> lançamento(s)</span>
     </div>
-    <div class="col-md-3 col-sm-12 col-xs-12 col-lg-3 tile_stats_count">
+    <div class="col-lg-4 tile_stats_count">
         <span class="count_top"><i class="fa fa-plus-square"></i> Total de créditos</span>
         <div class="count">@cre.ToString("R$ ###,###,###,##0.00")</div>
         <span class="count_bottom"><i class="primary"><i class="fa fa-sort-asc"></i>@CountCred</i> lançamento(s)</span>
     </div>
-    <div class="col-md-3 col-sm-12 col-xs-12 col-lg-3 tile_stats_count">
+    <div class="col-lg-4 tile_stats_count">
         <span class="count_top"><i class="fa fa-check-square"></i> Diferença contábil</span>        
         @if (dif == 0)
         {
@@ -47,62 +47,115 @@
 </div>
 <!-- /top tiles -->
 <div class="table-responsive margem-topo">
-    <table class="table table-striped">
-        <thead>
-            <tr class="headings">
-                <th class="column-title text-center">Ação</th>
-                <th class="column-title text-center">Item</th>
-                <th class="column-title text-left">Conta</th>
-                <th class="column-title text-left">C.Custo</th>
-                <th class="column-title text-left">Histórico</th>
-                <th class="column-title text-center">Tipo</th>
-                <th class="column-title text-right">Valor</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (ContabilidadeItemViewModel item in Model.ContabilidadeItems)
-            {
-                if (item.sequencial == Model.ContabilidadeItem.sequencial && (string)TempData["operacao"] == "A")
-                {
-                    classe = "text-bold green";
-                }
-                else if (item.sequencial == Model.ContabilidadeItem.sequencial && (string)TempData["operacao"] == "E")
-                {
-                    classe = "text-bold red";
-                }
-                else
-                {
-                    classe = "";
-                }
-                <tr class="@classe">
-                    <td class="col-md-1 col-sm-4 text-center">
-                        <div class="row">
-                            <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="EditItem(@item.sequencial);"></button>
-                            <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="DelItem(@item.sequencial);"></button>
-                        </div>
-                    </td>
-                    <td class="col-md-1 col-sm-4 text-center">
-                        <span>@item.sequencial</span>
-                    </td>
-                    <td class="col-md-4 col-sm-2">
-                        <span>@(item.codigoPleno + " " + item.descricao_planoConta)</span>
-                    </td>
-                    <td class="col-md-1 col-sm-2">
-                        <span>@Html.Editor("descricao_ccusto", "TRUNC", new { text = item.descricao_centroCusto ?? "", width = 10 })</span>
-                    </td>
-                    <td class="col-md-3 col-sm-2">
-                        <span>@item.descricao_historico</span>
-                    </td>
-                    <td class="col-md-1 col-sm-3 text-center">
-                        <span>@item.tipoLancamento</span>
-                    </td>
-                    <td class="col-md-1 col-sm-2 text-right">
-                        <span>@item.valor.ToString("###,###,###,##0.00")</span>
-                    </td>
+    <div class="hidden-xs hidden-md hidden-sm">
+        <table class="table table-striped">
+            <thead>
+                <tr class="headings">
+                    <th class="column-title text-center">Ação</th>
+                    <th class="column-title text-center">Item</th>
+                    <th class="column-title text-left">Conta</th>
+                    <th class="column-title text-left">C.Custo</th>
+                    <th class="column-title text-left">Histórico</th>
+                    <th class="column-title text-center">Tipo</th>
+                    <th class="column-title text-right">Valor</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (ContabilidadeItemViewModel item in Model.ContabilidadeItems)
+                {
+                    if (item.sequencial == Model.ContabilidadeItem.sequencial && (string)TempData["operacao"] == "A")
+                    {
+                        classe = "text-bold green";
+                    }
+                    else if (item.sequencial == Model.ContabilidadeItem.sequencial && (string)TempData["operacao"] == "E")
+                    {
+                        classe = "text-bold red";
+                    }
+                    else
+                    {
+                        classe = "";
+                    }
+                    <tr class="@classe">
+                        <td class="col-lg-1 text-center">
+                            <div class="row">
+                                <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="EditItem(@item.sequencial);"></button>
+                                <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="DelItem(@item.sequencial);"></button>
+                            </div>
+                        </td>
+                        <td class="col-lg-1 text-center">
+                            <span>@item.sequencial</span>
+                        </td>
+                        <td class="col-lg-4">
+                            <span>@(item.codigoPleno + " " + item.descricao_planoConta)</span>
+                        </td>
+                        <td class="col-lg-1">
+                            <span>@Html.Editor("descricao_ccusto", "TRUNC", new { text = item.descricao_centroCusto ?? "", width = 10 })</span>
+                        </td>
+                        <td class="col-lg-3">
+                            <span>@item.descricao_historico</span>
+                        </td>
+                        <td class="col-lg-1 text-center">
+                            <span>@item.tipoLancamento</span>
+                        </td>
+                        <td class="col-lg-1 text-right">
+                            <span>@item.valor.ToString("###,###,###,##0.00")</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="hidden-lg">
+        <table class="table table-striped">
+            <thead>
+                <tr class="headings">
+                    <th class="column-title text-center">Ação</th>
+                    <th class="column-title text-center">Item</th>
+                    <th class="column-title text-left">Conta</th>
+                    <th class="column-title text-center">Tipo</th>
+                    <th class="column-title text-right">Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ContabilidadeItemViewModel item in Model.ContabilidadeItems)
+                {
+                    if (item.sequencial == Model.ContabilidadeItem.sequencial && (string)TempData["operacao"] == "A")
+                    {
+                        classe = "text-bold green";
+                    }
+                    else if (item.sequencial == Model.ContabilidadeItem.sequencial && (string)TempData["operacao"] == "E")
+                    {
+                        classe = "text-bold red";
+                    }
+                    else
+                    {
+                        classe = "";
+                    }
+                    <tr class="@classe">
+                        <td class="col-md-2 text-center">
+                            <div class="row">
+                                <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-edit" title="Editar" onclick="EditItem(@item.sequencial);"></button>
+                                <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash" title="Excluir" onclick="DelItem(@item.sequencial);"></button>
+                            </div>
+                        </td>
+                        <td class="col-md-1 text-center">
+                            <span>@item.sequencial</span>
+                        </td>
+                        <td class="col-md-6">
+                            <span>@(item.codigoPleno + " " + item.descricao_planoConta)</span><br />
+                            <span>@(item.descricao_historico + " (" + item.descricao_centroCusto + ")")</span>
+                        </td>
+                        <td class="col-md-1 text-center">
+                            <span>@item.tipoLancamento</span>
+                        </td>
+                        <td class="col-md-2 text-right">
+                            <span>@item.valor.ToString("###,###,###,##0.00")</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script type="text/javascript">

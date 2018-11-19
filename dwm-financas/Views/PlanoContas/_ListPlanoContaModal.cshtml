@@ -1,25 +1,26 @@
 ﻿@using DWM.Models.Repositories;
 @model PagedList<PlanoContaViewModel>
 @{
-    Layout = null;
+    Layout = null; // 
 }
 
 @if (Model != null)
 {
     string font = "normal";
-    <table class="table table-striped jambo_table bulk_action" style="width: 100%;" id="datatablePC">
-        <caption></caption>
-        <thead>
-            <tr class="headings">
-                <th class="column-title text-center nobr">Ação</th>
-                <th class="column-title text-center">Código Pleno</th>
-                <th class="column-title">Descrição</th>
-                <th class="column-title text-center">Código Reduzido</th>
-                <th class="column-title">Tipo</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (PlanoContaViewModel planoConta in Model)
+    <div class="hidden-xs hidden-sm hidden-md">
+        <table class="table table-striped jambo_table bulk_action" style="width: 100%;" id="datatablePC">
+            <caption></caption>
+            <thead>
+                <tr class="headings">
+                    <th class="column-title text-center nobr">Ação</th>
+                    <th class="column-title text-center">Código Pleno</th>
+                    <th class="column-title">Descrição</th>
+                    <th class="column-title text-center">Código Reduzido</th>
+                    <th class="column-title">Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (PlanoContaViewModel planoConta in Model)
                 {
                     if (planoConta.planoContaId_pai.HasValue)
                     {
@@ -46,9 +47,56 @@
                             <small>@planoConta.tipoConta</small>
                         </td>
                     </tr>
-            }
-        </tbody>
-    </table>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="hidden-lg Scroll">
+        <table class="table table-striped jambo_table bulk_action" style="width: 100%;" id="datatablePC2">
+            <caption></caption>
+            <thead>
+                <tr class="headings">
+                    <th class="column-title text-center nobr">Ação</th>
+                    <th class="column-title text-center">Código Pleno</th>
+                    <th class="column-title">Descrição</th>
+                    <th class="column-title text-center">Código Reduzido</th>
+                    <th class="column-title">Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (PlanoContaViewModel planoConta in Model)
+                {
+                    if (planoConta.planoContaId_pai.HasValue)
+                    {
+                        font = "normal";
+                    }
+                    else
+                    {
+                        font = "bold";
+                    }
+                    <tr class="even pointer" style="font-weight: @font">
+                        <td class="text-center">
+                            <button type="button" class="fa fa-check" title="Selecionar" onclick="Move('@planoConta.planoContaId', '@(planoConta.codigoPleno + " " + @planoConta.descricao)', '@planoConta.codigoPleno')"></button>
+                        </td>
+                        <td class="text-center">
+                            <small>@planoConta.codigoPleno</small>
+                        </td>
+                        <td style="text-indent: @((planoConta.grauPc - 1) * 20)px">
+                            <small>@planoConta.descricao</small>
+                        </td>
+                        <td class="text-center">
+                            <small>@planoConta.codigoReduzido</small>
+                        </td>
+                        <td>
+                            <small>@planoConta.tipoConta</small>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
 }
 else
 {
@@ -67,25 +115,52 @@ else
             "url": "../Scripts/DataTablePtBr.txt"
         },
     });
+    $('#datatablePC2').DataTable({
+        lengthMenu: [[15, 25, 50, 100, -1], [15, 25, 50, 100, "Todos"]],
+        iDisplayLength: 15,
+        bSort: false,
+        language: {
+            "url": "../Scripts/DataTablePtBr.txt"
+        },
+    });
 
-    var table = $("#datatablePC").DataTable();
+    //var table = $("#datatablePC").DataTable();
     $.fn.dataTable.ext.search.push(
-    function (settings, data, dataIndex) {
-        var term = $('#datatablePC_filter input')
+        function (settings, data, dataIndex) {
+            var term = $('#datatablePC_filter input')
                 .val()
                 .toLowerCase();
 
-        for (var i = 0; i < data.length; i++) {
-            value = data[i]
-                .toString()
+            for (var i = 0; i < data.length; i++) {
+                value = data[i]
+                    .toString()
+                    .toLowerCase();
+
+                if (value.indexOf(term) == 0 && (i == 1 || i == 2 || i == 4)) {
+                    return true;
+                }
+            };
+            return false;
+        });
+
+    //var table2 = $("#datatablePC2").DataTable();
+    $.fn.dataTable.ext.search.push(
+        function (settings, data, dataIndex) {
+            var term = $('#datatablePC2_filter input')
+                .val()
                 .toLowerCase();
 
-            if (value.indexOf(term) == 0 && (i == 1 || i == 2 || i ==4)) {
-                return true;
-            }
-        };
-        return false;
-    });
+            for (var i = 0; i < data.length; i++) {
+                value = data[i]
+                    .toString()
+                    .toLowerCase();
+
+                if (value.indexOf(term) == 0 && (i == 1 || i == 2 || i == 4)) {
+                    return true;
+                }
+            };
+            return false;
+        });
 
 </script>
 
