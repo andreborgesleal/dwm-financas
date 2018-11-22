@@ -32,9 +32,9 @@
     </div>
 </div>
 <div class="row clearfix">
-    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-6">
+    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-6">
                 @Html.Editor("descricao_historico1", "HistoricoAutoComplete", new
                                                                                    {
                                                                                        value = Model.ContabilidadeItem.historicoId.ToString(),
@@ -43,24 +43,22 @@
                                                                                        nextField = "ContabilidadeItem_complementoHist",
                                                                                        prevField = "descricao_centroCusto"
                                                                                    })
-            </div>            
-        </div>
-        <div class="row clearfix hidden-lg">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-6">
                 <div class="form-group">
                     <label class="control-label" for="complementoHist">Histórico complementar</label>
-                    @Html.TextAreaFor(m => m.ContabilidadeItem.complementoHist, 5, 1, new { @class = "form-control", @tabindex = "4" })
+                    @Html.TextAreaFor(m => m.ContabilidadeItem.complementoHist, 1, 1, new { @class = "form-control", @tabindex = "4" })
                 </div>
             </div>
         </div>
         <div class="row clearfix">
-            <div class="col-md-8 col-sm-8 col-xs-8 col-lg-8">
+            <div class="col-md-4 col-sm-4 col-xs-4 col-lg-3">
                 <div class="form-group">
                     <label class="control-label" for="nome">Tipo do lançamento</label>
                     @Html.DropDownListFor(m => m.ContabilidadeItem.tipoLancamento, DropDownListEnum.NaturezaOperacao(Model.ContabilidadeItem.tipoLancamento), new { @class = "form-control", @tabindex="5" })
                 </div>
             </div>
-            <div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">
+            <div class="col-md-4 col-sm-4 col-xs-4 col-lg-3">
                 @Html.EditorFor(m => m.ContabilidadeItem.valor, "DECIMAL", new
                    {
                        htmlAttributes = (object)new { @class = "form-control text-right", @onblur = "return Converte(this, 'valor')" , tabindex = "6" }
@@ -68,11 +66,11 @@
             </div>
         </div>
     </div>
-    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-6 hidden-xs hidden-md hidden-md">
+    @*<div class="col-md-12 col-sm-12 col-xs-12 col-lg-6 hidden-xs hidden-md hidden-md">
         <div class="form-group">
             <label class="control-label" for="complementoHist">Histórico complementar</label>
             @Html.TextAreaFor(m => m.ContabilidadeItem.complementoHist, 5, 1, new { @class = "form-control", @tabindex = "4" })
         </div>
-    </div>
+    </div>*@
 </div>
 

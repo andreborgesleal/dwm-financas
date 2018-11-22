@@ -62,86 +62,164 @@
         @Html.EditorFor(info => Model, "FORMULARIO", new { Brand = "Balancete", Descricao = "", Transacao = t })
         <div class="x_content">
             <div class="dashboard-widget-content">
-                <div class="row clearfix">
-                    <div class="col-md-12" id="div-graph">
+                <div class="row clearfix hidden-xs hidden-sm hidden-md">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="div-graph">
                         @*<canvas id="cvs_pie2" width="350" height="250">
-                            [No canvas support]
-                        </canvas>*@
+                    [No canvas support]
+                </canvas>*@
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-striped jambo_table bulk_action" id="datatable">
-                        <thead>
-                            <tr class="headings">
-                                <th class="column-title text-center">Código Pleno</th>
-                                <th class="column-title">Descrição</th>
-                                <th style="text-align: right">Saldo Anterior</th>
-                                <th style="text-align: right">Débito</th>
-                                <th style="text-align: right">Crédito</th>
-                                <th style="text-align: right">Saldo</th>
-                                <th class="column-title no-link last text-center">
-                                    <span class="nobr">Ação</span>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (BalanceteViewModel balancete in Model)
-                            {
-                                if (balancete.planoContaId_pai.HasValue)
+                <div class="hidden-xs hidden-md hidden-sm">
+                    <div class="table-responsive">
+                        <table class="table table-striped jambo_table bulk_action" id="datatable">
+                            <thead>
+                                <tr class="headings">
+                                    <th class="column-title text-center">Código Pleno</th>
+                                    <th class="column-title">Descrição</th>
+                                    <th style="text-align: right">Saldo Anterior</th>
+                                    <th style="text-align: right">Débito</th>
+                                    <th style="text-align: right">Crédito</th>
+                                    <th style="text-align: right">Saldo</th>
+                                    <th class="column-title no-link last text-center">
+                                        <span class="nobr">Ação</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (BalanceteViewModel balancete in Model)
                                 {
-                                    font = "normal";
-                                }
-                                else
-                                {
-                                    font = "bold";
-                                }
-                                <tr class="even pointer" style="font-weight: @font">
-                                    <td class="text-center">
-                                        <span>@balancete.codigoPleno</span>
-                                    </td>
-                                    <td style="text-indent: @((balancete.grauPc - 1) * 20)px">
-                                        <span>@balancete.descricao</span>
-                                        @if (balancete.ShowGraph == 1)
-                                        {
-                                            var percent = (Math.Abs(balancete.vr_saldo_atual) / total) * 100;
-                                            <script>
+                                    if (balancete.planoContaId_pai.HasValue)
+                                    {
+                                        font = "normal";
+                                    }
+                                    else
+                                    {
+                                        font = "bold";
+                                    }
+                                    <tr class="even pointer" style="font-weight: @font">
+                                        <td class="text-center">
+                                            <span>@balancete.codigoPleno</span>
+                                        </td>
+                                        <td style="text-indent: @((balancete.grauPc - 1) * 20)px">
+                                            <span>@balancete.descricao</span>
+                                            @if (balancete.ShowGraph == 1)
+                                            {
+                                                var percent = (Math.Abs(balancete.vr_saldo_atual) / total) * 100;
+                                                <script>
                                                 _Labels.push('@Html.Raw((balancete.descricao.Length > 30 ? balancete.descricao.Substring(0,30) : balancete.descricao) + " " + percent.ToString("##0.00") + "%")');
                                                 _ToolTips.push('@Html.Raw(balancete.descricao + " " + Math.Abs(balancete.vr_saldo_atual).ToString("R$ ###,###,##0.00") + " (" + percent.ToString("##0.00") + "%)")');
                                                 _Data.push('@Math.Abs(balancete.vr_saldo_atual)');
-                                            </script>
-                                        }
-                                        else if (balancete.ShowGraph == 2)
-                                        {
-                                            var percent = (Math.Abs(balancete.vr_debito - balancete.vr_credito) / total2) * 100;
-                                            <script>
+                                                </script>
+                                            }
+                                            else if (balancete.ShowGraph == 2)
+                                            {
+                                                var percent = (Math.Abs(balancete.vr_debito - balancete.vr_credito) / total2) * 100;
+                                                <script>
                                                 _Labels.push('@Html.Raw((balancete.descricao.Length > 30 ? balancete.descricao.Substring(0,30) : balancete.descricao) + " " + percent.ToString("##0.00") + "%")');
                                                 _ToolTips.push('@Html.Raw(balancete.descricao + " " + Math.Abs(balancete.vr_debito - balancete.vr_credito).ToString("R$ ###,###,##0.00") + " (" + percent.ToString("##0.00") + "%)")');
                                                 _Data.push('@Math.Abs(balancete.vr_debito - balancete.vr_credito)');
-                                            </script>
-                                        }
-                                    </td>
-                                    <td class="text-right">
-                                        <span>@balancete.vr_saldo_ant.ToString("###,###,##0.00")</span>
-                                    </td>
-                                    <td class="text-right">
-                                        <span>@balancete.vr_debito.ToString("###,###,##0.00")</span>
-                                    </td>
-                                    <td class="text-right">
-                                        <span>@balancete.vr_credito.ToString("###,###,##0.00")</span>
-                                    </td>
-                                    <td class="text-right">
-                                        <span>@balancete.vr_saldo_atual.ToString("###,###,##0.00")</span>
-                                    </td>
-                                    <td class="text-center">
-                                        @if (balancete.tipoConta == "A")
-                                        {
-                                            <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno')"><i class="fa fa-1x fa-search-plus"></i></a>
-                                        }
-                                    </td>
+                                                </script>
+                                            }
+                                        </td>
+                                        <td class="text-right">
+                                            <span>@balancete.vr_saldo_ant.ToString("###,###,##0.00")</span>
+                                        </td>
+                                        <td class="text-right">
+                                            <span>@balancete.vr_debito.ToString("###,###,##0.00")</span>
+                                        </td>
+                                        <td class="text-right">
+                                            <span>@balancete.vr_credito.ToString("###,###,##0.00")</span>
+                                        </td>
+                                        <td class="text-right">
+                                            <span>@balancete.vr_saldo_atual.ToString("###,###,##0.00")</span>
+                                        </td>
+                                        <td class="text-center">
+                                            @if (balancete.tipoConta == "A")
+                                            {
+                                                <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno')"><i class="fa fa-1x fa-search-plus"></i></a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="hidden-lg">
+                    <div class="table-responsive">
+                        <table class="table table-striped jambo_table bulk_action" id="datatable">
+                            <thead>
+                                <tr class="headings">
+                                    <th class="column-title text-center"><small>Código Pleno</small></th>
+                                    <th class="column-title"><small>Descrição</small></th>
+                                    <th style="text-align: right"><small>Saldo Anterior</small></th>
+                                    <th style="text-align: right"><small>Débito</small</th>
+                                    <th style="text-align: right"><small>Crédito</small</th>
+                                    <th style="text-align: right"><small>Saldo</small</th>
+                                    <th class="column-title no-link last text-center">
+                                        <span class="nobr">Ação</span>
+                                    </th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (BalanceteViewModel balancete in Model)
+                                {
+                                    if (balancete.planoContaId_pai.HasValue)
+                                    {
+                                        font = "normal";
+                                    }
+                                    else
+                                    {
+                                        font = "bold";
+                                    }
+                                    <tr class="even pointer" style="font-weight: @font">
+                                        <td class="text-center">
+                                            <small>@balancete.codigoPleno</small>
+                                        </td>
+                                        <td style="text-indent: @((balancete.grauPc - 1) * 20)px">
+                                            <small>@balancete.descricao</small>
+                                            @if (balancete.ShowGraph == 1)
+                                            {
+                                                var percent = (Math.Abs(balancete.vr_saldo_atual) / total) * 100;
+                                                <script>
+                                                _Labels.push('@Html.Raw((balancete.descricao.Length > 30 ? balancete.descricao.Substring(0,30) : balancete.descricao) + " " + percent.ToString("##0.00") + "%")');
+                                                _ToolTips.push('@Html.Raw(balancete.descricao + " " + Math.Abs(balancete.vr_saldo_atual).ToString("R$ ###,###,##0.00") + " (" + percent.ToString("##0.00") + "%)")');
+                                                _Data.push('@Math.Abs(balancete.vr_saldo_atual)');
+                                                </script>
+                                            }
+                                            else if (balancete.ShowGraph == 2)
+                                            {
+                                                var percent = (Math.Abs(balancete.vr_debito - balancete.vr_credito) / total2) * 100;
+                                                <script>
+                                                _Labels.push('@Html.Raw((balancete.descricao.Length > 30 ? balancete.descricao.Substring(0,30) : balancete.descricao) + " " + percent.ToString("##0.00") + "%")');
+                                                _ToolTips.push('@Html.Raw(balancete.descricao + " " + Math.Abs(balancete.vr_debito - balancete.vr_credito).ToString("R$ ###,###,##0.00") + " (" + percent.ToString("##0.00") + "%)")');
+                                                _Data.push('@Math.Abs(balancete.vr_debito - balancete.vr_credito)');
+                                                </script>
+                                            }
+                                        </td>
+                                        <td class="text-right">
+                                            <small>@balancete.vr_saldo_ant.ToString("###,###,##0.00")</small>
+                                        </td>
+                                        <td class="text-right">
+                                            <small>@balancete.vr_debito.ToString("###,###,##0.00")</small>
+                                        </td>
+                                        <td class="text-right">
+                                            <small>@balancete.vr_credito.ToString("###,###,##0.00")</small>
+                                        </td>
+                                        <td class="text-right">
+                                            <small>@balancete.vr_saldo_atual.ToString("###,###,##0.00")</small>
+                                        </td>
+                                        <td class="text-center">
+                                            @if (balancete.tipoConta == "A")
+                                            {
+                                                <a href="#" title="Razão contábil" data-toggle="modal" data-target="#myModal" onclick="Razao('@balancete.planoContaId','@balancete.descricao','@balancete.codigoPleno')"><i class="fa fa-1x fa-search-plus"></i></a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <a href="#panel-detail" class="info pull-right" id="linkTopo"><i class="fa fa-toggle-up"></i> Topo</a>
