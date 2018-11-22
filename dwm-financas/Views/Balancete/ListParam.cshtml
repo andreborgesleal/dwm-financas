@@ -71,7 +71,7 @@
                 </div>
                 <div class="hidden-xs hidden-md hidden-sm">
                     <div class="table-responsive">
-                        <table class="table table-striped jambo_table bulk_action" id="datatable">
+                        <table class="table table-striped jambo_table bulk_action" id="datatable1">
                             <thead>
                                 <tr class="headings">
                                     <th class="column-title text-center">Código Pleno</th>
@@ -147,7 +147,7 @@
                 </div>
                 <div class="hidden-lg">
                     <div class="table-responsive">
-                        <table class="table table-striped jambo_table bulk_action" id="datatable">
+                        <table class="table table-striped jambo_table bulk_action" id="datatable2">
                             <thead>
                                 <tr class="headings">
                                     <th class="column-title text-center"><small>Código Pleno</small></th>
@@ -181,20 +181,10 @@
                                             @if (balancete.ShowGraph == 1)
                                             {
                                                 var percent = (Math.Abs(balancete.vr_saldo_atual) / total) * 100;
-                                                <script>
-                                                _Labels.push('@Html.Raw((balancete.descricao.Length > 30 ? balancete.descricao.Substring(0,30) : balancete.descricao) + " " + percent.ToString("##0.00") + "%")');
-                                                _ToolTips.push('@Html.Raw(balancete.descricao + " " + Math.Abs(balancete.vr_saldo_atual).ToString("R$ ###,###,##0.00") + " (" + percent.ToString("##0.00") + "%)")');
-                                                _Data.push('@Math.Abs(balancete.vr_saldo_atual)');
-                                                </script>
                                             }
                                             else if (balancete.ShowGraph == 2)
                                             {
                                                 var percent = (Math.Abs(balancete.vr_debito - balancete.vr_credito) / total2) * 100;
-                                                <script>
-                                                _Labels.push('@Html.Raw((balancete.descricao.Length > 30 ? balancete.descricao.Substring(0,30) : balancete.descricao) + " " + percent.ToString("##0.00") + "%")');
-                                                _ToolTips.push('@Html.Raw(balancete.descricao + " " + Math.Abs(balancete.vr_debito - balancete.vr_credito).ToString("R$ ###,###,##0.00") + " (" + percent.ToString("##0.00") + "%)")');
-                                                _Data.push('@Math.Abs(balancete.vr_debito - balancete.vr_credito)');
-                                                </script>
                                             }
                                         </td>
                                         <td class="text-right">
@@ -280,7 +270,7 @@ else
 
 <!-- Datatables -->
 <script>
-    $('#datatable').DataTable({
+    $('#datatable1').DataTable({
         lengthMenu: [[15, 25, 50, 100, -1], [15, 25, 50, 100, "Todos"]],
         iDisplayLength: 15,
         bSort: false,
@@ -289,10 +279,10 @@ else
         }
     });
 
-    var table = $("#datatable").DataTable();
+    var table = $("#datatable1").DataTable();
     $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
-        var term = $('#datatable_filter input')
+        var term = $('#datatable1_filter input')
                 .val()
                 .toLowerCase();
 
@@ -307,6 +297,34 @@ else
         };
         return false;
     });
+
+    $('#datatable2').DataTable({
+        lengthMenu: [[15, 25, 50, 100, -1], [15, 25, 50, 100, "Todos"]],
+        iDisplayLength: 15,
+        bSort: false,
+        language: {
+            "url": "../Scripts/DataTablePtBr.txt"
+        }
+    });
+
+    var table = $("#datatable2").DataTable();
+    $.fn.dataTable.ext.search.push(
+        function (settings, data, dataIndex) {
+            var term = $('#datatable2_filter input')
+                .val()
+                .toLowerCase();
+
+            for (var i = 0; i < data.length; i++) {
+                value = data[i]
+                    .toString()
+                    .toLowerCase();
+
+                if (value.indexOf(term) == 0 && (i == 0 || i == 1)) {
+                    return true;
+                }
+            };
+            return false;
+        });
 </script>
 <!-- /Datatables -->
 

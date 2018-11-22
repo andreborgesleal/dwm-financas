@@ -264,8 +264,8 @@
         </div>
     </div>
     <script>
-        labels [0] = labels[0] + " - " + '@Principal.ToString("R$ ###,###,##0.00")';
-        data [0] = '@Principal';
+        labels [0] = labels[0] + " - " + '@((Principal/2).ToString("R$ ###,###,##0.00"))';
+        data [0] = '@(Principal/2)';
     </script>
 
 }

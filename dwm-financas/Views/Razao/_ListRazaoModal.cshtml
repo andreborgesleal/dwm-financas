@@ -13,7 +13,7 @@
 
 @if (Model != null)
 {
-    <div class="row" style="margin-top: -15px">
+    <div class="row hidden-xs hidden-md hidden-sm" style="margin-top: -15px">
         <div class="col-md-12" style="padding-right: 0px;">
             <table class="table table-hover table-bordered table-condensed" style="cursor: pointer">
                 <caption></caption>
@@ -116,6 +116,112 @@
             </table>
         </div>
     </div>
+
+    <div class="row hidden-lg Scroll" style="margin-top: -15px">
+        <div class="col-md-12" style="padding-right: 0px;">
+            <table class="table table-hover table-bordered table-condensed" style="cursor: pointer">
+                <caption></caption>
+                <thead class="corvo text-white">
+                    <tr>
+                        <th><small>Data</small></th>
+                        <th><small>ID</small></th>
+                        <th><small>Doc</small></th>
+                        <th><small>C.Custo</small></th>
+                        <th><small>Histórico</small></th>
+                        <th style="text-align: right"><small>Débito</small></th>
+                        <th style="text-align: right"><small>Crédito</small></th>
+                        <th style="text-align: right"><small>Saldo</small></th>
+                    </tr>
+                </thead>
+                @foreach (RazaoViewModel razao in Model)
+                {
+                    vr_db = "";
+                    vr_cr = "";
+                    if (razao.contabilidadeId != null)
+                    {
+                        if (razao.vr_debito.HasValue)
+                        {
+                            vr_db = razao.vr_debito.Value.ToString("###,###,###,##0.00");
+                        }
+                        else
+                        {
+                            vr_db = "";
+                        }
+                        if (razao.vr_credito.HasValue)
+                        {
+                            vr_cr = razao.vr_credito.Value.ToString("###,###,###,##0.00");
+                        }
+                        else
+                        {
+                            vr_cr = "";
+                        }
+                        vr_sld = razao.vr_saldo.Value.ToString("###,###,###,##0.00");
+                        color = "#000";
+                    }
+                    else
+                    {
+                        vr_db = razao.vr_debito.HasValue ? "<b>" + razao.vr_debito.Value.ToString("###,###,###,##0.00") + "</b>" : "";
+                        vr_cr = razao.vr_credito.HasValue ? "<b>" + razao.vr_credito.Value.ToString("###,###,###,##0.00") + "</b>" : "";
+                        vr_sld = razao.vr_saldo.HasValue ? "<b>" + razao.vr_saldo.Value.ToString("###,###,###,##0.00") + "</b>" : "";
+                    }
+                    if (razao.codigoPleno != null)
+                    {
+                        plano_c = "<b>" + razao.codigoPleno + "-" + razao.descricao_planoConta + "</b>";
+                        color = "#000";
+                        <tr>
+                            <td colspan="8">@Html.DisplayTextFor(info => plano_c)</td>
+                        </tr>
+                    }
+
+                    if (razao._dt_lancamento.HasValue && razao._dt_lancamento.Value > DateTime.Today)
+                    {
+                        color = "#ba4d00";
+                    }
+                    else if (!razao._dt_lancamento.HasValue)
+                    {
+                        color = "#000";
+                    }
+                    <tr onclick="Move('@razao.contabilidadeId', '@razao.contabilidadeId')">
+                        <td class="col-md-1" style="color: @color">
+                            @if (@razao.dt_lancamento.HasValue)
+                            {
+                                <small>@razao.dt_lancamento.Value.ToString("dd/MM/yyyy")</small>
+                            }
+                        </td>
+                        <td class="col-md-1" style="color: @color">
+                            <small>@razao.contabilidadeId</small>
+                        </td>
+                        <td class="col-md-1" style="color: @color">
+                            <small>@razao.documento</small>
+                        </td>
+                        <td class="col-md-1 text-center" style="color: @color">
+                            <small>@Html.Editor("descricao_ccusto", "TRUNC", new { text = razao.descricao_centroCusto ?? "", width = 10 })</small>
+                        </td>
+                        <td class="col-md-5" style="color: @color">
+                            <small>@Html.DisplayTextFor(info => razao.descricao_historico)</small>
+                            @if (razao.complementoHist != null && razao.complementoHist.Trim() != "")
+                            {
+                                <small>@Html.DisplayTextFor(info => razao.complementoHist)</small>
+                            }
+                        </td>
+                        <td class="col-md-1 text-right" style="color: @color">
+                            @Html.DisplayTextFor(info => vr_db)
+                        </td>
+                        <td class="col-md-1 text-right" style="right; color: @color">
+                            @Html.DisplayTextFor(info => vr_cr)
+                        </td>
+                        <td class="col-md-1 text-right" style="right; color: @color">
+                            @Html.DisplayTextFor(info => vr_sld)
+                        </td>
+                    </tr>
+                    contador++;
+                }
+
+            </table>
+        </div>
+    </div>
+
+
     @Html.Partial("Paginacao", Model)
 }
 else
