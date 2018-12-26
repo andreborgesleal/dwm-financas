@@ -34,7 +34,7 @@
 <div class="row clearfix">
     <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
         <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-6">
+            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
                 @Html.Editor("descricao_historico1", "HistoricoAutoComplete", new
                                                                                    {
                                                                                        value = Model.ContabilidadeItem.historicoId.ToString(),
@@ -44,10 +44,10 @@
                                                                                        prevField = "descricao_centroCusto"
                                                                                    })
             </div>
-            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-6">
+            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
                 <div class="form-group">
                     <label class="control-label" for="complementoHist">Histórico complementar</label>
-                    @Html.TextAreaFor(m => m.ContabilidadeItem.complementoHist, 1, 1, new { @class = "form-control", @tabindex = "4" })
+                    @Html.TextAreaFor(m => m.ContabilidadeItem.complementoHist, 3, 1, new { @class = "form-control", @tabindex = "4" })
                 </div>
             </div>
         </div>

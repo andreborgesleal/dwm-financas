@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="row clearfix">
-                    <div class="col-md-6">
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-11">
                         @Html.Editor("descricao_historico1", "HistoricoAutoComplete", new
                         {
                             value = Model.historicoId > 0 ? Model.historicoId.ToString() : "",
@@ -62,10 +62,10 @@
                             prevField = "nome_credor"
                         })
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-11">
                         <div class="form-group">
                             <label class="control-label" for="complementoHist">Histórico complementar</label>
-                            @Html.TextAreaFor(m => m.complementoHist, 1, 1, new { @class = "form-control" })
+                            @Html.TextAreaFor(m => m.complementoHist, 3, 1, new { @class = "form-control" })
                         </div>
                     </div>
                 </div>
