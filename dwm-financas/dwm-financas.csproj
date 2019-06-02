@@ -4254,6 +4254,8 @@
     <Content Include="Content\RGraph\scripts\jsmin.c" />
     <None Include="Properties\PublishProfiles\caixaforte - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\caixaforte - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\caixaforte - Web Deploy1.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\dwm-financas - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\datepicker.css" />

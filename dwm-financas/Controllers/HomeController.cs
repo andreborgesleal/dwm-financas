@@ -84,7 +84,8 @@ namespace DWM.Controllers
                                             null,
                                             null,
                                             null,
-                                            null);
+                                            null,
+                                            "");
             return View("ListPanorama", pagedList);
         }
 

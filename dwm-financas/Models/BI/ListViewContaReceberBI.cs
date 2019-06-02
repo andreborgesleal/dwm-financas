@@ -163,6 +163,7 @@ namespace DWM.Models.BI
             int? centroCustoId = (int?)param[15];
             int? grupoId = (int?)param[16];
             int? bancoId = (int?)param[17];
+            string documento = (string)param[18];
             #endregion
             #endregion
 
@@ -192,6 +193,7 @@ namespace DWM.Models.BI
                             && (!grupoId.HasValue || cli.grupoClienteId.Value == grupoId)
                             && (!bancoId.HasValue || par.bancoId.Value == bancoId)
                             && (!dt_emissao1.HasValue || rec.dt_emissao >= dt_emissao1 && rec.dt_emissao <= dt_emissao2)
+                            && (String.IsNullOrEmpty(documento) || rec.documento == documento)
                      orderby par.dt_vencimento
                      select new ContaReceberDemonstrativoViewModel
                      {
@@ -239,6 +241,7 @@ namespace DWM.Models.BI
                                                    && (!grupoId.HasValue || cli1.grupoClienteId.Value == grupoId)
                                                    && (!bancoId.HasValue || par1.bancoId.Value == bancoId)
                                                    && (!dt_emissao1.HasValue || rec1.dt_emissao >= dt_emissao1 && rec1.dt_emissao <= dt_emissao2)
+                                                   && (String.IsNullOrEmpty(documento) || rec1.documento == documento)
                                             orderby par1.dt_vencimento
                                             select par1).Select(info => info.vr_amortizacao).Sum(),
                          TotalEmAberto = (from rec1 in db.ContaRecebers
@@ -260,6 +263,7 @@ namespace DWM.Models.BI
                                                  && (!grupoId.HasValue || cli1.grupoClienteId.Value == grupoId)
                                                  && (!bancoId.HasValue || par1.bancoId.Value == bancoId)
                                                  && (!dt_emissao1.HasValue || rec1.dt_emissao >= dt_emissao1 && rec1.dt_emissao <= dt_emissao2)
+                                                 && (String.IsNullOrEmpty(documento) || rec1.documento == documento)
                                           orderby par1.dt_vencimento
                                           select par1).Select(info => info.vr_saldo_devedor).Sum(),
                          TotalTitulos = 0,
@@ -282,6 +286,7 @@ namespace DWM.Models.BI
                                                 && (!grupoId.HasValue || cli1.grupoClienteId.Value == grupoId)
                                                 && (!bancoId.HasValue || par1.bancoId.Value == bancoId)
                                                 && (!dt_emissao1.HasValue || rec1.dt_emissao >= dt_emissao1 && rec1.dt_emissao <= dt_emissao2)
+                                                && (String.IsNullOrEmpty(documento) || rec1.documento == documento)
                                          orderby par1.dt_vencimento
                                          select par1).Select(info => info.vr_principal).Sum(),
                          TotalCount = (from rec1 in db.ContaRecebers
@@ -303,6 +308,7 @@ namespace DWM.Models.BI
                                               && (!grupoId.HasValue || cli1.grupoClienteId.Value == grupoId)
                                               && (!bancoId.HasValue || par1.bancoId.Value == bancoId)
                                               && (!dt_emissao1.HasValue || rec1.dt_emissao >= dt_emissao1 && rec1.dt_emissao <= dt_emissao2)
+                                              && (String.IsNullOrEmpty(documento) || rec1.documento == documento)
                                        orderby par1.dt_vencimento
                                        select rec1).Count()
                      }).ToList();

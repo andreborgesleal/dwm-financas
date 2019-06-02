@@ -68,7 +68,8 @@ namespace DWM.Models.BI
                                                 null,
                                                 null,
                                                 null,
-                                                null);
+                                                null,
+                                                "");
 
 
                 ListViewContaPagar listPag = new ListViewContaPagar();

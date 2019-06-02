@@ -226,14 +226,14 @@
                                             {
                                                 @ope.nome_cliente <br /><small>(@ope.descricao_grupoCliente)</small>
                                                 <small>
-                                                    @(ope.descricao_historico + " " + ope.complementoHist)
+                                                    @(ope.descricao_historico)
                                                 </small>
                                                 <small class="text-muted">@(ope.recorrencia == "S" ? "mensal" : "")</small>
                                             }
                                             else
                                             {
                                                 @(ope.nome_cliente) <br />
-                                                <small>(@(ope.descricao_historico + " " + ope.complementoHist))</small>
+                                                <small>(@(ope.descricao_historico))</small>
                                                 <small class="text-muted">@(ope.recorrencia == "S" ? "- mensal" : "")</small>
                                             }
                                         </span>

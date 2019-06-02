@@ -116,7 +116,8 @@ namespace DWM.Controllers
                                         string titulos_nao_pagos_ = null, string baixa_liquidacao_ = null, string baixa_cancelamento_ = null,
                                         string dt_baixa1 = null, string dt_baixa2 = null, string clienteId = null,
                                         string dt_emissao1 = null, string dt_emissao2 = null, string centroCustoId = null,
-                                        string grupoClienteId = null, string bancoId = null)
+                                        string grupoClienteId = null, string bancoId = null,
+                                        string documento = null)
         {
             ViewBag.ValidateRequest = true;
             if (ViewBag.ValidateRequest)
@@ -140,10 +141,12 @@ namespace DWM.Controllers
                 int? _centroCustoId = centroCustoId != null && centroCustoId != "" ? int.Parse(centroCustoId) : _null;
                 int? _grupoId = grupoClienteId != null && grupoClienteId != "" ? int.Parse(grupoClienteId) : _null;
                 int? _bancoId = bancoId != null && bancoId != "" ? int.Parse(bancoId) : _null;
+                string _documento = documento;
                 ListViewContaReceberDemonstrativoBI list = new ListViewContaReceberDemonstrativoBI();
                 return this._List(index, pageSize, "Browse", list, _titulos_vencidos_atraso, _dt_vencidos_atraso1, _dt_vencidos_atraso2, _titulos_a_vencer, 
                                     _dt_vencimento1, _dt_vencimento2, _titulos_amortizados, _titulos_nao_pagos, _baixa_liquidacao,
-                                    _baixa_cancelamento, _dt_baixa1, _dt_baixa2, _clienteId, _dt_emissao1, _dt_emissao2, _centroCustoId, _grupoId, _bancoId);
+                                    _baixa_cancelamento, _dt_baixa1, _dt_baixa2, _clienteId, _dt_emissao1, _dt_emissao2, _centroCustoId, _grupoId, _bancoId,
+                                    _documento);
             }
             else
                 return View();
