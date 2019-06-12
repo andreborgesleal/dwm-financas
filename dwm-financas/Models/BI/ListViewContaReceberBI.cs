@@ -175,6 +175,7 @@ namespace DWM.Models.BI
                      //join pge in db.ContaReceberParcelaEventos on new { par.operacaoId, par.parcelaId } equals new { pge.operacaoId, pge.parcelaId }
                      join cli in db.Clientes on rec.clienteId equals cli.clienteId
                      join his in db.Historicos on rec.historicoId equals his.historicoId
+                     join ban in db.Bancos on par.bancoId equals ban.bancoId
                      join gru in db.GrupoClientes on cli.grupoClienteId equals gru.grupoClienteId into GRU
                      from gru in GRU.DefaultIfEmpty()
                      where rec.empresaId.Equals(sessaoCorrente.empresaId)
@@ -208,10 +209,12 @@ namespace DWM.Models.BI
                          descricao_grupoCliente = gru.nome,
                          OperacaoParcela = new ContaReceberParcelaViewModel()
                          {
+                             nome_banco = ban.sigla,
                              operacaoId = par.operacaoId,
                              parcelaId = par.parcelaId,
                              dt_vencimento = par.dt_vencimento,
                              ind_baixa = par.ind_baixa,
+                             num_titulo = par.num_titulo,
                              dt_baixa = par.dt_baixa,
                              dt_ultima_amortizacao = par.dt_ultima_amortizacao,
                              vr_principal = par.vr_principal,
