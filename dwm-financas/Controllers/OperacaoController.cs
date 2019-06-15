@@ -976,6 +976,20 @@ namespace DWM.Controllers
             if (collection["vr_mora"] != null && collection["vr_mora"] != "" && collection["vr_mora"] != "0,00")
                 value.OperacaoParcela.vr_encargos += decimal.Parse(collection["vr_mora"]);
         }
+
+        public override ActionResult AfterCreate(ORepo value, FormCollection collection)
+        {
+            if ((collection["enquadramentoId"] != null && collection["enquadramentoId"] != "") ||
+                (collection["enquadramento_amortizacaoId"] != null && collection["enquadramento_amortizacaoId"] != ""))
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    return RedirectToAction("Edit", "Contabilidade", new { contabilidadeId = db.Contabilidades.Max(m => m.contabilidadeId) });
+                }
+            }
+            return RedirectToAction("Create");
+        }
+
         #endregion
 
         #region Gerar Parcelas

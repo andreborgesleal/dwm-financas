@@ -187,7 +187,6 @@ namespace DWM.Controllers
         }
         #endregion
 
-
         public ActionResult VisualizarBoleto(int bancoId, int operacaoId, int parcelaId)
         {
             BoletoDraw boletos = new BoletoDraw(bancoId, operacaoId, parcelaId);
