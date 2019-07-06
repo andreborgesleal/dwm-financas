@@ -987,7 +987,26 @@ namespace DWM.Controllers
                     return RedirectToAction("Edit", "Contabilidade", new { contabilidadeId = db.Contabilidades.Max(m => m.contabilidadeId) });
                 }
             }
-            return RedirectToAction("Create");
+            else
+            {
+                //http://localhost:50523/Contabilidade/Create?operacaoId=2524&parcelaId=1&natureza=R&dt_evento=2019-07-05%2023:06:50.113
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    if (value is ContaReceberViewModel)
+                    {
+                        int _operacaoId = db.ContaRecebers.Max(m => m.operacaoId);
+                        ContaReceberParcelaEvento x = db.ContaReceberParcelaEventos.Where(m => m.operacaoId == _operacaoId).OrderByDescending(z => z.dt_evento).FirstOrDefault(); 
+                        return RedirectToAction("Create", "Contabilidade", new { operacaoId = _operacaoId, parcelaId = 1, natureza = "R", dt_evento = x.dt_evento.ToString("yyyy-MM-dd HH:mm:ss.fff tt") });
+                    }
+                    else
+                    {
+                        int _operacaoId = db.ContaPagars.Max(m => m.operacaoId);
+                        ContaPagarParcelaEvento x = db.ContaPagarParcelaEventos.Where(m => m.operacaoId == _operacaoId).OrderByDescending(z => z.dt_evento).FirstOrDefault(); 
+                        return RedirectToAction("Create", "Contabilidade", new { operacaoId = _operacaoId, parcelaId = 1, natureza = "P", dt_evento = x.dt_evento.ToString("yyyy-MM-dd HH:mm:ss.fff tt") });
+                    }
+                }
+                    
+            }
         }
 
         #endregion

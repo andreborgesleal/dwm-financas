@@ -175,7 +175,8 @@ namespace DWM.Models.BI
                      //join pge in db.ContaReceberParcelaEventos on new { par.operacaoId, par.parcelaId } equals new { pge.operacaoId, pge.parcelaId }
                      join cli in db.Clientes on rec.clienteId equals cli.clienteId
                      join his in db.Historicos on rec.historicoId equals his.historicoId
-                     join ban in db.Bancos on par.bancoId equals ban.bancoId
+                     join ban in db.Bancos on par.bancoId equals ban.bancoId into BAN
+                     from ban in BAN.DefaultIfEmpty()
                      join gru in db.GrupoClientes on cli.grupoClienteId equals gru.grupoClienteId into GRU
                      from gru in GRU.DefaultIfEmpty()
                      where rec.empresaId.Equals(sessaoCorrente.empresaId)

@@ -231,8 +231,8 @@ namespace DWM.Models.Persistence
                 #region Incluir Evento "4-Baixa por motivo de liquidação" ou "3-Amortização"
                 if (p.vr_amortizacao.HasValue && p.vr_amortizacao.Value > 0 && indice == 0)
                 {
-                    if (!p.bancoId.HasValue)
-                        throw new ArgumentException("Banco deve ser informado.");
+                    //if (!p.bancoId.HasValue)
+                    //    throw new ArgumentException("Banco deve ser informado.");
 
                     if (value.OperacaoParcela.vr_amortizacao + (value.OperacaoParcela.vr_encargos ?? 0) - (value.OperacaoParcela.vr_desconto ?? 0) <= 0)
                         throw new ArgumentException("Valor amortizado deve ser um valor maior que zero.");
@@ -330,22 +330,24 @@ namespace DWM.Models.Persistence
                     #endregion
 
                     #region Gerar Movimentação Bancária
-
-                    MovtoBancarioViewModel movtoViewModel = new MovtoBancarioViewModel()
+                    MovtoBancarioViewModel movtoViewModel = null;
+                    if (p.bancoId.HasValue)
                     {
-                        empresaId = sessaoCorrente.empresaId,
-                        bancoId = p.bancoId.Value,
-                        historicoId = value.historicoId,
-                        complementoHist = value.complementoHist,
-                        dt_movto = dt_movto_proximo_diaUtil.Value,
-                        valor = value.OperacaoParcela.vr_amortizacao.Value + (value.OperacaoParcela.vr_encargos.HasValue ? value.OperacaoParcela.vr_encargos.Value : 0) - (value.OperacaoParcela.vr_desconto.HasValue ? value.OperacaoParcela.vr_desconto.Value : 0),
-                        documento = p.num_titulo != null && !String.IsNullOrWhiteSpace(p.num_titulo) ? p.num_titulo : value.documento,
-                        tipoMovto = getTipoMovto()
-                    };
-                    operacaoParcelaEventoAmortizacao.MovtoBancario = movtoViewModel;
+                        movtoViewModel = new MovtoBancarioViewModel()
+                        {
+                            empresaId = sessaoCorrente.empresaId,
+                            bancoId = p.bancoId.Value,
+                            historicoId = value.historicoId,
+                            complementoHist = value.complementoHist,
+                            dt_movto = dt_movto_proximo_diaUtil.Value,
+                            valor = value.OperacaoParcela.vr_amortizacao.Value + (value.OperacaoParcela.vr_encargos.HasValue ? value.OperacaoParcela.vr_encargos.Value : 0) - (value.OperacaoParcela.vr_desconto.HasValue ? value.OperacaoParcela.vr_desconto.Value : 0),
+                            documento = p.num_titulo != null && !String.IsNullOrWhiteSpace(p.num_titulo) ? p.num_titulo : value.documento,
+                            tipoMovto = getTipoMovto()
+                        };
+                        operacaoParcelaEventoAmortizacao.MovtoBancario = movtoViewModel;
+                    }
                     #endregion
-
-                    p.vr_amortizacao = movtoViewModel.valor;
+                    p.vr_amortizacao = value.OperacaoParcela.vr_amortizacao.Value + (value.OperacaoParcela.vr_encargos.HasValue ? value.OperacaoParcela.vr_encargos.Value : 0) - (value.OperacaoParcela.vr_desconto.HasValue ? value.OperacaoParcela.vr_desconto.Value : 0); // movtoViewModel.valor;
                 }
                 #endregion
 
@@ -510,7 +512,8 @@ namespace DWM.Models.Persistence
             #region Parcela para liquidação
             r.OperacaoParcela = getOperacaoParcelaRepositoryInstance();
 
-            r.OperacaoParcela.bancoId = r.OperacaoParcelas.FirstOrDefault().bancoId;
+            if (r.OperacaoParcelas.FirstOrDefault().bancoId.HasValue)
+                r.OperacaoParcela.bancoId = r.OperacaoParcelas.FirstOrDefault().bancoId;
             r.OperacaoParcela.nome_banco = r.OperacaoParcelas.FirstOrDefault().nome_banco;
             r.OperacaoParcela.ind_forma_pagamento = r.OperacaoParcelas.FirstOrDefault().ind_forma_pagamento ?? "";
             r.OperacaoParcela.dt_vencimento = r.OperacaoParcelas.FirstOrDefault().dt_vencimento;
