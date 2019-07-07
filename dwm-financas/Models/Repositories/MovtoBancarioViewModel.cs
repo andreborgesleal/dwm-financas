@@ -57,7 +57,6 @@ namespace DWM.Models.Repositories
 
     public class ExtratoViewModel : MovtoBancarioViewModel, IReportRepository<ExtratoViewModel>
     {
-        public int id { get; set; }
         public int _bancoid { get; set; }
         public DateTime? _dt_movto { get; set; }
         public decimal? vr_debito { get; set; }
