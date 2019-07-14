@@ -53,6 +53,7 @@ namespace DWM.Models.Report
                          complementoHist = i.complementoHist,
                          vr_debito = i.tipoLancamento == "D" ? i.valor : nulo,
                          vr_credito = i.tipoLancamento == "C" ? i.valor : nulo,
+                         DocumentoURL = i.DocumentoURL,
                          PageSize = pageSize,
                          TotalCount = (from c1 in db.Contabilidades
                                        join i1 in db.ContabilidadeItems on c1.contabilidadeId equals i1.contabilidadeId
@@ -123,6 +124,7 @@ namespace DWM.Models.Report
                          historicoId = i.historicoId,
                          descricao_historico = his.descricao,
                          complementoHist = i.complementoHist,
+                         DocumentoURL = i.DocumentoURL,
                          vr_debito = i.tipoLancamento == "D" ? i.valor : nulo,
                          vr_credito = i.tipoLancamento == "C" ? i.valor : nulo
                      }).ToList();

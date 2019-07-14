@@ -25,6 +25,7 @@ namespace DWM.Models.Repositories
         public string complementoHist { get; set; }
         public System.Nullable<decimal> vr_debito { get; set; }
         public System.Nullable<decimal> vr_credito { get; set; }
+        public string DocumentoURL { get; set; }
         //public IEnumerable<Repository> r { get; set; }
 
         #region métodos da Interface

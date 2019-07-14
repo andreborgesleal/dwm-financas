@@ -88,7 +88,8 @@ namespace DWM.Models.Persistence
                     historicoId = i.historicoId,
                     complementoHist = i.complementoHist,
                     tipoLancamento = i.tipoLancamento,
-                    valor = i.valor
+                    valor = i.valor,
+                    DocumentoURL = i.DocumentoURL
                 };
 
                 c.ContabilidadeItems.Add(x);
@@ -140,7 +141,8 @@ namespace DWM.Models.Persistence
                     descricao_historico = db.Historicos.Find(i.historicoId).descricao,
                     complementoHist = i.complementoHist,
                     tipoLancamento = i.tipoLancamento,
-                    valor = i.valor
+                    valor = i.valor,
+                    DocumentoURL = i.DocumentoURL
                 };
 
                 ((List<ContabilidadeItemViewModel>)r.ContabilidadeItems).Add(x);
@@ -416,7 +418,8 @@ namespace DWM.Models.Persistence
                                                   descricao_historico = his.descricao,
                                                   complementoHist = i.complementoHist,
                                                   tipoLancamento = i.tipoLancamento,
-                                                  valor = i.valor
+                                                  valor = i.valor,
+                                                  DocumentoURL = i.DocumentoURL
                                               },
                          PageSize = pageSize,
                          TotalCount = 0

@@ -117,6 +117,10 @@
                                 </td>
                                 <td class="col-md-1" style="color: @color">
                                     <span>@razao.contabilidadeId</span>
+                                    @if (!String.IsNullOrEmpty(@razao.DocumentoURL﻿﻿))
+                                    {
+                                        <a href="@razao.DocumentoURL﻿﻿" ﻿title="Visualizar documento salvo na nuvem" target="_blank"><i class="fa fa-cloud"></i></a>
+                                    }
                                 </td>
                                 <td class="col-md-1" style="color: @color">
                                     <span>@razao.documento</span>
@@ -266,6 +270,10 @@
                                 </td>
                                 <td class="col-md-1" style="color: @color">
                                     <small>@razao.contabilidadeId</small>
+                                    @if (!String.IsNullOrEmpty(@razao.DocumentoURL﻿﻿))
+                                    {
+                                        <a href="@razao.DocumentoURL﻿﻿" ﻿title="Visualizar documento salvo na nuvem" target="_blank"><i class="fa fa-cloud"></i></a>
+                                    }
                                 </td>
                                 @if (razao.descricao_historico.Contains("<b>"))
                                 {

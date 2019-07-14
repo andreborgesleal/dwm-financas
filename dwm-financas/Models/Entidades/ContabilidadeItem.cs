@@ -32,5 +32,8 @@ namespace DWM.Models.Entidades
 
         [DisplayName("Valor")]
         public decimal valor { get; set; }
+
+        [DisplayName("Documento")]
+        public string DocumentoURL { get; set; }
     }
 }

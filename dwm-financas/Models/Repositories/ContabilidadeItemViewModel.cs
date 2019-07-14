@@ -56,6 +56,9 @@ namespace DWM.Models.Repositories
 
         public string operacao { get; set; }
 
+        [DisplayName("Documento")]
+        public string DocumentoURL { get; set; }
+
         public ContabilidadeItemViewModel()
         {
             mensagem = new Validate() { Code = 0, Message = "Item incluído com sucesso" };
