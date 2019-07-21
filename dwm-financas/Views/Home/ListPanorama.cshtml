@@ -3,18 +3,24 @@
 @model PagedList<ContaReceberDemonstrativoViewModel>
 @{
     Layout = null;
-    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
-    t[0].url = "../Cobranca/Create";
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../Cobranca/CreateSimply";
     t[0].nomeCurto = "Incluir";
     t[0].referencia = "";
     t[0].exibir = "S";
+    t[0].glyph = "fa fa-plus-square";
 
-    t[1].url = "../Cobranca/Browse";
-    t[1].nomeCurto = "Filtrar";
+    t[1].url = "../Cobranca/Create";
+    t[1].nomeCurto = "Incluir (detalhado)";
     t[1].referencia = "";
     t[1].exibir = "S";
 
-    t[2].url = "../Home/Default";
+    t[2].url = "../Cobranca/Browse";
+    t[2].nomeCurto = "Filtrar";
+    t[2].referencia = "";
+    t[2].exibir = "S";
+
+    t[3].url = "../Home/Default";
 
 }
 

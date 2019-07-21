@@ -1,21 +1,27 @@
 ﻿@using App_Dominio.Repositories
 @model PagedList<DWM.Models.Repositories.ContaReceberDemonstrativoViewModel>
 @{
-    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
-    t[0].url = "../Cobranca/Create";
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../Cobranca/CreateSimply";
     t[0].nomeCurto = "Incluir";
     t[0].referencia = "";
     t[0].exibir = "S";
     t[0].glyph = "fa fa-plus-square";
 
-    t[1].url = "../Cobranca/Index";
-    t[1].nomeCurto = "Editar";
+    t[1].url = "../Cobranca/Create";
+    t[1].nomeCurto = "Incluir (detalhado)";
     t[1].referencia = "";
     t[1].exibir = "S";
-    t[1].glyph = "fa fa-edit";
+    t[1].glyph = "fa fa-plus-square";
+
+    t[2].url = "../Cobranca/Index";
+    t[2].nomeCurto = "Editar";
+    t[2].referencia = "";
+    t[2].exibir = "S";
+    t[2].glyph = "fa fa-edit";
 
 
-    t[2].url = "../Home/Default";
+    t[3].url = "../Home/Default";
 }
 <!-- Datatables -->
 <link href="../Content/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
@@ -197,7 +203,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <a href="#panel-detail" class="btn btn-primary" onclick="busca()">Buscar</a>
-                            <input type="button" class="btn btn-default" onclick="window.location = '../Cobranca/Create'" value="Incluir" />
+                            <input type="button" class="btn btn-default" onclick="window.location = '../Cobranca/CreateSimply'" value="Incluir" />
                         </div>
                     </div>
                 </div>

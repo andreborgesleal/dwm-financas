@@ -4585,6 +4585,8 @@
     <Content Include="Views\CNAB\ListParam.cshtml" />
     <Content Include="Views\CNAB\Edit.cshtml" />
     <Content Include="Views\CNAB\_Edit.cshtml" />
+    <Content Include="Views\Cobranca\CreateSimply.cshtml" />
+    <Content Include="Views\ContaPagar\CreateSimply.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\font-awesome\" />

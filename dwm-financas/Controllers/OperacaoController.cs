@@ -136,6 +136,12 @@ namespace DWM.Controllers
         #endregion
 
         #region Master
+        [AuthorizeFilter]
+        public virtual ActionResult CreateSimply()
+        {
+            return Create();
+        }
+
         #region edit
         [AuthorizeFilter]
         public ActionResult Edit(int operacaoId, int parcelaId)
