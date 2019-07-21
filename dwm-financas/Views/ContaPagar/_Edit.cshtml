@@ -5,18 +5,24 @@
     Layout = null;
     var path = System.Configuration.ConfigurationManager.AppSettings["Users_Data"];
 
-    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
-    t[0].url = "../ContaPagar/Create";
+    TransacaoRepository[] t = { new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository(), new TransacaoRepository() };
+    t[0].url = "../ContaPagar/CreateSimply";
     t[0].nomeCurto = "Incluir";
     t[0].referencia = "";
+    t[0].glyph = "fa fa-plus-square";
 
-    t[0].url = "../ContaPagar/Alterar?operacaoId=" + Model.operacaoId.ToString();
-    t[0].nomeCurto = "Alterar";
-    t[0].referencia = "";
-    t[0].exibir = "S";
-    t[0].glyph = "fa fa-check-edit";
+    t[1].url = "../ContaPagar/Create";
+    t[1].nomeCurto = "Incluir (detalhado)";
+    t[1].referencia = "";
+    t[1].glyph = "fa fa-plus-square";
 
-    t[2].url = "../Home/Default";
+    t[2].url = "../ContaPagar/Alterar?operacaoId=" + Model.operacaoId.ToString();
+    t[2].nomeCurto = "Alterar";
+    t[2].referencia = "";
+    t[2].exibir = "S";
+    t[2].glyph = "fa fa-check-edit";
+
+    t[3].url = "../Home/Default";
 }
 <div id="div-lov"></div>
 <div class="container-cadastro">
@@ -92,7 +98,7 @@
 
                     tTitulo[3].uri = "myTab";
                     tTitulo[3].nomeCurto = "Salvar como";
-                    tTitulo[3].url = "../ContaPagar/Create?operacaoId=" + Model.operacaoId.ToString();
+                    tTitulo[3].url = "../ContaPagar/CreateSimply?operacaoId=" + Model.operacaoId.ToString();
                     tTitulo[3].exibir = "S";
                     tTitulo[3].glyph = "fa fa-save";
 
