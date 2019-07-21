@@ -147,6 +147,7 @@ namespace DWM.Controllers
                                 string complementoHist,
                                 string tipoLancamento,
                                 string valor,
+                                string DocumentoURL,
                                 string operacao)
         {
             ContabilidadeItemViewModel item = new ContabilidadeItemViewModel()
@@ -162,6 +163,7 @@ namespace DWM.Controllers
                 complementoHist = complementoHist,
                 tipoLancamento = tipoLancamento,
                 valor = !String.IsNullOrEmpty(valor) ? decimal.Parse(valor) : new decimal(0),
+                DocumentoURL = DocumentoURL,
                 operacao = operacao
             };
             TempData["operacao"] = "I";

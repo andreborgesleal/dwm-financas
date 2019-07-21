@@ -55,7 +55,7 @@
             <div class="col-md-4 col-sm-4 col-xs-4 col-lg-3">
                 <div class="form-group">
                     <label class="control-label" for="nome">Tipo do lançamento</label>
-                    @Html.DropDownListFor(m => m.ContabilidadeItem.tipoLancamento, DropDownListEnum.NaturezaOperacao(Model.ContabilidadeItem.tipoLancamento), new { @class = "form-control", @tabindex="5" })
+                    @Html.DropDownListFor(m => m.ContabilidadeItem.tipoLancamento, DropDownListEnum.NaturezaOperacao(Model.ContabilidadeItem.tipoLancamento), new { @class = "form-control", @tabindex = "5" })
                 </div>
             </div>
             <div class="col-md-4 col-sm-4 col-xs-4 col-lg-3">
@@ -64,13 +64,23 @@
                        htmlAttributes = (object)new { @class = "form-control text-right", @onblur = "return Converte(this, 'valor')" , tabindex = "6" }
                    })
             </div>
+            <div class="col-md-6 col-sm-4 col-xs-4 col-lg-6">
+                <div class="form-group">
+                    <label class="control-label" for="DocumentoURL">Documento (Link)</label>
+                    @Html.TextBoxFor(m => m.ContabilidadeItem.DocumentoURL, new { @class = "form-control", @maxlength = 100, @tabindex = "7" })
+                    @{ if (!String.IsNullOrEmpty(Model.ContabilidadeItem.DocumentoURL))
+                        {
+                            <a href="@Model.ContabilidadeItem.DocumentoURL﻿﻿" ﻿title="Visualizar documento salvo na nuvem" class="text-primary pull-right" target="_blank"><i class="fa fa-cloud"></i></a>
+                        }
+                    }
+                </div>
+            </div>
         </div>
     </div>
     @*<div class="col-md-12 col-sm-12 col-xs-12 col-lg-6 hidden-xs hidden-md hidden-md">
-        <div class="form-group">
-            <label class="control-label" for="complementoHist">Histórico complementar</label>
-            @Html.TextAreaFor(m => m.ContabilidadeItem.complementoHist, 5, 1, new { @class = "form-control", @tabindex = "4" })
-        </div>
-    </div>*@
+            <div class="form-group">
+                <label class="control-label" for="complementoHist">Histórico complementar</label>
+                @Html.TextAreaFor(m => m.ContabilidadeItem.complementoHist, 5, 1, new { @class = "form-control", @tabindex = "4" })
+            </div>
+        </div>*@
 </div>
-

@@ -23,6 +23,7 @@ namespace DWM.Models.Repositories
         public System.Nullable<int> historicoId { get; set; }
         public string descricao_historico { get; set; }
         public string complementoHist { get; set; }
+        public string DocumentoURL { get; set; }
         public System.Nullable<decimal> vr_debito { get; set; }
         public System.Nullable<decimal> vr_credito { get; set; }
         public System.Nullable<decimal> vr_saldo { get; set; }

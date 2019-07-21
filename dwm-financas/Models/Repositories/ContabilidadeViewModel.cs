@@ -47,7 +47,8 @@ namespace DWM.Models.Repositories
                     descricao_centroCusto = GetItems().Last().descricao_centroCusto,
                     historicoId = GetItems().Last().historicoId,
                     descricao_historico = GetItems().Last().descricao_historico,
-                    complementoHist = GetItems().Last().complementoHist
+                    complementoHist = GetItems().Last().complementoHist,
+                    DocumentoURL = GetItems().Last().DocumentoURL
                 };
         }
 
