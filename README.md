@@ -3,6 +3,10 @@ Sistema integrado de gestão financeira envolvendo contas a pagar, cobrança, mo
 
 # Principais Funções
 
+Este é um sistema de retaguarda. A intenção é permitir que qualquer outro sistema que necessite de uma gestão financeira como condomínios, sindicatos, escolas, imobiliárias, etc possam se integrar com ele.
+
+Algumas funções descritas abaixo estão escritas em T-SQL
+
 **Cobrança**
 
 - Gera a inclusão automática de mensalidades, anuidades ou taxas de acordo com uma data configurável pela empresa
